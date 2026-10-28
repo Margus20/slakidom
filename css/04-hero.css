@@ -1,0 +1,39 @@
+/* ========================================== */
+/* 04. HERO / BANNER PRINCIPAL */
+/* ========================================== */
+.hero {
+    background: linear-gradient(135deg, var(--naranja) 0%, var(--amarillo) 100%);
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    color: var(--chocolate);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--chocolate);
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: #25D366;
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    animation: latido 2s infinite;
+}
