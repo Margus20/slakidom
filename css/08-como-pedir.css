@@ -1,0 +1,28 @@
+/* ========================================== */
+/* 08. CÓMO PEDIR */
+/* ========================================== */
+.como-pedir {
+    background: var(--amarillo);
+}
+
+.pasos-pedir {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.paso-pedir {
+    text-align: center;
+}
+
+.paso-icono {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.paso-pedir h3 {
+    color: var(--chocolate);
+    margin-bottom: 8px;
+}
