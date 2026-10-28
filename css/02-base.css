@@ -1,0 +1,29 @@
+/* ========================================== */
+/* 02. RESET Y ESTILOS BASE */
+/* ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--blanco);
+    color: var(--chocolate);
+    line-height: 1.6;
+}
+
+/* Títulos de secciones y espaciado general */
+.section-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--chocolate);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+section {
+    padding: 60px 20px;
+}
