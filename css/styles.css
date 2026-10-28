@@ -1,1 +1,455 @@
+/* ========================================== */
+/* SLAKIDOM - ESTILOS PRINCIPALES */
+/* ========================================== */
 
+/* Variables de colores (paleta oficial) */
+:root {
+    --rosa: #D95B89;
+    --amarillo: #F2D272;
+    --naranja: #F2AC29;
+    --durazno: #F2C777;
+    --chocolate: #8C2F0D;
+    --blanco: #FFFFFF;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--blanco);
+    color: var(--chocolate);
+    line-height: 1.6;
+}
+
+/* ========================================== */
+/* HEADER */
+/* ========================================== */
+.header {
+    background-color: var(--amarillo);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.menu-toggle {
+    background: var(--chocolate);
+    color: var(--blanco);
+    border: none;
+    padding: 10px 16px;
+    font-size: 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ========================================== */
+/* MENÚ FULL-SCREEN (tipo McVitie's) */
+/* ========================================== */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--chocolate);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.menu-overlay.active {
+    transform: translateX(0);
+}
+
+.menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--blanco);
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-item {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--blanco);
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 20px 0;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+.menu-item:hover {
+    color: var(--amarillo);
+}
+
+/* ========================================== */
+/* HERO / BANNER PRINCIPAL */
+/* ========================================== */
+.hero {
+    background: linear-gradient(135deg, var(--naranja) 0%, var(--amarillo) 100%);
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    color: var(--chocolate);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--chocolate);
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: #25D366;
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    animation: latido 2s infinite;
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* ========================================== */
+/* SECCIONES GENERALES */
+/* ========================================== */
+.section-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--chocolate);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+section {
+    padding: 60px 20px;
+}
+
+/* ========================================== */
+/* PRODUCTOS (Cards estilo EPA) */
+/* ========================================== */
+.productos {
+    background: var(--blanco);
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.producto-card {
+    background: var(--blanco);
+    border: 2px solid var(--durazno);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(140, 47, 13, 0.15);
+}
+
+.producto-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.producto-img-placeholder {
+    width: 100%;
+    height: 180px;
+    background: var(--durazno);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.producto-nombre {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--chocolate);
+    margin-bottom: 8px;
+}
+
+.producto-descripcion {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.producto-precio {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--rosa);
+    margin-bottom: 15px;
+}
+
+.btn-pedir {
+    display: inline-block;
+    background: var(--naranja);
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-pedir:hover {
+    background: var(--rosa);
+}
+
+/* ========================================== */
+/* PROCESO */
+/* ========================================== */
+.proceso {
+    background: var(--durazno);
+}
+
+.proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.paso {
+    text-align: center;
+    background: var(--blanco);
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.paso-numero {
+    width: 50px;
+    height: 50px;
+    background: var(--rosa);
+    color: var(--blanco);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 15px;
+}
+
+.paso h3 {
+    color: var(--chocolate);
+    margin-bottom: 10px;
+}
+
+/* ========================================== */
+/* SOBRE NOSOTROS */
+/* ========================================== */
+.sobre-nosotros {
+    background: var(--blanco);
+}
+
+.chef-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.chef-placeholder {
+    font-size: 6rem;
+    background: var(--amarillo);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chef-texto {
+    text-align: center;
+}
+
+.chef-texto h3 {
+    font-size: 1.8rem;
+    color: var(--rosa);
+    margin-bottom: 15px;
+}
+
+.chef-historia, .chef-mascota {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--chocolate);
+}
+
+/* ========================================== */
+/* CÓMO PEDIR */
+/* ========================================== */
+.como-pedir {
+    background: var(--amarillo);
+}
+
+.pasos-pedir {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.paso-pedir {
+    text-align: center;
+}
+
+.paso-icono {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.paso-pedir h3 {
+    color: var(--chocolate);
+    margin-bottom: 8px;
+}
+
+/* ========================================== */
+/* FOOTER */
+/* ========================================== */
+.footer {
+    background: var(--chocolate);
+    color: var(--blanco);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--amarillo);
+}
+
+.contacto-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.contacto-item {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.contacto-item:hover {
+    color: var(--amarillo);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ========================================== */
+/* BOTÓN FLOTANTE DE WHATSAPP */
+/* ========================================== */
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    color: var(--blanco);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    animation: latido 2s infinite;
+    z-index: 1000;
+}
+
+/* ========================================== */
+/* RESPONSIVE (Móvil) */
+/* ========================================== */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .menu-item {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .productos-grid {
+        grid-template-columns: 1fr;
+    }
+}
