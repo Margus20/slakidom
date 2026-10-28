@@ -1,0 +1,42 @@
+/* ========================================== */
+/* 07. SOBRE NOSOTROS (Chef y Mascota) */
+/* ========================================== */
+.sobre-nosotros {
+    background: var(--blanco);
+}
+
+.chef-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.chef-placeholder {
+    font-size: 6rem;
+    background: var(--amarillo);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chef-texto {
+    text-align: center;
+}
+
+.chef-texto h3 {
+    font-size: 1.8rem;
+    color: var(--rosa);
+    margin-bottom: 15px;
+}
+
+.chef-historia, .chef-mascota {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--chocolate);
+}
