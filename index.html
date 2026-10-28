@@ -7,7 +7,7 @@
     <title>SLAKIDOM - Galletas y Mermeladas Artesanales</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="icon" type="image/png" href="img/slaky_logo.png">
     
     <!-- CSS MODULAR (Se cargan en orden) -->
     <link rel="stylesheet" href="css/01-variables.css">
@@ -28,10 +28,12 @@
     <!-- ========================================== -->
     <header class="header">
         <div class="logo-container">
-            <img src="img/logo.png" alt="SLAKIDOM Logo" class="logo">
+            <!-- ✅ AJUSTE: Logo clicable que lleva al inicio -->
+            <a href="#inicio" class="logo-link" title="Volver al inicio">
+                <img src="img/slaky_logo.png" alt="SLAKIDOM Logo" class="logo">
+            </a>
         </div>
         
-        <!-- ✅ AJUSTE 1: Contenedor para el carrito y el menú -->
         <div class="header-botones">
             <button id="btn-ver-carrito" class="btn-carrito-header" aria-label="Ver carrito">
                 🛒 <span id="contador-carrito" class="contador-carrito">0</span>
@@ -167,7 +169,7 @@
         💬
     </a>
     
-    <!-- ✅ AJUSTE 2: MODAL DEL CARRITO DE COMPRAS (Oculto por defecto) -->
+    <!-- MODAL DEL CARRITO DE COMPRAS (Oculto por defecto) -->
     <div id="modal-carrito" class="modal-carrito">
         <div class="modal-contenido">
             <div class="modal-header">
