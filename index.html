@@ -30,7 +30,14 @@
         <div class="logo-container">
             <img src="img/logo.png" alt="SLAKIDOM Logo" class="logo">
         </div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+        
+        <!-- ✅ AJUSTE 1: Contenedor para el carrito y el menú -->
+        <div class="header-botones">
+            <button id="btn-ver-carrito" class="btn-carrito-header" aria-label="Ver carrito">
+                🛒 <span id="contador-carrito" class="contador-carrito">0</span>
+            </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+        </div>
     </header>
     
     <!-- Menú full-screen -->
@@ -57,11 +64,11 @@
             </div>
         </section>
         
-        <!-- SECCIÓN PRODUCTOS (El contenido se puede renderizar con JS después) -->
+        <!-- SECCIÓN PRODUCTOS -->
         <section id="productos" class="productos">
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="productos-grid" id="productos-grid">
-                <!-- Aquí se inyectarán las tarjetas desde js/datos/productos.js -->
+                <!-- Aquí se inyectarán las tarjetas automáticamente desde js/app.js -->
                 <p style="text-align:center; color: var(--chocolate);">Cargando productos...</p>
             </div>
         </section>
@@ -160,6 +167,28 @@
         💬
     </a>
     
+    <!-- ✅ AJUSTE 2: MODAL DEL CARRITO DE COMPRAS (Oculto por defecto) -->
+    <div id="modal-carrito" class="modal-carrito">
+        <div class="modal-contenido">
+            <div class="modal-header">
+                <h3>Tu Pedido 🍪</h3>
+                <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
+            </div>
+            <div id="lista-carrito" class="lista-carrito">
+                <!-- Aquí se inyectan los productos con JS -->
+            </div>
+            <div class="modal-footer">
+                <div class="total-carrito">
+                    <span>Total:</span>
+                    <span id="total-carrito">$0.00</span>
+                </div>
+                <button id="btn-finalizar-pedido" class="btn-whatsapp-modal">
+                    ✅ Enviar pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript Modular (Tipo Módulo) -->
     <script type="module" src="js/app.js"></script>
     
