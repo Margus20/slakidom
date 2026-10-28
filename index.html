@@ -9,7 +9,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/slaky_cuadrado.jpg">
     
-    <!-- CSS MODULAR (Se cargan en orden) -->
+    <!-- CSS MODULAR -->
     <link rel="stylesheet" href="css/01-variables.css">
     <link rel="stylesheet" href="css/02-base.css">
     <link rel="stylesheet" href="css/03-header-menu.css">
@@ -23,9 +23,7 @@
 </head>
 <body>
     
-    <!-- ========================================== -->
     <!-- HEADER / NAVEGACIÓN -->
-    <!-- ========================================== -->
     <header class="header">
         <div class="logo-container">
             <a href="#inicio" class="logo-link" title="Volver al inicio">
@@ -133,7 +131,7 @@
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
                 <div class="paso-pedir">
-                    <div class="paso-icono">2️</div>
+                    <div class="paso-icono">2️⃣</div>
                     <h3>Escríbenos</h3>
                     <p>Al WhatsApp 0412-2879803</p>
                 </div>
@@ -152,7 +150,7 @@
             <h3>Contáctanos</h3>
             <div class="contacto-info">
                 <a href="https://wa.me/584122879803" class="contacto-item" target="_blank">
-                    📱 WhatsApp: 0412-2879803
+                     WhatsApp: 0412-2879803
                 </a>
                 <div class="contacto-item">📍 Caracas, Venezuela</div>
             </div>
@@ -163,16 +161,24 @@
         </div>
     </footer>
     
-    <!-- Botón flotante de WhatsApp -->
+    <!-- ✅ BOTÓN FLOTANTE: Excalibur con carrito (esquina inferior izquierda) -->
+    <a href="#" id="btn-carrito-flotante" class="btn-flotante-excalibur" title="Ver carrito" onclick="document.getElementById('btn-ver-carrito').click(); return false;">
+        <img src="img/excalibur_carrito.png" alt="Excalibur Carrito">
+        <span id="contador-carrito-flotante" class="contador-flotante">0</span>
+    </a>
+    
+    <!-- ✅ BOTÓN FLOTANTE: WhatsApp (esquina inferior derecha) -->
     <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido" class="whatsapp-flotante" target="_blank" title="Pedir por WhatsApp">
-        💬
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#FFFFFF">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.664-.698c.968.59 1.968.913 3.032.913l.001-.001c3.181 0 5.768-2.586 5.769-5.766.001-3.183-2.585-5.769-5.766-5.769zm5.295 8.345c-.226.634-1.302 1.173-1.776 1.251-.493.081-.956.358-3.225-.541-2.723-1.074-4.432-3.864-4.566-4.043-.134-.179-1.074-1.431-1.074-2.731 0-1.299.669-1.934.931-2.222.226-.248.602-.358.904-.358.248 0 .473.011.679.011.226 0 .564-.09.879.658.358.857 1.215 2.954 1.326 3.181.112.226.179.493.034.764-.145.271-.226.448-.448.708-.226.248-.475.522-.679.726-.226.226-.461.471-.397.864.064.393.381 1.577.813 2.396.564 1.063 1.041 1.512 1.776 2.076.726.557 1.299.658 1.776.726.473.068.931-.034 1.251-.358.403-.403.904-1.063 1.13-1.381.226-.318.448-.266.764-.157.318.111 2.031.959 2.385 1.137.358.179.595.266.679.403.084.137.084.795-.142 1.429z"/>
+        </svg>
     </a>
     
     <!-- MODAL DEL CARRITO DE COMPRAS -->
     <div id="modal-carrito" class="modal-carrito">
         <div class="modal-contenido">
             <div class="modal-header">
-                <h3>Tu Pedido </h3>
+                <h3>Tu Pedido 🍪</h3>
                 <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
             </div>
             <div id="lista-carrito" class="lista-carrito">
