@@ -7,7 +7,7 @@
     <title>SLAKIDOM - Galletas y Mermeladas Artesanales</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="img/slaky_logo.png">
+    <link rel="icon" type="image/png" href="img/slaky_cuadrado.jpg">
     
     <!-- CSS MODULAR (Se cargan en orden) -->
     <link rel="stylesheet" href="css/01-variables.css">
@@ -28,7 +28,6 @@
     <!-- ========================================== -->
     <header class="header">
         <div class="logo-container">
-            <!-- ✅ AJUSTE: Logo clicable que lleva al inicio -->
             <a href="#inicio" class="logo-link" title="Volver al inicio">
                 <img src="img/slaky_logo.png" alt="SLAKIDOM Logo" class="logo">
             </a>
@@ -36,7 +35,8 @@
         
         <div class="header-botones">
             <button id="btn-ver-carrito" class="btn-carrito-header" aria-label="Ver carrito">
-                🛒 <span id="contador-carrito" class="contador-carrito">0</span>
+                <img src="img/excalibur_carrito.png" alt="Carrito" class="carrito-icon">
+                <span id="contador-carrito" class="contador-carrito">0</span>
             </button>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
         </div>
@@ -70,7 +70,6 @@
         <section id="productos" class="productos">
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="productos-grid" id="productos-grid">
-                <!-- Aquí se inyectarán las tarjetas automáticamente desde js/app.js -->
                 <p style="text-align:center; color: var(--chocolate);">Cargando productos...</p>
             </div>
         </section>
@@ -107,7 +106,7 @@
             <h2 class="section-title">Conoce a la Chef</h2>
             <div class="chef-content">
                 <div class="chef-imagen">
-                    <div class="chef-placeholder">👩‍🍳🐩</div>
+                    <div class="chef-placeholder">👩‍🐩</div>
                 </div>
                 <div class="chef-texto">
                     <h3>Mirian</h3>
@@ -134,7 +133,7 @@
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
                 <div class="paso-pedir">
-                    <div class="paso-icono">2️⃣</div>
+                    <div class="paso-icono">2️</div>
                     <h3>Escríbenos</h3>
                     <p>Al WhatsApp 0412-2879803</p>
                 </div>
@@ -169,15 +168,14 @@
         💬
     </a>
     
-    <!-- MODAL DEL CARRITO DE COMPRAS (Oculto por defecto) -->
+    <!-- MODAL DEL CARRITO DE COMPRAS -->
     <div id="modal-carrito" class="modal-carrito">
         <div class="modal-contenido">
             <div class="modal-header">
-                <h3>Tu Pedido 🍪</h3>
+                <h3>Tu Pedido </h3>
                 <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
             </div>
             <div id="lista-carrito" class="lista-carrito">
-                <!-- Aquí se inyectan los productos con JS -->
             </div>
             <div class="modal-footer">
                 <div class="total-carrito">
@@ -191,7 +189,7 @@
         </div>
     </div>
 
-    <!-- JavaScript Modular (Tipo Módulo) -->
+    <!-- JavaScript Modular -->
     <script type="module" src="js/app.js"></script>
     
 </body>
