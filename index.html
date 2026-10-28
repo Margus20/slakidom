@@ -6,11 +6,20 @@
     <meta name="description" content="Galletas y mermeladas artesanales SLAKIDOM - Hechas con amor en Caracas">
     <title>SLAKIDOM - Galletas y Mermeladas Artesanales</title>
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Favicon (logo pequeño para la pestaña del navegador) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/logo.png">
+    
+    <!-- CSS MODULAR (Se cargan en orden) -->
+    <link rel="stylesheet" href="css/01-variables.css">
+    <link rel="stylesheet" href="css/02-base.css">
+    <link rel="stylesheet" href="css/03-header-menu.css">
+    <link rel="stylesheet" href="css/04-hero.css">
+    <link rel="stylesheet" href="css/05-productos.css">
+    <link rel="stylesheet" href="css/06-proceso.css">
+    <link rel="stylesheet" href="css/07-sobre-nosotros.css">
+    <link rel="stylesheet" href="css/08-como-pedir.css">
+    <link rel="stylesheet" href="css/09-footer.css">
+    <link rel="stylesheet" href="css/10-animaciones.css">
 </head>
 <body>
     
@@ -21,16 +30,12 @@
         <div class="logo-container">
             <img src="img/logo.png" alt="SLAKIDOM Logo" class="logo">
         </div>
-        
-        <button class="menu-toggle" id="menuToggle">
-            ☰
-        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
     </header>
     
-    <!-- Menú full-screen (oculto por defecto) -->
+    <!-- Menú full-screen -->
     <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close" id="menuClose">×</button>
-        
+        <button class="menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
         <nav class="menu-nav">
             <a href="#inicio" class="menu-item">Inicio</a>
             <a href="#productos" class="menu-item">Productos</a>
@@ -40,214 +45,109 @@
         </nav>
     </div>
     
-    <!-- ========================================== -->
-    <!-- SECCIÓN HERO / BANNER PRINCIPAL -->
-    <!-- ========================================== -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Galletas Artesanales<br>Hechas con Amor</h1>
-            <p class="hero-subtitle">Desde nuestra cocina en Caracas hasta tu mesa</p>
-            <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido%20de%20galletas" 
-               class="btn-whatsapp" 
-               target="_blank">
-                🟢 Pedir por WhatsApp
-            </a>
-        </div>
-    </section>
-    
-    <!-- ========================================== -->
-    <!-- SECCIÓN PRODUCTOS -->
-    <!-- ========================================== -->
-    <section id="productos" class="productos">
-        <h2 class="section-title">Nuestros Productos</h2>
+    <main>
+        <!-- SECCIÓN HERO -->
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Galletas Artesanales<br>Hechas con Amor</h1>
+                <p class="hero-subtitle">Desde nuestra cocina en Caracas hasta tu mesa</p>
+                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido%20de%20galletas" class="btn-whatsapp" target="_blank">
+                    🟢 Pedir por WhatsApp
+                </a>
+            </div>
+        </section>
         
-        <div class="productos-grid">
-            <!-- Galleta 1: Coco y Vainilla -->
-            <div class="producto-card">
-                <img src="img/galletas-coco.jpg" alt="Galletas de Coco y Vainilla" class="producto-img">
-                <h3 class="producto-nombre">Galletas de Coco y Vainilla</h3>
-                <p class="producto-descripcion">Deliciosas galletas artesanales con coco rallado y esencia de vainilla</p>
-                <span class="producto-precio">$3.00</span>
-                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20pedir%20Galletas%20de%20Coco%20y%20Vainilla" 
-                   class="btn-pedir" 
-                   target="_blank">
-                    Pedir
-                </a>
+        <!-- SECCIÓN PRODUCTOS (El contenido se puede renderizar con JS después) -->
+        <section id="productos" class="productos">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="productos-grid" id="productos-grid">
+                <!-- Aquí se inyectarán las tarjetas desde js/datos/productos.js -->
+                <p style="text-align:center; color: var(--chocolate);">Cargando productos...</p>
             </div>
-            
-            <!-- Galleta 2: Limón -->
-            <div class="producto-card">
-                <div class="producto-img-placeholder">🍋</div>
-                <h3 class="producto-nombre">Galletas de Limón</h3>
-                <p class="producto-descripcion">Frescas galletas con sabor cítrico de limón natural</p>
-                <span class="producto-precio">$3.00</span>
-                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20pedir%20Galletas%20de%20Limón" 
-                   class="btn-pedir" 
-                   target="_blank">
-                    Pedir
-                </a>
-            </div>
-            
-            <!-- Galleta 3: Chispitas de Chocolate -->
-            <div class="producto-card">
-                <div class="producto-img-placeholder">🍫</div>
-                <h3 class="producto-nombre">Galletas con Chispas de Chocolate</h3>
-                <p class="producto-descripcion">Clásicas galletas con abundantes chispas de chocolate</p>
-                <span class="producto-precio">$3.50</span>
-                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20pedir%20Galletas%20con%20Chispas%20de%20Chocolate" 
-                   class="btn-pedir" 
-                   target="_blank">
-                    Pedir
-                </a>
-            </div>
-            
-            <!-- Mermelada 1: Fresa -->
-            <div class="producto-card">
-                <img src="img/mermelada.jpg" alt="Mermelada de Fresa" class="producto-img">
-                <h3 class="producto-nombre">Mermelada de Fresa</h3>
-                <p class="producto-descripcion">Mermelada artesanal de fresa, perfecta para untar</p>
-                <span class="producto-precio">$4.00</span>
-                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20pedir%20Mermelada%20de%20Fresa" 
-                   class="btn-pedir" 
-                   target="_blank">
-                    Pedir
-                </a>
-            </div>
-            
-            <!-- Mermelada 2: Guayaba -->
-            <div class="producto-card">
-                <div class="producto-img-placeholder">🍈</div>
-                <h3 class="producto-nombre">Mermelada de Guayaba</h3>
-                <p class="producto-descripcion">Dulce mermelada de guayaba con sabor tradicional</p>
-                <span class="producto-precio">$4.00</span>
-                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20pedir%20Mermelada%20de%20Guayaba" 
-                   class="btn-pedir" 
-                   target="_blank">
-                    Pedir
-                </a>
-            </div>
-            
-            <!-- Mermelada 3: Durazno -->
-            <div class="producto-card">
-                <div class="producto-img-placeholder">🍑</div>
-                <h3 class="producto-nombre">Mermelada de Durazno</h3>
-                <p class="producto-descripcion">Suave mermelada de durazno, ideal para el desayuno</p>
-                <span class="producto-precio">$4.00</span>
-                <a href="https://wa.me/584122879803?text=Hola,%20quiero%20pedir%20Mermelada%20de%20Durazno" 
-                   class="btn-pedir" 
-                   target="_blank">
-                    Pedir
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ========================================== -->
-    <!-- SECCIÓN PROCESO -->
-    <!-- ========================================== -->
-    <section id="proceso" class="proceso">
-        <h2 class="section-title">Así Hacemos Nuestras Galletas</h2>
+        </section>
         
-        <div class="proceso-steps">
-            <div class="paso">
-                <div class="paso-numero">1</div>
-                <h3>Seleccionamos</h3>
-                <p>Los mejores ingredientes frescos</p>
-            </div>
-            
-            <div class="paso">
-                <div class="paso-numero">2</div>
-                <h3>Preparamos</h3>
-                <p>La masa con amor y dedicación</p>
-            </div>
-            
-            <div class="paso">
-                <div class="paso-numero">3</div>
-                <h3>Horneamos</h3>
-                <p>Hasta obtener la textura perfecta</p>
-            </div>
-            
-            <div class="paso">
-                <div class="paso-numero">4</div>
-                <h3>Empacamos</h3>
-                <p>Con cuidado para que lleguen perfectas</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ========================================== -->
-    <!-- SECCIÓN SOBRE NOSOTROS -->
-    <!-- ========================================== -->
-    <section id="sobre-nosotros" class="sobre-nosotros">
-        <h2 class="section-title">Conoce a la Chef</h2>
-        
-        <div class="chef-content">
-            <div class="chef-imagen">
-                <!-- Aquí irá la ilustración Ghibli cuando la tengamos -->
-                <div class="chef-placeholder">
-                    👩‍🍳🐩
+        <!-- SECCIÓN PROCESO -->
+        <section id="proceso" class="proceso">
+            <h2 class="section-title">Así Hacemos Nuestras Galletas</h2>
+            <div class="proceso-steps">
+                <div class="paso">
+                    <div class="paso-numero">1</div>
+                    <h3>Seleccionamos</h3>
+                    <p>Los mejores ingredientes frescos</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-numero">2</div>
+                    <h3>Preparamos</h3>
+                    <p>La masa con amor y dedicación</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-numero">3</div>
+                    <h3>Horneamos</h3>
+                    <p>Hasta obtener la textura perfecta</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-numero">4</div>
+                    <h3>Empacamos</h3>
+                    <p>Con cuidado para que lleguen perfectas</p>
                 </div>
             </div>
-            
-            <div class="chef-texto">
-                <h3>Mirian</h3>
-                <p class="chef-historia">
-                    Soy Mirian, y desde mi cocina en Caracas preparo galletas y mermeladas 
-                    artesanales con el mismo cariño de siempre. Cada producto es hecho a mano, 
-                    usando ingredientes frescos y recetas familiares.
-                </p>
-                <p class="chef-mascota">
-                    Y siempre me acompaña <strong>Excalibur</strong>, mi fiel poodle blanco, 
-                    quien es mi asistente de cocina (aunque solo sabe pedir galletas 🐩).
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ========================================== -->
-    <!-- SECCIÓN CÓMO PEDIR -->
-    <!-- ========================================== -->
-    <section class="como-pedir">
-        <h2 class="section-title">¿Cómo Pedir?</h2>
+        </section>
         
-        <div class="pasos-pedir">
-            <div class="paso-pedir">
-                <div class="paso-icono">1️⃣</div>
-                <h3>Elige</h3>
-                <p>Tus galletas o mermeladas favoritas</p>
+        <!-- SECCIÓN SOBRE NOSOTROS -->
+        <section id="sobre-nosotros" class="sobre-nosotros">
+            <h2 class="section-title">Conoce a la Chef</h2>
+            <div class="chef-content">
+                <div class="chef-imagen">
+                    <div class="chef-placeholder">👩‍🍳🐩</div>
+                </div>
+                <div class="chef-texto">
+                    <h3>Mirian</h3>
+                    <p class="chef-historia">
+                        Soy Mirian, y desde mi cocina en Caracas preparo galletas y mermeladas 
+                        artesanales con el mismo cariño de siempre. Cada producto es hecho a mano, 
+                        usando ingredientes frescos y recetas familiares.
+                    </p>
+                    <p class="chef-mascota">
+                        Y siempre me acompaña <strong>Excalibur</strong>, mi fiel poodle blanco, 
+                        quien es mi asistente de cocina (aunque solo sabe pedir galletas 🐩).
+                    </p>
+                </div>
             </div>
-            
-            <div class="paso-pedir">
-                <div class="paso-icono">2️⃣</div>
-                <h3>Escríbenos</h3>
-                <p>Al WhatsApp 0412-2879803</p>
+        </section>
+        
+        <!-- SECCIÓN CÓMO PEDIR -->
+        <section class="como-pedir">
+            <h2 class="section-title">¿Cómo Pedir?</h2>
+            <div class="pasos-pedir">
+                <div class="paso-pedir">
+                    <div class="paso-icono">1️⃣</div>
+                    <h3>Elige</h3>
+                    <p>Tus galletas o mermeladas favoritas</p>
+                </div>
+                <div class="paso-pedir">
+                    <div class="paso-icono">2️⃣</div>
+                    <h3>Escríbenos</h3>
+                    <p>Al WhatsApp 0412-2879803</p>
+                </div>
+                <div class="paso-pedir">
+                    <div class="paso-icono">3️⃣</div>
+                    <h3>Recibe</h3>
+                    <p>Tu pedido en Caracas</p>
+                </div>
             </div>
-            
-            <div class="paso-pedir">
-                <div class="paso-icono">3️⃣</div>
-                <h3>Recibe</h3>
-                <p>Tu pedido en Caracas</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
     
-    <!-- ========================================== -->
     <!-- FOOTER / CONTACTO -->
-    <!-- ========================================== -->
     <footer id="contacto" class="footer">
         <div class="footer-content">
             <h3>Contáctanos</h3>
-            
             <div class="contacto-info">
                 <a href="https://wa.me/584122879803" class="contacto-item" target="_blank">
                     📱 WhatsApp: 0412-2879803
                 </a>
-                
-                <div class="contacto-item">
-                    📍 Caracas, Venezuela
-                </div>
+                <div class="contacto-item">📍 Caracas, Venezuela</div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2026 SLAKIDOM. Todos los derechos reservados.</p>
                 <p>Hecho con ❤️ por Mirian</p>
@@ -256,15 +156,12 @@
     </footer>
     
     <!-- Botón flotante de WhatsApp -->
-    <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido" 
-       class="whatsapp-flotante" 
-       target="_blank"
-       title="Pedir por WhatsApp">
+    <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido" class="whatsapp-flotante" target="_blank" title="Pedir por WhatsApp">
         💬
     </a>
     
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <!-- JavaScript Modular (Tipo Módulo) -->
+    <script type="module" src="js/app.js"></script>
     
 </body>
 </html>
