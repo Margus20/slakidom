@@ -34,7 +34,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    display: none; /* Se muestra con JS */
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -201,25 +201,99 @@
 }
 
 /* ========================================== */
+/* BOTONES FLOTANTES (Excalibur y WhatsApp) */
+/* ========================================== */
+
+/* ✅ Botón flotante de Excalibur (esquina inferior DERECHA) */
+.btn-flotante-excalibur {
+    position: fixed;
+    bottom: 100px;
+    right: 20px; /* ✅ Cambiado a la derecha */
+    width: 70px;
+    height: 70px;
+    background: var(--blanco);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-flotante-excalibur img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.btn-flotante-excalibur:hover {
+    transform: scale(1.1);
+}
+
+.contador-flotante {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--rosa);
+    color: var(--blanco);
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--blanco);
+}
+
+/* ✅ Botón flotante de WhatsApp (esquina inferior IZQUIERDA) */
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* ✅ Cambiado a la izquierda */
+    background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-flotante svg {
+    width: 35px;
+    height: 35px;
+    fill: #FFFFFF;
+}
+
+.whatsapp-flotante:hover {
+    transform: scale(1.1);
+}
+
+/* ========================================== */
 /* AJUSTES RESPONSIVE FINALES */
 /* ========================================== */
 
-/* Tablets y celulares grandes */
 @media (max-width: 768px) {
     .hero-title { font-size: 2rem; }
     .section-title { font-size: 1.6rem; }
     
-    /* En móvil, el grid de productos pasa a 1 columna para que se vean grandes */
     .productos-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
     }
 }
 
-/* Celulares pequeños */
 @media (max-width: 480px) {
     .header { padding: 10px 15px; }
-    .logo { height: 40px; }
     
     .hero { padding: 60px 15px; min-height: 350px; }
     .hero-title { font-size: 1.6rem; }
@@ -233,5 +307,31 @@
     .btn-agregar-carrito {
         font-size: 0.9rem;
         padding: 12px;
+    }
+
+    /* ✅ Ajuste responsive: Excalibur a la derecha */
+    .btn-flotante-excalibur {
+        bottom: 90px;
+        right: 15px; /* ✅ Derecha en móvil */
+        width: 60px;
+        height: 60px;
+    }
+    
+    .btn-flotante-excalibur img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* ✅ Ajuste responsive: WhatsApp a la izquierda */
+    .whatsapp-flotante {
+        bottom: 20px;
+        left: 20px; /* ✅ Izquierda en móvil */
+        width: 55px;
+        height: 55px;
+    }
+    
+    .whatsapp-flotante svg {
+        width: 30px;
+        height: 30px;
     }
 }
