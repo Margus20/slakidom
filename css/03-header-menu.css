@@ -32,54 +32,123 @@
 }
 
 /* ✅ Reactivar los clics en los botones hijos */
-.header-botones button {
+.header-botones button,
+.header-botones .selector-moneda,
+.header-botones .ubicacion {
     pointer-events: auto;
 }
 
-/* ✅ Botón del carrito en la esquina IZQUIERDA */
-.btn-carrito-header {
-    background: var(--blanco);
-    border: 2px solid var(--chocolate);
-    border-radius: 50px;
-    padding: 8px 12px;
-    font-size: 1.2rem;
-    cursor: pointer;
+/* ✅ NUEVO: Selector de moneda (izquierda) */
+.selector-moneda {
     display: flex;
     align-items: center;
-    gap: 5px;
-    transition: transform 0.2s;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--chocolate);
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    position: relative;
 }
 
-.btn-carrito-header:hover {
-    transform: scale(1.05);
+.selector-moneda:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.carrito-icon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
+.selector-moneda .bandera {
+    font-size: 1.2rem;
 }
 
-.contador-carrito {
-    background: var(--rosa);
-    color: var(--blanco);
-    font-size: 0.75rem;
-    font-weight: bold;
-    min-width: 18px;
-    height: 18px;
-    border-radius: 50%;
+.selector-moneda .moneda-actual {
+    font-weight: 700;
+}
+
+.selector-moneda .flecha {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.selector-moneda.activo .flecha {
+    transform: rotate(180deg);
+}
+
+/* Dropdown de monedas */
+.dropdown-monedas {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--blanco);
+    border: 2px solid var(--chocolate);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    min-width: 150px;
     display: none;
+    z-index: 103;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.dropdown-monedas.activo {
+    display: block;
+}
+
+.opcion-moneda {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 4px;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--chocolate);
 }
 
-/* ✅ CAMBIO 1: Ocultar el botón antiguo del menú (ya tenemos el flotante) */
+.opcion-moneda:hover {
+    background: var(--durazno);
+}
+
+.opcion-moneda.seleccionada {
+    background: var(--amarillo);
+    font-weight: bold;
+}
+
+/* ✅ NUEVO: Ubicación (derecha) */
+.ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--chocolate);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.ubicacion:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.ubicacion .icono-ubicacion {
+    font-size: 1.1rem;
+}
+
+/* ✅ Ocultar el botón antiguo del carrito (ahora es flotante) */
+.btn-carrito-header {
+    display: none;
+}
+
+/* ✅ Ocultar el botón antiguo del menú (ya tenemos el flotante) */
 .menu-toggle {
-    display: none; /* ✅ Esto hace que el botón cuadrado marrón desaparezca */
+    display: none;
 }
 
-/* ✅ CAMBIO 2: Logo subido y más grande */
+/* ✅ CAMBIO: Logo subido más arriba (-35%) */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -87,8 +156,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* ✅ CAMBIO: De 5% a -20% (el valor negativo SUBE el logo) */
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -35%); /* ✅ Subido de -20% a -35% */
     z-index: 102;
 }
 
@@ -102,9 +170,9 @@
     transform: scale(1.05);
 }
 
-/* ✅ CAMBIO 3: Logo más grande (de 200px a 230px) */
+/* ✅ Logo más grande (230px) */
 .logo {
-    height: 230px; /* ✅ Aumentado de 200px a 230px */
+    height: 230px;
     width: auto;
     display: block;
     cursor: pointer;
@@ -173,58 +241,51 @@
         height: 70px;
     }
     
-    /* ✅ Logo más grande en tablet también (de 150px a 180px) */
     .logo {
         height: 180px;
     }
     
-    /* ✅ Subir el logo en tablet */
     .logo-container {
-        transform: translate(-50%, -15%);
+        transform: translate(-50%, -25%); /* ✅ Ajustado para tablet */
+    }
+    
+    .selector-moneda,
+    .ubicacion {
+        font-size: 0.85rem;
+        padding: 6px 10px;
     }
     
     .menu-item {
         font-size: 1.5rem;
-    }
-    
-    .btn-carrito-header {
-        padding: 6px 10px;
-    }
-    
-    .carrito-icon {
-        width: 24px;
-        height: 24px;
     }
 }
 
 @media (max-width: 480px) {
     .header {
         height: 65px;
-        padding: 0 12px;
+        padding: 0 10px;
     }
     
-    /* ✅ Logo más grande en móvil también (de 120px a 150px) */
     .logo {
         height: 150px;
     }
     
-    /* ✅ Subir el logo en móvil */
     .logo-container {
-        transform: translate(-50%, -10%);
+        transform: translate(-50%, -20%); /* ✅ Ajustado para móvil */
     }
     
-    .btn-carrito-header {
-        padding: 6px 8px;
+    .selector-moneda,
+    .ubicacion {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+        gap: 4px;
     }
     
-    .carrito-icon {
-        width: 22px;
-        height: 22px;
+    .selector-moneda .bandera {
+        font-size: 1rem;
     }
     
-    .contador-carrito {
-        font-size: 0.7rem;
-        min-width: 16px;
-        height: 16px;
+    .ubicacion .icono-ubicacion {
+        font-size: 0.9rem;
     }
 }
