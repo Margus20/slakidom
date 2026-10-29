@@ -144,6 +144,7 @@ document.addEventListener('componentesListos', () => {
             // ✅ Aplicar redondeo inteligente
             const precioVESRedondeado = redondearBolivares(producto.precio * tasaCambio);
             
+            // ✅ CAMBIO: Eliminado el span de decimales para los Bolívares
             card.innerHTML = `
                 <div class="producto-img-placeholder">🍪</div>
                 <h3 class="producto-nombre">${producto.nombre}</h3>
@@ -156,7 +157,6 @@ document.addEventListener('componentesListos', () => {
                     <div class="precio-ves activo-pequeno">
                         <span class="simbolo">Bs.</span>
                         <span class="entero">${precioVESRedondeado}</span>
-                        <span class="decimales">.00</span>
                     </div>
                 </div>
                 <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
@@ -241,6 +241,26 @@ document.addEventListener('componentesListos', () => {
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-agregar-carrito')) alert('✅ Producto agregado al carrito');
     });
+
+    // ✅ NUEVO: EFECTO DE NIEVE CAYENDO
+    function crearCopoDeNieve() {
+        const copo = document.createElement('div');
+        copo.className = 'snowflake';
+        copo.innerHTML = '❄';
+        copo.style.left = Math.random() * 100 + 'vw';
+        copo.style.animationDuration = Math.random() * 3 + 2 + 's';
+        copo.style.opacity = Math.random();
+        copo.style.fontSize = Math.random() * 10 + 10 + 'px';
+        
+        document.body.appendChild(copo);
+        
+        setTimeout(() => {
+            copo.remove();
+        }, 5000);
+    }
+
+    // Crear copos cada 300ms
+    setInterval(crearCopoDeNieve, 300);
 
     console.log('🎉 ¡Sistema SLAKIDOM activo!');
 });
