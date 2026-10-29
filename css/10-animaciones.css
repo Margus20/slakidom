@@ -231,10 +231,42 @@
 }
 
 /* ========================================== */
-/* BOTONES FLOTANTES (Excalibur y WhatsApp) */
+/* BOTONES FLOTANTES (Menú, Excalibur y WhatsApp) */
 /* ========================================== */
 
-/* ✅ Botón flotante de Excalibur (esquina inferior DERECHA) */
+/* ✅ 1. BOTÓN FLOTANTE DEL MENÚ (esquina superior DERECHA) */
+.btn-menu-flotante {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--chocolate);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(140, 47, 13, 0.4);
+    z-index: 998; /* Justo debajo del overlay del menú (999) */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-menu-flotante:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(140, 47, 13, 0.5);
+}
+
+.btn-menu-flotante svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-menu-flotante:hover svg {
+    transform: scale(1.1);
+}
+
+/* ✅ 2. BOTÓN FLOTANTE DE EXCALIBUR (esquina inferior DERECHA) */
 .btn-flotante-excalibur {
     position: fixed;
     bottom: 30px;
@@ -257,7 +289,7 @@
 
 /* ✅ AJUSTE: Perrito más grande y con efecto 3D de sobresalir */
 .btn-flotante-excalibur img {
-    width: 68px;  /* ✅ Aumentado de 60px a 68px */
+    width: 68px;
     height: 68px;
     object-fit: contain;
     /* ✅ EFECTO 3D: Sombra proyectada que hace que parezca que sobresale */
@@ -293,7 +325,7 @@
     border: 2px solid var(--blanco);
 }
 
-/* ✅ Botón flotante de WhatsApp (esquina inferior IZQUIERDA) */
+/* ✅ 3. BOTÓN FLOTANTE DE WHATSAPP (esquina inferior IZQUIERDA) */
 .whatsapp-flotante {
     position: fixed;
     bottom: 30px;
@@ -356,6 +388,19 @@
         padding: 12px;
     }
 
+    /* ✅ Menú flotante en móvil */
+    .btn-menu-flotante {
+        top: 15px;
+        right: 15px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    .btn-menu-flotante svg {
+        width: 26px;
+        height: 26px;
+    }
+
     /* ✅ Excalibur en móvil: misma altura que WhatsApp */
     .btn-flotante-excalibur {
         bottom: 20px;
@@ -365,7 +410,7 @@
     }
     
     .btn-flotante-excalibur img {
-        width: 58px; /* ✅ Perrito más grande en móvil también */
+        width: 58px;
         height: 58px;
         filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
     }
