@@ -11,9 +11,9 @@
     top: 0;
     z-index: 100;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    height: 80px;
+    height: 260px; /* ✅ AUMENTADO de 80px a 260px para cubrir el logo */
     position: relative;
-    overflow: visible;
+    overflow: hidden; /* ✅ Cambiado de visible a hidden para que el logo quede contenido */
 }
 
 /* ✅ AJUSTE CLAVE: Contenedor de botones que ocupa todo el ancho y distribuye a los lados */
@@ -25,8 +25,8 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
+    align-items: flex-start; /* ✅ Cambiado a flex-start para alinear arriba */
+    padding: 15px 15px;
     z-index: 101;
     pointer-events: none;
 }
@@ -38,7 +38,7 @@
     pointer-events: auto;
 }
 
-/* ✅ NUEVO: Selector de moneda (izquierda) */
+/* ✅ NUEVO: Selector de moneda (izquierda) - COLOR TURQUESA */
 .selector-moneda {
     display: flex;
     align-items: center;
@@ -48,7 +48,7 @@
     cursor: pointer;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--chocolate);
+    color: #26A3BF; /* ✅ CAMBIADO a turquesa */
     padding: 8px 12px;
     border-radius: 8px;
     transition: background 0.2s;
@@ -116,19 +116,19 @@
     font-weight: bold;
 }
 
-/* ✅ NUEVO: Ubicación (debajo del selector de moneda) */
+/* ✅ NUEVO: Ubicación (debajo del selector de moneda) - COLOR TURQUESA */
 .ubicacion {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--chocolate);
+    color: #26A3BF; /* ✅ CAMBIADO a turquesa */
     cursor: pointer;
     padding: 4px 12px;
     border-radius: 8px;
     transition: background 0.2s;
-    margin-top: -5px; /* ✅ Para que quede más pegado al selector */
+    margin-top: -5px;
 }
 
 .ubicacion:hover {
@@ -149,7 +149,7 @@
     display: none;
 }
 
-/* ✅ CAMBIO: Logo bajado un poco (-28% en lugar de -35%) */
+/* ✅ Logo centrado dentro del header extendido */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -157,7 +157,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -28%); /* ✅ BAJADO de -35% a -28% */
+    transform: translate(-50%, -50%); /* ✅ Centrado perfecto vertical y horizontal */
     z-index: 102;
 }
 
@@ -171,7 +171,7 @@
     transform: scale(1.05);
 }
 
-/* ✅ Logo más grande (230px) */
+/* ✅ Logo (230px) ahora cabe perfectamente en el header de 260px */
 .logo {
     height: 230px;
     width: auto;
@@ -239,7 +239,7 @@
 
 @media (max-width: 768px) {
     .header {
-        height: 70px;
+        height: 200px; /* ✅ Ajustado para tablet */
     }
     
     .logo {
@@ -247,7 +247,7 @@
     }
     
     .logo-container {
-        transform: translate(-50%, -22%); /* ✅ Ajustado para tablet */
+        transform: translate(-50%, -50%); /* ✅ Centrado perfecto */
     }
     
     .selector-moneda,
@@ -263,7 +263,7 @@
 
 @media (max-width: 480px) {
     .header {
-        height: 65px;
+        height: 170px; /* ✅ Ajustado para móvil */
         padding: 0 10px;
     }
     
@@ -272,7 +272,7 @@
     }
     
     .logo-container {
-        transform: translate(-50%, -18%); /* ✅ Ajustado para móvil */
+        transform: translate(-50%, -50%); /* ✅ Centrado perfecto */
     }
     
     .selector-moneda,
