@@ -32,7 +32,7 @@
         </div>
         
         <div class="header-botones">
-            <!-- ✅ NUEVO: Selector de moneda y Ubicación (izquierda) -->
+            <!-- ✅ Selector de moneda y Ubicación (izquierda) -->
             <div class="selector-moneda-wrapper">
                 <button class="selector-moneda" id="selectorMoneda" aria-label="Cambiar moneda">
                     <span class="bandera">🇻🇪</span>
@@ -72,9 +72,8 @@
     </div>
     
     <main>
-        <!-- SECCIÓN PRODUCTOS -->
+        <!-- SECCIÓN PRODUCTOS (✅ Título "Nuestros Productos" eliminado) -->
         <section id="productos" class="productos">
-            <h2 class="section-title">Nuestros Productos</h2>
             <div class="productos-grid" id="productos-grid">
                 <p style="text-align:center; color: var(--chocolate);">Cargando productos...</p>
             </div>
@@ -224,11 +223,9 @@
             const opcionesMoneda = document.querySelectorAll('.opcion-moneda');
             const monedaActualText = document.querySelector('.moneda-actual');
             
-            // Tasa de cambio de referencia (puedes actualizarla fácilmente)
             let tasaCambio = 36; // 1 USD = 36 Bs. (ejemplo)
             let monedaSeleccionada = 'USD';
             
-            // Abrir/cerrar dropdown
             if(selectorMoneda) {
                 selectorMoneda.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -237,46 +234,34 @@
                 });
             }
             
-            // Seleccionar moneda
             opcionesMoneda.forEach(opcion => {
                 opcion.addEventListener('click', () => {
                     const moneda = opcion.dataset.moneda;
                     const simbolo = opcion.dataset.simbolo;
                     
-                    // Actualizar selección visual
                     opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
                     opcion.classList.add('seleccionada');
                     
-                    // Actualizar texto del selector
                     if(monedaActualText) {
                         monedaActualText.textContent = `Venezuela (${simbolo})`;
                     }
                     
-                    // Cerrar dropdown
                     dropdownMonedas.classList.remove('activo');
                     selectorMoneda.classList.remove('activo');
                     
-                    // Actualizar precios en la página
                     monedaSeleccionada = moneda;
                     actualizarPrecios(moneda, simbolo);
-                    
-                    console.log(`Moneda cambiada a: ${moneda} (${simbolo})`);
                 });
             });
             
-            // Función para actualizar precios
             function actualizarPrecios(moneda, simbolo) {
                 const precios = document.querySelectorAll('.producto-precio');
-                
                 precios.forEach(precioEl => {
                     const precioUSD = parseFloat(precioEl.dataset.precioUsd);
-                    
                     if(!precioUSD) {
-                        // Guardar el precio original en USD la primera vez
                         const textoPrecio = precioEl.textContent.replace(/[^0-9.]/g, '');
                         precioEl.dataset.precioUsd = textoPrecio;
                     }
-                    
                     if(moneda === 'VES') {
                         const precioBS = (precioUSD * tasaCambio).toFixed(2);
                         precioEl.textContent = `${simbolo} ${precioBS}`;
@@ -285,7 +270,6 @@
                     }
                 });
                 
-                // Actualizar total del carrito si existe
                 const totalCarrito = document.getElementById('total-carrito');
                 if(totalCarrito) {
                     const totalUSD = parseFloat(totalCarrito.textContent.replace(/[^0-9.]/g, '')) || 0;
@@ -298,7 +282,6 @@
                 }
             }
             
-            // Cerrar dropdown al hacer clic fuera
             document.addEventListener('click', () => {
                 dropdownMonedas.classList.remove('activo');
                 selectorMoneda.classList.remove('activo');
