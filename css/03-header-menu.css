@@ -81,7 +81,7 @@
     transform: rotate(180deg);
 }
 
-/* Dropdown de monedas */
+/* ✅ Dropdown de monedas: z-index aumentado a 105 para que SÍ se abra */
 .dropdown-monedas {
     position: absolute;
     top: 100%;
@@ -90,9 +90,9 @@
     border: 2px solid var(--chocolate);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    min-width: 150px;
+    min-width: 160px;
     display: none;
-    z-index: 103;
+    z-index: 105; /* ✅ CAMBIADO: De 103 a 105 para estar por encima de todo */
     margin-top: 5px;
     overflow: hidden;
 }
@@ -346,6 +346,39 @@
     font-size: 0.7rem;
     margin-left: 5px;
 }
+
+/* ========================================== */
+/* ✅ ESTILOS PARA DOBLE PRECIO (USD y VES) */
+/* ========================================== */
+.producto-precio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* Espacio entre el precio grande y el pequeño */
+    margin-bottom: 15px;
+}
+
+.precio-usd, .precio-ves {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--chocolate);
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+/* ✅ Estado GRANDE (tamaño principal) */
+.activo-grande .simbolo { font-size: 1.8rem; margin-right: 2px; }
+.activo-grande .entero { font-size: 1.8rem; }
+.activo-grande .decimales { font-size: 0.9rem; align-self: flex-start; margin-top: 4px; }
+
+/* ✅ Estado PEQUEÑO (tamaño secundario, más tenue) */
+.activo-pequeno { opacity: 0.65; transform: scale(0.9); }
+.activo-pequeno .simbolo { font-size: 0.9rem; margin-right: 2px; }
+.activo-pequeno .entero { font-size: 0.9rem; }
+.activo-pequeno .decimales { font-size: 0.7rem; align-self: flex-start; margin-top: 2px; }
 
 /* ========================================== */
 /* ✅ Ocultar productos que no coincidan con la búsqueda */
@@ -678,4 +711,4 @@
         padding: 10px 12px;
         font-size: 0.8rem;
     }
-}
+                            }
