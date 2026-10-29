@@ -68,7 +68,7 @@
     display: none; 
 }
 
-/* ✅ Precio estilo EPA: dólar grande, centavos pequeños, en chocolate */
+/* ✅ Precio estilo EPA: símbolo y entero del mismo tamaño, centavos pequeños */
 .producto-precio {
     display: inline-flex;
     align-items: flex-start;
@@ -80,40 +80,37 @@
 }
 
 .producto-precio .simbolo {
-    font-size: 1rem;
+    font-size: 2.5rem; /* ✅ CAMBIO: Mismo tamaño que el número entero (antes era 1rem) */
     margin-right: 2px;
-    align-self: flex-start;
-    margin-top: 4px;
 }
 
 .producto-precio .entero {
-    font-size: 2.5rem; /* ✅ Dólares MUY grandes */
+    font-size: 2.5rem; /* ✅ Dólares grandes */
     line-height: 1;
 }
 
 .producto-precio .decimales {
     font-size: 1rem; /* ✅ Centavos pequeños */
     align-self: flex-start;
-    margin-top: 4px;
+    margin-top: 6px; /* ✅ Ajuste visual para alinearlo con la parte superior del número */
 }
 
-/* ✅ Botón "Agregar" compacto (ajustado al texto y centrado) */
+/* ✅ Botón "Agregar" compacto (ajustado EXACTAMENTE al texto) */
 .btn-agregar-carrito {
     background: var(--chocolate);
     color: var(--blanco);
     border: none;
-    padding: 10px 20px; /* ✅ Padding reducido para que sea compacto */
+    padding: 8px 16px; /* ✅ Padding reducido para que sea justo al texto */
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    width: auto; /* ✅ Ancho automático (se ajusta al texto) */
-    min-width: 120px; /* ✅ Ancho mínimo para que se vea bien */
+    width: fit-content; /* ✅ Se ajusta exactamente al contenido */
+    min-width: auto; /* ✅ CAMBIO: Eliminado el ancho mínimo de 120px */
     transition: all 0.3s;
-    display: inline-flex; /* ✅ Para centrar mejor el contenido */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
     margin: 0 auto; /* ✅ Centrado horizontal dentro de la tarjeta */
 }
 
@@ -168,14 +165,17 @@
         font-size: 2rem;
     }
     
+    .producto-precio .simbolo {
+        font-size: 2rem; /* ✅ Sincronizado con el entero en móvil */
+    }
+    
     .producto-nombre {
         font-size: 1rem;
     }
     
     .btn-agregar-carrito {
-        min-width: 100px;
         font-size: 0.85rem;
-        padding: 8px 16px;
+        padding: 6px 14px; /* ✅ Aún más compacto en móvil */
     }
 }
 
@@ -186,7 +186,8 @@
         height: 180px;
     }
     
-    .producto-precio .entero {
+    .producto-precio .entero,
+    .producto-precio .simbolo {
         font-size: 1.8rem;
     }
 }
