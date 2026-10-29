@@ -3,17 +3,17 @@
 /* ========================================== */
 .header {
     background-color: var(--amarillo);
-    padding: 15px 20px;
+    padding: 0 20px; /* Padding vertical en 0 para controlar la altura exacta */
     display: flex;
     align-items: center;
     justify-content: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    height: 80px; /* ✅ Altura fija para que no crezca */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    height: 80px; /* ✅ Altura fija estricta (no crece) */
     position: relative;
-    overflow: visible; /* ✅ Permite que el logo sobresalga */
+    overflow: visible; /* ✅ CLAVE: Permite que el logo sobresalga hacia abajo */
 }
 
 /* ✅ Botón del carrito en la esquina superior IZQUIERDA */
@@ -80,7 +80,7 @@
     transform: scale(1.05);
 }
 
-/* ✅ Contenedor del logo centrado */
+/* ✅ Contenedor del logo centrado y sobresaliendo hacia ABAJO */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -88,7 +88,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -30%); /* ✅ Centrado horizontal y sobresale un poco hacia abajo */
+    /* ✅ Cambio clave: -50% centra horizontal, 25% empuja hacia ABAJO para que sobresalga */
+    transform: translate(-50%, 25%);
     z-index: 102;
 }
 
@@ -103,13 +104,13 @@
     transform: scale(1.05);
 }
 
-/* ✅ Logo grande que sobresale del header */
+/* ✅ Logo más grande que sobresale del header */
 .logo {
-    height: 130px; /* ✅ Tamaño grande */
+    height: 160px; /* ✅ Aumentado de 130px a 160px */
     width: auto;
     display: block;
     cursor: pointer;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); /* ✅ Sombra para que destaque */
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2)); /* ✅ Sombra más marcada para que destaque al sobresalir */
 }
 
 /* Menú full-screen */
@@ -176,7 +177,11 @@
     }
     
     .logo {
-        height: 100px; /* Logo más pequeño en tablets */
+        height: 120px; /* Logo grande pero proporcional en tablet */
+    }
+    
+    .logo-container {
+        transform: translate(-50%, 20%); /* Ajuste de caída para tablet */
     }
     
     .menu-item {
@@ -197,11 +202,15 @@
 @media (max-width: 480px) {
     .header {
         height: 65px;
-        padding: 10px 12px;
+        padding: 0 12px;
     }
     
     .logo {
-        height: 85px; /* Logo más pequeño en móviles pero sigue sobresaliendo */
+        height: 100px; /* Logo visible pero sin tapar todo en móvil */
+    }
+    
+    .logo-container {
+        transform: translate(-50%, 15%); /* Menos caída en móvil para no estorbar */
     }
     
     .btn-carrito-header {
