@@ -41,7 +41,7 @@
     pointer-events: auto;
 }
 
-/* ✅ Selector de moneda (izquierda) - COLOR TURQUESA */
+/* ✅ Selector de moneda (izquierda) - COLOR CHOCOLATE para máximo contraste con amarillo */
 .selector-moneda {
     display: flex;
     align-items: center;
@@ -50,8 +50,8 @@
     border: none;
     cursor: pointer;
     font-size: 0.95rem;
-    font-weight: 600;
-    color: #26A3BF;
+    font-weight: 700;
+    color: var(--chocolate); /* ✅ CAMBIADO: De turquesa a chocolate */
     padding: 8px 12px;
     border-radius: 8px;
     transition: background 0.2s;
@@ -59,7 +59,7 @@
 }
 
 .selector-moneda:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .selector-moneda .bandera {
@@ -119,14 +119,14 @@
     font-weight: bold;
 }
 
-/* ✅ Ubicación (debajo del selector de moneda) - COLOR TURQUESA */
+/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE */
 .ubicacion {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 0.85rem;
-    font-weight: 600;
-    color: #26A3BF;
+    font-weight: 700;
+    color: var(--chocolate); /* ✅ CAMBIADO: De turquesa a chocolate */
     cursor: pointer;
     padding: 4px 12px;
     border-radius: 8px;
@@ -135,7 +135,7 @@
 }
 
 .ubicacion:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .ubicacion .icono-ubicacion {
@@ -157,7 +157,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 102;
@@ -174,7 +174,7 @@
 }
 
 .logo {
-    height: 230px;
+    height: 200px;
     width: auto;
     display: block;
     cursor: pointer;
@@ -182,7 +182,7 @@
 }
 
 /* ========================================== */
-/* ✅ NUEVO: BUSCADOR EN EL HEADER */
+/* ✅ BUSCADOR EN EL HEADER */
 /* ========================================== */
 .buscador-header {
     display: flex;
@@ -194,7 +194,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     max-width: 280px;
     width: 100%;
-    margin-top: 180px; /* ✅ BAJADO hacia el borde inferior de la franja amarilla */
+    margin-top: 180px;
 }
 
 .buscador-input {
@@ -239,12 +239,106 @@
     height: 18px;
 }
 
+/* ========================================== */
+/* ✅ MENÚ HORIZONTAL DENTRO DE LA FRANJA AMARILLA */
+/* ========================================== */
+.nav-bar {
+    background: transparent; /* ✅ Sin fondo propio, se integra al amarillo */
+    padding: 0 20px;
+    position: absolute;
+    bottom: 0; /* ✅ Se pega al borde inferior del header */
+    left: 0;
+    width: 100%;
+    z-index: 102;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-item {
+    position: relative;
+}
+
+/* ✅ Letras color chocolate sobre fondo amarillo */
+.nav-link {
+    display: block;
+    padding: 12px 25px;
+    color: var(--chocolate); /* ✅ Color chocolate */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s;
+    white-space: nowrap;
+    border-radius: 8px 8px 0 0;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.5); /* ✅ Fondo blanco semi-transparente al pasar el mouse */
+    color: var(--chocolate);
+}
+
+/* Dropdown de subcategorías */
+.nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--blanco);
+    min-width: 180px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 0 0 8px 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 103;
+}
+
+.nav-item.activo .nav-dropdown {
+    display: block;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 12px 20px;
+    color: var(--chocolate);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-link:last-child {
+    border-bottom: none;
+}
+
+.dropdown-link:hover {
+    background: var(--amarillo);
+    color: var(--chocolate);
+}
+
+/* Flechita para indicar dropdown */
+.nav-item:has(.nav-dropdown) .nav-link::after {
+    content: ' ▼';
+    font-size: 0.7rem;
+    margin-left: 5px;
+}
+
+/* ========================================== */
 /* ✅ Ocultar productos que no coincidan con la búsqueda */
+/* ========================================== */
 .producto-card.oculto {
     display: none !important;
 }
 
-/* Mensaje cuando no hay resultados */
 .sin-resultados {
     text-align: center;
     padding: 40px 20px;
@@ -258,7 +352,9 @@
     display: block;
 }
 
-/* Menú full-screen */
+/* ========================================== */
+/* Menú full-screen (móvil) */
+/* ========================================== */
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -346,12 +442,10 @@
     transition: transform 0.3s;
 }
 
-/* Cuando está activo, la flecha gira */
 .menu-item-dropdown.activo .dropdown-arrow {
     transform: rotate(180deg);
 }
 
-/* Contenedor del submenú (animado) */
 .menu-subnav {
     list-style: none;
     padding: 0;
@@ -362,9 +456,8 @@
     background: rgba(0,0,0,0.2);
 }
 
-/* Al activarse, se expande */
 .menu-item-dropdown.activo .menu-subnav {
-    max-height: 200px; /* Suficiente para 2-3 items */
+    max-height: 200px;
 }
 
 .menu-subitem {
@@ -393,11 +486,11 @@
     }
     
     .logo {
-        height: 180px;
+        height: 160px;
     }
     
     .logo-container {
-        transform: translate(-50%, -50%);
+        top: 40%;
     }
     
     .selector-moneda,
@@ -410,19 +503,18 @@
         font-size: 1.5rem;
     }
     
-    /* ✅ Ajustes del submenú en tablet/móvil */
     .menu-toggle-dropdown {
         font-size: 1.5rem;
     }
+    
     .menu-subitem {
         font-size: 1.1rem;
         padding: 12px 20px;
     }
     
-    /* ✅ Buscador en tablet (ajustado proporcionalmente) */
     .buscador-header {
         max-width: 220px;
-        margin-top: 120px; /* ✅ Bajado proporcionalmente para header de 200px */
+        margin-top: 120px;
     }
     
     .buscador-input {
@@ -439,6 +531,17 @@
         width: 16px;
         height: 16px;
     }
+    
+    /* ✅ Menú horizontal en tablet: letras más pequeñas */
+    .nav-link {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .dropdown-link {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -448,11 +551,11 @@
     }
     
     .logo {
-        height: 150px;
+        height: 130px;
     }
     
     .logo-container {
-        transform: translate(-50%, -50%);
+        top: 38%;
     }
     
     .selector-moneda,
@@ -470,10 +573,9 @@
         font-size: 0.9rem;
     }
     
-    /* ✅ Buscador en móvil (ajustado proporcionalmente) */
     .buscador-header {
         max-width: 160px;
-        margin-top: 90px; /* ✅ Bajado proporcionalmente para header de 170px */
+        margin-top: 90px;
     }
     
     .buscador-input {
@@ -493,5 +595,24 @@
     .buscador-btn svg {
         width: 14px;
         height: 14px;
+    }
+    
+    /* ✅ Menú horizontal en móvil: más compacto */
+    .nav-bar {
+        padding: 0 10px;
+    }
+    
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .nav-dropdown {
+        min-width: 140px;
+    }
+    
+    .dropdown-link {
+        padding: 10px 12px;
+        font-size: 0.8rem;
     }
 }
