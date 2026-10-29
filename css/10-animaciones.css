@@ -23,16 +23,16 @@
 .header-botones {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* ✅ Distribuye: carrito a la izquierda, menú a la derecha */
+    justify-content: space-between;
     gap: 15px;
-    position: absolute; /* ✅ Para que no empuje al logo del centro */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     padding: 0 15px;
     z-index: 101;
-    pointer-events: none; /* Permite clics a través del contenedor */
+    pointer-events: none;
 }
 
 /* ✅ Reactivar clics en los botones hijos */
@@ -241,8 +241,8 @@
     right: 20px;
     width: 70px;
     height: 70px;
-    background: #F2CB05; /* ✅ CAMBIADO: Amarillo vibrante #F2CB05 */
-    border: 2px solid var(--chocolate); /* ✅ AGREGADO: Borde chocolate para que el perrito blanco resalte */
+    background: #F2CB05;
+    border: 2px solid var(--chocolate);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -252,16 +252,28 @@
     transition: transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    overflow: visible; /* ✅ CLAVE: Permite que el perrito sobresalga del círculo */
 }
 
+/* ✅ AJUSTE: Perrito más grande y con efecto 3D de sobresalir */
 .btn-flotante-excalibur img {
-    width: 60px;
-    height: 60px;
+    width: 68px;  /* ✅ Aumentado de 60px a 68px */
+    height: 68px;
     object-fit: contain;
+    /* ✅ EFECTO 3D: Sombra proyectada que hace que parezca que sobresale */
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
+/* ✅ Al pasar el mouse: el perrito "salta" un poquito más */
 .btn-flotante-excalibur:hover {
     transform: scale(1.1);
+}
+
+.btn-flotante-excalibur:hover img {
+    /* ✅ Sombra más intensa al hacer hover para más efecto 3D */
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+    transform: translateY(-2px);
 }
 
 .contador-flotante {
@@ -353,8 +365,14 @@
     }
     
     .btn-flotante-excalibur img {
-        width: 50px;
-        height: 50px;
+        width: 58px; /* ✅ Perrito más grande en móvil también */
+        height: 58px;
+        filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+    }
+    
+    .btn-flotante-excalibur:hover img {
+        filter: drop-shadow(0 5px 8px rgba(0,0,0,0.6));
+        transform: translateY(-2px);
     }
     
     /* ✅ WhatsApp en móvil: misma altura que Excalibur */
