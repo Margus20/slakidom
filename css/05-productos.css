@@ -11,7 +11,7 @@
 /* ✅ Grid de 3 columnas fijas */
 .productos-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* ✅ 3 columnas iguales */
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     max-width: 1200px;
     margin: 0 auto;
@@ -19,33 +19,37 @@
 
 /* ✅ Tarjetas sin bordes visibles (estilo limpio) */
 .producto-card {
-    background: #FFFFFF; /* ✅ Fondo blanco */
-    border: none; /* Sin bordes */
+    background: #FFFFFF;
+    border: none;
     border-radius: 12px;
     padding: 15px;
     text-align: center;
+    /* ✅ NUEVO: Flexbox para centrar todo perfectamente */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .producto-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(140, 47, 13, 0.15); /* Sombra sutil al pasar el mouse */
+    box-shadow: 0 8px 25px rgba(140, 47, 13, 0.15);
 }
 
 /* Imagen del producto */
 .producto-img {
     width: 100%;
     height: 200px;
-    object-fit: contain; /* ✅ Mantiene la proporción sin recortar */
+    object-fit: contain;
     border-radius: 12px;
     margin-bottom: 15px;
-    background: #FFFFFF; /* ✅ Fondo blanco */
+    background: #FFFFFF;
 }
 
 .producto-img-placeholder {
     width: 100%;
     height: 200px;
-    background: #FFFFFF; /* ✅ Fondo blanco */
+    background: #FFFFFF;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -80,38 +84,41 @@
 }
 
 .producto-precio .simbolo {
-    font-size: 2.5rem; /* ✅ CAMBIO: Mismo tamaño que el número entero (antes era 1rem) */
+    font-size: 2.5rem;
     margin-right: 2px;
 }
 
 .producto-precio .entero {
-    font-size: 2.5rem; /* ✅ Dólares grandes */
+    font-size: 2.5rem;
     line-height: 1;
 }
 
 .producto-precio .decimales {
-    font-size: 1rem; /* ✅ Centavos pequeños */
+    font-size: 1rem;
     align-self: flex-start;
-    margin-top: 6px; /* ✅ Ajuste visual para alinearlo con la parte superior del número */
+    margin-top: 6px;
 }
 
-/* ✅ Botón "Agregar" compacto (ajustado EXACTAMENTE al texto) */
+/* ✅ Botón "Agregar" compacto (FORZADO a ser del tamaño del texto) */
 .btn-agregar-carrito {
     background: var(--chocolate);
     color: var(--blanco);
     border: none;
-    padding: 8px 16px; /* ✅ Padding reducido para que sea justo al texto */
+    padding: 8px 16px;
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    width: fit-content; /* ✅ Se ajusta exactamente al contenido */
-    min-width: auto; /* ✅ CAMBIO: Eliminado el ancho mínimo de 120px */
+    
+    /* ✅ ESTAS 3 LÍNEAS SON LA CLAVE PARA QUE NO SE ESTIRE */
+    width: auto !important; 
+    min-width: 0 !important;
+    align-self: center; /* Centra el botón dentro del flex de la tarjeta */
+    
     transition: all 0.3s;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto; /* ✅ Centrado horizontal dentro de la tarjeta */
 }
 
 .btn-agregar-carrito:hover {
@@ -166,7 +173,7 @@
     }
     
     .producto-precio .simbolo {
-        font-size: 2rem; /* ✅ Sincronizado con el entero en móvil */
+        font-size: 2rem;
     }
     
     .producto-nombre {
@@ -175,7 +182,7 @@
     
     .btn-agregar-carrito {
         font-size: 0.85rem;
-        padding: 6px 14px; /* ✅ Aún más compacto en móvil */
+        padding: 6px 14px;
     }
 }
 
