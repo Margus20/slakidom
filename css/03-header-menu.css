@@ -3,20 +3,23 @@
 /* ========================================== */
 .header {
     background-color: var(--amarillo);
-    padding: 15px 20px;
+    padding: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 15px;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* ✅ AJUSTE: Contenedor del logo */
+/* ✅ AJUSTE: Contenedor del logo centrado */
 .logo-container {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 /* ✅ AJUSTE: Enlace que envuelve el logo para hacerlo clicable */
@@ -31,12 +34,59 @@
     transform: scale(1.05);
 }
 
-/* ✅ AJUSTE: Logo como botón clicable */
+/* ✅ AJUSTE: Logo 4 veces más grande (200px) */
 .logo {
-    height: 50px;
+    height: 200px;
     width: auto;
     display: block;
     cursor: pointer;
+}
+
+/* ✅ AJUSTE: Contenedor de botones del header (carrito y menú) */
+.header-botones {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* ✅ AJUSTE: Botón del carrito con imagen de Excalibur */
+.btn-carrito-header {
+    background: var(--blanco);
+    border: 2px solid var(--chocolate);
+    border-radius: 50px;
+    padding: 8px 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.2s;
+}
+
+.btn-carrito-header:hover {
+    transform: scale(1.05);
+}
+
+/* ✅ AJUSTE: Imagen de Excalibur dentro del botón del carrito */
+.carrito-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* ✅ AJUSTE: Contador del carrito */
+.contador-carrito {
+    background: var(--rosa);
+    color: var(--blanco);
+    font-size: 0.8rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-toggle {
@@ -100,4 +150,40 @@
 
 .menu-item:hover {
     color: var(--amarillo);
+}
+
+/* ========================================== */
+/* RESPONSIVE: Ajustes para tablets y móviles */
+/* ========================================== */
+
+/* Tablets y celulares grandes */
+@media (max-width: 768px) {
+    .logo {
+        height: 120px; /* Logo más pequeño en tablets */
+    }
+    
+    .menu-item {
+        font-size: 1.5rem;
+    }
+}
+
+/* Celulares pequeños */
+@media (max-width: 480px) {
+    .header {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        height: 90px; /* Logo más pequeño en móviles */
+    }
+    
+    .carrito-icon {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .menu-toggle {
+        padding: 8px 12px;
+        font-size: 20px;
+    }
 }
