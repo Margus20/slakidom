@@ -3,7 +3,7 @@
 /* ========================================== */
 .header {
     background-color: var(--amarillo);
-    padding: 0 20px; /* Padding vertical en 0 para controlar la altura exacta */
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,7 +80,7 @@
     transform: scale(1.05);
 }
 
-/* ✅ Contenedor del logo centrado y sobresaliendo hacia ABAJO */
+/* ✅ Contenedor del logo: PERFECTAMENTE centrado y sobresaliendo abajo */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -88,8 +88,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* ✅ Cambio clave: -50% centra horizontal, 25% empuja hacia ABAJO para que sobresalga */
-    transform: translate(-50%, 25%);
+    /* ✅ Centrado horizontal perfecto (-50%), y empujado un 5% hacia abajo para que sobresalga */
+    transform: translate(-50%, 5%);
     z-index: 102;
 }
 
@@ -104,13 +104,13 @@
     transform: scale(1.05);
 }
 
-/* ✅ Logo más grande que sobresale del header */
+/* ✅ Logo más grande: 200px (aprox. 5.2 cm) */
 .logo {
-    height: 160px; /* ✅ Aumentado de 130px a 160px */
+    height: 200px; /* ✅ Aumentado de 160px a 200px */
     width: auto;
     display: block;
     cursor: pointer;
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2)); /* ✅ Sombra más marcada para que destaque al sobresalir */
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25)); /* ✅ Sombra más marcada para dar profundidad al sobresalir */
 }
 
 /* Menú full-screen */
@@ -177,11 +177,11 @@
     }
     
     .logo {
-        height: 120px; /* Logo grande pero proporcional en tablet */
+        height: 150px; /* Logo grande pero proporcional en tablet (aprox. 3.9 cm) */
     }
     
     .logo-container {
-        transform: translate(-50%, 20%); /* Ajuste de caída para tablet */
+        transform: translate(-50%, 0%); /* En tablet, un poco más centrado verticalmente */
     }
     
     .menu-item {
@@ -206,11 +206,11 @@
     }
     
     .logo {
-        height: 100px; /* Logo visible pero sin tapar todo en móvil */
+        height: 120px; /* Logo visible en móviles (aprox. 3.1 cm) sin tapar la pantalla */
     }
     
     .logo-container {
-        transform: translate(-50%, 15%); /* Menos caída en móvil para no estorbar */
+        transform: translate(-50%, -5%); /* En móvil, sube un poquito para no estorbar el contenido */
     }
     
     .btn-carrito-header {
