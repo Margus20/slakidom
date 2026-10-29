@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inicializarAnimaciones();
     actualizarContadorCarrito();
     
-    // 2. Renderizar productos dinámicamente con el NUEVO estilo EPA
+    // 2. Renderizar productos dinámicamente con el NUEVO estilo EPA (Limpio)
     const gridProductos = document.getElementById("productos-grid");
     if (gridProductos) {
         gridProductos.innerHTML = ""; // Limpiar el "Cargando..."
@@ -36,30 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 : `<img src="${producto.imagen}" alt="${producto.nombre}" class="producto-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="producto-img-placeholder" style="display:none;">🍪</div>`;
 
             // ✅ Separar el precio para el estilo EPA (Ej: 3.50 -> entero: 3, decimales: .50)
-            // Maneja tanto números (3.50) como strings ("$3.50") de forma segura
             const precioLimpio = String(producto.precio).replace(/[^0-9.]/g, '');
             const precioFormateado = parseFloat(precioLimpio).toFixed(2);
             const partesPrecio = precioFormateado.split('.');
             const entero = partesPrecio[0];
             const decimales = '.' + partesPrecio[1];
-            
-            // Enlace a la página individual (usa el del dato o genera uno por defecto)
-            const enlaceProducto = producto.enlace || `producto.html?id=${producto.id}`;
 
-            // ✅ HTML actualizado: Descripción como enlace y precio dividido en 3 partes
+            // ✅ HTML actualizado: SOLO título, precio y botón "Agregar" (sin descripción)
             card.innerHTML = `
                 ${imagenHTML}
                 <h3 class="producto-nombre">${producto.nombre}</h3>
-                <p class="producto-descripcion">
-                    <a href="${enlaceProducto}" title="Ver detalles de ${producto.nombre}">${producto.descripcion}</a>
-                </p>
                 <div class="producto-precio">
                     <span class="simbolo">$</span>
                     <span class="entero">${entero}</span>
                     <span class="decimales">${decimales}</span>
                 </div>
                 <button class="btn-agregar-carrito" data-id="${producto.id}">
-                    🛒 Agregar al pedido
+                    Agregar
                 </button>
             `;
             
@@ -74,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ✅ 3. Conectar botones del modal del carrito
-    // Seleccionamos TODOS los elementos que deben abrir el carrito (header, flotante y cualquier otro con la clase)
     const botonesAbrirCarrito = document.querySelectorAll('#btn-ver-carrito, .btn-flotante-excalibur, .abrir-modal-carrito');
     const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
     const btnFinalizar = document.getElementById("btn-finalizar-pedido");
