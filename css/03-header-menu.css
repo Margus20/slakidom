@@ -312,6 +312,78 @@
 }
 
 /* ========================================== */
+/* ✅ MENÚ FULL-SCREEN CON SUBMENÚ (Móvil) */
+/* ========================================== */
+.menu-item-dropdown {
+    width: 100%;
+}
+
+.menu-toggle-dropdown {
+    background: none;
+    border: none;
+    color: var(--blanco);
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 20px 0;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    transition: color 0.3s;
+}
+
+.menu-toggle-dropdown:hover {
+    color: var(--amarillo);
+}
+
+.menu-toggle-dropdown .dropdown-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+/* Cuando está activo, la flecha gira */
+.menu-item-dropdown.activo .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Contenedor del submenú (animado) */
+.menu-subnav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0,0,0,0.2);
+}
+
+/* Al activarse, se expande */
+.menu-item-dropdown.activo .menu-subnav {
+    max-height: 200px; /* Suficiente para 2-3 items */
+}
+
+.menu-subitem {
+    display: block;
+    padding: 15px 20px;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu-subitem:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--amarillo);
+}
+
+/* ========================================== */
 /* RESPONSIVE */
 /* ========================================== */
 
@@ -336,6 +408,15 @@
     
     .menu-item {
         font-size: 1.5rem;
+    }
+    
+    /* ✅ Ajustes del submenú en tablet/móvil */
+    .menu-toggle-dropdown {
+        font-size: 1.5rem;
+    }
+    .menu-subitem {
+        font-size: 1.1rem;
+        padding: 12px 20px;
     }
     
     /* ✅ Buscador en tablet (ajustado proporcionalmente) */
