@@ -51,10 +51,13 @@ async function obtenerTasaBCV() {
 
 async function cargarComponentes() {
     try {
-        const headerRes = await fetch('componentes/header.html');
+        // ✅ CAMBIO 1: Rutas absolutas (con / al inicio) para que funcionen desde cualquier subcarpeta
+        const headerRes = await fetch('/componentes/header.html');
         if (headerRes.ok) document.getElementById('header-container').innerHTML = await headerRes.text();
-        const footerRes = await fetch('componentes/footer.html');
+        
+        const footerRes = await fetch('/componentes/footer.html');
         if (footerRes.ok) document.getElementById('footer-container').innerHTML = await footerRes.text();
+        
         document.dispatchEvent(new Event('componentesListos'));
     } catch (error) {
         console.error('❌ [NERD-DEBUG]: Error al cargar los cimientos (componentes):', error);
@@ -123,13 +126,20 @@ document.addEventListener('componentesListos', () => {
         });
     }
 
-    function renderizarProductos() {
+    // ✅ CAMBIO 2: La función ahora recibe la lista de productos a mostrar como parámetro
+    function renderizarProductos(listaProductos) {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
         
         console.log('🏗️ [NERD-DEBUG]: Construyendo la vitrina de productos...');
         gridProductos.innerHTML = "";
-        PRODUCTOS.forEach(producto => {
+
+        if (listaProductos.length === 0) {
+            gridProductos.innerHTML = "<p style='text-align:center; color: var(--chocolate); padding: 40px;'>No hay productos en esta categoría por ahora.</p>";
+            return;
+        }
+        
+        listaProductos.forEach(producto => {
             const card = document.createElement("div");
             card.className = "producto-card";
             card.dataset.categoria = producto.categoria;
@@ -168,7 +178,21 @@ document.addEventListener('componentesListos', () => {
         tasaCambio = await obtenerTasaBCV();
         console.log('💰 [NERD-DEBUG]: La tasa sagrada ha sido establecida en:', tasaCambio);
         if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
-        renderizarProductos();
+        
+        // ✅ CAMBIO 3: Detectar la URL y filtrar los productos
+        const path = window.location.pathname; // Ej: "/", "/galletas/", "/mermeladas/"
+        let productosAMostrar = PRODUCTOS; // Por defecto, muestra TODOS (para index.html)
+
+        if (path.includes('/galletas/')) {
+            productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'galletas');
+            console.log('🍪 [NERD-DEBUG]: Modo Galletas activado. Filtrando productos.');
+        } else if (path.includes('/mermeladas/')) {
+            productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'mermeladas');
+            console.log('🫙 [NERD-DEBUG]: Modo Mermeladas activado. Filtrando productos.');
+        }
+
+        // Renderizamos con la lista filtrada (o completa)
+        renderizarProductos(productosAMostrar);
     })();
 
     // ==========================================
@@ -186,7 +210,6 @@ document.addEventListener('componentesListos', () => {
     }
 
     opcionesMoneda.forEach(opcion => {
-        // Bloqueamos mousedown para que no robe el foco ni seleccione texto/productos
         opcion.addEventListener('mousedown', (e) => {
             e.stopPropagation();
             e.preventDefault();
@@ -210,8 +233,6 @@ document.addEventListener('componentesListos', () => {
             if (selectorMoneda) selectorMoneda.classList.remove('activo');
             
             monedaSeleccionada = moneda;
-            
-            // Ejecutamos la reconstrucción total del DOM
             actualizarVistaDePrecios(moneda);
         });
     });
@@ -238,7 +259,9 @@ document.addEventListener('componentesListos', () => {
         { id: 6, nombre: "Mermelada de Durazno", precio: 4.00, categoria: "mermeladas" }
     ];
 
-    // ... (El resto del código del menú, buscador, carrito y nieve se mantiene intacto y funcional) ...
+    // ==========================================
+    // EL RESTO DEL CÓDIGO (MENÚ, BUSCADOR, CARRITO, NIEVE) SE MANTIENE INTACTO
+    // ==========================================
     const menuFlotante = document.getElementById('menu-flotante');
     const menuClose = document.getElementById('menuClose');
     const menuOverlay = document.getElementById('menuOverlay');
