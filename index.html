@@ -56,6 +56,17 @@
                     <span>Caracas</span>
                 </div>
             </div>
+            
+            <!-- ✅ NUEVO: Buscador (derecha) -->
+            <div class="buscador-header">
+                <input type="text" id="buscador-input" class="buscador-input" placeholder="Buscar..." aria-label="Buscar productos">
+                <button class="buscador-btn" id="buscador-btn" aria-label="Buscar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
     
@@ -72,7 +83,7 @@
     </div>
     
     <main>
-        <!-- SECCIÓN PRODUCTOS (✅ Título "Nuestros Productos" eliminado) -->
+        <!-- SECCIÓN PRODUCTOS -->
         <section id="productos" class="productos">
             <div class="productos-grid" id="productos-grid">
                 <p style="text-align:center; color: var(--chocolate);">Cargando productos...</p>
@@ -335,6 +346,65 @@
                 });
                 menuOverlay.addEventListener('click', (e) => {
                     if (e.target === menuOverlay) cerrarMenu();
+                });
+            }
+
+            // ==========================================
+            // 4. LÓGICA DEL BUSCADOR
+            // ==========================================
+            const buscadorInput = document.getElementById('buscador-input');
+            const buscadorBtn = document.getElementById('buscador-btn');
+            const productosGrid = document.getElementById('productos-grid');
+
+            function buscarProductos() {
+                const termino = buscadorInput ? buscadorInput.value.toLowerCase().trim() : '';
+                const tarjetas = document.querySelectorAll('.producto-card');
+                let resultadosVisibles = 0;
+                
+                tarjetas.forEach(tarjeta => {
+                    const nombre = tarjeta.querySelector('.producto-nombre').textContent.toLowerCase();
+                    const precio = tarjeta.querySelector('.producto-precio').textContent.toLowerCase();
+                    
+                    if (nombre.includes(termino) || precio.includes(termino)) {
+                        tarjeta.classList.remove('oculto');
+                        resultadosVisibles++;
+                    } else {
+                        tarjeta.classList.add('oculto');
+                    }
+                });
+                
+                // Mostrar mensaje si no hay resultados
+                let sinResultados = document.querySelector('.sin-resultados');
+                if (!sinResultados) {
+                    sinResultados = document.createElement('div');
+                    sinResultados.className = 'sin-resultados';
+                    sinResultados.textContent = 'No se encontraron productos 😕';
+                    if(productosGrid) productosGrid.appendChild(sinResultados);
+                }
+                
+                if (resultadosVisibles === 0 && termino !== '') {
+                    sinResultados.classList.add('visible');
+                } else {
+                    sinResultados.classList.remove('visible');
+                }
+            }
+
+            // Buscar al escribir en tiempo real
+            if (buscadorInput) {
+                buscadorInput.addEventListener('input', buscarProductos);
+            }
+
+            // Buscar al hacer clic en la lupa
+            if (buscadorBtn) {
+                buscadorBtn.addEventListener('click', buscarProductos);
+            }
+
+            // Buscar al presionar Enter
+            if (buscadorInput) {
+                buscadorInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        buscarProductos();
+                    }
                 });
             }
         });
