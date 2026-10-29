@@ -16,7 +16,6 @@
     overflow: hidden;
 }
 
-/* ✅ AJUSTE CLAVE: Contenedor de botones que ocupa todo el ancho y distribuye a los lados */
 .header-botones {
     position: absolute;
     top: 0;
@@ -31,7 +30,6 @@
     pointer-events: none;
 }
 
-/* ✅ Reactivar los clics en los botones hijos */
 .header-botones button,
 .header-botones .selector-moneda,
 .header-botones .ubicacion,
@@ -41,7 +39,6 @@
     pointer-events: auto;
 }
 
-/* ✅ Selector de moneda (izquierda) - ALINEADO con el botón hamburguesa */
 .selector-moneda {
     display: flex;
     align-items: center;
@@ -81,7 +78,7 @@
     transform: rotate(180deg);
 }
 
-/* ✅ Dropdown de monedas: z-index aumentado a 105 para que SÍ se abra */
+/* ✅ Dropdown de monedas: z-index aumentado a 105 */
 .dropdown-monedas {
     position: absolute;
     top: 100%;
@@ -92,7 +89,7 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     min-width: 160px;
     display: none;
-    z-index: 105; /* ✅ CAMBIADO: De 103 a 105 para estar por encima de todo */
+    z-index: 105;
     margin-top: 5px;
     overflow: hidden;
 }
@@ -121,7 +118,6 @@
     font-weight: bold;
 }
 
-/* ✅ Ubicación (debajo del selector) - ALINEADA con la V de Venezuela */
 .ubicacion {
     display: flex;
     align-items: center;
@@ -150,16 +146,10 @@
     font-size: 1rem;
 }
 
-/* ✅ Ocultar botones antiguos */
-.btn-carrito-header {
+.btn-carrito-header, .menu-toggle {
     display: none;
 }
 
-.menu-toggle {
-    display: none;
-}
-
-/* ✅ Logo centrado dentro del header extendido */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -181,7 +171,6 @@
     transform: scale(1.05);
 }
 
-/* ✅ LOGO MÁS GRANDE: De 180px a 210px */
 .logo {
     height: 210px;
     width: auto;
@@ -190,9 +179,6 @@
     filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
 }
 
-/* ========================================== */
-/* ✅ BUSCADOR EN EL HEADER - MÁS ESTRECHO */
-/* ========================================== */
 .buscador-header {
     display: flex;
     align-items: center;
@@ -201,7 +187,7 @@
     border-radius: 25px;
     padding: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    max-width: 220px; /* ✅ CAMBIADO: De 280px a 220px (más estrecho) */
+    max-width: 220px;
     width: 100%;
     margin-top: 180px;
 }
@@ -248,9 +234,6 @@
     height: 18px;
 }
 
-/* ========================================== */
-/* ✅ MENÚ HORIZONTAL - AJUSTADO PARA QUE QUEPA EN UNA LÍNEA */
-/* ========================================== */
 .nav-bar {
     background: transparent;
     padding: 0 15px;
@@ -259,7 +242,7 @@
     left: 0;
     width: 100%;
     z-index: 102;
-    max-width: calc(100% - 260px); /* ✅ Ajustado: De 300px a 260px (más espacio por el buscador más pequeño) */
+    max-width: calc(100% - 260px);
 }
 
 .nav-list {
@@ -278,7 +261,6 @@
     flex-shrink: 0;
 }
 
-/* ✅ Botones del menú MÁS PEQUEÑOS para que quepan en una línea */
 .nav-link {
     display: block;
     padding: 6px 14px;
@@ -300,7 +282,6 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Dropdown de subcategorías */
 .nav-dropdown {
     position: absolute;
     top: 100%;
@@ -340,7 +321,6 @@
     color: var(--chocolate);
 }
 
-/* Flechita para indicar dropdown */
 .nav-item:has(.nav-dropdown) .nav-link::after {
     content: ' ▼';
     font-size: 0.7rem;
@@ -353,9 +333,9 @@
 .producto-precio {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* ✅ CENTRADO vertical */
     justify-content: center;
-    gap: 4px; /* Espacio entre el precio grande y el pequeño */
+    gap: 4px;
     margin-bottom: 15px;
 }
 
@@ -374,341 +354,82 @@
 .activo-grande .entero { font-size: 1.8rem; }
 .activo-grande .decimales { font-size: 0.9rem; align-self: flex-start; margin-top: 4px; }
 
-/* ✅ Estado PEQUEÑO (tamaño secundario, más tenue) */
-.activo-pequeno { opacity: 0.65; transform: scale(0.9); }
-.activo-pequeno .simbolo { font-size: 0.9rem; margin-right: 2px; }
-.activo-pequeno .entero { font-size: 0.9rem; }
-.activo-pequeno .decimales { font-size: 0.7rem; align-self: flex-start; margin-top: 2px; }
+/* ✅ Estado PEQUEÑO (más pequeño y tenue) */
+.activo-pequeno { opacity: 0.6; transform: scale(0.85); }
+.activo-pequeno .simbolo { font-size: 0.85rem; margin-right: 2px; }
+.activo-pequeno .entero { font-size: 0.85rem; }
+.activo-pequeno .decimales { font-size: 0.65rem; align-self: flex-start; margin-top: 2px; }
 
-/* ========================================== */
-/* ✅ Ocultar productos que no coincidan con la búsqueda */
-/* ========================================== */
-.producto-card.oculto {
-    display: none !important;
-}
+.producto-card.oculto { display: none !important; }
+.sin-resultados { text-align: center; padding: 40px 20px; color: var(--chocolate); font-size: 1.1rem; display: none; grid-column: 1 / -1; }
+.sin-resultados.visible { display: block; }
 
-.sin-resultados {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--chocolate);
-    font-size: 1.1rem;
-    display: none;
-    grid-column: 1 / -1;
-}
-
-.sin-resultados.visible {
-    display: block;
-}
-
-/* ========================================== */
-/* Menú full-screen (móvil) */
-/* ========================================== */
 .menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--chocolate);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px;
-    z-index: 999;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--chocolate);
+    display: flex; flex-direction: column; justify-content: center; padding: 40px; z-index: 999;
+    transform: translateX(100%); transition: transform 0.3s ease;
 }
+.menu-overlay.active { transform: translateX(0); }
+.menu-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--blanco); font-size: 40px; cursor: pointer; }
+.menu-nav { display: flex; flex-direction: column; gap: 10px; }
+.menu-item { font-family: 'Arial Black', sans-serif; font-size: 2rem; font-weight: 900; color: var(--blanco); text-transform: uppercase; text-decoration: none; padding: 20px 0; border-bottom: 2px solid rgba(255,255,255,0.1); }
+.menu-item:hover { color: var(--amarillo); }
 
-.menu-overlay.active {
-    transform: translateX(0);
-}
-
-.menu-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: var(--blanco);
-    font-size: 40px;
-    cursor: pointer;
-}
-
-.menu-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.menu-item {
-    font-family: 'Arial Black', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--blanco);
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 20px 0;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
-}
-
-.menu-item:hover {
-    color: var(--amarillo);
-}
-
-/* ========================================== */
-/* ✅ MENÚ FULL-SCREEN CON SUBMENÚ (Móvil) */
-/* ========================================== */
-.menu-item-dropdown {
-    width: 100%;
-}
-
+.menu-item-dropdown { width: 100%; }
 .menu-toggle-dropdown {
-    background: none;
-    border: none;
-    color: var(--blanco);
-    font-family: 'Arial Black', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: left;
-    padding: 20px 0;
-    width: 100%;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
-    transition: color 0.3s;
+    background: none; border: none; color: var(--blanco); font-family: 'Arial Black', sans-serif;
+    font-size: 2rem; font-weight: 900; text-transform: uppercase; text-align: left; padding: 20px 0;
+    width: 100%; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid rgba(255,255,255,0.1); transition: color 0.3s;
 }
+.menu-toggle-dropdown:hover { color: var(--amarillo); }
+.menu-toggle-dropdown .dropdown-arrow { font-size: 1.2rem; transition: transform 0.3s; }
+.menu-item-dropdown.activo .dropdown-arrow { transform: rotate(180deg); }
 
-.menu-toggle-dropdown:hover {
-    color: var(--amarillo);
-}
+.menu-subnav { list-style: none; padding: 0; margin: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(0,0,0,0.2); }
+.menu-item-dropdown.activo .menu-subnav { max-height: 200px; }
+.menu-subitem { display: block; padding: 15px 20px; color: var(--blanco); text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s, color 0.2s; }
+.menu-subitem:hover { background: rgba(255,255,255,0.1); color: var(--amarillo); }
 
-.menu-toggle-dropdown .dropdown-arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-}
-
-.menu-item-dropdown.activo .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-.menu-subnav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(0,0,0,0.2);
-}
-
-.menu-item-dropdown.activo .menu-subnav {
-    max-height: 200px;
-}
-
-.menu-subitem {
-    display: block;
-    padding: 15px 20px;
-    color: var(--blanco);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: background 0.2s, color 0.2s;
-}
-
-.menu-subitem:hover {
-    background: rgba(255,255,255,0.1);
-    color: var(--amarillo);
-}
-
-/* ========================================== */
 /* RESPONSIVE */
-/* ========================================== */
-
 @media (max-width: 768px) {
-    .header {
-        height: 200px;
-    }
-    
-    /* ✅ LOGO MÁS GRANDE EN TABLET: De 140px a 160px */
-    .logo {
-        height: 160px;
-    }
-    
-    .logo-container {
-        top: 38%;
-    }
-    
-    .selector-moneda {
-        font-size: 0.9rem;
-        padding: 8px 10px;
-        margin-top: -3px;
-    }
-
-    .selector-moneda .bandera {
-        font-size: 1.1rem;
-    }
-
-    .selector-moneda .moneda-actual {
-        font-size: 0.9rem;
-    }
-
-    .ubicacion {
-        font-size: 0.85rem;
-        padding: 2px 10px;
-        margin-top: -10px;
-    }
-    
-    .menu-item {
-        font-size: 1.5rem;
-    }
-    
-    .menu-toggle-dropdown {
-        font-size: 1.5rem;
-    }
-    
-    .menu-subitem {
-        font-size: 1.1rem;
-        padding: 12px 20px;
-    }
-    
-    /* ✅ BUSCADOR MÁS ESTRECHO EN TABLET: De 220px a 180px */
-    .buscador-header {
-        max-width: 180px;
-        margin-top: 120px;
-    }
-    
-    .buscador-input {
-        font-size: 0.85rem;
-        padding: 6px 12px;
-    }
-    
-    .buscador-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .buscador-btn svg {
-        width: 16px;
-        height: 16px;
-    }
-    
-    /* ✅ Menú horizontal en tablet */
-    .nav-bar {
-        padding: 0 10px;
-        max-width: calc(100% - 220px); /* Ajustado por el buscador más pequeño */
-    }
-    
-    .nav-list {
-        gap: 4px;
-    }
-    
-    .nav-link {
-        padding: 5px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .dropdown-link {
-        padding: 10px 15px;
-        font-size: 0.85rem;
-    }
+    .header { height: 200px; }
+    .logo { height: 160px; }
+    .logo-container { top: 38%; }
+    .selector-moneda { font-size: 0.9rem; padding: 8px 10px; margin-top: -3px; }
+    .selector-moneda .bandera { font-size: 1.1rem; }
+    .selector-moneda .moneda-actual { font-size: 0.9rem; }
+    .ubicacion { font-size: 0.85rem; padding: 2px 10px; margin-top: -10px; }
+    .menu-item { font-size: 1.5rem; }
+    .menu-toggle-dropdown { font-size: 1.5rem; }
+    .menu-subitem { font-size: 1.1rem; padding: 12px 20px; }
+    .buscador-header { max-width: 180px; margin-top: 120px; }
+    .buscador-input { font-size: 0.85rem; padding: 6px 12px; }
+    .buscador-btn { width: 32px; height: 32px; }
+    .buscador-btn svg { width: 16px; height: 16px; }
+    .nav-bar { padding: 0 10px; max-width: calc(100% - 220px); }
+    .nav-list { gap: 4px; }
+    .nav-link { padding: 5px 12px; font-size: 0.8rem; }
+    .dropdown-link { padding: 10px 15px; font-size: 0.85rem; }
 }
 
 @media (max-width: 480px) {
-    .header {
-        height: 170px;
-        padding: 0 10px;
-    }
-    
-    /* ✅ LOGO MÁS GRANDE EN MÓVIL: De 110px a 130px */
-    .logo {
-        height: 130px;
-    }
-    
-    .logo-container {
-        top: 35%;
-    }
-    
-    .selector-moneda {
-        font-size: 0.8rem;
-        padding: 6px 8px;
-        margin-top: -2px;
-    }
-
-    .selector-moneda .bandera {
-        font-size: 1rem;
-    }
-
-    .selector-moneda .moneda-actual {
-        font-size: 0.8rem;
-    }
-
-    .ubicacion {
-        font-size: 0.75rem;
-        padding: 2px 6px;
-        gap: 4px;
-        margin-top: -8px;
-    }
-    
-    .selector-moneda .bandera {
-        font-size: 1rem;
-    }
-    
-    .ubicacion .icono-ubicacion {
-        font-size: 0.9rem;
-    }
-    
-    /* ✅ BUSCADOR MÁS ESTRECHO EN MÓVIL: De 160px a 140px */
-    .buscador-header {
-        max-width: 140px;
-        margin-top: 90px;
-    }
-    
-    .buscador-input {
-        font-size: 0.75rem;
-        padding: 5px 10px;
-    }
-    
-    .buscador-input::placeholder {
-        font-size: 0.7rem;
-    }
-    
-    .buscador-btn {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .buscador-btn svg {
-        width: 14px;
-        height: 14px;
-    }
-    
-    /* ✅ Menú horizontal en móvil: más compacto */
-    .nav-bar {
-        padding: 0 5px;
-        bottom: 5px;
-        max-width: 100%;
-    }
-    
-    .nav-list {
-        gap: 3px;
-        flex-wrap: wrap;
-    }
-    
-    .nav-link {
-        padding: 4px 10px;
-        font-size: 0.7rem;
-    }
-    
-    .nav-dropdown {
-        min-width: 140px;
-    }
-    
-    .dropdown-link {
-        padding: 10px 12px;
-        font-size: 0.8rem;
-    }
-                            }
+    .header { height: 170px; padding: 0 10px; }
+    .logo { height: 130px; }
+    .logo-container { top: 35%; }
+    .selector-moneda { font-size: 0.8rem; padding: 6px 8px; margin-top: -2px; }
+    .selector-moneda .bandera { font-size: 1rem; }
+    .selector-moneda .moneda-actual { font-size: 0.8rem; }
+    .ubicacion { font-size: 0.75rem; padding: 2px 6px; gap: 4px; margin-top: -8px; }
+    .ubicacion .icono-ubicacion { font-size: 0.9rem; }
+    .buscador-header { max-width: 140px; margin-top: 90px; }
+    .buscador-input { font-size: 0.75rem; padding: 5px 10px; }
+    .buscador-input::placeholder { font-size: 0.7rem; }
+    .buscador-btn { width: 28px; height: 28px; }
+    .buscador-btn svg { width: 14px; height: 14px; }
+    .nav-bar { padding: 0 5px; bottom: 5px; max-width: 100%; }
+    .nav-list { gap: 3px; flex-wrap: wrap; }
+    .nav-link { padding: 4px 10px; font-size: 0.7rem; }
+    .nav-dropdown { min-width: 140px; }
+    .dropdown-link { padding: 10px 12px; font-size: 0.8rem; }
+}
