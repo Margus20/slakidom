@@ -13,7 +13,24 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     height: 260px;
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* ✅ CAMBIADO: De hidden a visible para que el dropdown no se corte */
+    /* ✅ FONDO NAVIDAD EN TRANSPARENCIA */
+    background-image: url('../img/navidad.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ✅ Capa superpuesta para que el fondo sea transparente */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 220, 100, 0.85); /* ✅ Amarillo semi-transparente sobre la imagen */
+    z-index: 0;
 }
 
 .header-botones {
@@ -78,7 +95,7 @@
     transform: rotate(180deg);
 }
 
-/* ✅ Dropdown de monedas: z-index aumentado a 105 */
+/* ✅ Dropdown de monedas: z-index aumentado a 9999 */
 .dropdown-monedas {
     position: absolute;
     top: 100%;
@@ -89,9 +106,9 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     min-width: 160px;
     display: none;
-    z-index: 105;
+    z-index: 9999; /* ✅ CAMBIADO: De 105 a 9999 para estar por encima de todo */
     margin-top: 5px;
-    overflow: hidden;
+    overflow: visible; /* ✅ CAMBIADO: Para que no se corte */
 }
 
 .dropdown-monedas.activo {
@@ -335,7 +352,7 @@
     flex-direction: column;
     align-items: center; /* ✅ CENTRADO vertical */
     justify-content: center;
-    gap: 4px;
+    gap: 2px; /* ✅ Reducido de 4px a 2px */
     margin-bottom: 15px;
 }
 
@@ -355,10 +372,10 @@
 .activo-grande .decimales { font-size: 0.9rem; align-self: flex-start; margin-top: 4px; }
 
 /* ✅ Estado PEQUEÑO (más pequeño y tenue) */
-.activo-pequeno { opacity: 0.6; transform: scale(0.85); }
-.activo-pequeno .simbolo { font-size: 0.85rem; margin-right: 2px; }
-.activo-pequeno .entero { font-size: 0.85rem; }
-.activo-pequeno .decimales { font-size: 0.65rem; align-self: flex-start; margin-top: 2px; }
+.activo-pequeno { opacity: 0.5; transform: scale(0.75); } /* ✅ CAMBIADO: De 0.6/0.85 a 0.5/0.75 */
+.activo-pequeno .simbolo { font-size: 0.75rem; margin-right: 2px; }
+.activo-pequeno .entero { font-size: 0.75rem; }
+.activo-pequeno .decimales { font-size: 0.55rem; align-self: flex-start; margin-top: 2px; }
 
 .producto-card.oculto { display: none !important; }
 .sin-resultados { text-align: center; padding: 40px 20px; color: var(--chocolate); font-size: 1.1rem; display: none; grid-column: 1 / -1; }
@@ -390,6 +407,33 @@
 .menu-item-dropdown.activo .menu-subnav { max-height: 200px; }
 .menu-subitem { display: block; padding: 15px 20px; color: var(--blanco); text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s, color 0.2s; }
 .menu-subitem:hover { background: rgba(255,255,255,0.1); color: var(--amarillo); }
+
+/* ========================================== */
+/* ✅ EFECTO DE NIEVE CAYENDO */
+/* ========================================== */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: #fff;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px #000;
+    user-select: none;
+    z-index: 9998;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.3;
+    }
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
