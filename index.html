@@ -32,11 +32,31 @@
         </div>
         
         <div class="header-botones">
-            <button id="btn-ver-carrito" class="btn-carrito-header abrir-modal-carrito" aria-label="Ver carrito">
-                <img src="img/excalibur_carrito.png" alt="Carrito" class="carrito-icon">
-                <span id="contador-carrito" class="contador-carrito">0</span>
-            </button>
-            <!-- ✅ ELIMINADO: Botón del menú antiguo (ahora usamos el flotante) -->
+            <!-- ✅ NUEVO: Selector de moneda (izquierda) -->
+            <div class="selector-moneda-wrapper">
+                <button class="selector-moneda" id="selectorMoneda" aria-label="Cambiar moneda">
+                    <span class="bandera">🇪</span>
+                    <span class="moneda-actual">Venezuela ($)</span>
+                    <span class="flecha">▼</span>
+                </button>
+                <!-- Dropdown de monedas -->
+                <div class="dropdown-monedas" id="dropdownMonedas">
+                    <div class="opcion-moneda seleccionada" data-moneda="USD" data-simbolo="$">
+                        <span>💵</span>
+                        <span>Dólares ($)</span>
+                    </div>
+                    <div class="opcion-moneda" data-moneda="VES" data-simbolo="Bs.">
+                        <span>💰</span>
+                        <span>Bolívares (Bs.)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ✅ NUEVO: Ubicación (derecha) -->
+            <div class="ubicacion">
+                <span class="icono-ubicacion">📍</span>
+                <span>Caracas</span>
+            </div>
         </div>
     </header>
     
@@ -93,7 +113,7 @@
             <h2 class="section-title">Conoce a la Chef</h2>
             <div class="chef-content">
                 <div class="chef-imagen">
-                    <div class="chef-placeholder">‍🐩</div>
+                    <div class="chef-placeholder">👩‍</div>
                 </div>
                 <div class="chef-texto">
                     <h3>Mirian</h3>
@@ -115,17 +135,17 @@
             <h2 class="section-title">¿Cómo Pedir?</h2>
             <div class="pasos-pedir">
                 <div class="paso-pedir">
-                    <div class="paso-icono">1️⃣</div>
+                    <div class="paso-icono">1️</div>
                     <h3>Elige</h3>
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
                 <div class="paso-pedir">
-                    <div class="paso-icono">2️</div>
+                    <div class="paso-icono">2️⃣</div>
                     <h3>Escríbenos</h3>
                     <p>Al WhatsApp 0412-2879803</p>
                 </div>
                 <div class="paso-pedir">
-                    <div class="paso-icono">3️</div>
+                    <div class="paso-icono">3️⃣</div>
                     <h3>Recibe</h3>
                     <p>Tu pedido en Caracas</p>
                 </div>
@@ -141,7 +161,7 @@
                 <a href="https://wa.me/584122879803" class="contacto-item" target="_blank">
                      WhatsApp: 0412-2879803
                 </a>
-                <div class="contacto-item">📍 Caracas, Venezuela</div>
+                <div class="contacto-item"> Caracas, Venezuela</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 SLAKIDOM. Todos los derechos reservados.</p>
@@ -176,7 +196,7 @@
     <div id="modal-carrito" class="modal-carrito">
         <div class="modal-contenido">
             <div class="modal-header">
-                <h3>Tu Pedido </h3>
+                <h3>Tu Pedido 🍪</h3>
                 <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
             </div>
             <div id="lista-carrito" class="lista-carrito">
@@ -197,10 +217,101 @@
     <!-- ✅ SCRIPT DE FUNCIONALIDAD UI -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Lógica del Carrito
+            // ==========================================
+            // 1. SELECTOR DE MONEDA (Dólares/Bolívares)
+            // ==========================================
+            const selectorMoneda = document.getElementById('selectorMoneda');
+            const dropdownMonedas = document.getElementById('dropdownMonedas');
+            const opcionesMoneda = document.querySelectorAll('.opcion-moneda');
+            const monedaActualText = document.querySelector('.moneda-actual');
+            
+            // Tasa de cambio参考 (puedes actualizarla fácilmente)
+            let tasaCambio = 36; // 1 USD = 36 Bs. (ejemplo)
+            let monedaSeleccionada = 'USD';
+            
+            // Abrir/cerrar dropdown
+            if(selectorMoneda) {
+                selectorMoneda.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdownMonedas.classList.toggle('activo');
+                    selectorMoneda.classList.toggle('activo');
+                });
+            }
+            
+            // Seleccionar moneda
+            opcionesMoneda.forEach(opcion => {
+                opcion.addEventListener('click', () => {
+                    const moneda = opcion.dataset.moneda;
+                    const simbolo = opcion.dataset.simbolo;
+                    const texto = opcion.querySelector('span:last-child').textContent;
+                    
+                    // Actualizar selección visual
+                    opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
+                    opcion.classList.add('seleccionada');
+                    
+                    // Actualizar texto del selector
+                    if(monedaActualText) {
+                        monedaActualText.textContent = `Venezuela (${simbolo})`;
+                    }
+                    
+                    // Cerrar dropdown
+                    dropdownMonedas.classList.remove('activo');
+                    selectorMoneda.classList.remove('activo');
+                    
+                    // Actualizar precios en la página
+                    monedaSeleccionada = moneda;
+                    actualizarPrecios(moneda, simbolo);
+                    
+                    console.log(`Moneda cambiada a: ${moneda} (${simbolo})`);
+                });
+            });
+            
+            // Función para actualizar precios
+            function actualizarPrecios(moneda, simbolo) {
+                const precios = document.querySelectorAll('.producto-precio');
+                
+                precios.forEach(precioEl => {
+                    const precioUSD = parseFloat(precioEl.dataset.precioUsd);
+                    
+                    if(!precioUSD) {
+                        // Guardar el precio original en USD la primera vez
+                        const textoPrecio = precioEl.textContent.replace(/[^0-9.]/g, '');
+                        precioEl.dataset.precioUsd = textoPrecio;
+                    }
+                    
+                    if(moneda === 'VES') {
+                        const precioBS = (precioUSD * tasaCambio).toFixed(2);
+                        precioEl.textContent = `${simbolo} ${precioBS}`;
+                    } else {
+                        precioEl.textContent = `${simbolo} ${precioUSD.toFixed(2)}`;
+                    }
+                });
+                
+                // Actualizar total del carrito si existe
+                const totalCarrito = document.getElementById('total-carrito');
+                if(totalCarrito) {
+                    const totalUSD = parseFloat(totalCarrito.textContent.replace(/[^0-9.]/g, '')) || 0;
+                    if(moneda === 'VES') {
+                        const totalBS = (totalUSD * tasaCambio).toFixed(2);
+                        totalCarrito.textContent = `${simbolo} ${totalBS}`;
+                    } else {
+                        totalCarrito.textContent = `${simbolo} ${totalUSD.toFixed(2)}`;
+                    }
+                }
+            }
+            
+            // Cerrar dropdown al hacer clic fuera
+            document.addEventListener('click', () => {
+                dropdownMonedas.classList.remove('activo');
+                selectorMoneda.classList.remove('activo');
+            });
+            
+            // ==========================================
+            // 2. Lógica del Carrito
+            // ==========================================
             const modal = document.getElementById('modal-carrito');
             const btnCerrar = document.getElementById('btn-cerrar-carrito');
-            const botonesAbrir = document.querySelectorAll('.abrir-modal-carrito, #btn-ver-carrito');
+            const botonesAbrir = document.querySelectorAll('.abrir-modal-carrito');
 
             botonesAbrir.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -219,7 +330,9 @@
                 });
             }
 
-            // 2. Lógica del Menú Hamburguesa (Solo botón flotante)
+            // ==========================================
+            // 3. Lógica del Menú Hamburguesa
+            // ==========================================
             const menuFlotante = document.getElementById('menu-flotante');
             const menuClose = document.getElementById('menuClose');
             const menuOverlay = document.getElementById('menuOverlay');
@@ -232,13 +345,9 @@
                 if(menuOverlay) menuOverlay.classList.remove('active');
             }
 
-            // Abrir con el botón flotante
             if(menuFlotante) menuFlotante.addEventListener('click', abrirMenu);
-            
-            // Cerrar con la X
             if(menuClose) menuClose.addEventListener('click', cerrarMenu);
 
-            // Cerrar al hacer clic en un enlace del menú o fuera de él
             if(menuOverlay) {
                 menuOverlay.querySelectorAll('.menu-item').forEach(item => {
                     item.addEventListener('click', cerrarMenu);
