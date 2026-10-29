@@ -237,11 +237,12 @@
 /* ✅ Botón flotante de Excalibur (esquina inferior DERECHA) */
 .btn-flotante-excalibur {
     position: fixed;
-    bottom: 30px; /* ✅ AJUSTE: Antes era 100px, ahora 30px (misma altura que WhatsApp) */
+    bottom: 30px;
     right: 20px;
     width: 70px;
     height: 70px;
-    background: var(--chocolate); /* ✅ AJUSTE: Antes era var(--blanco), ahora chocolate */
+    background: #F2CB05; /* ✅ CAMBIADO: Amarillo vibrante #F2CB05 */
+    border: 2px solid var(--chocolate); /* ✅ AGREGADO: Borde chocolate para que el perrito blanco resalte */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -286,8 +287,8 @@
     bottom: 30px;
     left: 30px;
     background: #25D366;
-    width: 70px; /* ✅ AJUSTE: Antes era 60px, ahora 70px (mismo tamaño que Excalibur) */
-    height: 70px; /* ✅ AJUSTE: Antes era 60px, ahora 70px */
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -299,7 +300,7 @@
 }
 
 .whatsapp-flotante svg {
-    width: 40px; /* ✅ AJUSTE: Antes era 35px, ahora 40px para equilibrar */
+    width: 40px;
     height: 40px;
     fill: #FFFFFF;
 }
@@ -345,7 +346,7 @@
 
     /* ✅ Excalibur en móvil: misma altura que WhatsApp */
     .btn-flotante-excalibur {
-        bottom: 20px; /* ✅ AJUSTE: Antes era 90px, ahora 20px */
+        bottom: 20px;
         right: 15px;
         width: 60px;
         height: 60px;
