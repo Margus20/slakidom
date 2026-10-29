@@ -1,8 +1,10 @@
 /* ========================================== */
 /* 05. PRODUCTOS (Cards estilo EPA) */
 /* ========================================== */
+
+/* ✅ AJUSTE: Fondo transparente para que se vea la textura del body */
 .productos {
-    background: var(--blanco);
+    background: transparent;
 }
 
 .productos-grid {
@@ -80,5 +82,23 @@
 }
 
 .btn-pedir:hover {
+    background: var(--rosa);
+}
+
+/* ✅ AJUSTE: Botón "Agregar al pedido" del carrito */
+.btn-agregar-carrito {
+    background: var(--chocolate);
+    color: var(--blanco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+    font-size: 0.95rem;
+}
+
+.btn-agregar-carrito:hover {
     background: var(--rosa);
 }
