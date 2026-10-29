@@ -65,8 +65,10 @@ document.addEventListener('componentesListos', () => {
         });
     }
 
+    // ✅ CAMBIO 1: Agregado (e) y e.stopPropagation() para que el clic no interfiera
     opcionesMoneda.forEach(opcion => {
-        opcion.addEventListener('click', () => {
+        opcion.addEventListener('click', (e) => {
+            e.stopPropagation(); // ✅ CLAVE: Evita que el clic burbujee al document
             const moneda = opcion.dataset.moneda;
             const simbolo = opcion.dataset.simbolo;
             
@@ -79,12 +81,17 @@ document.addEventListener('componentesListos', () => {
             
             monedaSeleccionada = moneda;
             alternarPreciosEnPagina(moneda);
+            
+            console.log('💱 Moneda cambiada a:', moneda, '- Ejecutando alternarPreciosEnPagina');
         });
     });
 
-    document.addEventListener('click', () => {
-        if (dropdownMonedas) dropdownMonedas.classList.remove('activo');
-        if (selectorMoneda) selectorMoneda.classList.remove('activo');
+    // ✅ CAMBIO 2: El document ahora solo cierra si el clic fue FUERA del selector/dropdown
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.selector-moneda') && !e.target.closest('.dropdown-monedas')) {
+            if (dropdownMonedas) dropdownMonedas.classList.remove('activo');
+            if (selectorMoneda) selectorMoneda.classList.remove('activo');
+        }
     });
 
     // ✅ Función que alterna las clases "grande" y "pequeño"
