@@ -55,14 +55,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 3. Conectar botones del modal del carrito
-    const btnVerCarrito = document.getElementById("btn-ver-carrito");
+    // ✅ 3. Conectar botones del modal del carrito (CORREGIDO)
+    // Seleccionamos TODOS los elementos que deben abrir el carrito (header y flotante)
+    const botonesAbrirCarrito = document.querySelectorAll('#btn-ver-carrito, .btn-flotante-excalibur');
     const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
     const btnFinalizar = document.getElementById("btn-finalizar-pedido");
 
-    if (btnVerCarrito) btnVerCarrito.addEventListener("click", mostrarCarritoModal);
-    if (btnCerrarCarrito) btnCerrarCarrito.addEventListener("click", cerrarCarritoModal);
-    if (btnFinalizar) btnFinalizar.addEventListener("click", finalizarPedidoWhatsApp);
+    // Asignar el evento a ambos botones de abrir
+    botonesAbrirCarrito.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault(); // Evita que la página salte si es un enlace <a>
+            mostrarCarritoModal();
+        });
+    });
+
+    // Asignar eventos de cerrar y finalizar
+    if (btnCerrarCarrito) {
+        btnCerrarCarrito.addEventListener("click", cerrarCarritoModal);
+    }
+    
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener("click", finalizarPedidoWhatsApp);
+    }
+    
+    // ✅ Extra: Cerrar el modal si se hace clic fuera del contenido (en el fondo oscuro)
+    const modalCarrito = document.getElementById("modal-carrito");
+    if (modalCarrito) {
+        modalCarrito.addEventListener("click", (e) => {
+            if (e.target === modalCarrito) {
+                cerrarCarritoModal();
+            }
+        });
+    }
     
     console.log('🎉 SLAKIDOM - Sistema de carrito y productos activo');
 });
