@@ -12,16 +12,18 @@ body {
     background-color: var(--blanco);
     color: var(--chocolate);
     line-height: 1.6;
+    min-height: 100vh;
     
     /* ✅ AJUSTE: Fondo con la imagen de textura */
     background-image: url('../img/1_transparencia.jpg');
     background-attachment: fixed;
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
+    background-position: center;
     position: relative;
 }
 
-/* ✅ AJUSTE: Capa blanca semitransparente sobre el fondo para que el texto se lea perfecto */
+/* ✅ AJUSTE: Capa blanca semitransparente (reducida a 60% para que se vea la textura) */
 body::before {
     content: '';
     position: fixed;
@@ -29,7 +31,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.85); /* Blanco con 85% de opacidad */
+    background: rgba(255, 255, 255, 0.60); /* ✅ Cambiado de 0.85 a 0.60 */
     z-index: -1;
     pointer-events: none;
 }
