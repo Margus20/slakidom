@@ -28,7 +28,7 @@
     align-items: center;
     padding: 0 15px;
     z-index: 101;
-    pointer-events: none; /* Permite que los clics pasen al logo si es necesario */
+    pointer-events: none;
 }
 
 /* ✅ Reactivar los clics en los botones hijos */
@@ -74,23 +74,12 @@
     padding: 0 4px;
 }
 
-/* ✅ Botón del menú en la esquina DERECHA */
+/* ✅ CAMBIO 1: Ocultar el botón antiguo del menú (ya tenemos el flotante) */
 .menu-toggle {
-    background: var(--chocolate);
-    color: var(--blanco);
-    border: none;
-    padding: 10px 14px;
-    font-size: 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s;
+    display: none; /* ✅ Esto hace que el botón cuadrado marrón desaparezca */
 }
 
-.menu-toggle:hover {
-    transform: scale(1.05);
-}
-
-/* ✅ Logo perfectamente centrado y sobresaliendo hacia abajo */
+/* ✅ CAMBIO 2: Logo subido y más grande */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -98,7 +87,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 5%);
+    /* ✅ CAMBIO: De 5% a -20% (el valor negativo SUBE el logo) */
+    transform: translate(-50%, -20%);
     z-index: 102;
 }
 
@@ -112,8 +102,9 @@
     transform: scale(1.05);
 }
 
+/* ✅ CAMBIO 3: Logo más grande (de 200px a 230px) */
 .logo {
-    height: 200px;
+    height: 230px; /* ✅ Aumentado de 200px a 230px */
     width: auto;
     display: block;
     cursor: pointer;
@@ -182,12 +173,14 @@
         height: 70px;
     }
     
+    /* ✅ Logo más grande en tablet también (de 150px a 180px) */
     .logo {
-        height: 150px;
+        height: 180px;
     }
     
+    /* ✅ Subir el logo en tablet */
     .logo-container {
-        transform: translate(-50%, 0%);
+        transform: translate(-50%, -15%);
     }
     
     .menu-item {
@@ -210,12 +203,14 @@
         padding: 0 12px;
     }
     
+    /* ✅ Logo más grande en móvil también (de 120px a 150px) */
     .logo {
-        height: 120px;
+        height: 150px;
     }
     
+    /* ✅ Subir el logo en móvil */
     .logo-container {
-        transform: translate(-50%, -5%);
+        transform: translate(-50%, -10%);
     }
     
     .btn-carrito-header {
@@ -225,11 +220,6 @@
     .carrito-icon {
         width: 22px;
         height: 22px;
-    }
-    
-    .menu-toggle {
-        padding: 8px 12px;
-        font-size: 20px;
     }
     
     .contador-carrito {
