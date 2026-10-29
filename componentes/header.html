@@ -41,40 +41,42 @@
             </button>
         </div>
     </div>
-</header>
 
-<!-- MENÚ HORIZONTAL DE NAVEGACIÓN -->
-<nav class="nav-bar">
-    <ul class="nav-list">
-        <li class="nav-item">
-            <a href="#productos" class="nav-link">Productos</a>
-            <ul class="nav-dropdown">
-                <li><a href="#productos" class="dropdown-link" data-categoria="galletas">Galletas</a></li>
-                <li><a href="#productos" class="dropdown-link" data-categoria="mermeladas">Mermeladas</a></li>
-            </ul>
-        </li>
-        <li class="nav-item"><a href="#proceso" class="nav-link">Nuestro Proceso</a></li>
-        <li class="nav-item"><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
-        <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
-    </ul>
-</nav>
+    <!-- ✅ MENÚ HORIZONTAL INTEGRADO DENTRO DEL HEADER -->
+    <nav class="nav-bar">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#productos" class="nav-link">Productos</a>
+                <ul class="nav-dropdown">
+                    <li><a href="#productos" class="dropdown-link" data-categoria="galletas">Galletas</a></li>
+                    <li><a href="#productos" class="dropdown-link" data-categoria="mermeladas">Mermeladas</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a href="#proceso" class="nav-link">Nuestro Proceso</a></li>
+            <li class="nav-item"><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+            <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
 
 <!-- MENÚ FULL-SCREEN (Móvil) -->
 <div class="menu-overlay" id="menuOverlay">
     <button class="menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
     <nav class="menu-nav">
-        <a href="#" class="menu-item" onclick="cerrarMenu()">Inicio</a>
+        <a href="#" class="menu-item" data-target="inicio">Inicio</a>
+        
         <div class="menu-item-dropdown" id="menuProductosDropdown">
             <button class="menu-item menu-toggle-dropdown" id="menuProductosToggle">
                 Productos <span class="dropdown-arrow">▼</span>
             </button>
             <ul class="menu-subnav">
-                <li><a href="#productos" class="menu-subitem" data-categoria="galletas" onclick="filtrarYCerrar('galletas')">Galletas</a></li>
-                <li><a href="#productos" class="menu-subitem" data-categoria="mermeladas" onclick="filtrarYCerrar('mermeladas')">Mermeladas</a></li>
+                <li><a href="#productos" class="menu-subitem" data-categoria="galletas">Galletas</a></li>
+                <li><a href="#productos" class="menu-subitem" data-categoria="mermeladas">Mermeladas</a></li>
             </ul>
         </div>
-        <a href="#proceso" class="menu-item" onclick="cerrarMenu()">Nuestro Proceso</a>
-        <a href="#sobre-nosotros" class="menu-item" onclick="cerrarMenu()">Sobre Nosotros</a>
-        <a href="#contacto" class="menu-item" onclick="cerrarMenu()">Contacto</a>
+
+        <a href="#proceso" class="menu-item" data-target="proceso">Nuestro Proceso</a>
+        <a href="#sobre-nosotros" class="menu-item" data-target="sobre-nosotros">Sobre Nosotros</a>
+        <a href="#contacto" class="menu-item" data-target="contacto">Contacto</a>
     </nav>
 </div>
