@@ -13,18 +13,40 @@ async function obtenerTasaBCV() {
         const timestamp = localStorage.getItem(TASA_TIMESTAMP_KEY);
         if (tasaGuardada && timestamp) {
             const horasTranscurridas = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60);
-            if (horasTranscurridas < HORAS_ACTUALIZACION) return parseFloat(tasaGuardada);
+            if (horasTranscurridas < HORAS_ACTUALIZACION) {
+                console.log('✅ Usando tasa en caché:', tasaGuardada);
+                return parseFloat(tasaGuardada);
+            }
         }
+        
+        console.log('🔄 Consultando API del BCV...');
         const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
         if (!respuesta.ok) throw new Error('Error en la respuesta');
+        
         const datos = await respuesta.json();
-        const tasaBCV = datos.promedio;
+        console.log('📊 Datos recibidos de la API:', datos);
+        
+        // ✅ CAMBIO: Usar 'precio' o 'promedio' según lo que devuelva la API hoy
+        const tasaBCV = datos.precio || datos.promedio;
+        
+        if (!tasaBCV || tasaBCV <= 0) {
+            throw new Error('Tasa inválida recibida: ' + tasaBCV);
+        }
+        
         localStorage.setItem(TASA_CACHE_KEY, tasaBCV);
         localStorage.setItem(TASA_TIMESTAMP_KEY, Date.now().toString());
+        
+        console.log('✅ Tasa BCV actualizada:', tasaBCV);
         return tasaBCV;
     } catch (error) {
+        console.error('❌ Error al obtener tasa BCV:', error);
         const tasaVieja = localStorage.getItem(TASA_CACHE_KEY);
-        return tasaVieja ? parseFloat(tasaVieja) : TASA_RESPALDO;
+        if (tasaVieja) {
+            console.log('📦 Usando tasa antigua del caché:', tasaVieja);
+            return parseFloat(tasaVieja);
+        }
+        console.log('⚠️ Usando tasa de respaldo:', TASA_RESPALDO);
+        return TASA_RESPALDO;
     }
 }
 
@@ -52,25 +74,76 @@ document.addEventListener('componentesListos', () => {
     const monedaActualText = document.querySelector('.moneda-actual');
     const tasaInfo = document.getElementById('tasaBcvInfo');
 
+    // ✅ Función separada para renderizar productos con la tasa CORRECTA
+    function renderizarProductos() {
+        const gridProductos = document.getElementById("productos-grid");
+        if (!gridProductos) return;
+        
+        gridProductos.innerHTML = "";
+        PRODUCTOS.forEach(producto => {
+            const card = document.createElement("div");
+            card.className = "producto-card";
+            card.dataset.categoria = producto.categoria;
+            card.dataset.nombre = producto.nombre.toLowerCase();
+            
+            const precioUSD = producto.precio.toFixed(2);
+            const [enteroUSD, decimalesUSD] = precioUSD.split('.');
+            
+            // ✅ CÁLCULO CORREGIDO: Multiplicación con la tasa ya actualizada
+            const precioEnBolivares = producto.precio * tasaCambio;
+            const precioVESRedondeado = redondearBolivares(precioEnBolivares);
+            
+            console.log(`🍪 ${producto.nombre}: $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${precioVESRedondeado}`);
+            
+            card.innerHTML = `
+                <div class="producto-img-placeholder">🍪</div>
+                <h3 class="producto-nombre">${producto.nombre}</h3>
+                <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
+                    <div class="precio-usd activo-grande">
+                        <span class="simbolo">$</span>
+                        <span class="entero">${enteroUSD}</span>
+                        <span class="decimales">.${decimalesUSD}</span>
+                    </div>
+                    <div class="precio-ves activo-pequeno">
+                        <span class="simbolo">Bs.</span>
+                        <span class="entero">${precioVESRedondeado}</span>
+                    </div>
+                </div>
+                <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
+            `;
+            gridProductos.appendChild(card);
+        });
+    }
+
+    // ✅ Obtenemos la tasa PRIMERO y luego renderizamos
     (async () => {
         tasaCambio = await obtenerTasaBCV();
+        console.log('💰 Tasa final utilizada para cálculos:', tasaCambio);
         if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${tasaCambio.toFixed(2)} por $`;
+        
+        // Renderizar productos AHORA que tenemos la tasa correcta
+        renderizarProductos();
     })();
 
     if (selectorMoneda) {
         selectorMoneda.addEventListener('click', (e) => {
             e.stopPropagation();
+            e.preventDefault(); // ✅ Agregado para evitar comportamientos extraños
             if (dropdownMonedas) dropdownMonedas.classList.toggle('activo');
             selectorMoneda.classList.toggle('activo');
         });
     }
 
-    // ✅ CAMBIO 1: Agregado (e) y e.stopPropagation() para que el clic no interfiera
+    // ✅ CAMBIO 1: Agregado e.stopPropagation() y e.preventDefault()
     opcionesMoneda.forEach(opcion => {
         opcion.addEventListener('click', (e) => {
-            e.stopPropagation(); // ✅ CLAVE: Evita que el clic burbujee al document
+            e.stopPropagation();
+            e.preventDefault();
+            
             const moneda = opcion.dataset.moneda;
             const simbolo = opcion.dataset.simbolo;
+            
+            console.log('🎯 Opción clickeada:', moneda, simbolo);
             
             opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
             opcion.classList.add('seleccionada');
@@ -80,13 +153,15 @@ document.addEventListener('componentesListos', () => {
             if (selectorMoneda) selectorMoneda.classList.remove('activo');
             
             monedaSeleccionada = moneda;
+            
+            // ✅ Ejecutar la función de alternar
             alternarPreciosEnPagina(moneda);
             
-            console.log('💱 Moneda cambiada a:', moneda, '- Ejecutando alternarPreciosEnPagina');
+            console.log('💱 Moneda cambiada a:', moneda, '- Tasa:', tasaCambio);
         });
     });
 
-    // ✅ CAMBIO 2: El document ahora solo cierra si el clic fue FUERA del selector/dropdown
+    // ✅ CAMBIO 2: Solo cerrar si el clic fue FUERA
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.selector-moneda') && !e.target.closest('.dropdown-monedas')) {
             if (dropdownMonedas) dropdownMonedas.classList.remove('activo');
@@ -96,21 +171,26 @@ document.addEventListener('componentesListos', () => {
 
     // ✅ Función que alterna las clases "grande" y "pequeño"
     function alternarPreciosEnPagina(moneda) {
+        console.log('🔄 Ejecutando alternarPreciosEnPagina para:', moneda);
         const precios = document.querySelectorAll('.producto-precio');
-        precios.forEach(precioEl => {
+        console.log('📦 Elementos de precio encontrados:', precios.length);
+        
+        precios.forEach((precioEl, index) => {
             const divUsd = precioEl.querySelector('.precio-usd');
             const divVes = precioEl.querySelector('.precio-ves');
             
+            console.log(`  Producto ${index}: USD=${divUsd ? 'OK' : 'NULL'}, VES=${divVes ? 'OK' : 'NULL'}`);
+            
             if (moneda === 'VES') {
-                divUsd.classList.remove('activo-grande');
-                divUsd.classList.add('activo-pequeno');
-                divVes.classList.remove('activo-pequeno');
-                divVes.classList.add('activo-grande');
+                divUsd?.classList.remove('activo-grande');
+                divUsd?.classList.add('activo-pequeno');
+                divVes?.classList.remove('activo-pequeno');
+                divVes?.classList.add('activo-grande');
             } else {
-                divVes.classList.remove('activo-grande');
-                divVes.classList.add('activo-pequeno');
-                divUsd.classList.remove('activo-pequeno');
-                divUsd.classList.add('activo-grande');
+                divVes?.classList.remove('activo-grande');
+                divVes?.classList.add('activo-pequeno');
+                divUsd?.classList.remove('activo-pequeno');
+                divUsd?.classList.add('activo-grande');
             }
         });
     }
@@ -135,41 +215,6 @@ document.addEventListener('componentesListos', () => {
         { id: 5, nombre: "Mermelada de Guayaba", precio: 4.00, categoria: "mermeladas" },
         { id: 6, nombre: "Mermelada de Durazno", precio: 4.00, categoria: "mermeladas" }
     ];
-
-    const gridProductos = document.getElementById("productos-grid");
-    if (gridProductos) {
-        gridProductos.innerHTML = "";
-        PRODUCTOS.forEach(producto => {
-            const card = document.createElement("div");
-            card.className = "producto-card";
-            card.dataset.categoria = producto.categoria;
-            card.dataset.nombre = producto.nombre.toLowerCase();
-            
-            const precioUSD = producto.precio.toFixed(2);
-            const [enteroUSD, decimalesUSD] = precioUSD.split('.');
-            
-            // ✅ Aplicar redondeo inteligente
-            const precioVESRedondeado = redondearBolivares(producto.precio * tasaCambio);
-            
-            card.innerHTML = `
-                <div class="producto-img-placeholder">🍪</div>
-                <h3 class="producto-nombre">${producto.nombre}</h3>
-                <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
-                    <div class="precio-usd activo-grande">
-                        <span class="simbolo">$</span>
-                        <span class="entero">${enteroUSD}</span>
-                        <span class="decimales">.${decimalesUSD}</span>
-                    </div>
-                    <div class="precio-ves activo-pequeno">
-                        <span class="simbolo">Bs.</span>
-                        <span class="entero">${precioVESRedondeado}</span>
-                    </div>
-                </div>
-                <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
-            `;
-            gridProductos.appendChild(card);
-        });
-    }
 
     const menuFlotante = document.getElementById('menu-flotante');
     const menuClose = document.getElementById('menuClose');
@@ -227,11 +272,11 @@ document.addEventListener('componentesListos', () => {
             }
         });
         let sinResultados = document.querySelector('.sin-resultados');
-        if (!sinResultados && gridProductos) {
+        if (!sinResultados && document.getElementById("productos-grid")) {
             sinResultados = document.createElement('div');
             sinResultados.className = 'sin-resultados';
             sinResultados.textContent = 'No se encontraron productos ';
-            gridProductos.appendChild(sinResultados);
+            document.getElementById("productos-grid").appendChild(sinResultados);
         }
         if (sinResultados) sinResultados.classList.toggle('visible', visibles === 0 && termino !== '');
     });
@@ -256,9 +301,9 @@ document.addEventListener('componentesListos', () => {
         copo.className = 'snowflake';
         copo.innerHTML = '❄';
         copo.style.left = Math.random() * 100 + 'vw';
-        copo.style.animationDuration = Math.random() * 3 + 2 + 's'; // Caída entre 2 y 5 segundos
-        copo.style.opacity = Math.random() * 0.7 + 0.3; // ✅ Más visibles (entre 0.3 y 1.0)
-        copo.style.fontSize = Math.random() * 15 + 10 + 'px'; // ✅ Ligeramente más grandes (10px a 25px)
+        copo.style.animationDuration = Math.random() * 3 + 2 + 's';
+        copo.style.opacity = Math.random() * 0.7 + 0.3;
+        copo.style.fontSize = Math.random() * 15 + 10 + 'px';
         
         document.body.appendChild(copo);
         
@@ -267,7 +312,6 @@ document.addEventListener('componentesListos', () => {
         }, 5000);
     }
 
-    // ✅ CAMBIO CLAVE: De 300ms a 100ms. ¡Esto crea 3 veces más nieve por segundo!
     setInterval(crearCopoDeNieve, 100);
 
     console.log('🎉 ¡Sistema SLAKIDOM activo!');
