@@ -51,7 +51,7 @@ async function obtenerTasaBCV() {
 
 async function cargarComponentes() {
     try {
-        // ✅ CAMBIO 1: Rutas absolutas (con / al inicio) para que funcionen desde cualquier subcarpeta
+        // ✅ Rutas absolutas (con / al inicio) para que funcionen desde cualquier subcarpeta
         const headerRes = await fetch('/componentes/header.html');
         if (headerRes.ok) document.getElementById('header-container').innerHTML = await headerRes.text();
         
@@ -126,7 +126,7 @@ document.addEventListener('componentesListos', () => {
         });
     }
 
-    // ✅ CAMBIO 2: La función ahora recibe la lista de productos a mostrar como parámetro
+    // ✅ FUNCIÓN PARA RENDERIZAR PRODUCTOS
     function renderizarProductos(listaProductos) {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
@@ -151,10 +151,13 @@ document.addEventListener('componentesListos', () => {
             const precioEnBolivares = producto.precio * tasaCambio;
             const precioVESRedondeado = redondearBolivares(precioEnBolivares);
             
-            console.log(`🍪 [NERD-DEBUG]: ${producto.nombre} | $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${formatearConPuntosDeMil(precioVESRedondeado)}`);
+            // ✅ AJUSTE: Emoji dinámico (Frasco 🫙 para mermeladas, Galleta 🍪 para lo demás)
+            const emoji = producto.categoria === 'mermeladas' ? '🫙' : '🍪';
+            
+            console.log(`${emoji} [NERD-DEBUG]: ${producto.nombre} | $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${formatearConPuntosDeMil(precioVESRedondeado)}`);
             
             card.innerHTML = `
-                <div class="producto-img-placeholder">🍪</div>
+                <div class="producto-img-placeholder">${emoji}</div>
                 <h3 class="producto-nombre">${producto.nombre}</h3>
                 <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
                     <div class="precio-usd activo-grande">
@@ -179,7 +182,7 @@ document.addEventListener('componentesListos', () => {
         console.log('💰 [NERD-DEBUG]: La tasa sagrada ha sido establecida en:', tasaCambio);
         if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
         
-        // ✅ CAMBIO 3: Detectar la URL y filtrar los productos
+        // ✅ Detectar la URL y filtrar los productos
         const path = window.location.pathname; // Ej: "/", "/galletas/", "/mermeladas/"
         let productosAMostrar = PRODUCTOS; // Por defecto, muestra TODOS (para index.html)
 
