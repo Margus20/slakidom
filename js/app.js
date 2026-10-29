@@ -2,6 +2,56 @@
 // SLAKIDOM - ORQUESTADOR PRINCIPAL (app.js)
 // ==========================================
 
+// ==========================================
+// ✅ OBTENCIÓN DE TASA BCV (Dólar oficial)
+// ==========================================
+const TASA_CACHE_KEY = 'slakidom_tasa_bcv';
+const TASA_TIMESTAMP_KEY = 'slakidom_tasa_timestamp';
+const HORAS_ACTUALIZACION = 6; // Actualizar cada 6 horas
+const TASA_RESPALDO = 36.50; // Tasa manual por si falla la API
+
+async function obtenerTasaBCV() {
+    try {
+        const tasaGuardada = localStorage.getItem(TASA_CACHE_KEY);
+        const timestamp = localStorage.getItem(TASA_TIMESTAMP_KEY);
+        
+        if (tasaGuardada && timestamp) {
+            const horasTranscurridas = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60);
+            if (horasTranscurridas < HORAS_ACTUALIZACION) {
+                console.log('✅ Usando tasa BCV en caché:', tasaGuardada);
+                return parseFloat(tasaGuardada);
+            }
+        }
+        
+        console.log('🔄 Consultando tasa BCV actualizada...');
+        const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
+        if (!respuesta.ok) throw new Error('Error en la respuesta');
+        
+        const datos = await respuesta.json();
+        const tasaBCV = datos.promedio; // Tasa oficial del BCV
+        
+        localStorage.setItem(TASA_CACHE_KEY, tasaBCV);
+        localStorage.setItem(TASA_TIMESTAMP_KEY, Date.now().toString());
+        
+        console.log('✅ Tasa BCV actualizada:', tasaBCV);
+        return tasaBCV;
+        
+    } catch (error) {
+        console.warn('⚠️ No se pudo obtener la tasa BCV, usando tasa de respaldo:', TASA_RESPALDO);
+        const tasaVieja = localStorage.getItem(TASA_CACHE_KEY);
+        if (tasaVieja) return parseFloat(tasaVieja);
+        return TASA_RESPALDO;
+    }
+}
+
+function mostrarUltimaActualizacion() {
+    const timestamp = localStorage.getItem(TASA_TIMESTAMP_KEY);
+    if (timestamp) {
+        const fecha = new Date(parseInt(timestamp));
+        console.log('📅 Última actualización de tasa:', fecha.toLocaleString('es-VE'));
+    }
+}
+
 // 1. CARGAR COMPONENTES (Header y Footer)
 async function cargarComponentes() {
     try {
@@ -28,6 +78,97 @@ cargarComponentes();
 // 2. INICIALIZAR LA APLICACIÓN (Se ejecuta SOLO cuando el HTML está listo)
 document.addEventListener('componentesListos', () => {
     console.log('✅ Componentes cargados. Iniciando sistema SLAKIDOM...');
+
+    // ==========================================
+    // ✅ SELECTOR DE MONEDA CON TASA BCV REAL
+    // ==========================================
+    let tasaCambio = TASA_RESPALDO;
+    let monedaSeleccionada = 'USD';
+
+    const selectorMoneda = document.getElementById('selectorMoneda');
+    const dropdownMonedas = document.getElementById('dropdownMonedas');
+    const opcionesMoneda = document.querySelectorAll('.opcion-moneda');
+    const monedaActualText = document.querySelector('.moneda-actual');
+
+    // Cargar la tasa BCV al iniciar
+    (async () => {
+        tasaCambio = await obtenerTasaBCV();
+        mostrarUltimaActualizacion();
+        
+        // Mostrar la tasa en el header si existe el elemento
+        const tasaInfo = document.getElementById('tasaBcvInfo');
+        if (tasaInfo) {
+            tasaInfo.textContent = `Tasa BCV: Bs. ${tasaCambio.toFixed(2)} por $`;
+        }
+    })();
+
+    if (selectorMoneda) {
+        selectorMoneda.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMonedas?.classList.toggle('activo');
+            selectorMoneda.classList.toggle('activo');
+        });
+    }
+
+    opcionesMoneda.forEach(opcion => {
+        opcion.addEventListener('click', () => {
+            const moneda = opcion.dataset.moneda;
+            const simbolo = opcion.dataset.simbolo;
+            
+            opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
+            opcion.classList.add('seleccionada');
+            
+            if (monedaActualText) {
+                monedaActualText.textContent = `Venezuela (${simbolo})`;
+            }
+            
+            dropdownMonedas?.classList.remove('activo');
+            selectorMoneda?.classList.remove('activo');
+            
+            monedaSeleccionada = moneda;
+            actualizarPreciosEnPagina(moneda, simbolo);
+            
+            console.log(`💱 Moneda cambiada a: ${moneda} (${simbolo}) - Tasa: ${tasaCambio}`);
+        });
+    });
+
+    document.addEventListener('click', () => {
+        dropdownMonedas?.classList.remove('activo');
+        selectorMoneda?.classList.remove('activo');
+    });
+
+    // ✅ Función para actualizar precios en la página manteniendo el estilo EPA
+    function actualizarPreciosEnPagina(moneda, simbolo) {
+        const precios = document.querySelectorAll('.producto-precio');
+        
+        precios.forEach(precioEl => {
+            let precioUSD = parseFloat(precioEl.dataset.precioUsd);
+            
+            if (!precioUSD) {
+                const texto = precioEl.textContent.replace(/[^0-9.]/g, '');
+                precioUSD = parseFloat(texto);
+                precioEl.dataset.precioUsd = precioUSD;
+            }
+            
+            if (moneda === 'VES') {
+                const precioBS = (precioUSD * tasaCambio).toFixed(2);
+                const [enteroBS, decimalesBS] = precioBS.split('.');
+                precioEl.innerHTML = `
+                    <span class="simbolo">${simbolo}</span>
+                    <span class="entero">${enteroBS}</span>
+                    <span class="decimales">.${decimalesBS}</span>
+                `;
+            } else {
+                const precioFormateado = precioUSD.toFixed(2);
+                const [entero, decimales] = precioFormateado.split('.');
+                precioEl.innerHTML = `
+                    <span class="simbolo">${simbolo}</span>
+                    <span class="entero">${entero}</span>
+                    <span class="decimales">.${decimales}</span>
+                `;
+            }
+        });
+    }
 
     // ==========================================
     // A. DATOS DE PRODUCTOS
@@ -57,10 +198,11 @@ document.addEventListener('componentesListos', () => {
             const precioFormateado = producto.precio.toFixed(2);
             const [entero, decimales] = precioFormateado.split('.');
             
+            // ✅ AGREGADO: data-precio-usd para que el conversor funcione
             card.innerHTML = `
                 <div class="producto-img-placeholder">🍪</div>
                 <h3 class="producto-nombre">${producto.nombre}</h3>
-                <div class="producto-precio">
+                <div class="producto-precio" data-precio-usd="${producto.precio}">
                     <span class="simbolo">$</span>
                     <span class="entero">${entero}</span>
                     <span class="decimales">.${decimales}</span>
@@ -90,7 +232,7 @@ document.addEventListener('componentesListos', () => {
     menuClose?.addEventListener('click', cerrarMenu);
     
     menuProductosToggle?.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evita que se cierre el menú al tocar el botón
+        e.stopPropagation();
         menuProductosDropdown?.classList.toggle('activo');
     });
 
@@ -98,16 +240,12 @@ document.addEventListener('componentesListos', () => {
         if (e.target === menuOverlay) cerrarMenu();
     });
 
-    // ✅ SOLUCIÓN: Cerrar menú automáticamente al hacer clic en CUALQUIER opción
-    // (excepto el botón toggle de Productos, que solo abre/cierra el submenú)
     document.querySelectorAll('.menu-item:not(.menu-toggle-dropdown), .menu-subitem').forEach(item => {
         item.addEventListener('click', () => {
-            // Pequeño delay para que el scroll se vea suave
             setTimeout(() => cerrarMenu(), 150);
         });
     });
 
-    // Dropdown del menú horizontal (Desktop: se activa con hover)
     const navProductos = document.querySelector('.nav-item:has(.nav-dropdown)');
     navProductos?.addEventListener('mouseenter', () => navProductos.classList.add('activo'));
     navProductos?.addEventListener('mouseleave', () => navProductos.classList.remove('activo'));
@@ -124,12 +262,10 @@ document.addEventListener('componentesListos', () => {
             }
         });
         
-        // Scroll suave hacia la sección de productos
         document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
         cerrarMenu();
     };
 
-    // Asignar eventos a los links de filtrado (tanto en menú horizontal como móvil)
     document.querySelectorAll('[data-categoria]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -154,7 +290,6 @@ document.addEventListener('componentesListos', () => {
             }
         });
 
-        // Mostrar/ocultar mensaje de "No se encontraron productos"
         let sinResultados = document.querySelector('.sin-resultados');
         if (!sinResultados && gridProductos) {
             sinResultados = document.createElement('div');
@@ -188,7 +323,6 @@ document.addEventListener('componentesListos', () => {
         if (e.target === modalCarrito) modalCarrito.classList.remove('activo');
     });
 
-    // Demo: Botones de agregar al carrito
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-agregar-carrito')) {
             alert('✅ Producto agregado al carrito (Funcionalidad de demo)');
