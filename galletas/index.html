@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galletas artesanales SLAKIDOM - Hechas con amor en Caracas">
+    <title>Galletas - SLAKIDOM</title>
+    
+    <link rel="icon" type="image/png" href="../img/slaky_cuadrado.jpg">
+    
+    <!-- CSS MODULAR (Nota el ../ para subir un nivel) -->
+    <link rel="stylesheet" href="../css/01-variables.css">
+    <link rel="stylesheet" href="../css/02-base.css">
+    <link rel="stylesheet" href="../css/03-header-menu.css">
+    <link rel="stylesheet" href="../css/04-hero.css">
+    <link rel="stylesheet" href="../css/05-productos.css">
+    <link rel="stylesheet" href="../css/06-proceso.css">
+    <link rel="stylesheet" href="../css/07-sobre-nosotros.css">
+    <link rel="stylesheet" href="../css/08-como-pedir.css">
+    <link rel="stylesheet" href="../css/09-footer.css">
+    <link rel="stylesheet" href="../css/10-animaciones.css">
+</head>
+<body>
+    
+    <!-- ✅ AQUÍ SE INYECTARÁ EL HEADER -->
+    <div id="header-container"></div>
+    
+    <main>
+        <!-- SECCIÓN GALLETAS -->
+        <section id="productos" class="productos">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">Nuestras Galletas 🍪</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem;">Hechas con amor y los mejores ingredientes</p>
+            
+            <div class="productos-grid" id="productos-grid">
+                <p style="text-align:center; color: var(--chocolate);">Cargando galletas...</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- ✅ AQUÍ SE INYECTARÁ EL FOOTER Y ELEMENTOS GLOBALES -->
+    <div id="footer-container"></div>
+
+    <!-- ✅ SCRIPT PRINCIPAL DE LA APLICACIÓN (Nota el ../) -->
+    <script type="module" src="../js/app.js"></script>
+    
+</body>
+</html>
