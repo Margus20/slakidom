@@ -80,7 +80,7 @@ document.addEventListener('componentesListos', () => {
     console.log('✅ Componentes cargados. Iniciando sistema SLAKIDOM...');
 
     // ==========================================
-    // ✅ SELECTOR DE MONEDA CON TASA BCV REAL
+    // ✅ SELECTOR DE MONEDA CON DOBLE PRECIO
     // ==========================================
     let tasaCambio = TASA_RESPALDO;
     let monedaSeleccionada = 'USD';
@@ -95,7 +95,7 @@ document.addEventListener('componentesListos', () => {
         tasaCambio = await obtenerTasaBCV();
         mostrarUltimaActualizacion();
         
-        // Mostrar la tasa en el header si existe el elemento
+        // Mostrar la tasa en el header
         const tasaInfo = document.getElementById('tasaBcvInfo');
         if (tasaInfo) {
             tasaInfo.textContent = `Tasa BCV: Bs. ${tasaCambio.toFixed(2)} por $`;
@@ -126,7 +126,7 @@ document.addEventListener('componentesListos', () => {
             selectorMoneda?.classList.remove('activo');
             
             monedaSeleccionada = moneda;
-            actualizarPreciosEnPagina(moneda, simbolo);
+            alternarPreciosEnPagina(moneda); // ✅ Función que cambia tamaños, no reescribe HTML
             
             console.log(`💱 Moneda cambiada a: ${moneda} (${simbolo}) - Tasa: ${tasaCambio}`);
         });
@@ -137,35 +137,23 @@ document.addEventListener('componentesListos', () => {
         selectorMoneda?.classList.remove('activo');
     });
 
-    // ✅ Función para actualizar precios en la página manteniendo el estilo EPA
-    function actualizarPreciosEnPagina(moneda, simbolo) {
+    // ✅ Función que alterna las clases "grande" y "pequeño"
+    function alternarPreciosEnPagina(moneda) {
         const precios = document.querySelectorAll('.producto-precio');
-        
         precios.forEach(precioEl => {
-            let precioUSD = parseFloat(precioEl.dataset.precioUsd);
-            
-            if (!precioUSD) {
-                const texto = precioEl.textContent.replace(/[^0-9.]/g, '');
-                precioUSD = parseFloat(texto);
-                precioEl.dataset.precioUsd = precioUSD;
-            }
+            const divUsd = precioEl.querySelector('.precio-usd');
+            const divVes = precioEl.querySelector('.precio-ves');
             
             if (moneda === 'VES') {
-                const precioBS = (precioUSD * tasaCambio).toFixed(2);
-                const [enteroBS, decimalesBS] = precioBS.split('.');
-                precioEl.innerHTML = `
-                    <span class="simbolo">${simbolo}</span>
-                    <span class="entero">${enteroBS}</span>
-                    <span class="decimales">.${decimalesBS}</span>
-                `;
+                divUsd.classList.remove('activo-grande');
+                divUsd.classList.add('activo-pequeno');
+                divVes.classList.remove('activo-pequeno');
+                divVes.classList.add('activo-grande');
             } else {
-                const precioFormateado = precioUSD.toFixed(2);
-                const [entero, decimales] = precioFormateado.split('.');
-                precioEl.innerHTML = `
-                    <span class="simbolo">${simbolo}</span>
-                    <span class="entero">${entero}</span>
-                    <span class="decimales">.${decimales}</span>
-                `;
+                divVes.classList.remove('activo-grande');
+                divVes.classList.add('activo-pequeno');
+                divUsd.classList.remove('activo-pequeno');
+                divUsd.classList.add('activo-grande');
             }
         });
     }
@@ -183,7 +171,7 @@ document.addEventListener('componentesListos', () => {
     ];
 
     // ==========================================
-    // B. RENDERIZAR PRODUCTOS (Estilo EPA)
+    // B. RENDERIZAR PRODUCTOS CON AMBOS PRECIOS
     // ==========================================
     const gridProductos = document.getElementById("productos-grid");
     if (gridProductos) {
@@ -195,17 +183,28 @@ document.addEventListener('componentesListos', () => {
             card.dataset.categoria = producto.categoria;
             card.dataset.nombre = producto.nombre.toLowerCase();
             
-            const precioFormateado = producto.precio.toFixed(2);
-            const [entero, decimales] = precioFormateado.split('.');
+            // Calcular ambos precios
+            const precioUSD = producto.precio.toFixed(2);
+            const [enteroUSD, decimalesUSD] = precioUSD.split('.');
             
-            // ✅ AGREGADO: data-precio-usd para que el conversor funcione
+            const precioVES = (producto.precio * tasaCambio).toFixed(2);
+            const [enteroVES, decimalesVES] = precioVES.split('.');
+            
+            // ✅ Renderizamos AMBOS precios, uno grande y otro pequeño
             card.innerHTML = `
                 <div class="producto-img-placeholder">🍪</div>
                 <h3 class="producto-nombre">${producto.nombre}</h3>
-                <div class="producto-precio" data-precio-usd="${producto.precio}">
-                    <span class="simbolo">$</span>
-                    <span class="entero">${entero}</span>
-                    <span class="decimales">.${decimales}</span>
+                <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVES}">
+                    <div class="precio-usd activo-grande">
+                        <span class="simbolo">$</span>
+                        <span class="entero">${enteroUSD}</span>
+                        <span class="decimales">.${decimalesUSD}</span>
+                    </div>
+                    <div class="precio-ves activo-pequeno">
+                        <span class="simbolo">Bs.</span>
+                        <span class="entero">${enteroVES}</span>
+                        <span class="decimales">.${decimalesVES}</span>
+                    </div>
                 </div>
                 <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
             `;
