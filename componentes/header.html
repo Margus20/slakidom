@@ -1,8 +1,9 @@
 <!-- HEADER / NAVEGACIÓN -->
 <header class="header">
     <div class="logo-container">
-        <a href="index.html" class="logo-link" title="Volver al inicio">
-            <img src="img/slaky_logo.png" alt="SLAKIDOM Logo" class="logo">
+        <!-- ✅ Ruta absoluta desde la raíz para que funcione en todas las carpetas -->
+        <a href="/index.html" class="logo-link" title="Volver al inicio">
+            <img src="/img/slaky_logo.png" alt="SLAKIDOM Logo" class="logo">
         </a>
     </div>
     
@@ -44,19 +45,19 @@
         </div>
     </div>
 
-    <!-- ✅ MENÚ HORIZONTAL: Enlaces directos a las nuevas páginas independientes -->
+    <!-- ✅ MENÚ HORIZONTAL: Enlaces absolutos a todas las páginas -->
     <nav class="nav-bar">
         <ul class="nav-list">
             <li class="nav-item">
-                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="/index.html" class="nav-link">Inicio</a>
                 <ul class="nav-dropdown">
-                    <li><a href="galletas.html" class="dropdown-link">Galletas</a></li>
-                    <li><a href="mermeladas.html" class="dropdown-link">Mermeladas</a></li>
+                    <li><a href="/galletas/" class="dropdown-link">Galletas</a></li>
+                    <li><a href="/mermeladas/" class="dropdown-link">Mermeladas</a></li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="proceso.html" class="nav-link">Nuestro Proceso</a></li>
-            <li class="nav-item"><a href="nosotros.html" class="nav-link">Sobre Nosotros</a></li>
-            <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+            <li class="nav-item"><a href="/proceso.html" class="nav-link">Nuestro Proceso</a></li>
+            <li class="nav-item"><a href="/nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+            <li class="nav-item"><a href="/contacto.html" class="nav-link">Contacto</a></li>
         </ul>
     </nav>
 </header>
@@ -65,20 +66,20 @@
 <div class="menu-overlay" id="menuOverlay">
     <button class="menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
     <nav class="menu-nav">
-        <a href="index.html" class="menu-item">Inicio</a>
+        <a href="/index.html" class="menu-item">Inicio</a>
         
         <div class="menu-item-dropdown" id="menuProductosDropdown">
             <button class="menu-item menu-toggle-dropdown" id="menuProductosToggle">
                 Productos <span class="dropdown-arrow">▼</span>
             </button>
             <ul class="menu-subnav">
-                <li><a href="galletas.html" class="menu-subitem">Galletas</a></li>
-                <li><a href="mermeladas.html" class="menu-subitem">Mermeladas</a></li>
+                <li><a href="/galletas/" class="menu-subitem">Galletas</a></li>
+                <li><a href="/mermeladas/" class="menu-subitem">Mermeladas</a></li>
             </ul>
         </div>
 
-        <a href="proceso.html" class="menu-item">Nuestro Proceso</a>
-        <a href="nosotros.html" class="menu-item">Sobre Nosotros</a>
-        <a href="contacto.html" class="menu-item">Contacto</a>
+        <a href="/proceso.html" class="menu-item">Nuestro Proceso</a>
+        <a href="/nosotros.html" class="menu-item">Sobre Nosotros</a>
+        <a href="/contacto.html" class="menu-item">Contacto</a>
     </nav>
 </div>
