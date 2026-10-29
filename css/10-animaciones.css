@@ -18,10 +18,26 @@
 /* ========================================== */
 /* CARRITO DE COMPRAS - HEADER */
 /* ========================================== */
+
+/* ✅ AJUSTE: header-botones ahora ocupa todo el ancho y distribuye los botones a los lados */
 .header-botones {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* ✅ Distribuye: carrito a la izquierda, menú a la derecha */
     gap: 15px;
+    position: absolute; /* ✅ Para que no empuje al logo del centro */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    z-index: 101;
+    pointer-events: none; /* Permite clics a través del contenedor */
+}
+
+/* ✅ Reactivar clics en los botones hijos */
+.header-botones button {
+    pointer-events: auto;
 }
 
 .btn-carrito-header {
@@ -31,7 +47,6 @@
     padding: 8px 15px;
     font-size: 1.2rem;
     cursor: pointer;
-    position: relative;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -222,17 +237,17 @@
 /* ✅ Botón flotante de Excalibur (esquina inferior DERECHA) */
 .btn-flotante-excalibur {
     position: fixed;
-    bottom: 100px;
+    bottom: 30px; /* ✅ AJUSTE: Antes era 100px, ahora 30px (misma altura que WhatsApp) */
     right: 20px;
     width: 70px;
     height: 70px;
-    background: var(--blanco);
+    background: var(--chocolate); /* ✅ AJUSTE: Antes era var(--blanco), ahora chocolate */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 1500; /* ✅ Aumentado para estar sobre todo */
+    z-index: 1500;
     transition: transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
@@ -271,21 +286,21 @@
     bottom: 30px;
     left: 30px;
     background: #25D366;
-    width: 60px;
-    height: 60px;
+    width: 70px; /* ✅ AJUSTE: Antes era 60px, ahora 70px (mismo tamaño que Excalibur) */
+    height: 70px; /* ✅ AJUSTE: Antes era 60px, ahora 70px */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    z-index: 1500; /* ✅ Aumentado para estar sobre todo */
+    z-index: 1500;
     transition: transform 0.3s ease;
     text-decoration: none;
 }
 
 .whatsapp-flotante svg {
-    width: 35px;
-    height: 35px;
+    width: 40px; /* ✅ AJUSTE: Antes era 35px, ahora 40px para equilibrar */
+    height: 40px;
     fill: #FFFFFF;
 }
 
@@ -328,9 +343,9 @@
         padding: 12px;
     }
 
-    /* Excalibur más pequeño en móvil */
+    /* ✅ Excalibur en móvil: misma altura que WhatsApp */
     .btn-flotante-excalibur {
-        bottom: 90px;
+        bottom: 20px; /* ✅ AJUSTE: Antes era 90px, ahora 20px */
         right: 15px;
         width: 60px;
         height: 60px;
@@ -341,16 +356,16 @@
         height: 50px;
     }
     
-    /* WhatsApp más pequeño en móvil */
+    /* ✅ WhatsApp en móvil: misma altura que Excalibur */
     .whatsapp-flotante {
         bottom: 20px;
-        left: 20px;
-        width: 55px;
-        height: 55px;
+        left: 15px;
+        width: 60px;
+        height: 60px;
     }
     
     .whatsapp-flotante svg {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
     }
 }
