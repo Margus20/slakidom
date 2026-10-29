@@ -10,6 +10,12 @@
     50% { transform: scale(1.05); }
 }
 
+/* ✅ NUEVA ANIMACIÓN: Latido suave pero evidente para botones flotantes */
+@keyframes latido-suave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); } /* Crece un 8% sutilmente */
+}
+
 @keyframes slideUp {
     from { transform: translateY(50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -248,12 +254,14 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(140, 47, 13, 0.4);
-    z-index: 998; /* Justo debajo del overlay del menú (999) */
+    z-index: 998;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: latido-suave 2.5s ease-in-out infinite; /* ✅ Animación de latido */
 }
 
 .btn-menu-flotante:hover {
+    animation: none; /* ✅ Pausa el latido al hacer hover para que el efecto de escala funcione perfecto */
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(140, 47, 13, 0.5);
 }
@@ -284,7 +292,8 @@
     transition: transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
-    overflow: visible; /* ✅ CLAVE: Permite que el perrito sobresalga del círculo */
+    overflow: visible;
+    animation: latido-suave 2.5s ease-in-out infinite; /* ✅ Animación de latido */
 }
 
 /* ✅ AJUSTE: Perrito más grande y con efecto 3D de sobresalir */
@@ -292,18 +301,16 @@
     width: 68px;
     height: 68px;
     object-fit: contain;
-    /* ✅ EFECTO 3D: Sombra proyectada que hace que parezca que sobresale */
     filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-/* ✅ Al pasar el mouse: el perrito "salta" un poquito más */
 .btn-flotante-excalibur:hover {
+    animation: none; /* ✅ Pausa el latido al hacer hover */
     transform: scale(1.1);
 }
 
 .btn-flotante-excalibur:hover img {
-    /* ✅ Sombra más intensa al hacer hover para más efecto 3D */
     filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
     transform: translateY(-2px);
 }
@@ -341,6 +348,7 @@
     z-index: 1500;
     transition: transform 0.3s ease;
     text-decoration: none;
+    animation: latido-suave 2.5s ease-in-out infinite; /* ✅ Animación de latido */
 }
 
 .whatsapp-flotante svg {
@@ -350,6 +358,7 @@
 }
 
 .whatsapp-flotante:hover {
+    animation: none; /* ✅ Pausa el latido al hacer hover */
     transform: scale(1.1);
 }
 
