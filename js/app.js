@@ -72,7 +72,7 @@ document.addEventListener('componentesListos', () => {
     }
 
     // ==========================================
-    // C. MENÚ HAMBURGUESA Y DROPDOWNS
+    // C. MENÚ HAMBURGUESA CON CIERRE AUTOMÁTICO ✅
     // ==========================================
     const menuFlotante = document.getElementById('menu-flotante');
     const menuClose = document.getElementById('menuClose');
@@ -96,6 +96,15 @@ document.addEventListener('componentesListos', () => {
 
     menuOverlay?.addEventListener('click', (e) => {
         if (e.target === menuOverlay) cerrarMenu();
+    });
+
+    // ✅ SOLUCIÓN: Cerrar menú automáticamente al hacer clic en CUALQUIER opción
+    // (excepto el botón toggle de Productos, que solo abre/cierra el submenú)
+    document.querySelectorAll('.menu-item:not(.menu-toggle-dropdown), .menu-subitem').forEach(item => {
+        item.addEventListener('click', () => {
+            // Pequeño delay para que el scroll se vea suave
+            setTimeout(() => cerrarMenu(), 150);
+        });
     });
 
     // Dropdown del menú horizontal (Desktop: se activa con hover)
@@ -150,7 +159,7 @@ document.addEventListener('componentesListos', () => {
         if (!sinResultados && gridProductos) {
             sinResultados = document.createElement('div');
             sinResultados.className = 'sin-resultados';
-            sinResultados.textContent = 'No se encontraron productos 😕';
+            sinResultados.textContent = 'No se encontraron productos ';
             gridProductos.appendChild(sinResultados);
         }
         
