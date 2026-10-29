@@ -119,7 +119,7 @@
     font-weight: bold;
 }
 
-/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE y SUBIDA */
+/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE y MUY SUBIDA */
 .ubicacion {
     display: flex;
     align-items: center;
@@ -128,10 +128,10 @@
     font-weight: 700;
     color: var(--chocolate);
     cursor: pointer;
-    padding: 2px 12px; /* ✅ Reducido para subirlo más */
+    padding: 2px 12px;
     border-radius: 8px;
     transition: background 0.2s;
-    margin-top: -8px; /* ✅ Subido para acercarse más al selector */
+    margin-top: -25px; /* ✅ CAMBIADO: De -8px a -25px para subir mucho más */
 }
 
 .ubicacion:hover {
@@ -157,7 +157,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 42%; /* ✅ Ajustado para dar espacio al menú inferior */
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 102;
@@ -174,7 +174,7 @@
 }
 
 .logo {
-    height: 180px; /* ✅ Reducido ligeramente para equilibrar el header */
+    height: 180px;
     width: auto;
     display: block;
     cursor: pointer;
@@ -243,10 +243,10 @@
 /* ✅ MENÚ HORIZONTAL DENTRO DE LA FRANJA AMARILLA */
 /* ========================================== */
 .nav-bar {
-    background: transparent; /* ✅ Sin fondo propio, se integra al amarillo */
+    background: transparent;
     padding: 0 20px;
     position: absolute;
-    bottom: 0; /* ✅ Se pega al borde inferior del header */
+    bottom: 10px; /* ✅ Subido un poco para dar espacio */
     left: 0;
     width: 100%;
     z-index: 102;
@@ -257,32 +257,35 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    gap: 0;
-    max-width: 1200px;
-    margin: 0 auto;
+    justify-content: flex-start; /* ✅ CAMBIADO: Alineado a la izquierda */
+    gap: 5px; /* ✅ Espacio entre botones */
+    max-width: 600px; /* ✅ CAMBIADO: Limitado para no montarse en el buscador */
 }
 
 .nav-item {
     position: relative;
 }
 
-/* ✅ Letras color chocolate sobre fondo amarillo */
+/* ✅ Botones del menú con fondo y borde rosa (estilo cliclable) */
 .nav-link {
     display: block;
-    padding: 10px 22px;
+    padding: 8px 18px;
     color: var(--chocolate);
     text-decoration: none;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 0.3s;
     white-space: nowrap;
-    border-radius: 8px 8px 0 0;
+    border-radius: 20px; /* ✅ Bordes redondeados tipo botón */
+    background: rgba(255, 192, 203, 0.3); /* ✅ Fondo rosa semi-transparente */
+    border: 2px solid var(--rosa); /* ✅ Borde rosa */
 }
 
 .nav-link:hover {
-    background: rgba(255, 255, 255, 0.5); /* ✅ Fondo blanco semi-transparente al pasar el mouse */
-    color: var(--chocolate);
+    background: var(--rosa); /* ✅ Al pasar el mouse, fondo rosa sólido */
+    color: var(--blanco); /* ✅ Letras blancas al hacer hover */
+    transform: translateY(-2px); /* ✅ Pequeño efecto de elevación */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* Dropdown de subcategorías */
@@ -500,8 +503,8 @@
 
     .ubicacion {
         font-size: 0.8rem;
-        padding: 2px 8px; /* ✅ Ajustado para móvil */
-        margin-top: -6px;
+        padding: 2px 8px;
+        margin-top: -20px; /* ✅ Ajustado para tablet */
     }
     
     .menu-item {
@@ -537,10 +540,19 @@
         height: 16px;
     }
     
-    /* ✅ Menú horizontal en tablet: letras más pequeñas */
+    /* ✅ Menú horizontal en tablet */
+    .nav-bar {
+        padding: 0 10px;
+    }
+    
+    .nav-list {
+        max-width: 100%;
+        gap: 3px;
+    }
+    
     .nav-link {
-        padding: 8px 15px;
-        font-size: 0.9rem;
+        padding: 6px 12px;
+        font-size: 0.85rem;
     }
     
     .dropdown-link {
@@ -572,7 +584,7 @@
         font-size: 0.7rem;
         padding: 2px 6px;
         gap: 4px;
-        margin-top: -4px;
+        margin-top: -15px; /* ✅ Ajustado para móvil */
     }
     
     .selector-moneda .bandera {
@@ -610,11 +622,17 @@
     /* ✅ Menú horizontal en móvil: más compacto */
     .nav-bar {
         padding: 0 5px;
+        bottom: 5px;
+    }
+    
+    .nav-list {
+        max-width: 100%;
+        gap: 2px;
     }
     
     .nav-link {
-        padding: 6px 8px;
-        font-size: 0.75rem;
+        padding: 5px 10px;
+        font-size: 0.7rem;
     }
     
     .nav-dropdown {
