@@ -12,13 +12,124 @@
     <link rel="stylesheet" href="css/01-variables.css">
     <link rel="stylesheet" href="css/02-base.css">
     <link rel="stylesheet" href="css/03-header-menu.css">
-    <link rel="stylesheet" href="css/04-hero.css">
-    <link rel="stylesheet" href="css/05-productos.css">
-    <link rel="stylesheet" href="css/06-proceso.css">
-    <link rel="stylesheet" href="css/07-sobre-nosotros.css">
-    <link rel="stylesheet" href="css/08-como-pedir.css">
     <link rel="stylesheet" href="css/09-footer.css">
     <link rel="stylesheet" href="css/10-animaciones.css">
+    
+    <!-- Estilos exclusivos para la portada -->
+    <style>
+        .hero-inicio {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-inicio h1 {
+            font-size: 3rem;
+            color: var(--chocolate);
+            margin-bottom: 20px;
+            font-family: 'Arial Black', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero-inicio .subtitulo {
+            font-size: 1.5rem;
+            color: var(--chocolate);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .hero-inicio p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        .botones-inicio {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn-principal {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--chocolate);
+            color: var(--blanco);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--chocolate);
+            box-shadow: 0 4px 15px rgba(140, 47, 13, 0.3);
+        }
+        
+        .btn-principal:hover {
+            background-color: var(--amarillo);
+            color: var(--chocolate);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(140, 47, 13, 0.4);
+        }
+        
+        .btn-secundario {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: transparent;
+            color: var(--chocolate);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--chocolate);
+        }
+        
+        .btn-secundario:hover {
+            background-color: var(--chocolate);
+            color: var(--blanco);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(140, 47, 13, 0.3);
+        }
+        
+        .features-inicio {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-item {
+            text-align: center;
+            max-width: 200px;
+        }
+        
+        .feature-item .icono {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature-item h3 {
+            color: var(--chocolate);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     
@@ -26,54 +137,39 @@
     <div id="header-container"></div>
     
     <main>
-        <!-- SECCIÓN PRODUCTOS -->
-        <section id="productos" class="productos">
-            <div class="productos-grid" id="productos-grid">
-                <p style="text-align:center; color: var(--chocolate);">Cargando productos...</p>
+        <section class="hero-inicio">
+            <h1>¡Bienvenidos a SLAKIDOM! 🍪</h1>
+            <p class="subtitulo">Galletas y Mermeladas Artesanales</p>
+            <p>Descubre el sabor auténtico de nuestras galletas y mermeladas artesanales, hechas con amor en Caracas. Ingredientes frescos, recetas familiares y un toque mágico en cada bocado.</p>
+            
+            <div class="botones-inicio">
+                <a href="productos.html" class="btn-principal">Ver Productos</a>
+                <a href="nosotros.html" class="btn-secundario">Conoce a la Chef</a>
             </div>
-        </section>
-        
-        <!-- SECCIÓN PROCESO -->
-        <section id="proceso" class="proceso">
-            <h2 class="section-title">Así Hacemos Nuestras Galletas</h2>
-            <div class="proceso-steps">
-                <div class="paso"><div class="paso-numero">1</div><h3>Seleccionamos</h3><p>Los mejores ingredientes frescos</p></div>
-                <div class="paso"><div class="paso-numero">2</div><h3>Preparamos</h3><p>La masa con amor y dedicación</p></div>
-                <div class="paso"><div class="paso-numero">3</div><h3>Horneamos</h3><p>Hasta obtener la textura perfecta</p></div>
-                <div class="paso"><div class="paso-numero">4</div><h3>Empacamos</h3><p>Con cuidado para que lleguen perfectas</p></div>
-            </div>
-        </section>
-        
-        <!-- SECCIÓN SOBRE NOSOTROS -->
-        <section id="sobre-nosotros" class="sobre-nosotros">
-            <h2 class="section-title">Conoce a la Chef</h2>
-            <div class="chef-content">
-                <div class="chef-imagen"><div class="chef-placeholder">👩‍🍳🐩</div></div>
-                <div class="chef-texto">
-                    <h3>Mirian</h3>
-                    <p class="chef-historia">Soy Mirian, y desde mi cocina en Caracas preparo galletas y mermeladas artesanales con el mismo cariño de siempre. Cada producto es hecho a mano, usando ingredientes frescos y recetas familiares.</p>
-                    <p class="chef-mascota">Y siempre me acompaña <strong>Excalibur</strong>, mi fiel poodle blanco, quien es mi asistente de cocina (aunque solo sabe pedir galletas 🐩).</p>
+            
+            <div class="features-inicio">
+                <div class="feature-item">
+                    <div class="icono">🥥</div>
+                    <h3>Ingredientes Frescos</h3>
+                    <p>Seleccionados cuidadosamente</p>
                 </div>
-            </div>
-        </section>
-        
-        <!-- SECCIÓN CÓMO PEDIR -->
-        <section class="como-pedir">
-            <h2 class="section-title">¿Cómo Pedir?</h2>
-            <div class="pasos-pedir">
-                <div class="paso-pedir"><div class="paso-icono">1️⃣</div><h3>Elige</h3><p>Tus galletas o mermeladas favoritas</p></div>
-                <div class="paso-pedir"><div class="paso-icono">2️⃣</div><h3>Escríbenos</h3><p>Al WhatsApp 0412-2879803</p></div>
-                <div class="paso-pedir"><div class="paso-icono">3️⃣</div><h3>Recibe</h3><p>Tu pedido en Caracas</p></div>
+                <div class="feature-item">
+                    <div class="icono">👩‍🍳</div>
+                    <h3>Hecho a Mano</h3>
+                    <p>Con amor y dedicación</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icono">🚚</div>
+                    <h3>Entrega en Caracas</h3>
+                    <p>Directo a tu puerta</p>
+                </div>
             </div>
         </section>
     </main>
     
-    <!-- ✅ AQUÍ SE INYECTARÁ EL FOOTER Y ELEMENTOS GLOBALES -->
+    <!-- ✅ AQUÍ SE INYECTARÁ EL FOOTER -->
     <div id="footer-container"></div>
 
-    <!-- ✅ SCRIPT PARA CARGAR COMPONENTES (Debe ir antes de app.js) -->
-    <script src="js/cargar-componentes.js"></script>
-    
     <!-- ✅ SCRIPT PRINCIPAL DE LA APLICACIÓN -->
     <script type="module" src="js/app.js"></script>
     
