@@ -144,7 +144,6 @@ document.addEventListener('componentesListos', () => {
             // ✅ Aplicar redondeo inteligente
             const precioVESRedondeado = redondearBolivares(producto.precio * tasaCambio);
             
-            // ✅ CAMBIO: Eliminado el span de decimales para los Bolívares
             card.innerHTML = `
                 <div class="producto-img-placeholder">🍪</div>
                 <h3 class="producto-nombre">${producto.nombre}</h3>
@@ -242,15 +241,17 @@ document.addEventListener('componentesListos', () => {
         if (e.target.classList.contains('btn-agregar-carrito')) alert('✅ Producto agregado al carrito');
     });
 
-    // ✅ NUEVO: EFECTO DE NIEVE CAYENDO
+    // ==========================================
+    // ✅ EFECTO DE NIEVE CAYENDO (INTENSIDAD AUMENTADA)
+    // ==========================================
     function crearCopoDeNieve() {
         const copo = document.createElement('div');
         copo.className = 'snowflake';
         copo.innerHTML = '❄';
         copo.style.left = Math.random() * 100 + 'vw';
-        copo.style.animationDuration = Math.random() * 3 + 2 + 's';
-        copo.style.opacity = Math.random();
-        copo.style.fontSize = Math.random() * 10 + 10 + 'px';
+        copo.style.animationDuration = Math.random() * 3 + 2 + 's'; // Caída entre 2 y 5 segundos
+        copo.style.opacity = Math.random() * 0.7 + 0.3; // ✅ Más visibles (entre 0.3 y 1.0)
+        copo.style.fontSize = Math.random() * 15 + 10 + 'px'; // ✅ Ligeramente más grandes (10px a 25px)
         
         document.body.appendChild(copo);
         
@@ -259,8 +260,8 @@ document.addEventListener('componentesListos', () => {
         }, 5000);
     }
 
-    // Crear copos cada 300ms
-    setInterval(crearCopoDeNieve, 300);
+    // ✅ CAMBIO CLAVE: De 300ms a 100ms. ¡Esto crea 3 veces más nieve por segundo!
+    setInterval(crearCopoDeNieve, 100);
 
     console.log('🎉 ¡Sistema SLAKIDOM activo!');
 });
