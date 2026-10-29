@@ -1,47 +1,52 @@
 /* ========================================== */
-/* 05. PRODUCTOS (Cards estilo EPA) */
+/* 05. PRODUCTOS (Estilo EPA - 3 columnas) */
 /* ========================================== */
 
-/* ✅ AJUSTE: Fondo transparente para que se vea la textura del body */
+/* ✅ Fondo transparente para que se vea la textura del body */
 .productos {
     background: transparent;
+    padding: 40px 20px;
 }
 
+/* ✅ Grid de 3 columnas fijas */
 .productos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* ✅ 3 columnas iguales */
+    gap: 25px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* ✅ Tarjetas sin bordes visibles (estilo limpio) */
 .producto-card {
-    background: var(--blanco);
-    border: 2px solid var(--durazno);
+    background: transparent; /* Sin fondo */
+    border: none; /* Sin bordes */
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .producto-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(140, 47, 13, 0.15);
+    box-shadow: 0 8px 25px rgba(140, 47, 13, 0.15); /* Sombra sutil al pasar el mouse */
 }
 
+/* Imagen del producto */
 .producto-img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
+    height: 200px;
+    object-fit: contain; /* ✅ Mantiene la proporción sin recortar */
+    border-radius: 12px;
     margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.4); /* Fondo sutil para que resalte */
 }
 
 .producto-img-placeholder {
     width: 100%;
-    height: 180px;
-    background: var(--durazno);
-    border-radius: 8px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,56 +54,145 @@
     margin-bottom: 15px;
 }
 
+/* Nombre del producto */
 .producto-nombre {
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--chocolate);
     margin-bottom: 8px;
+    line-height: 1.3;
 }
 
+/* ✅ Descripción como enlace clickeable (lleva a página individual) */
 .producto-descripcion {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 12px;
+    line-height: 1.4;
 }
 
-.producto-precio {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--rosa);
-    margin-bottom: 15px;
-}
-
-.btn-pedir {
-    display: inline-block;
-    background: var(--naranja);
-    color: var(--blanco);
+.producto-descripcion a {
+    color: #666;
     text-decoration: none;
-    padding: 10px 25px;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: background 0.3s;
+    transition: color 0.3s;
 }
 
-.btn-pedir:hover {
-    background: var(--rosa);
+.producto-descripcion a:hover {
+    color: var(--chocolate);
+    text-decoration: underline;
 }
 
-/* ✅ AJUSTE: Botón "Agregar al pedido" del carrito */
+/* ✅ Precio estilo EPA: dólar grande, centavos pequeños, en chocolate */
+.producto-precio {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--chocolate);
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.producto-precio .simbolo {
+    font-size: 1rem;
+    margin-right: 2px;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+.producto-precio .entero {
+    font-size: 2.5rem; /* ✅ Dólares MUY grandes */
+    line-height: 1;
+}
+
+.producto-precio .decimales {
+    font-size: 1rem; /* ✅ Centavos pequeños */
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+/* ✅ Botón "Agregar al pedido" con colores SLAKIDOM */
 .btn-agregar-carrito {
     background: var(--chocolate);
     color: var(--blanco);
     border: none;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border-radius: 25px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     width: 100%;
-    transition: background 0.3s;
-    font-size: 0.95rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .btn-agregar-carrito:hover {
-    background: var(--rosa);
+    background: var(--amarillo);
+    color: var(--chocolate);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(140, 47, 13, 0.3);
+}
+
+/* Botón "Pedir" (por si se usa en otro lado) */
+.btn-pedir {
+    display: inline-block;
+    background: var(--chocolate);
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-pedir:hover {
+    background: var(--amarillo);
+    color: var(--chocolate);
+}
+
+/* ========================================== */
+/* RESPONSIVE: Ajustes para diferentes tamaños */
+/* ========================================== */
+
+/* Tablets - 2 columnas */
+@media (max-width: 992px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Celulares - 1 columna */
+@media (max-width: 576px) {
+    .productos {
+        padding: 30px 15px;
+    }
+    
+    .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .producto-precio .entero {
+        font-size: 2rem;
+    }
+    
+    .producto-nombre {
+        font-size: 1rem;
+    }
+}
+
+/* Ajuste extra para móviles muy pequeños */
+@media (max-width: 400px) {
+    .producto-img,
+    .producto-img-placeholder {
+        height: 180px;
+    }
+    
+    .producto-precio .entero {
+        font-size: 1.8rem;
+    }
 }
