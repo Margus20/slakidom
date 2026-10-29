@@ -49,7 +49,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 1.05rem; /* ✅ AUMENTADO: De 0.95rem a 1.05rem para que el $ se vea más grande */
     font-weight: 700;
     color: var(--chocolate);
     padding: 8px 12px;
@@ -63,15 +63,16 @@
 }
 
 .selector-moneda .bandera {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* ✅ AUMENTADO: De 1.2rem a 1.3rem */
 }
 
 .selector-moneda .moneda-actual {
     font-weight: 700;
+    font-size: 1.05rem; /* ✅ AUMENTADO para que "Venezuela ($)" se vea más grande */
 }
 
 .selector-moneda .flecha {
-    font-size: 0.8rem;
+    font-size: 0.9rem; /* ✅ AUMENTADO: De 0.8rem a 0.9rem */
     transition: transform 0.3s;
 }
 
@@ -119,19 +120,25 @@
     font-weight: bold;
 }
 
-/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE y MUY SUBIDA */
+/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE con contorno blanco */
 .ubicacion {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.85rem;
+    font-size: 0.9rem; /* ✅ AUMENTADO: De 0.85rem a 0.9rem */
     font-weight: 700;
     color: var(--chocolate);
     cursor: pointer;
     padding: 2px 12px;
     border-radius: 8px;
     transition: background 0.2s;
-    margin-top: -25px; /* ✅ CAMBIADO: De -8px a -25px para subir mucho más */
+    margin-top: -18px; /* ✅ AJUSTADO: De -25px a -18px para que no se monte sobre Venezuela */
+    /* ✅ Contorno blanco sutil para destacar las palabras */
+    text-shadow: 
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff;
 }
 
 .ubicacion:hover {
@@ -246,10 +253,11 @@
     background: transparent;
     padding: 0 20px;
     position: absolute;
-    bottom: 10px; /* ✅ Subido un poco para dar espacio */
+    bottom: 10px;
     left: 0;
     width: 100%;
     z-index: 102;
+    max-width: calc(100% - 320px); /* ✅ AGREGADO: Límite para no montarse en el buscador (funciona en Firefox y Chrome) */
 }
 
 .nav-list {
@@ -257,9 +265,10 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: flex-start; /* ✅ CAMBIADO: Alineado a la izquierda */
-    gap: 5px; /* ✅ Espacio entre botones */
-    max-width: 600px; /* ✅ CAMBIADO: Limitado para no montarse en el buscador */
+    justify-content: flex-start;
+    gap: 8px; /* ✅ AUMENTADO: De 5px a 8px para mejor espaciado */
+    max-width: 100%;
+    flex-wrap: wrap; /* ✅ AGREGADO: Permite que los botones se ajusten si no hay espacio */
 }
 
 .nav-item {
@@ -276,15 +285,15 @@
     font-size: 0.95rem;
     transition: all 0.3s;
     white-space: nowrap;
-    border-radius: 20px; /* ✅ Bordes redondeados tipo botón */
-    background: rgba(255, 192, 203, 0.3); /* ✅ Fondo rosa semi-transparente */
-    border: 2px solid var(--rosa); /* ✅ Borde rosa */
+    border-radius: 20px;
+    background: rgba(255, 192, 203, 0.3);
+    border: 2px solid var(--rosa);
 }
 
 .nav-link:hover {
-    background: var(--rosa); /* ✅ Al pasar el mouse, fondo rosa sólido */
-    color: var(--blanco); /* ✅ Letras blancas al hacer hover */
-    transform: translateY(-2px); /* ✅ Pequeño efecto de elevación */
+    background: var(--rosa);
+    color: var(--blanco);
+    transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
@@ -497,14 +506,22 @@
     }
     
     .selector-moneda {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         padding: 6px 10px;
     }
 
+    .selector-moneda .bandera {
+        font-size: 1.15rem;
+    }
+
+    .selector-moneda .moneda-actual {
+        font-size: 0.95rem;
+    }
+
     .ubicacion {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         padding: 2px 8px;
-        margin-top: -20px; /* ✅ Ajustado para tablet */
+        margin-top: -14px; /* ✅ Ajustado para tablet */
     }
     
     .menu-item {
@@ -543,15 +560,15 @@
     /* ✅ Menú horizontal en tablet */
     .nav-bar {
         padding: 0 10px;
+        max-width: calc(100% - 260px); /* ✅ Ajustado para tablet */
     }
     
     .nav-list {
-        max-width: 100%;
-        gap: 3px;
+        gap: 5px;
     }
     
     .nav-link {
-        padding: 6px 12px;
+        padding: 6px 14px;
         font-size: 0.85rem;
     }
     
@@ -576,15 +593,23 @@
     }
     
     .selector-moneda {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         padding: 4px 8px;
     }
 
+    .selector-moneda .bandera {
+        font-size: 1rem;
+    }
+
+    .selector-moneda .moneda-actual {
+        font-size: 0.85rem;
+    }
+
     .ubicacion {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
         padding: 2px 6px;
         gap: 4px;
-        margin-top: -15px; /* ✅ Ajustado para móvil */
+        margin-top: -10px; /* ✅ Ajustado para móvil */
     }
     
     .selector-moneda .bandera {
@@ -623,11 +648,11 @@
     .nav-bar {
         padding: 0 5px;
         bottom: 5px;
+        max-width: 100%; /* ✅ En móvil ocupa todo el ancho */
     }
     
     .nav-list {
-        max-width: 100%;
-        gap: 2px;
+        gap: 3px;
     }
     
     .nav-link {
