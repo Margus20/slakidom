@@ -52,11 +52,11 @@
     font-size: 1rem;
     font-weight: 700;
     color: var(--chocolate);
-    padding: 10px 12px; /* ✅ Ajustado para alinear con el botón hamburguesa */
+    padding: 10px 12px;
     border-radius: 8px;
     transition: background 0.2s;
     position: relative;
-    margin-top: -5px; /* ✅ Subido para alinearse con el botón chocolate */
+    margin-top: -5px;
 }
 
 .selector-moneda:hover {
@@ -133,8 +133,8 @@
     padding: 2px 12px;
     border-radius: 8px;
     transition: background 0.2s;
-    margin-top: -12px; /* ✅ Ajustado para que la C quede bajo la V */
-    margin-left: 0; /* ✅ Alineada a la izquierda igual que Venezuela */
+    margin-top: -12px;
+    margin-left: 0;
     text-shadow: 
         -1px -1px 0 #fff,
         1px -1px 0 #fff,
@@ -181,8 +181,9 @@
     transform: scale(1.05);
 }
 
+/* ✅ LOGO MÁS GRANDE: De 180px a 210px */
 .logo {
-    height: 180px;
+    height: 210px;
     width: auto;
     display: block;
     cursor: pointer;
@@ -190,7 +191,7 @@
 }
 
 /* ========================================== */
-/* ✅ BUSCADOR EN EL HEADER */
+/* ✅ BUSCADOR EN EL HEADER - MÁS ESTRECHO */
 /* ========================================== */
 .buscador-header {
     display: flex;
@@ -200,7 +201,7 @@
     border-radius: 25px;
     padding: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    max-width: 280px;
+    max-width: 220px; /* ✅ CAMBIADO: De 280px a 220px (más estrecho) */
     width: 100%;
     margin-top: 180px;
 }
@@ -252,13 +253,13 @@
 /* ========================================== */
 .nav-bar {
     background: transparent;
-    padding: 0 15px; /* ✅ Reducido para dar más espacio */
+    padding: 0 15px;
     position: absolute;
     bottom: 10px;
     left: 0;
     width: 100%;
     z-index: 102;
-    max-width: calc(100% - 300px); /* ✅ Ajustado para dejar espacio al buscador */
+    max-width: calc(100% - 260px); /* ✅ Ajustado: De 300px a 260px (más espacio por el buscador más pequeño) */
 }
 
 .nav-list {
@@ -267,24 +268,24 @@
     padding: 0;
     display: flex;
     justify-content: flex-start;
-    gap: 6px; /* ✅ Reducido de 8px a 6px */
+    gap: 6px;
     max-width: 100%;
-    flex-wrap: nowrap; /* ✅ Cambiado a nowrap para forzar una sola línea */
+    flex-wrap: nowrap;
 }
 
 .nav-item {
     position: relative;
-    flex-shrink: 0; /* ✅ Evita que los botones se encojan */
+    flex-shrink: 0;
 }
 
 /* ✅ Botones del menú MÁS PEQUEÑOS para que quepan en una línea */
 .nav-link {
     display: block;
-    padding: 6px 14px; /* ✅ Reducido de 8px 18px a 6px 14px */
+    padding: 6px 14px;
     color: var(--chocolate);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.85rem; /* ✅ Reducido de 0.95rem a 0.85rem */
+    font-size: 0.85rem;
     transition: all 0.3s;
     white-space: nowrap;
     border-radius: 20px;
@@ -499,8 +500,9 @@
         height: 200px;
     }
     
+    /* ✅ LOGO MÁS GRANDE EN TABLET: De 140px a 160px */
     .logo {
-        height: 140px;
+        height: 160px;
     }
     
     .logo-container {
@@ -540,8 +542,9 @@
         padding: 12px 20px;
     }
     
+    /* ✅ BUSCADOR MÁS ESTRECHO EN TABLET: De 220px a 180px */
     .buscador-header {
-        max-width: 220px;
+        max-width: 180px;
         margin-top: 120px;
     }
     
@@ -563,7 +566,7 @@
     /* ✅ Menú horizontal en tablet */
     .nav-bar {
         padding: 0 10px;
-        max-width: calc(100% - 240px);
+        max-width: calc(100% - 220px); /* Ajustado por el buscador más pequeño */
     }
     
     .nav-list {
@@ -587,8 +590,9 @@
         padding: 0 10px;
     }
     
+    /* ✅ LOGO MÁS GRANDE EN MÓVIL: De 110px a 130px */
     .logo {
-        height: 110px;
+        height: 130px;
     }
     
     .logo-container {
@@ -624,8 +628,9 @@
         font-size: 0.9rem;
     }
     
+    /* ✅ BUSCADOR MÁS ESTRECHO EN MÓVIL: De 160px a 140px */
     .buscador-header {
-        max-width: 160px;
+        max-width: 140px;
         margin-top: 90px;
     }
     
@@ -657,7 +662,7 @@
     
     .nav-list {
         gap: 3px;
-        flex-wrap: wrap; /* ✅ En móvil sí permite wrap */
+        flex-wrap: wrap;
     }
     
     .nav-link {
