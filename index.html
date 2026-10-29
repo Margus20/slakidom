@@ -31,8 +31,9 @@
             </a>
         </div>
         
+        <!-- Botones del header (El CSS los posicionará en las esquinas) -->
         <div class="header-botones">
-            <button id="btn-ver-carrito" class="btn-carrito-header" aria-label="Ver carrito">
+            <button id="btn-ver-carrito" class="btn-carrito-header abrir-modal-carrito" aria-label="Ver carrito">
                 <img src="img/excalibur_carrito.png" alt="Carrito" class="carrito-icon">
                 <span id="contador-carrito" class="contador-carrito">0</span>
             </button>
@@ -161,13 +162,13 @@
         </div>
     </footer>
     
-    <!-- ✅ BOTÓN FLOTANTE: Excalibur con carrito (esquina inferior izquierda) -->
-    <a href="#" id="btn-carrito-flotante" class="btn-flotante-excalibur" title="Ver carrito" onclick="document.getElementById('btn-ver-carrito').click(); return false;">
+    <!-- ✅ BOTÓN FLOTANTE: Excalibur con carrito (esquina inferior DERECHA) -->
+    <a href="#" class="btn-flotante-excalibur abrir-modal-carrito" title="Ver carrito">
         <img src="img/excalibur_carrito.png" alt="Excalibur Carrito">
         <span id="contador-carrito-flotante" class="contador-flotante">0</span>
     </a>
     
-    <!-- ✅ BOTÓN FLOTANTE: WhatsApp (esquina inferior derecha) -->
+    <!-- ✅ BOTÓN FLOTANTE: WhatsApp (esquina inferior IZQUIERDA) -->
     <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido" class="whatsapp-flotante" target="_blank" title="Pedir por WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#FFFFFF">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.664-.698c.968.59 1.968.913 3.032.913l.001-.001c3.181 0 5.768-2.586 5.769-5.766.001-3.183-2.585-5.769-5.766-5.769zm5.295 8.345c-.226.634-1.302 1.173-1.776 1.251-.493.081-.956.358-3.225-.541-2.723-1.074-4.432-3.864-4.566-4.043-.134-.179-1.074-1.431-1.074-2.731 0-1.299.669-1.934.931-2.222.226-.248.602-.358.904-.358.248 0 .473.011.679.011.226 0 .564-.09.879.658.358.857 1.215 2.954 1.326 3.181.112.226.179.493.034.764-.145.271-.226.448-.448.708-.226.248-.475.522-.679.726-.226.226-.461.471-.397.864.064.393.381 1.577.813 2.396.564 1.063 1.041 1.512 1.776 2.076.726.557 1.299.658 1.776.726.473.068.931-.034 1.251-.358.403-.403.904-1.063 1.13-1.381.226-.318.448-.266.764-.157.318.111 2.031.959 2.385 1.137.358.179.595.266.679.403.084.137.084.795-.142 1.429z"/>
@@ -182,6 +183,7 @@
                 <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
             </div>
             <div id="lista-carrito" class="lista-carrito">
+                <!-- Aquí se inyectan los productos con JS -->
             </div>
             <div class="modal-footer">
                 <div class="total-carrito">
@@ -195,7 +197,41 @@
         </div>
     </div>
 
-    <!-- JavaScript Modular -->
+    <!-- ✅ SCRIPT PARA GARANTIZAR QUE EL CARRITO FUNCIONE -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modal-carrito');
+            const btnCerrar = document.getElementById('btn-cerrar-carrito');
+            // Seleccionamos ambos botones de carrito (el del header y el flotante)
+            const botonesAbrir = document.querySelectorAll('.abrir-modal-carrito, #btn-ver-carrito');
+
+            // Abrir modal al hacer clic en cualquier botón de carrito
+            botonesAbrir.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if(modal) modal.classList.add('activo');
+                });
+            });
+
+            // Cerrar modal con el botón X
+            if(btnCerrar) {
+                btnCerrar.addEventListener('click', () => {
+                    modal.classList.remove('activo');
+                });
+            }
+
+            // Cerrar modal al hacer clic fuera del contenido (en el fondo oscuro)
+            if(modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('activo');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- JavaScript Modular (Tu lógica principal de productos, etc.) -->
     <script type="module" src="js/app.js"></script>
     
 </body>
