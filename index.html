@@ -6,7 +6,6 @@
     <meta name="description" content="Galletas y mermeladas artesanales SLAKIDOM - Hechas con amor en Caracas">
     <title>SLAKIDOM - Galletas y Mermeladas Artesanales</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/slaky_cuadrado.jpg">
     
     <!-- CSS MODULAR -->
@@ -23,73 +22,8 @@
 </head>
 <body>
     
-    <!-- HEADER / NAVEGACIÓN -->
-    <header class="header">
-        <div class="logo-container">
-            <a href="#" class="logo-link" title="Volver al inicio">
-                <img src="img/slaky_logo.png" alt="SLAKIDOM Logo" class="logo">
-            </a>
-        </div>
-        
-        <div class="header-botones">
-            <!-- Selector de moneda y Ubicación (izquierda) -->
-            <div class="selector-moneda-wrapper">
-                <button class="selector-moneda" id="selectorMoneda" aria-label="Cambiar moneda">
-                    <span class="bandera">🇻🇪</span>
-                    <span class="moneda-actual">Venezuela ($)</span>
-                    <span class="flecha">▼</span>
-                </button>
-                <div class="dropdown-monedas" id="dropdownMonedas">
-                    <div class="opcion-moneda seleccionada" data-moneda="USD" data-simbolo="$">
-                        <span>💵</span>
-                        <span>Dólares ($)</span>
-                    </div>
-                    <div class="opcion-moneda" data-moneda="VES" data-simbolo="Bs.">
-                        <span>💰</span>
-                        <span>Bolívares (Bs.)</span>
-                    </div>
-                </div>
-                <div class="ubicacion">
-                    <span class="icono-ubicacion">📍</span>
-                    <span>Caracas</span>
-                </div>
-            </div>
-            
-            <!-- Buscador (derecha) -->
-            <div class="buscador-header">
-                <input type="text" id="buscador-input" class="buscador-input" placeholder="Buscar..." aria-label="Buscar productos">
-                <button class="buscador-btn" id="buscador-btn" aria-label="Buscar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
-    
-    <!-- MENÚ FULL-SCREEN CON SUBMENÚ -->
-    <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
-        <nav class="menu-nav">
-            <a href="#" class="menu-item" onclick="cerrarMenu()">Inicio</a>
-            
-            <!-- Productos con submenú desplegable -->
-            <div class="menu-item-dropdown" id="menuProductosDropdown">
-                <button class="menu-item menu-toggle-dropdown" id="menuProductosToggle">
-                    Productos <span class="dropdown-arrow">▼</span>
-                </button>
-                <ul class="menu-subnav">
-                    <li><a href="#productos" class="menu-subitem" data-categoria="galletas" onclick="filtrarYCerrar('galletas')">Galletas</a></li>
-                    <li><a href="#productos" class="menu-subitem" data-categoria="mermeladas" onclick="filtrarYCerrar('mermeladas')">Mermeladas</a></li>
-                </ul>
-            </div>
-
-            <a href="#proceso" class="menu-item" onclick="cerrarMenu()">Nuestro Proceso</a>
-            <a href="#sobre-nosotros" class="menu-item" onclick="cerrarMenu()">Sobre Nosotros</a>
-            <a href="#contacto" class="menu-item" onclick="cerrarMenu()">Contacto</a>
-        </nav>
-    </div>
+    <!-- ✅ AQUÍ SE INYECTARÁ EL HEADER -->
+    <div id="header-container"></div>
     
     <main>
         <!-- SECCIÓN PRODUCTOS -->
@@ -103,26 +37,10 @@
         <section id="proceso" class="proceso">
             <h2 class="section-title">Así Hacemos Nuestras Galletas</h2>
             <div class="proceso-steps">
-                <div class="paso">
-                    <div class="paso-numero">1</div>
-                    <h3>Seleccionamos</h3>
-                    <p>Los mejores ingredientes frescos</p>
-                </div>
-                <div class="paso">
-                    <div class="paso-numero">2</div>
-                    <h3>Preparamos</h3>
-                    <p>La masa con amor y dedicación</p>
-                </div>
-                <div class="paso">
-                    <div class="paso-numero">3</div>
-                    <h3>Horneamos</h3>
-                    <p>Hasta obtener la textura perfecta</p>
-                </div>
-                <div class="paso">
-                    <div class="paso-numero">4</div>
-                    <h3>Empacamos</h3>
-                    <p>Con cuidado para que lleguen perfectas</p>
-                </div>
+                <div class="paso"><div class="paso-numero">1</div><h3>Seleccionamos</h3><p>Los mejores ingredientes frescos</p></div>
+                <div class="paso"><div class="paso-numero">2</div><h3>Preparamos</h3><p>La masa con amor y dedicación</p></div>
+                <div class="paso"><div class="paso-numero">3</div><h3>Horneamos</h3><p>Hasta obtener la textura perfecta</p></div>
+                <div class="paso"><div class="paso-numero">4</div><h3>Empacamos</h3><p>Con cuidado para que lleguen perfectas</p></div>
             </div>
         </section>
         
@@ -130,20 +48,11 @@
         <section id="sobre-nosotros" class="sobre-nosotros">
             <h2 class="section-title">Conoce a la Chef</h2>
             <div class="chef-content">
-                <div class="chef-imagen">
-                    <div class="chef-placeholder">👩‍🍳🐩</div>
-                </div>
+                <div class="chef-imagen"><div class="chef-placeholder">👩‍🍳🐩</div></div>
                 <div class="chef-texto">
                     <h3>Mirian</h3>
-                    <p class="chef-historia">
-                        Soy Mirian, y desde mi cocina en Caracas preparo galletas y mermeladas 
-                        artesanales con el mismo cariño de siempre. Cada producto es hecho a mano, 
-                        usando ingredientes frescos y recetas familiares.
-                    </p>
-                    <p class="chef-mascota">
-                        Y siempre me acompaña <strong>Excalibur</strong>, mi fiel poodle blanco, 
-                        quien es mi asistente de cocina (aunque solo sabe pedir galletas 🐩).
-                    </p>
+                    <p class="chef-historia">Soy Mirian, y desde mi cocina en Caracas preparo galletas y mermeladas artesanales con el mismo cariño de siempre. Cada producto es hecho a mano, usando ingredientes frescos y recetas familiares.</p>
+                    <p class="chef-mascota">Y siempre me acompaña <strong>Excalibur</strong>, mi fiel poodle blanco, quien es mi asistente de cocina (aunque solo sabe pedir galletas 🐩).</p>
                 </div>
             </div>
         </section>
@@ -152,250 +61,21 @@
         <section class="como-pedir">
             <h2 class="section-title">¿Cómo Pedir?</h2>
             <div class="pasos-pedir">
-                <div class="paso-pedir">
-                    <div class="paso-icono">1️⃣</div>
-                    <h3>Elige</h3>
-                    <p>Tus galletas o mermeladas favoritas</p>
-                </div>
-                <div class="paso-pedir">
-                    <div class="paso-icono">2️⃣</div>
-                    <h3>Escríbenos</h3>
-                    <p>Al WhatsApp 0412-2879803</p>
-                </div>
-                <div class="paso-pedir">
-                    <div class="paso-icono">3️⃣</div>
-                    <h3>Recibe</h3>
-                    <p>Tu pedido en Caracas</p>
-                </div>
+                <div class="paso-pedir"><div class="paso-icono">1️⃣</div><h3>Elige</h3><p>Tus galletas o mermeladas favoritas</p></div>
+                <div class="paso-pedir"><div class="paso-icono">2️⃣</div><h3>Escríbenos</h3><p>Al WhatsApp 0412-2879803</p></div>
+                <div class="paso-pedir"><div class="paso-icono">3️⃣</div><h3>Recibe</h3><p>Tu pedido en Caracas</p></div>
             </div>
         </section>
     </main>
     
-    <!-- FOOTER / CONTACTO -->
-    <footer id="contacto" class="footer">
-        <div class="footer-content">
-            <h3>Contáctanos</h3>
-            <div class="contacto-info">
-                <a href="https://wa.me/584122879803" class="contacto-item" target="_blank">
-                    📱 WhatsApp: 0412-2879803
-                </a>
-                <div class="contacto-item">📍 Caracas, Venezuela</div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 SLAKIDOM. Todos los derechos reservados.</p>
-                <p>Hecho con ❤️ por Mirian</p>
-            </div>
-        </div>
-    </footer>
+    <!-- ✅ AQUÍ SE INYECTARÁ EL FOOTER Y ELEMENTOS GLOBALES -->
+    <div id="footer-container"></div>
+
+    <!-- ✅ SCRIPT PARA CARGAR COMPONENTES (Debe ir antes de app.js) -->
+    <script src="js/cargar-componentes.js"></script>
     
-    <!-- BOTÓN FLOTANTE: Menú hamburguesa -->
-    <button id="menu-flotante" class="btn-menu-flotante" aria-label="Abrir menú">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-    </button>
-
-    <!-- BOTÓN FLOTANTE: Excalibur con carrito -->
-    <a href="#" class="btn-flotante-excalibur abrir-modal-carrito" title="Ver carrito">
-        <img src="img/excalibur_carrito.png" alt="Excalibur Carrito">
-        <span id="contador-carrito-flotante" class="contador-flotante">0</span>
-    </a>
-    
-    <!-- BOTÓN FLOTANTE: WhatsApp -->
-    <a href="https://wa.me/584122879803?text=Hola,%20quiero%20hacer%20un%20pedido" class="whatsapp-flotante" target="_blank" title="Pedir por WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="#FFFFFF">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-    </a>
-    
-    <!-- MODAL DEL CARRITO -->
-    <div id="modal-carrito" class="modal-carrito">
-        <div class="modal-contenido">
-            <div class="modal-header">
-                <h3>Tu Pedido 🍪</h3>
-                <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
-            </div>
-            <div id="lista-carrito" class="lista-carrito">
-                <p style="text-align:center; padding: 20px; color: #666;">Tu carrito está vacío</p>
-            </div>
-            <div class="modal-footer">
-                <div class="total-carrito">
-                    <span>Total:</span>
-                    <span id="total-carrito">$0.00</span>
-                </div>
-                <button id="btn-finalizar-pedido" class="btn-whatsapp-modal">
-                    ✅ Enviar pedido por WhatsApp
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ✅ SCRIPT COMPLETO Y FUNCIONAL (Sin dependencias externas que puedan fallar) -->
-    <script>
-        // 1. DATOS DE PRODUCTOS (Integrados para garantizar que carguen)
-        const PRODUCTOS = [
-            { id: 1, nombre: "Galletas de Coco y Vainilla", descripcion: "Deliciosas galletas artesanales con coco rallado", precio: 3.00, categoria: "galletas" },
-            { id: 2, nombre: "Galletas de Limón", descripcion: "Frescas galletas con sabor cítrico natural", precio: 3.00, categoria: "galletas" },
-            { id: 3, nombre: "Galletas con Chispas de Chocolate", descripcion: "Clásicas galletas con abundantes chispas", precio: 3.50, categoria: "galletas" },
-            { id: 4, nombre: "Mermelada de Fresa", descripcion: "Mermelada artesanal de fresa, perfecta para untar", precio: 4.00, categoria: "mermeladas" },
-            { id: 5, nombre: "Mermelada de Guayaba", descripcion: "Dulce mermelada de guayaba con sabor tradicional", precio: 4.00, categoria: "mermeladas" },
-            { id: 6, nombre: "Mermelada de Durazno", descripcion: "Suave mermelada de durazno, ideal para el desayuno", precio: 4.00, categoria: "mermeladas" }
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('🍪 SLAKIDOM - Sistema iniciando...');
-            
-            // 2. RENDERIZAR PRODUCTOS
-            const gridProductos = document.getElementById("productos-grid");
-            if (gridProductos) {
-                gridProductos.innerHTML = ""; // Limpiar "Cargando..."
-                
-                PRODUCTOS.forEach(producto => {
-                    const card = document.createElement("div");
-                    card.className = "producto-card";
-                    card.dataset.categoria = producto.categoria;
-                    card.dataset.nombre = producto.nombre.toLowerCase();
-                    
-                    const precioFormateado = producto.precio.toFixed(2);
-                    const partesPrecio = precioFormateado.split('.');
-                    
-                    card.innerHTML = `
-                        <div class="producto-img-placeholder">🍪</div>
-                        <h3 class="producto-nombre">${producto.nombre}</h3>
-                        <div class="producto-precio">
-                            <span class="simbolo">$</span>
-                            <span class="entero">${partesPrecio[0]}</span>
-                            <span class="decimales">.${partesPrecio[1]}</span>
-                        </div>
-                        <button class="btn-agregar-carrito" onclick="alert('Producto agregado al carrito (Demo)')">
-                            Agregar
-                        </button>
-                    `;
-                    gridProductos.appendChild(card);
-                });
-            }
-            
-            // 3. SELECTOR DE MONEDA
-            const selectorMoneda = document.getElementById('selectorMoneda');
-            const dropdownMonedas = document.getElementById('dropdownMonedas');
-            const opcionesMoneda = document.querySelectorAll('.opcion-moneda');
-            const monedaActualText = document.querySelector('.moneda-actual');
-            
-            if(selectorMoneda) {
-                selectorMoneda.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    dropdownMonedas.classList.toggle('activo');
-                    selectorMoneda.classList.toggle('activo');
-                });
-            }
-            
-            opcionesMoneda.forEach(opcion => {
-                opcion.addEventListener('click', () => {
-                    const simbolo = opcion.dataset.simbolo;
-                    opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
-                    opcion.classList.add('seleccionada');
-                    if(monedaActualText) monedaActualText.textContent = `Venezuela (${simbolo})`;
-                    dropdownMonedas.classList.remove('activo');
-                    selectorMoneda.classList.remove('activo');
-                });
-            });
-            
-            document.addEventListener('click', () => {
-                if(dropdownMonedas) dropdownMonedas.classList.remove('activo');
-                if(selectorMoneda) selectorMoneda.classList.remove('activo');
-            });
-            
-            // 4. MENÚ HAMBURGUESA
-            const menuFlotante = document.getElementById('menu-flotante');
-            const menuClose = document.getElementById('menuClose');
-            const menuOverlay = document.getElementById('menuOverlay');
-            const menuProductosToggle = document.getElementById('menuProductosToggle');
-            const menuProductosDropdown = document.getElementById('menuProductosDropdown');
-
-            window.abrirMenu = function() {
-                if(menuOverlay) menuOverlay.classList.add('active');
-            }
-
-            window.cerrarMenu = function() {
-                if(menuOverlay) menuOverlay.classList.remove('active');
-                if(menuProductosDropdown) menuProductosDropdown.classList.remove('activo');
-            }
-
-            if(menuFlotante) menuFlotante.addEventListener('click', window.abrirMenu);
-            if(menuClose) menuClose.addEventListener('click', window.cerrarMenu);
-
-            if(menuProductosToggle) {
-                menuProductosToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    menuProductosDropdown.classList.toggle('activo');
-                });
-            }
-
-            if(menuOverlay) {
-                menuOverlay.addEventListener('click', (e) => {
-                    if (e.target === menuOverlay) window.cerrarMenu();
-                });
-            }
-
-            // 5. FILTRADO POR CATEGORÍA
-            window.filtrarYCerrar = function(categoria) {
-                const tarjetas = document.querySelectorAll('.producto-card');
-                tarjetas.forEach(tarjeta => {
-                    if(tarjeta.dataset.categoria === categoria) {
-                        tarjeta.classList.remove('oculto');
-                    } else {
-                        tarjeta.classList.add('oculto');
-                    }
-                });
-                
-                const productosSection = document.getElementById('productos');
-                if(productosSection) productosSection.scrollIntoView({ behavior: 'smooth' });
-                
-                window.cerrarMenu();
-            };
-
-            // 6. BUSCADOR
-            const buscadorInput = document.getElementById('buscador-input');
-            if(buscadorInput) {
-                buscadorInput.addEventListener('input', (e) => {
-                    const termino = e.target.value.toLowerCase().trim();
-                    const tarjetas = document.querySelectorAll('.producto-card');
-                    let visibles = 0;
-                    
-                    tarjetas.forEach(tarjeta => {
-                        const nombre = tarjeta.dataset.nombre;
-                        if(nombre.includes(termino)) {
-                            tarjeta.classList.remove('oculto');
-                            visibles++;
-                        } else {
-                            tarjeta.classList.add('oculto');
-                        }
-                    });
-                    
-                    // Mostrar/ocultar mensaje de no resultados
-                    let sinResultados = document.querySelector('.sin-resultados');
-                    if (!sinResultados && gridProductos) {
-                        sinResultados = document.createElement('div');
-                        sinResultados.className = 'sin-resultados';
-                        sinResultados.textContent = 'No se encontraron productos 😕';
-                        gridProductos.appendChild(sinResultados);
-                    }
-                    
-                    if(sinResultados) {
-                        if (visibles === 0 && termino !== '') {
-                            sinResultados.classList.add('visible');
-                        } else {
-                            sinResultados.classList.remove('visible');
-                        }
-                    }
-                });
-            }
-            
-            console.log('✅ Sistema SLAKIDOM listo y funcionando');
-        });
-    </script>
+    <!-- ✅ SCRIPT PRINCIPAL DE LA APLICACIÓN -->
+    <script type="module" src="js/app.js"></script>
     
 </body>
 </html>
