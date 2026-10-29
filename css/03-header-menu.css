@@ -41,7 +41,7 @@
     pointer-events: auto;
 }
 
-/* ✅ Selector de moneda (izquierda) - COLOR CHOCOLATE para máximo contraste con amarillo */
+/* ✅ Selector de moneda (izquierda) - COLOR CHOCOLATE para máximo contraste */
 .selector-moneda {
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@
     cursor: pointer;
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--chocolate); /* ✅ CAMBIADO: De turquesa a chocolate */
+    color: var(--chocolate);
     padding: 8px 12px;
     border-radius: 8px;
     transition: background 0.2s;
@@ -119,19 +119,19 @@
     font-weight: bold;
 }
 
-/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE */
+/* ✅ Ubicación (debajo del selector) - COLOR CHOCOLATE y SUBIDA */
 .ubicacion {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--chocolate); /* ✅ CAMBIADO: De turquesa a chocolate */
+    color: var(--chocolate);
     cursor: pointer;
-    padding: 4px 12px;
+    padding: 2px 12px; /* ✅ Reducido para subirlo más */
     border-radius: 8px;
     transition: background 0.2s;
-    margin-top: -5px;
+    margin-top: -8px; /* ✅ Subido para acercarse más al selector */
 }
 
 .ubicacion:hover {
@@ -157,7 +157,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 45%;
+    top: 42%; /* ✅ Ajustado para dar espacio al menú inferior */
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 102;
@@ -174,7 +174,7 @@
 }
 
 .logo {
-    height: 200px;
+    height: 180px; /* ✅ Reducido ligeramente para equilibrar el header */
     width: auto;
     display: block;
     cursor: pointer;
@@ -270,8 +270,8 @@
 /* ✅ Letras color chocolate sobre fondo amarillo */
 .nav-link {
     display: block;
-    padding: 12px 25px;
-    color: var(--chocolate); /* ✅ Color chocolate */
+    padding: 10px 22px;
+    color: var(--chocolate);
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
@@ -486,17 +486,22 @@
     }
     
     .logo {
-        height: 160px;
+        height: 140px;
     }
     
     .logo-container {
-        top: 40%;
+        top: 38%;
     }
     
-    .selector-moneda,
-    .ubicacion {
+    .selector-moneda {
         font-size: 0.8rem;
         padding: 6px 10px;
+    }
+
+    .ubicacion {
+        font-size: 0.8rem;
+        padding: 2px 8px; /* ✅ Ajustado para móvil */
+        margin-top: -6px;
     }
     
     .menu-item {
@@ -534,7 +539,7 @@
     
     /* ✅ Menú horizontal en tablet: letras más pequeñas */
     .nav-link {
-        padding: 10px 15px;
+        padding: 8px 15px;
         font-size: 0.9rem;
     }
     
@@ -551,18 +556,23 @@
     }
     
     .logo {
-        height: 130px;
+        height: 110px;
     }
     
     .logo-container {
-        top: 38%;
+        top: 35%;
     }
     
-    .selector-moneda,
-    .ubicacion {
+    .selector-moneda {
         font-size: 0.7rem;
         padding: 4px 8px;
+    }
+
+    .ubicacion {
+        font-size: 0.7rem;
+        padding: 2px 6px;
         gap: 4px;
+        margin-top: -4px;
     }
     
     .selector-moneda .bandera {
@@ -599,12 +609,12 @@
     
     /* ✅ Menú horizontal en móvil: más compacto */
     .nav-bar {
-        padding: 0 10px;
+        padding: 0 5px;
     }
     
     .nav-link {
-        padding: 8px 10px;
-        font-size: 0.8rem;
+        padding: 6px 8px;
+        font-size: 0.75rem;
     }
     
     .nav-dropdown {
