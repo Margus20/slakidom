@@ -36,7 +36,7 @@
                 <img src="img/excalibur_carrito.png" alt="Carrito" class="carrito-icon">
                 <span id="contador-carrito" class="contador-carrito">0</span>
             </button>
-            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+            <!-- ✅ ELIMINADO: Botón del menú antiguo (ahora usamos el flotante) -->
         </div>
     </header>
     
@@ -93,7 +93,7 @@
             <h2 class="section-title">Conoce a la Chef</h2>
             <div class="chef-content">
                 <div class="chef-imagen">
-                    <div class="chef-placeholder">👩‍🐩</div>
+                    <div class="chef-placeholder">‍🐩</div>
                 </div>
                 <div class="chef-texto">
                     <h3>Mirian</h3>
@@ -120,12 +120,12 @@
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
                 <div class="paso-pedir">
-                    <div class="paso-icono">2️⃣</div>
+                    <div class="paso-icono">2️</div>
                     <h3>Escríbenos</h3>
                     <p>Al WhatsApp 0412-2879803</p>
                 </div>
                 <div class="paso-pedir">
-                    <div class="paso-icono">3️⃣</div>
+                    <div class="paso-icono">3️</div>
                     <h3>Recibe</h3>
                     <p>Tu pedido en Caracas</p>
                 </div>
@@ -176,7 +176,7 @@
     <div id="modal-carrito" class="modal-carrito">
         <div class="modal-contenido">
             <div class="modal-header">
-                <h3>Tu Pedido 🍪</h3>
+                <h3>Tu Pedido </h3>
                 <button id="btn-cerrar-carrito" class="btn-cerrar-modal">×</button>
             </div>
             <div id="lista-carrito" class="lista-carrito">
@@ -219,8 +219,7 @@
                 });
             }
 
-            // 2. Lógica del Menú Hamburguesa (Header y Flotante)
-            const menuToggle = document.getElementById('menuToggle');
+            // 2. Lógica del Menú Hamburguesa (Solo botón flotante)
             const menuFlotante = document.getElementById('menu-flotante');
             const menuClose = document.getElementById('menuClose');
             const menuOverlay = document.getElementById('menuOverlay');
@@ -233,10 +232,7 @@
                 if(menuOverlay) menuOverlay.classList.remove('active');
             }
 
-            // Abrir con el botón del header (si existe)
-            if(menuToggle) menuToggle.addEventListener('click', abrirMenu);
-            
-            // Abrir con el botón flotante (si existe)
+            // Abrir con el botón flotante
             if(menuFlotante) menuFlotante.addEventListener('click', abrirMenu);
             
             // Cerrar con la X
