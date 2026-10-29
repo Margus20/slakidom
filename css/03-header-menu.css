@@ -11,9 +11,9 @@
     top: 0;
     z-index: 100;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    height: 260px; /* ✅ AUMENTADO de 80px a 260px para cubrir el logo */
+    height: 260px;
     position: relative;
-    overflow: hidden; /* ✅ Cambiado de visible a hidden para que el logo quede contenido */
+    overflow: hidden;
 }
 
 /* ✅ AJUSTE CLAVE: Contenedor de botones que ocupa todo el ancho y distribuye a los lados */
@@ -25,7 +25,7 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* ✅ Cambiado a flex-start para alinear arriba */
+    align-items: flex-start;
     padding: 15px 15px;
     z-index: 101;
     pointer-events: none;
@@ -34,11 +34,14 @@
 /* ✅ Reactivar los clics en los botones hijos */
 .header-botones button,
 .header-botones .selector-moneda,
-.header-botones .ubicacion {
+.header-botones .ubicacion,
+.header-botones .buscador-header,
+.header-botones .buscador-input,
+.header-botones .buscador-btn {
     pointer-events: auto;
 }
 
-/* ✅ NUEVO: Selector de moneda (izquierda) - COLOR TURQUESA */
+/* ✅ Selector de moneda (izquierda) - COLOR TURQUESA */
 .selector-moneda {
     display: flex;
     align-items: center;
@@ -48,7 +51,7 @@
     cursor: pointer;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #26A3BF; /* ✅ CAMBIADO a turquesa */
+    color: #26A3BF;
     padding: 8px 12px;
     border-radius: 8px;
     transition: background 0.2s;
@@ -116,14 +119,14 @@
     font-weight: bold;
 }
 
-/* ✅ NUEVO: Ubicación (debajo del selector de moneda) - COLOR TURQUESA */
+/* ✅ Ubicación (debajo del selector de moneda) - COLOR TURQUESA */
 .ubicacion {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #26A3BF; /* ✅ CAMBIADO a turquesa */
+    color: #26A3BF;
     cursor: pointer;
     padding: 4px 12px;
     border-radius: 8px;
@@ -139,12 +142,11 @@
     font-size: 1rem;
 }
 
-/* ✅ Ocultar el botón antiguo del carrito (ahora es flotante) */
+/* ✅ Ocultar botones antiguos */
 .btn-carrito-header {
     display: none;
 }
 
-/* ✅ Ocultar el botón antiguo del menú (ya tenemos el flotante) */
 .menu-toggle {
     display: none;
 }
@@ -157,7 +159,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* ✅ Centrado perfecto vertical y horizontal */
+    transform: translate(-50%, -50%);
     z-index: 102;
 }
 
@@ -171,13 +173,88 @@
     transform: scale(1.05);
 }
 
-/* ✅ Logo (230px) ahora cabe perfectamente en el header de 260px */
 .logo {
     height: 230px;
     width: auto;
     display: block;
     cursor: pointer;
     filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+}
+
+/* ========================================== */
+/* ✅ NUEVO: BUSCADOR EN EL HEADER */
+/* ========================================== */
+.buscador-header {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--blanco);
+    border-radius: 25px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 280px;
+    width: 100%;
+}
+
+.buscador-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--chocolate);
+    border-radius: 25px 0 0 25px;
+    min-width: 0;
+}
+
+.buscador-input::placeholder {
+    color: #B0B0B0;
+    font-style: italic;
+}
+
+.buscador-btn {
+    background: var(--rosa);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--blanco);
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.buscador-btn:hover {
+    background: var(--chocolate);
+    transform: scale(1.05);
+}
+
+.buscador-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ✅ Ocultar productos que no coincidan con la búsqueda */
+.producto-card.oculto {
+    display: none !important;
+}
+
+/* Mensaje cuando no hay resultados */
+.sin-resultados {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--chocolate);
+    font-size: 1.1rem;
+    display: none;
+    grid-column: 1 / -1;
+}
+
+.sin-resultados.visible {
+    display: block;
 }
 
 /* Menú full-screen */
@@ -239,7 +316,7 @@
 
 @media (max-width: 768px) {
     .header {
-        height: 200px; /* ✅ Ajustado para tablet */
+        height: 200px;
     }
     
     .logo {
@@ -247,7 +324,7 @@
     }
     
     .logo-container {
-        transform: translate(-50%, -50%); /* ✅ Centrado perfecto */
+        transform: translate(-50%, -50%);
     }
     
     .selector-moneda,
@@ -259,11 +336,31 @@
     .menu-item {
         font-size: 1.5rem;
     }
+    
+    /* ✅ Buscador en tablet */
+    .buscador-header {
+        max-width: 220px;
+    }
+    
+    .buscador-input {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+    
+    .buscador-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .buscador-btn svg {
+        width: 16px;
+        height: 16px;
+    }
 }
 
 @media (max-width: 480px) {
     .header {
-        height: 170px; /* ✅ Ajustado para móvil */
+        height: 170px;
         padding: 0 10px;
     }
     
@@ -272,7 +369,7 @@
     }
     
     .logo-container {
-        transform: translate(-50%, -50%); /* ✅ Centrado perfecto */
+        transform: translate(-50%, -50%);
     }
     
     .selector-moneda,
@@ -288,5 +385,29 @@
     
     .ubicacion .icono-ubicacion {
         font-size: 0.9rem;
+    }
+    
+    /* ✅ Buscador en móvil */
+    .buscador-header {
+        max-width: 160px;
+    }
+    
+    .buscador-input {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+    
+    .buscador-input::placeholder {
+        font-size: 0.7rem;
+    }
+    
+    .buscador-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .buscador-btn svg {
+        width: 14px;
+        height: 14px;
     }
 }
