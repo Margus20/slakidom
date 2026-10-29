@@ -32,10 +32,10 @@
         </div>
         
         <div class="header-botones">
-            <!-- ✅ NUEVO: Selector de moneda (izquierda) -->
+            <!-- ✅ NUEVO: Selector de moneda y Ubicación (izquierda) -->
             <div class="selector-moneda-wrapper">
                 <button class="selector-moneda" id="selectorMoneda" aria-label="Cambiar moneda">
-                    <span class="bandera">🇪</span>
+                    <span class="bandera">🇻🇪</span>
                     <span class="moneda-actual">Venezuela ($)</span>
                     <span class="flecha">▼</span>
                 </button>
@@ -50,12 +50,11 @@
                         <span>Bolívares (Bs.)</span>
                     </div>
                 </div>
-            </div>
-            
-            <!-- ✅ NUEVO: Ubicación (derecha) -->
-            <div class="ubicacion">
-                <span class="icono-ubicacion">📍</span>
-                <span>Caracas</span>
+                <!-- ✅ Ubicación justo debajo del selector -->
+                <div class="ubicacion">
+                    <span class="icono-ubicacion">📍</span>
+                    <span>Caracas</span>
+                </div>
             </div>
         </div>
     </header>
@@ -113,7 +112,7 @@
             <h2 class="section-title">Conoce a la Chef</h2>
             <div class="chef-content">
                 <div class="chef-imagen">
-                    <div class="chef-placeholder">👩‍</div>
+                    <div class="chef-placeholder">👩‍🍳🐩</div>
                 </div>
                 <div class="chef-texto">
                     <h3>Mirian</h3>
@@ -135,7 +134,7 @@
             <h2 class="section-title">¿Cómo Pedir?</h2>
             <div class="pasos-pedir">
                 <div class="paso-pedir">
-                    <div class="paso-icono">1️</div>
+                    <div class="paso-icono">1️⃣</div>
                     <h3>Elige</h3>
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
@@ -159,9 +158,9 @@
             <h3>Contáctanos</h3>
             <div class="contacto-info">
                 <a href="https://wa.me/584122879803" class="contacto-item" target="_blank">
-                     WhatsApp: 0412-2879803
+                    📱 WhatsApp: 0412-2879803
                 </a>
-                <div class="contacto-item"> Caracas, Venezuela</div>
+                <div class="contacto-item">📍 Caracas, Venezuela</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 SLAKIDOM. Todos los derechos reservados.</p>
@@ -225,7 +224,7 @@
             const opcionesMoneda = document.querySelectorAll('.opcion-moneda');
             const monedaActualText = document.querySelector('.moneda-actual');
             
-            // Tasa de cambio参考 (puedes actualizarla fácilmente)
+            // Tasa de cambio de referencia (puedes actualizarla fácilmente)
             let tasaCambio = 36; // 1 USD = 36 Bs. (ejemplo)
             let monedaSeleccionada = 'USD';
             
@@ -243,7 +242,6 @@
                 opcion.addEventListener('click', () => {
                     const moneda = opcion.dataset.moneda;
                     const simbolo = opcion.dataset.simbolo;
-                    const texto = opcion.querySelector('span:last-child').textContent;
                     
                     // Actualizar selección visual
                     opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
