@@ -194,6 +194,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     max-width: 280px;
     width: 100%;
+    margin-top: 180px; /* ✅ BAJADO hacia el borde inferior de la franja amarilla */
 }
 
 .buscador-input {
@@ -337,9 +338,10 @@
         font-size: 1.5rem;
     }
     
-    /* ✅ Buscador en tablet */
+    /* ✅ Buscador en tablet (ajustado proporcionalmente) */
     .buscador-header {
         max-width: 220px;
+        margin-top: 120px; /* ✅ Bajado proporcionalmente para header de 200px */
     }
     
     .buscador-input {
@@ -387,9 +389,10 @@
         font-size: 0.9rem;
     }
     
-    /* ✅ Buscador en móvil */
+    /* ✅ Buscador en móvil (ajustado proporcionalmente) */
     .buscador-header {
         max-width: 160px;
+        margin-top: 90px; /* ✅ Bajado proporcionalmente para header de 170px */
     }
     
     .buscador-input {
