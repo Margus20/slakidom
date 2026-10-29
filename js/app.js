@@ -14,19 +14,18 @@ async function obtenerTasaBCV() {
         if (tasaGuardada && timestamp) {
             const horasTranscurridas = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60);
             if (horasTranscurridas < HORAS_ACTUALIZACION) {
-                console.log('✅ Usando tasa en caché:', tasaGuardada);
+                console.log('✅ [NERD-DEBUG]: El tiempo es relativo, pero la tasa en caché es absoluta. Usando:', tasaGuardada);
                 return parseFloat(tasaGuardada);
             }
         }
         
-        console.log('🔄 Consultando API del BCV...');
+        console.log('🔄 [NERD-DEBUG]: Consultando los oráculos de la API del BCV...');
         const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
         if (!respuesta.ok) throw new Error('Error en la respuesta');
         
         const datos = await respuesta.json();
-        console.log('📊 Datos recibidos de la API:', datos);
+        console.log('📊 [NERD-DEBUG]: Los oráculos hablaron. Datos recibidos:', datos);
         
-        // ✅ CAMBIO: Usar 'precio' o 'promedio' según lo que devuelva la API hoy
         const tasaBCV = datos.precio || datos.promedio;
         
         if (!tasaBCV || tasaBCV <= 0) {
@@ -36,16 +35,16 @@ async function obtenerTasaBCV() {
         localStorage.setItem(TASA_CACHE_KEY, tasaBCV);
         localStorage.setItem(TASA_TIMESTAMP_KEY, Date.now().toString());
         
-        console.log('✅ Tasa BCV actualizada:', tasaBCV);
+        console.log('✅ [NERD-DEBUG]: Tasa BCV grabada en la memoria del universo:', tasaBCV);
         return tasaBCV;
     } catch (error) {
-        console.error('❌ Error al obtener tasa BCV:', error);
+        console.error('❌ [NERD-DEBUG]: La API falló, pero nosotros no. Error:', error);
         const tasaVieja = localStorage.getItem(TASA_CACHE_KEY);
         if (tasaVieja) {
-            console.log('📦 Usando tasa antigua del caché:', tasaVieja);
+            console.log('📦 [NERD-DEBUG]: Rescatando la tasa antigua del baúl de los recuerdos:', tasaVieja);
             return parseFloat(tasaVieja);
         }
-        console.log('⚠️ Usando tasa de respaldo:', TASA_RESPALDO);
+        console.log('⚠️ [NERD-DEBUG]: Activando protocolo de emergencia. Tasa de respaldo:', TASA_RESPALDO);
         return TASA_RESPALDO;
     }
 }
@@ -58,13 +57,15 @@ async function cargarComponentes() {
         if (footerRes.ok) document.getElementById('footer-container').innerHTML = await footerRes.text();
         document.dispatchEvent(new Event('componentesListos'));
     } catch (error) {
-        console.error('❌ Error al cargar componentes:', error);
+        console.error('❌ [NERD-DEBUG]: Error al cargar los cimientos (componentes):', error);
     }
 }
 
 cargarComponentes();
 
 document.addEventListener('componentesListos', () => {
+    console.log('🌟 [NERD-DEBUG]: El escenario está montado. Los componentes han llegado.');
+    
     let tasaCambio = TASA_RESPALDO;
     let monedaSeleccionada = 'USD';
 
@@ -74,11 +75,59 @@ document.addEventListener('componentesListos', () => {
     const monedaActualText = document.querySelector('.moneda-actual');
     const tasaInfo = document.getElementById('tasaBcvInfo');
 
-    // ✅ Función separada para renderizar productos con la tasa CORRECTA
+    // ✅ FUNCIÓN BRAVA 1: Formateo de números al estilo venezolano (puntos de mil)
+    function formatearConPuntosDeMil(numero) {
+        return new Intl.NumberFormat('es-VE').format(numero);
+    }
+
+    // ✅ FUNCIÓN BRAVA 2: Reconstrucción total del precio (Infalible)
+    function actualizarVistaDePrecios(moneda) {
+        console.log(`🎭 [NERD-DEBUG]: Transformando la realidad visual a moneda: ${moneda}`);
+        const precios = document.querySelectorAll('.producto-precio');
+        console.log(`📦 [NERD-DEBUG]: Encontrados ${precios.length} artefactos de precio para transformar.`);
+        
+        precios.forEach((precioEl, index) => {
+            const usd = parseFloat(precioEl.dataset.precioUsd);
+            const ves = parseFloat(precioEl.dataset.precioVes);
+            
+            const [enteroUSD, decimalesUSD] = usd.toFixed(2).split('.');
+            const vesFormateado = formatearConPuntosDeMil(ves);
+
+            if (moneda === 'VES') {
+                console.log(`  ✨ Producto ${index}: El Bolívar toma el protagonismo (Bs.${vesFormateado})`);
+                precioEl.innerHTML = `
+                    <div class="precio-ves activo-grande">
+                        <span class="simbolo">Bs.</span>
+                        <span class="entero">${vesFormateado}</span>
+                    </div>
+                    <div class="precio-usd activo-pequeno">
+                        <span class="simbolo">$</span>
+                        <span class="entero">${enteroUSD}</span>
+                        <span class="decimales">.${decimalesUSD}</span>
+                    </div>
+                `;
+            } else {
+                console.log(`  ✨ Producto ${index}: El Dólar recupera su trono ($${usd})`);
+                precioEl.innerHTML = `
+                    <div class="precio-usd activo-grande">
+                        <span class="simbolo">$</span>
+                        <span class="entero">${enteroUSD}</span>
+                        <span class="decimales">.${decimalesUSD}</span>
+                    </div>
+                    <div class="precio-ves activo-pequeno">
+                        <span class="simbolo">Bs.</span>
+                        <span class="entero">${vesFormateado}</span>
+                    </div>
+                `;
+            }
+        });
+    }
+
     function renderizarProductos() {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
         
+        console.log('🏗️ [NERD-DEBUG]: Construyendo la vitrina de productos...');
         gridProductos.innerHTML = "";
         PRODUCTOS.forEach(producto => {
             const card = document.createElement("div");
@@ -89,11 +138,10 @@ document.addEventListener('componentesListos', () => {
             const precioUSD = producto.precio.toFixed(2);
             const [enteroUSD, decimalesUSD] = precioUSD.split('.');
             
-            // ✅ CÁLCULO CORREGIDO: Multiplicación con la tasa ya actualizada
             const precioEnBolivares = producto.precio * tasaCambio;
             const precioVESRedondeado = redondearBolivares(precioEnBolivares);
             
-            console.log(`🍪 ${producto.nombre}: $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${precioVESRedondeado}`);
+            console.log(`🍪 [NERD-DEBUG]: ${producto.nombre} | $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${formatearConPuntosDeMil(precioVESRedondeado)}`);
             
             card.innerHTML = `
                 <div class="producto-img-placeholder">🍪</div>
@@ -106,7 +154,7 @@ document.addEventListener('componentesListos', () => {
                     </div>
                     <div class="precio-ves activo-pequeno">
                         <span class="simbolo">Bs.</span>
-                        <span class="entero">${precioVESRedondeado}</span>
+                        <span class="entero">${formatearConPuntosDeMil(precioVESRedondeado)}</span>
                     </div>
                 </div>
                 <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
@@ -118,32 +166,41 @@ document.addEventListener('componentesListos', () => {
     // ✅ Obtenemos la tasa PRIMERO y luego renderizamos
     (async () => {
         tasaCambio = await obtenerTasaBCV();
-        console.log('💰 Tasa final utilizada para cálculos:', tasaCambio);
-        if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${tasaCambio.toFixed(2)} por $`;
-        
-        // Renderizar productos AHORA que tenemos la tasa correcta
+        console.log('💰 [NERD-DEBUG]: La tasa sagrada ha sido establecida en:', tasaCambio);
+        if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
         renderizarProductos();
     })();
 
+    // ==========================================
+    // ✅ BLINDAJE TOTAL DEL SELECTOR (MODO BRAVO)
+    // ==========================================
     if (selectorMoneda) {
         selectorMoneda.addEventListener('click', (e) => {
             e.stopPropagation();
-            e.preventDefault(); // ✅ Agregado para evitar comportamientos extraños
+            e.preventDefault();
+            e.stopImmediatePropagation(); // 🔥 DETIENE CUALQUIER OTRO EVENTO EN SU CAMINO
+            console.log('🛡️ [NERD-DEBUG]: Escudo activado. Clic en selector principal interceptado.');
             if (dropdownMonedas) dropdownMonedas.classList.toggle('activo');
             selectorMoneda.classList.toggle('activo');
         });
     }
 
-    // ✅ CAMBIO 1: Agregado e.stopPropagation() y e.preventDefault()
     opcionesMoneda.forEach(opcion => {
+        // Bloqueamos mousedown para que no robe el foco ni seleccione texto/productos
+        opcion.addEventListener('mousedown', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
         opcion.addEventListener('click', (e) => {
             e.stopPropagation();
             e.preventDefault();
+            e.stopImmediatePropagation(); // 🔥 EL GOLPE FINAL CONTRA LA INTERFERENCIA
             
             const moneda = opcion.dataset.moneda;
             const simbolo = opcion.dataset.simbolo;
             
-            console.log('🎯 Opción clickeada:', moneda, simbolo);
+            console.log(`🚨 [NERD-DEBUG]: ¡ACCIÓN CONFIRMADA! El usuario eligió: ${moneda} (${simbolo})`);
             
             opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
             opcion.classList.add('seleccionada');
@@ -154,14 +211,11 @@ document.addEventListener('componentesListos', () => {
             
             monedaSeleccionada = moneda;
             
-            // ✅ Ejecutar la función de alternar
-            alternarPreciosEnPagina(moneda);
-            
-            console.log('💱 Moneda cambiada a:', moneda, '- Tasa:', tasaCambio);
+            // Ejecutamos la reconstrucción total del DOM
+            actualizarVistaDePrecios(moneda);
         });
     });
 
-    // ✅ CAMBIO 2: Solo cerrar si el clic fue FUERA
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.selector-moneda') && !e.target.closest('.dropdown-monedas')) {
             if (dropdownMonedas) dropdownMonedas.classList.remove('activo');
@@ -169,42 +223,10 @@ document.addEventListener('componentesListos', () => {
         }
     });
 
-    // ✅ Función que alterna las clases "grande" y "pequeño"
-    function alternarPreciosEnPagina(moneda) {
-        console.log('🔄 Ejecutando alternarPreciosEnPagina para:', moneda);
-        const precios = document.querySelectorAll('.producto-precio');
-        console.log('📦 Elementos de precio encontrados:', precios.length);
-        
-        precios.forEach((precioEl, index) => {
-            const divUsd = precioEl.querySelector('.precio-usd');
-            const divVes = precioEl.querySelector('.precio-ves');
-            
-            console.log(`  Producto ${index}: USD=${divUsd ? 'OK' : 'NULL'}, VES=${divVes ? 'OK' : 'NULL'}`);
-            
-            if (moneda === 'VES') {
-                divUsd?.classList.remove('activo-grande');
-                divUsd?.classList.add('activo-pequeno');
-                divVes?.classList.remove('activo-pequeno');
-                divVes?.classList.add('activo-grande');
-            } else {
-                divVes?.classList.remove('activo-grande');
-                divVes?.classList.add('activo-pequeno');
-                divUsd?.classList.remove('activo-pequeno');
-                divUsd?.classList.add('activo-grande');
-            }
-        });
-    }
-
-    // ✅ Función de redondeo inteligente: 5+ sube, 4- mantiene
     function redondearBolivares(precio) {
         const parteDecimal = Math.floor((precio % 1) * 100);
         const parteEntera = Math.floor(precio);
-        
-        if (parteDecimal >= 50) {
-            return parteEntera + 1;
-        } else {
-            return parteEntera;
-        }
+        return (parteDecimal >= 50) ? parteEntera + 1 : parteEntera;
     }
 
     const PRODUCTOS = [
@@ -216,6 +238,7 @@ document.addEventListener('componentesListos', () => {
         { id: 6, nombre: "Mermelada de Durazno", precio: 4.00, categoria: "mermeladas" }
     ];
 
+    // ... (El resto del código del menú, buscador, carrito y nieve se mantiene intacto y funcional) ...
     const menuFlotante = document.getElementById('menu-flotante');
     const menuClose = document.getElementById('menuClose');
     const menuOverlay = document.getElementById('menuOverlay');
@@ -293,9 +316,6 @@ document.addEventListener('componentesListos', () => {
         if (e.target.classList.contains('btn-agregar-carrito')) alert('✅ Producto agregado al carrito');
     });
 
-    // ==========================================
-    // ✅ EFECTO DE NIEVE CAYENDO (INTENSIDAD AUMENTADA)
-    // ==========================================
     function crearCopoDeNieve() {
         const copo = document.createElement('div');
         copo.className = 'snowflake';
@@ -304,15 +324,10 @@ document.addEventListener('componentesListos', () => {
         copo.style.animationDuration = Math.random() * 3 + 2 + 's';
         copo.style.opacity = Math.random() * 0.7 + 0.3;
         copo.style.fontSize = Math.random() * 15 + 10 + 'px';
-        
         document.body.appendChild(copo);
-        
-        setTimeout(() => {
-            copo.remove();
-        }, 5000);
+        setTimeout(() => { copo.remove(); }, 5000);
     }
-
     setInterval(crearCopoDeNieve, 100);
 
-    console.log('🎉 ¡Sistema SLAKIDOM activo!');
+    console.log('🎉 [NERD-DEBUG]: ¡Sistema SLAKIDOM completamente activo, blindado y poético!');
 });
