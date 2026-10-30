@@ -45,12 +45,14 @@
         </div>
     </div>
 
-    <!-- ✅ MENÚ HORIZONTAL: Rutas con /slakidom/ para GitHub Pages -->
+    <!-- ✅ MENÚ HORIZONTAL: Productos como dropdown selector -->
     <nav class="nav-bar">
         <ul class="nav-list">
             <li class="nav-item">
-                <a href="/slakidom/index.html" class="nav-link">Inicio</a>
-                <ul class="nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" id="navProductosToggle">
+                    Productos <span class="dropdown-arrow">▼</span>
+                </button>
+                <ul class="nav-dropdown" id="navProductosDropdown">
                     <li><a href="/slakidom/galletas/" class="dropdown-link">Galletas</a></li>
                     <li><a href="/slakidom/mermeladas/" class="dropdown-link">Mermeladas</a></li>
                 </ul>
