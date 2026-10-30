@@ -138,7 +138,7 @@ document.addEventListener('componentesListos', () => {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
         
-        console.log('️ [DEBUG]: Renderizando productos...');
+        console.log('🏗️ [DEBUG]: Renderizando productos...');
         gridProductos.innerHTML = "";
 
         if (listaProductos.length === 0) {
@@ -165,10 +165,16 @@ document.addEventListener('componentesListos', () => {
             const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
             
             const imagenHTML = imagenSrc
-                ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'></div>'">` 
+                ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
                 : `<div class="producto-img-placeholder">🫙</div>`;
             
-            card.innerHTML = `
+            // ✅ AJUSTE: Enlace clicable solo si el producto tiene la propiedad 'url'
+            const esClicable = !!producto.url;
+            const productoURL = esClicable 
+                ? (isSubfolder ? `../${producto.categoria}/${producto.url}` : `${producto.categoria}/${producto.url}`)
+                : '#';
+            
+            const contenidoInfo = `
                 ${imagenHTML}
                 <h3 class="producto-nombre">${producto.nombre}</h3>
                 <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
@@ -182,7 +188,12 @@ document.addEventListener('componentesListos', () => {
                         <span class="entero">${formatearConPuntosDeMil(precioVESRedondeado)}</span>
                     </div>
                 </div>
-                <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
+            `;
+
+            // ✅ Si es clicable, envolvemos la info en un <a>. Si no, la dejamos normal.
+            card.innerHTML = `
+                ${esClicable ? `<a href="${productoURL}" style="text-decoration: none; color: inherit; display: block;">${contenidoInfo}</a>` : contenidoInfo}
+                <button class="btn-agregar-carrito" data-id="${producto.id}" ${esClicable ? 'onclick="event.stopPropagation();"' : ''}>Agregar</button>
             `;
             gridProductos.appendChild(card);
         });
@@ -253,9 +264,9 @@ document.addEventListener('componentesListos', () => {
         return (parteDecimal >= 50) ? parteEntera + 1 : parteEntera;
     }
 
-    // ✅ ACTUALIZADO: Imágenes reales de galletas y precios a $2.00
+    // ✅ ACTUALIZADO: Solo "Coco y Vainilla" tiene la propiedad 'url' por ahora
     const PRODUCTOS = [
-        { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 2.00, categoria: "galletas", imagen: "img/galletas/coco_vainilla.jpg" },
+        { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 2.00, categoria: "galletas", imagen: "img/galletas/coco_vainilla.jpg", url: "coco-vainilla.html" },
         { id: 2, nombre: "Galletas de Limón", precio: 2.00, categoria: "galletas", imagen: "img/galletas/limon.jpg" },
         { id: 3, nombre: "Galletas con Chispas de Chocolate", precio: 2.00, categoria: "galletas", imagen: "img/galletas/chispas_de_chocolate.jpg" },
         { id: 4, nombre: "Mermelada de Fresa", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/fresa.jpg" },
