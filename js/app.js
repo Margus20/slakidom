@@ -41,7 +41,7 @@ async function obtenerTasaBCV() {
         console.error('❌ [DEBUG]: Error al obtener tasa BCV:', error);
         const tasaVieja = localStorage.getItem(TASA_CACHE_KEY);
         if (tasaVieja) {
-            console.log(' [DEBUG]: Usando tasa antigua del caché:', tasaVieja);
+            console.log('📦 [DEBUG]: Usando tasa antigua del caché:', tasaVieja);
             return parseFloat(tasaVieja);
         }
         console.log('⚠️ [DEBUG]: Usando tasa de respaldo:', TASA_RESPALDO);
@@ -82,7 +82,7 @@ async function cargarComponentes() {
 cargarComponentes();
 
 document.addEventListener('componentesListos', () => {
-    console.log(' [DEBUG]: Componentes cargados. Iniciando aplicación...');
+    console.log('🌟 [DEBUG]: Componentes cargados. Iniciando aplicación...');
     
     let tasaCambio = TASA_RESPALDO;
     let monedaSeleccionada = 'USD';
@@ -138,7 +138,7 @@ document.addEventListener('componentesListos', () => {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
         
-        console.log('️ [DEBUG]: Renderizando productos...');
+        console.log('🏗️ [DEBUG]: Renderizando productos...');
         gridProductos.innerHTML = "";
 
         if (listaProductos.length === 0) {
@@ -146,7 +146,6 @@ document.addEventListener('componentesListos', () => {
             return;
         }
         
-        // ✅ DETECTAR SI ESTAMOS EN SUBCARPETA PARA AJUSTAR RUTAS DE IMÁGENES
         const path = window.location.pathname;
         const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
         const imgBasePath = isSubfolder ? '../' : '';
@@ -163,7 +162,6 @@ document.addEventListener('componentesListos', () => {
             const precioEnBolivares = producto.precio * tasaCambio;
             const precioVESRedondeado = redondearBolivares(precioEnBolivares);
             
-            // ✅ CORRECCIÓN: Usar ruta dinámica para imágenes
             const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
             
             const imagenHTML = imagenSrc
@@ -350,12 +348,23 @@ document.addEventListener('componentesListos', () => {
     const modalCarrito = document.getElementById('modal-carrito');
     const btnCerrarCarrito = document.getElementById('btn-cerrar-carrito');
     
+    // ✅ CORRECCIÓN DEFINITIVA: Forzar ruta absoluta de Excalibur para que funcione en TODAS las páginas
     const btnCarritoFlotante = document.querySelector('.abrir-modal-carrito');
-    if (btnCarritoFlotante && !btnCarritoFlotante.querySelector('img')) {
-        const path = window.location.pathname;
-        const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
-        const imgPath = isSubfolder ? '../img/excalibur_carrito.png' : 'img/excalibur_carrito.png';
-        btnCarritoFlotante.innerHTML = `<img src="${imgPath}" alt="Excalibur Carrito" style="width: 100%; height: 100%; object-fit: contain; pointer-events: none; display: block;">`;
+    if (btnCarritoFlotante) {
+        let img = btnCarritoFlotante.querySelector('img');
+        if (!img) {
+            const contador = btnCarritoFlotante.querySelector('.contador-flotante');
+            img = document.createElement('img');
+            img.alt = 'Excalibur Carrito';
+            img.style.cssText = 'width: 100%; height: 100%; object-fit: contain; pointer-events: none; display: block;';
+            if (contador) {
+                btnCarritoFlotante.insertBefore(img, contador);
+            } else {
+                btnCarritoFlotante.appendChild(img);
+            }
+        }
+        // Esta línea garantiza que la imagen siempre use la ruta correcta de GitHub Pages
+        img.src = '/slakidom/img/excalibur_carrito.png';
     }
 
     document.querySelectorAll('.abrir-modal-carrito').forEach(btn => {
