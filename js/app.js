@@ -44,12 +44,11 @@ async function obtenerTasaBCV() {
             console.log(' [DEBUG]: Usando tasa antigua del caché:', tasaVieja);
             return parseFloat(tasaVieja);
         }
-        console.log('️ [DEBUG]: Usando tasa de respaldo:', TASA_RESPALDO);
+        console.log('⚠️ [DEBUG]: Usando tasa de respaldo:', TASA_RESPALDO);
         return TASA_RESPALDO;
     }
 }
 
-// ✅ CORRECCIÓN CLAVE: Rutas relativas dinámicas para GitHub Pages
 async function cargarComponentes() {
     try {
         const path = window.location.pathname;
@@ -83,7 +82,7 @@ async function cargarComponentes() {
 cargarComponentes();
 
 document.addEventListener('componentesListos', () => {
-    console.log('🌟 [DEBUG]: Componentes cargados. Iniciando aplicación...');
+    console.log(' [DEBUG]: Componentes cargados. Iniciando aplicación...');
     
     let tasaCambio = TASA_RESPALDO;
     let monedaSeleccionada = 'USD';
@@ -99,10 +98,9 @@ document.addEventListener('componentesListos', () => {
     }
 
     function actualizarVistaDePrecios(moneda) {
-        console.log(`🎭 [DEBUG]: Cambiando vista a moneda: ${moneda}`);
         const precios = document.querySelectorAll('.producto-precio');
         
-        precios.forEach((precioEl, index) => {
+        precios.forEach((precioEl) => {
             const usd = parseFloat(precioEl.dataset.precioUsd);
             const ves = parseFloat(precioEl.dataset.precioVes);
             const [enteroUSD, decimalesUSD] = usd.toFixed(2).split('.');
@@ -140,13 +138,18 @@ document.addEventListener('componentesListos', () => {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
         
-        console.log('🏗️ [DEBUG]: Renderizando productos...');
+        console.log('️ [DEBUG]: Renderizando productos...');
         gridProductos.innerHTML = "";
 
         if (listaProductos.length === 0) {
             gridProductos.innerHTML = "<p style='text-align:center; color: var(--chocolate); padding: 40px;'>No hay productos en esta categoría por ahora.</p>";
             return;
         }
+        
+        // ✅ DETECTAR SI ESTAMOS EN SUBCARPETA PARA AJUSTAR RUTAS DE IMÁGENES
+        const path = window.location.pathname;
+        const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
+        const imgBasePath = isSubfolder ? '../' : '';
         
         listaProductos.forEach(producto => {
             const card = document.createElement("div");
@@ -160,10 +163,12 @@ document.addEventListener('componentesListos', () => {
             const precioEnBolivares = producto.precio * tasaCambio;
             const precioVESRedondeado = redondearBolivares(precioEnBolivares);
             
-            // ✅ IMAGEN REAL o EMOJI de respaldo
-            const imagenHTML = producto.imagen 
-                ? `<img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;">` 
-                : `<div class="producto-img-placeholder">${producto.categoria === 'mermeladas' ? '' : '🍪'}</div>`;
+            // ✅ CORRECCIÓN: Usar ruta dinámica para imágenes
+            const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
+            
+            const imagenHTML = imagenSrc
+                ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
+                : `<div class="producto-img-placeholder">🫙</div>`;
             
             card.innerHTML = `
                 ${imagenHTML}
@@ -187,28 +192,20 @@ document.addEventListener('componentesListos', () => {
 
     (async () => {
         tasaCambio = await obtenerTasaBCV();
-        console.log('💰 [DEBUG]: Tasa establecida en:', tasaCambio);
         if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
         
         const path = window.location.pathname;
-        console.log('📍 [DEBUG]: URL actual:', path);
-        
         let productosAMostrar = PRODUCTOS;
 
         if (path.includes('/galletas/')) {
             productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'galletas');
-            console.log('🍪 [DEBUG]: Filtrando solo galletas.');
         } else if (path.includes('/mermeladas/')) {
             productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'mermeladas');
-            console.log('🫙 [DEBUG]: Filtrando solo mermeladas.');
         }
 
         renderizarProductos(productosAMostrar);
     })();
 
-    // ==========================================
-    // ✅ LÓGICA DEL SELECTOR DE MONEDA
-    // ==========================================
     if (selectorMoneda) {
         selectorMoneda.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -232,8 +229,6 @@ document.addEventListener('componentesListos', () => {
             
             const moneda = opcion.dataset.moneda;
             const simbolo = opcion.dataset.simbolo;
-            
-            console.log(` [DEBUG]: Moneda seleccionada: ${moneda}`);
             
             opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
             opcion.classList.add('seleccionada');
@@ -260,7 +255,6 @@ document.addEventListener('componentesListos', () => {
         return (parteDecimal >= 50) ? parteEntera + 1 : parteEntera;
     }
 
-    // ✅ LISTA DE PRODUCTOS ACTUALIZADA CON RUTAS CORRECTAS A img/mermeladas/
     const PRODUCTOS = [
         { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 3.00, categoria: "galletas" },
         { id: 2, nombre: "Galletas de Limón", precio: 3.00, categoria: "galletas" },
@@ -270,9 +264,6 @@ document.addEventListener('componentesListos', () => {
         { id: 6, nombre: "Mermelada de Durazno", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/durazno.jpg" }
     ];
 
-    // ==========================================
-    // ✅ MENÚ, BUSCADOR, CARRITO Y NIEVE
-    // ==========================================
     const menuFlotante = document.getElementById('menu-flotante');
     const menuClose = document.getElementById('menuClose');
     const menuOverlay = document.getElementById('menuOverlay');
@@ -358,9 +349,19 @@ document.addEventListener('componentesListos', () => {
 
     const modalCarrito = document.getElementById('modal-carrito');
     const btnCerrarCarrito = document.getElementById('btn-cerrar-carrito');
+    
+    const btnCarritoFlotante = document.querySelector('.abrir-modal-carrito');
+    if (btnCarritoFlotante && !btnCarritoFlotante.querySelector('img')) {
+        const path = window.location.pathname;
+        const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
+        const imgPath = isSubfolder ? '../img/excalibur_carrito.png' : 'img/excalibur_carrito.png';
+        btnCarritoFlotante.innerHTML = `<img src="${imgPath}" alt="Excalibur Carrito" style="width: 100%; height: 100%; object-fit: contain; pointer-events: none; display: block;">`;
+    }
+
     document.querySelectorAll('.abrir-modal-carrito').forEach(btn => {
         btn.addEventListener('click', (e) => { e.preventDefault(); modalCarrito?.classList.add('activo'); });
     });
+    
     btnCerrarCarrito?.addEventListener('click', () => modalCarrito?.classList.remove('activo'));
     modalCarrito?.addEventListener('click', (e) => { if (e.target === modalCarrito) modalCarrito.classList.remove('activo'); });
 
