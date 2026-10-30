@@ -304,6 +304,25 @@ document.addEventListener('componentesListos', () => {
     navProductos?.addEventListener('mouseenter', () => navProductos.classList.add('activo'));
     navProductos?.addEventListener('mouseleave', () => navProductos.classList.remove('activo'));
 
+    // ✅ NUEVO: Lógica para el botón "Productos" en el menú horizontal
+    const navProductosToggleBtn = document.getElementById('navProductosToggle');
+    const navProductosDropdownMenu = document.getElementById('navProductosDropdown');
+    
+    if (navProductosToggleBtn && navProductosDropdownMenu) {
+        navProductosToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navProductosDropdownMenu.classList.toggle('activo');
+            navProductosToggleBtn.classList.toggle('activo');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                navProductosDropdownMenu.classList.remove('activo');
+                navProductosToggleBtn.classList.remove('activo');
+            }
+        });
+    }
+
     window.filtrarYCerrar = (categoria) => {
         document.querySelectorAll('.producto-card').forEach(tarjeta => {
             tarjeta.classList.toggle('oculto', tarjeta.dataset.categoria !== categoria);
