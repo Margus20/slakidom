@@ -44,7 +44,7 @@
         
         .producto-info h1 {
             font-size: 2rem;
-            color: var(--chocolate);
+            color: var(--chocolate, #5D4037); /* ✅ MARRÓN */
             margin-bottom: 15px;
         }
         
@@ -53,20 +53,35 @@
             padding: 20px;
             background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
             border-radius: 10px;
-            border: 2px solid var(--chocolate);
+            border: 2px solid var(--chocolate, #5D4037);
+        }
+        
+        /* ✅ PRECIO CON CÉNTIMOS PEQUEÑOS (como en index) */
+        .precio-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 2px;
         }
         
         .precio-principal {
             font-size: 2.5rem;
             font-weight: bold;
-            color: var(--chocolate);
-            margin-bottom: 5px;
+            color: var(--chocolate, #5D4037);
+        }
+        
+        .precio-centavos {
+            font-size: 1rem; /* ✅ MÁS PEQUEÑO */
+            font-weight: bold;
+            color: var(--chocolate, #5D4037);
+            align-self: flex-start;
+            margin-top: 5px;
         }
         
         .precio-secundario {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #666;
             font-weight: 600;
+            margin-top: 5px;
         }
         
         .cantidad-selector {
@@ -77,10 +92,9 @@
             display: block;
             margin-bottom: 10px;
             font-weight: 600;
-            color: var(--chocolate);
+            color: var(--chocolate, #5D4037);
         }
         
-        /* ✅ NUEVO: Contenedor para poner cantidad y botón en la misma línea */
         .accion-container {
             display: flex;
             align-items: center;
@@ -93,11 +107,13 @@
             gap: 10px;
         }
         
+        /* ✅ BOTONES ROSADOS */
         .cantidad-input button {
             width: 45px;
             height: 45px;
-            border: 2px solid var(--chocolate);
-            background: white;
+            border: 2px solid var(--rosado, #D46A6A);
+            background: var(--rosado, #D46A6A);
+            color: white;
             border-radius: 8px;
             font-size: 1.2rem;
             cursor: pointer;
@@ -108,24 +124,26 @@
         }
         
         .cantidad-input button:hover {
-            background: var(--chocolate);
-            color: white;
+            background: var(--chocolate, #5D4037);
+            border-color: var(--chocolate, #5D4037);
         }
         
         .cantidad-input input {
             width: 70px;
             height: 45px;
             text-align: center;
-            border: 2px solid var(--chocolate);
+            border: 2px solid var(--chocolate, #5D4037);
             border-radius: 8px;
             font-size: 1.1rem;
             font-weight: bold;
+            color: var(--chocolate, #5D4037);
         }
         
+        /* ✅ BOTÓN AGREGAR MARRÓN */
         .btn-agregar-detalle {
-            flex: 1; /* Ocupa el espacio restante al lado de la cantidad */
+            flex: 1;
             height: 45px;
-            background: var(--chocolate);
+            background: var(--chocolate, #5D4037);
             color: white;
             border: none;
             border-radius: 8px;
@@ -139,14 +157,14 @@
         }
         
         .btn-agregar-detalle:hover {
-            background: var(--marron-oscuro);
+            background: var(--marron-oscuro, #3E2723);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
         }
         
-        /* ✅ NUEVO: Descripción a ancho completo horizontal */
+        /* ✅ DESCRIPCIÓN CON LETRAS MÁS PEQUEÑAS */
         .producto-descripcion-full {
-            grid-column: 1 / -1; /* Se expande de extremo izquierdo a derecho */
+            grid-column: 1 / -1;
             margin-top: 60px;
             padding-top: 40px;
             border-top: 2px solid #eee;
@@ -154,38 +172,38 @@
         }
         
         .producto-descripcion-full h2 {
-            color: var(--chocolate);
+            color: var(--chocolate, #5D4037);
             margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
         
         .producto-descripcion-full p {
-            line-height: 1.8;
-            color: #555;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            max-width: 900px; /* Legibilidad óptima pero aprovechando el ancho */
+            line-height: 1.6;
+            color: #666;
+            font-size: 0.95rem; /* ✅ MÁS PEQUEÑO */
+            margin-bottom: 15px;
+            max-width: 900px;
         }
         
         .producto-caracteristicas {
             margin-top: 30px;
-            padding: 25px;
+            padding: 20px;
             background: #fff8f0;
             border-radius: 10px;
             max-width: 900px;
         }
         
         .producto-caracteristicas h3 {
-            color: var(--chocolate);
+            color: var(--chocolate, #5D4037);
             margin-bottom: 15px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
         
         .producto-caracteristicas ul {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Aprovecha el ancho en columnas */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 10px 30px;
         }
         
@@ -193,8 +211,8 @@
             padding: 5px 0;
             padding-left: 30px;
             position: relative;
-            font-size: 1.05rem;
-            color: #444;
+            font-size: 0.95rem;
+            color: #555;
         }
         
         .producto-caracteristicas li:before {
@@ -203,7 +221,6 @@
             left: 0;
             color: var(--verde, #28a745);
             font-weight: bold;
-            font-size: 1.2rem;
         }
         
         @media (max-width: 768px) {
@@ -225,7 +242,6 @@
                 font-size: 2rem;
             }
             
-            /* En móvil, apilamos cantidad y botón verticalmente */
             .accion-container {
                 flex-direction: column;
                 align-items: stretch;
@@ -250,31 +266,36 @@
 </head>
 <body>
     
-    <!-- ✅ AQUÍ SE INYECTARÁ EL HEADER -->
+    <!-- ✅ HEADER (se inyecta desde app.js) -->
     <div id="header-container"></div>
     
     <main>
         <section class="producto-detalle">
             <div class="producto-grid">
-                <!-- COLUMNA IZQUIERDA: IMAGEN -->
+                <!-- ✅ IMAGEN DEL PRODUCTO -->
                 <div class="producto-imagen">
-                    <img src="../../img/galletas/coco_vainilla.jpg" alt="Galletas de Coco y Vainilla" onerror="this.src='../../img/slaky_cuadrado.jpg'">
+                    <img src="../../img/galletas/coco_vainilla.jpg" 
+                         alt="Galletas de Coco y Vainilla" 
+                         onerror="this.src='../../img/slaky_cuadrado.jpg'">
                 </div>
                 
-                <!-- COLUMNA DERECHA: INFORMACIÓN -->
+                <!-- INFORMACIÓN -->
                 <div class="producto-info">
-                    <h1>Galletas de Coco y Vainilla 🍪</h1>
+                    <!-- ✅ SIN EMOJI, COLOR MARRÓN -->
+                    <h1>Galletas de Coco y Vainilla</h1>
                     
                     <div class="producto-precio-detalle">
-                        <div class="precio-principal" id="precio-usd">
-                            $2.00
+                        <!-- ✅ PRECIO CON CÉNTIMOS PEQUEÑOS -->
+                        <div class="precio-wrapper">
+                            <span class="precio-principal">$2</span>
+                            <span class="precio-centavos">00</span>
                         </div>
                         <div class="precio-secundario" id="precio-bolivares">
                             Bs. 0
                         </div>
                     </div>
                     
-                    <!-- ✅ SELECTOR DE CANTIDAD Y BOTÓN AGREGAR EN LA MISMA LÍNEA -->
+                    <!-- CANTIDAD Y BOTÓN -->
                     <div class="cantidad-selector">
                         <label>Cantidad:</label>
                         <div class="accion-container">
@@ -290,7 +311,7 @@
                     </div>
                 </div>
 
-                <!-- ✅ DESCRIPCIÓN A ANCHO COMPLETO (Horizontal) -->
+                <!-- DESCRIPCIÓN ANCHO COMPLETO -->
                 <div class="producto-descripcion-full">
                     <h2>Descripción del Producto</h2>
                     <p>
@@ -305,7 +326,6 @@
                         lleguen frescas hasta ti.
                     </p>
                     
-                    <!-- CARACTERÍSTICAS -->
                     <div class="producto-caracteristicas">
                         <h3>Características:</h3>
                         <ul>
@@ -322,23 +342,21 @@
         </section>
     </main>
     
-    <!-- ✅ AQUÍ SE INYECTARÁ EL FOOTER -->
+    <!-- ✅ FOOTER (se inyecta desde app.js) -->
     <div id="footer-container"></div>
 
-    <!-- ✅ SCRIPT PRINCIPAL -->
+    <!-- ✅ SCRIPT PRINCIPAL (carga header, footer y efectos de nieve) -->
     <script type="module" src="../../js/app.js"></script>
     
-    <!-- ✅ SCRIPT ESPECÍFICO DEL PRODUCTO -->
+    <!-- ✅ SCRIPT ESPECÍFICO -->
     <script>
         let cantidad = 1;
         let tasaBCV = 0;
         
-        // Función para formatear con puntos de mil (SIN DECIMALES)
         function formatearNumero(numero) {
             return new Intl.NumberFormat('es-VE', { maximumFractionDigits: 0 }).format(numero);
         }
 
-        // Obtener tasa de cambio
         async function obtenerTasa() {
             try {
                 const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
@@ -347,25 +365,17 @@
                 actualizarPrecio();
             } catch (error) {
                 console.error('Error al obtener tasa:', error);
-                tasaBCV = 36.50; // Tasa de respaldo
+                tasaBCV = 36.50;
                 actualizarPrecio();
             }
         }
         
-        // ✅ Actualizar precio en bolívares (SIN DECIMALES, como en los index)
         function actualizarPrecio() {
             const precioUSD = 2.00;
-            // Redondeamos y formateamos con puntos de mil
-            const precioVES = Math.round(precioUSD * tasaBCV); 
+            const precioVES = Math.round(precioUSD * tasaBCV);
             document.getElementById('precio-bolivares').textContent = `Bs. ${formatearNumero(precioVES)}`;
-            
-            // Actualizar data attributes por si acaso
-            const precioElement = document.querySelector('.precio-principal');
-            precioElement.dataset.precioUsd = precioUSD;
-            precioElement.dataset.precioVes = precioVES;
         }
         
-        // Cambiar cantidad
         function cambiarCantidad(cambio) {
             cantidad += cambio;
             if (cantidad < 1) cantidad = 1;
@@ -373,7 +383,6 @@
             document.getElementById('cantidad').value = cantidad;
         }
         
-        // Agregar al carrito
         function agregarAlCarrito() {
             const producto = {
                 id: 1,
@@ -383,10 +392,7 @@
                 imagen: "../../img/galletas/coco_vainilla.jpg"
             };
             
-            // Obtener carrito del localStorage
             let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-            
-            // Verificar si ya existe
             const existe = carrito.find(item => item.id === producto.id);
             if (existe) {
                 existe.cantidad += cantidad;
@@ -394,17 +400,11 @@
                 carrito.push(producto);
             }
             
-            // Guardar en localStorage
             localStorage.setItem('carrito', JSON.stringify(carrito));
-            
-            // Actualizar contador
             actualizarContadorCarrito();
-            
-            // Mostrar mensaje
             alert(`✅ Agregaste ${cantidad} unidad(es) de Galletas de Coco y Vainilla al carrito`);
         }
         
-        // Actualizar contador del carrito
         function actualizarContadorCarrito() {
             const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
             const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
@@ -412,21 +412,15 @@
             const contador = document.getElementById('contador-carrito-flotante');
             if (contador) {
                 contador.textContent = totalItems;
-                if (totalItems > 0) {
-                    contador.style.display = 'flex';
-                } else {
-                    contador.style.display = 'none';
-                }
+                contador.style.display = totalItems > 0 ? 'flex' : 'none';
             }
         }
         
-        // Inicializar
         document.addEventListener('DOMContentLoaded', () => {
             obtenerTasa();
             actualizarContadorCarrito();
         });
         
-        // Esperar a que cargue el header/footer
         document.addEventListener('componentesListos', () => {
             actualizarContadorCarrito();
         });
