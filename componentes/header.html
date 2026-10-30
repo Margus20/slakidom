@@ -49,12 +49,14 @@
     <nav class="nav-bar">
         <ul class="nav-list">
             <li class="nav-item">
+                <!-- ✅ CAMBIO 1: Se eliminó el span de la flecha para evitar la duplicidad (el CSS ya la agrega) -->
                 <button class="nav-link nav-dropdown-toggle" id="navProductosToggle">
-                    Productos <span class="dropdown-arrow">▼</span>
+                    Productos
                 </button>
                 <ul class="nav-dropdown" id="navProductosDropdown">
-                    <li><a href="/slakidom/galletas/" class="dropdown-link">Galletas</a></li>
-                    <li><a href="/slakidom/mermeladas/" class="dropdown-link">Mermeladas</a></li>
+                    <!-- ✅ CAMBIO 2: Se agregó onclick para cerrar el menú inmediatamente al seleccionar -->
+                    <li><a href="/slakidom/galletas/" class="dropdown-link" onclick="document.getElementById('navProductosDropdown').classList.remove('activo'); document.getElementById('navProductosToggle').classList.remove('activo');">Galletas</a></li>
+                    <li><a href="/slakidom/mermeladas/" class="dropdown-link" onclick="document.getElementById('navProductosDropdown').classList.remove('activo'); document.getElementById('navProductosToggle').classList.remove('activo');">Mermeladas</a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="/slakidom/proceso.html" class="nav-link">Nuestro Proceso</a></li>
