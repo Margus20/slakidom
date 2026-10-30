@@ -49,14 +49,27 @@ async function obtenerTasaBCV() {
     }
 }
 
+// ✅ CORRECCIÓN CLAVE: Rutas relativas dinámicas para GitHub Pages
 async function cargarComponentes() {
     try {
-        // ✅ Rutas absolutas (con / al inicio) para que funcionen desde cualquier subcarpeta
-        const headerRes = await fetch('/componentes/header.html');
-        if (headerRes.ok) document.getElementById('header-container').innerHTML = await headerRes.text();
+        // Detectamos si estamos en una subcarpeta para ajustar la ruta (../)
+        const path = window.location.pathname;
+        const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
+        const basePath = isSubfolder ? '../' : '';
         
-        const footerRes = await fetch('/componentes/footer.html');
-        if (footerRes.ok) document.getElementById('footer-container').innerHTML = await footerRes.text();
+        const headerRes = await fetch(`${basePath}componentes/header.html`);
+        if (headerRes.ok) {
+            document.getElementById('header-container').innerHTML = await headerRes.text();
+        } else {
+            console.error('❌ No se pudo cargar header.html. Ruta:', `${basePath}componentes/header.html`);
+        }
+        
+        const footerRes = await fetch(`${basePath}componentes/footer.html`);
+        if (footerRes.ok) {
+            document.getElementById('footer-container').innerHTML = await footerRes.text();
+        } else {
+            console.error('❌ No se pudo cargar footer.html. Ruta:', `${basePath}componentes/footer.html`);
+        }
         
         document.dispatchEvent(new Event('componentesListos'));
     } catch (error) {
