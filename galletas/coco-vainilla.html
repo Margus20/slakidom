@@ -39,6 +39,7 @@
             width: 100%;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            object-fit: cover;
         }
         
         .producto-info h1 {
@@ -59,12 +60,13 @@
             font-size: 2.5rem;
             font-weight: bold;
             color: var(--chocolate);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         
         .precio-secundario {
             font-size: 1.3rem;
-            color: #999;
+            color: #666;
+            font-weight: 600;
         }
         
         .cantidad-selector {
@@ -78,21 +80,31 @@
             color: var(--chocolate);
         }
         
-        .cantidad-input {
+        /* ✅ NUEVO: Contenedor para poner cantidad y botón en la misma línea */
+        .accion-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
+        .cantidad-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .cantidad-input button {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border: 2px solid var(--chocolate);
             background: white;
             border-radius: 8px;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .cantidad-input button:hover {
@@ -101,8 +113,8 @@
         }
         
         .cantidad-input input {
-            width: 80px;
-            height: 40px;
+            width: 70px;
+            height: 45px;
             text-align: center;
             border: 2px solid var(--chocolate);
             border-radius: 8px;
@@ -111,17 +123,19 @@
         }
         
         .btn-agregar-detalle {
-            width: 100%;
-            padding: 18px;
+            flex: 1; /* Ocupa el espacio restante al lado de la cantidad */
+            height: 45px;
             background: var(--chocolate);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .btn-agregar-detalle:hover {
@@ -130,53 +144,66 @@
             box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
         }
         
-        .producto-descripcion {
-            margin-top: 40px;
+        /* ✅ NUEVO: Descripción a ancho completo horizontal */
+        .producto-descripcion-full {
+            grid-column: 1 / -1; /* Se expande de extremo izquierdo a derecho */
+            margin-top: 60px;
             padding-top: 40px;
             border-top: 2px solid #eee;
+            width: 100%;
         }
         
-        .producto-descripcion h2 {
+        .producto-descripcion-full h2 {
             color: var(--chocolate);
             margin-bottom: 20px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
         
-        .producto-descripcion p {
+        .producto-descripcion-full p {
             line-height: 1.8;
-            color: #666;
-            font-size: 1.05rem;
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            max-width: 900px; /* Legibilidad óptima pero aprovechando el ancho */
         }
         
         .producto-caracteristicas {
             margin-top: 30px;
-            padding: 20px;
+            padding: 25px;
             background: #fff8f0;
             border-radius: 10px;
+            max-width: 900px;
         }
         
         .producto-caracteristicas h3 {
             color: var(--chocolate);
             margin-bottom: 15px;
+            font-size: 1.3rem;
         }
         
         .producto-caracteristicas ul {
             list-style: none;
             padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Aprovecha el ancho en columnas */
+            gap: 10px 30px;
         }
         
         .producto-caracteristicas li {
-            padding: 8px 0;
-            padding-left: 25px;
+            padding: 5px 0;
+            padding-left: 30px;
             position: relative;
+            font-size: 1.05rem;
+            color: #444;
         }
         
         .producto-caracteristicas li:before {
             content: "✓";
             position: absolute;
             left: 0;
-            color: var(--verde);
+            color: var(--verde, #28a745);
             font-weight: bold;
+            font-size: 1.2rem;
         }
         
         @media (max-width: 768px) {
@@ -197,6 +224,27 @@
             .precio-principal {
                 font-size: 2rem;
             }
+            
+            /* En móvil, apilamos cantidad y botón verticalmente */
+            .accion-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .cantidad-input {
+                justify-content: center;
+            }
+            
+            .btn-agregar-detalle {
+                width: 100%;
+                height: 50px;
+            }
+
+            .producto-descripcion-full p,
+            .producto-caracteristicas {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -210,64 +258,64 @@
             <div class="producto-grid">
                 <!-- COLUMNA IZQUIERDA: IMAGEN -->
                 <div class="producto-imagen">
-                    <img src="../../img/galletas/coco_vainilla.jpg" alt="Galletas de Coco y Vainilla">
+                    <img src="../../img/galletas/coco_vainilla.jpg" alt="Galletas de Coco y Vainilla" onerror="this.src='../../img/slaky_cuadrado.jpg'">
                 </div>
                 
                 <!-- COLUMNA DERECHA: INFORMACIÓN -->
                 <div class="producto-info">
-                    <h1>Galletas de Coco y Vainilla </h1>
+                    <h1>Galletas de Coco y Vainilla 🍪</h1>
                     
                     <div class="producto-precio-detalle">
-                        <div class="precio-principal" data-precio-usd="2.00" data-precio-ves="0">
+                        <div class="precio-principal" id="precio-usd">
                             $2.00
                         </div>
                         <div class="precio-secundario" id="precio-bolivares">
-                            Bs. 0.00
+                            Bs. 0
                         </div>
                     </div>
                     
-                    <!-- SELECTOR DE CANTIDAD -->
+                    <!-- ✅ SELECTOR DE CANTIDAD Y BOTÓN AGREGAR EN LA MISMA LÍNEA -->
                     <div class="cantidad-selector">
-                        <label for="cantidad">Cantidad:</label>
-                        <div class="cantidad-input">
-                            <button type="button" onclick="cambiarCantidad(-1)">−</button>
-                            <input type="number" id="cantidad" value="1" min="1" max="50" readonly>
-                            <button type="button" onclick="cambiarCantidad(1)">+</button>
+                        <label>Cantidad:</label>
+                        <div class="accion-container">
+                            <div class="cantidad-input">
+                                <button type="button" onclick="cambiarCantidad(-1)">−</button>
+                                <input type="number" id="cantidad" value="1" min="1" max="50" readonly>
+                                <button type="button" onclick="cambiarCantidad(1)">+</button>
+                            </div>
+                            <button class="btn-agregar-detalle" onclick="agregarAlCarrito()">
+                                Agregar al Carrito
+                            </button>
                         </div>
                     </div>
+                </div>
+
+                <!-- ✅ DESCRIPCIÓN A ANCHO COMPLETO (Horizontal) -->
+                <div class="producto-descripcion-full">
+                    <h2>Descripción del Producto</h2>
+                    <p>
+                        Deliciosas galletas artesanales de coco y vainilla, elaboradas con ingredientes 
+                        frescos y de la más alta calidad. Su textura crujiente por fuera y suave por 
+                        dentro, combinada con el aroma irresistible del coco tostado y la vainilla 
+                        natural, las convierten en el acompañante perfecto para tu café o té.
+                    </p>
+                    <p>
+                        Cada galleta es preparada a mano con la receta familiar de Mirian, horneadas 
+                        hasta obtener el punto dorado perfecto y empacadas con cuidado para que 
+                        lleguen frescas hasta ti.
+                    </p>
                     
-                    <!-- BOTÓN AGREGAR -->
-                    <button class="btn-agregar-detalle" onclick="agregarAlCarrito()">
-                         Agregar al Carrito
-                    </button>
-                    
-                    <!-- DESCRIPCIÓN -->
-                    <div class="producto-descripcion">
-                        <h2>Descripción</h2>
-                        <p>
-                            Deliciosas galletas artesanales de coco y vainilla, elaboradas con ingredientes 
-                            frescos y de la más alta calidad. Su textura crujiente por fuera y suave por 
-                            dentro, combinada con el aroma irresistible del coco tostado y la vainilla 
-                            natural, las convierten en el acompañante perfecto para tu café o té.
-                        </p>
-                        <p>
-                            Cada galleta es preparada a mano con la receta familiar de Mirian, horneadas 
-                            hasta obtener el punto dorado perfecto y empacadas con cuidado para que 
-                            lleguen frescas hasta ti.
-                        </p>
-                        
-                        <!-- CARACTERÍSTICAS -->
-                        <div class="producto-caracteristicas">
-                            <h3>Características:</h3>
-                            <ul>
-                                <li>Ingredientes 100% naturales</li>
-                                <li>Sin conservantes artificiales</li>
-                                <li>Elaboradas artesanalmente</li>
-                                <li>Presentación: Caja con 12 unidades</li>
-                                <li>Conservación: Lugar fresco y seco</li>
-                                <li>Duración: 15 días aproximadamente</li>
-                            </ul>
-                        </div>
+                    <!-- CARACTERÍSTICAS -->
+                    <div class="producto-caracteristicas">
+                        <h3>Características:</h3>
+                        <ul>
+                            <li>Ingredientes 100% naturales</li>
+                            <li>Sin conservantes artificiales</li>
+                            <li>Elaboradas artesanalmente</li>
+                            <li>Presentación: Caja con 12 unidades</li>
+                            <li>Conservación: Lugar fresco y seco</li>
+                            <li>Duración: 15 días aproximadamente</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -285,6 +333,11 @@
         let cantidad = 1;
         let tasaBCV = 0;
         
+        // Función para formatear con puntos de mil (SIN DECIMALES)
+        function formatearNumero(numero) {
+            return new Intl.NumberFormat('es-VE', { maximumFractionDigits: 0 }).format(numero);
+        }
+
         // Obtener tasa de cambio
         async function obtenerTasa() {
             try {
@@ -299,13 +352,14 @@
             }
         }
         
-        // Actualizar precio en bolívares
+        // ✅ Actualizar precio en bolívares (SIN DECIMALES, como en los index)
         function actualizarPrecio() {
             const precioUSD = 2.00;
-            const precioVES = (precioUSD * tasaBCV).toFixed(2);
-            document.getElementById('precio-bolivares').textContent = `Bs. ${precioVES}`;
+            // Redondeamos y formateamos con puntos de mil
+            const precioVES = Math.round(precioUSD * tasaBCV); 
+            document.getElementById('precio-bolivares').textContent = `Bs. ${formatearNumero(precioVES)}`;
             
-            // Actualizar data attributes
+            // Actualizar data attributes por si acaso
             const precioElement = document.querySelector('.precio-principal');
             precioElement.dataset.precioUsd = precioUSD;
             precioElement.dataset.precioVes = precioVES;
@@ -360,6 +414,8 @@
                 contador.textContent = totalItems;
                 if (totalItems > 0) {
                     contador.style.display = 'flex';
+                } else {
+                    contador.style.display = 'none';
                 }
             }
         }
@@ -370,7 +426,7 @@
             actualizarContadorCarrito();
         });
         
-        // Esperar a que cargue el header
+        // Esperar a que cargue el header/footer
         document.addEventListener('componentesListos', () => {
             actualizarContadorCarrito();
         });
