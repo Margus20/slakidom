@@ -1,4 +1,83 @@
 // ==========================================
+// ✅ CONSOLA NERUDA - Panel visual de depuración para tablet
+// ==========================================
+(function() {
+    // Crear el botón flotante
+    const btn = document.createElement('button');
+    btn.innerHTML = '🔍';
+    btn.style.cssText = 'position:fixed;top:10px;right:10px;z-index:99999;background:#333;color:#fff;border:2px solid #fff;border-radius:50%;width:45px;height:45px;font-size:22px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.5);';
+    btn.title = 'Abrir Consola Neruda';
+    document.body.appendChild(btn);
+
+    // Crear el panel
+    const panel = document.createElement('div');
+    panel.id = 'consola-neruda';
+    panel.style.cssText = 'display:none;position:fixed;top:0;right:0;width:90%;max-width:500px;height:70vh;background:rgba(0,0,0,0.92);color:#0f0;font-family:monospace;font-size:12px;z-index:99998;border:2px solid #0f0;border-radius:10px 0 0 10px;overflow:hidden;flex-direction:column;';
+    
+    // Header del panel
+    const header = document.createElement('div');
+    header.style.cssText = 'background:#222;padding:10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #0f0;';
+    header.innerHTML = '<strong style="color:#ff0;">🧠 Consola Neruda</strong><div><button id="neruda-limpiar" style="background:#ff0;color:#000;border:none;padding:5px 10px;border-radius:5px;margin-right:5px;cursor:pointer;font-weight:bold;">Limpiar</button><button id="neruda-cerrar" style="background:#f00;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-weight:bold;">✕</button></div>';
+    panel.appendChild(header);
+
+    // Contenedor de mensajes
+    const mensajes = document.createElement('div');
+    mensajes.id = 'neruda-mensajes';
+    mensajes.style.cssText = 'flex:1;overflow-y:auto;padding:10px;';
+    panel.appendChild(mensajes);
+
+    document.body.appendChild(panel);
+
+    // Función para agregar mensajes
+    function agregarMensaje(tipo, args) {
+        const linea = document.createElement('div');
+        linea.style.cssText = 'margin:3px 0;padding:4px 8px;border-left:3px solid;word-wrap:break-word;';
+        
+        let color = '#0f0';
+        let borde = '#0f0';
+        let prefijo = '📝';
+        
+        if (tipo === 'error') { color = '#f55'; borde = '#f00'; prefijo = '❌'; }
+        else if (tipo === 'warn') { color = '#ff0'; borde = '#fa0'; prefijo = '⚠️'; }
+        else if (tipo === 'info') { color = '#0ff'; borde = '#0ff'; prefijo = 'ℹ️'; }
+        
+        linea.style.color = color;
+        linea.style.borderLeftColor = borde;
+        
+        const texto = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+        linea.textContent = `${prefijo} ${texto}`;
+        
+        mensajes.appendChild(linea);
+        mensajes.scrollTop = mensajes.scrollHeight;
+    }
+
+    // Interceptar console.log, error, warn, info
+    const origLog = console.log;
+    const origError = console.error;
+    const origWarn = console.warn;
+    const origInfo = console.info;
+
+    console.log = function(...args) { origLog.apply(console, args); agregarMensaje('log', args); };
+    console.error = function(...args) { origError.apply(console, args); agregarMensaje('error', args); };
+    console.warn = function(...args) { origWarn.apply(console, args); agregarMensaje('warn', args); };
+    console.info = function(...args) { origInfo.apply(console, args); agregarMensaje('info', args); };
+
+    // Eventos de botones
+    btn.addEventListener('click', () => { panel.style.display = 'flex'; });
+    document.getElementById('neruda-cerrar').addEventListener('click', () => { panel.style.display = 'none'; });
+    document.getElementById('neruda-limpiar').addEventListener('click', () => { mensajes.innerHTML = ''; });
+
+    // Mensaje de bienvenida
+    setTimeout(() => {
+        agregarMensaje('info', ['🧠 Consola Neruda activada. Toca el botón 🔍 para ver los mensajes.']);
+    }, 500);
+})();
+// ==========================================
+// FIN CONSOLA NERUDA
+// ==========================================
+
+
+// ==========================================
 // SLAKIDOM - ORQUESTADOR PRINCIPAL (app.js)
 // ==========================================
 
@@ -57,18 +136,22 @@ async function cargarComponentes() {
         const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
         const basePath = isSubfolder ? '../' : '';
         
+        console.log('📂 [NERUDA]: Buscando header en:', `${basePath}componentes/header.html`);
+        
         const headerRes = await fetch(`${basePath}componentes/header.html`);
         if (headerRes.ok) {
             document.getElementById('header-container').innerHTML = await headerRes.text();
+            console.log('✅ [NERUDA]: Header cargado correctamente');
         } else {
-            console.error('❌ No se pudo cargar header.html. Ruta:', `${basePath}componentes/header.html`);
+            console.error('❌ [NERUDA]: No se pudo cargar header.html. Status:', headerRes.status, 'Ruta buscada:', `${basePath}componentes/header.html`);
         }
         
         const footerRes = await fetch(`${basePath}componentes/footer.html`);
         if (footerRes.ok) {
             document.getElementById('footer-container').innerHTML = await footerRes.text();
+            console.log('✅ [NERUDA]: Footer cargado correctamente');
         } else {
-            console.error('❌ No se pudo cargar footer.html. Ruta:', `${basePath}componentes/footer.html`);
+            console.error('❌ [NERUDA]: No se pudo cargar footer.html. Status:', footerRes.status, 'Ruta buscada:', `${basePath}componentes/footer.html`);
         }
         
         document.dispatchEvent(new Event('componentesListos'));
@@ -142,7 +225,10 @@ document.addEventListener('componentesListos', () => {
     // ✅ FUNCIÓN PARA RENDERIZAR PRODUCTOS
     function renderizarProductos(listaProductos) {
         const gridProductos = document.getElementById("productos-grid");
-        if (!gridProductos) return;
+        if (!gridProductos) {
+            console.warn('⚠️ [NERUDA]: No se encontró el elemento #productos-grid en esta página.');
+            return;
+        }
         
         console.log('🏗️ [NERD-DEBUG]: Construyendo la vitrina de productos...');
         gridProductos.innerHTML = "";
@@ -197,6 +283,8 @@ document.addEventListener('componentesListos', () => {
         
         // ✅ Detectar la URL y filtrar los productos
         const path = window.location.pathname; // Ej: "/", "/galletas/", "/mermeladas/"
+        console.log('📍 [NERUDA]: URL actual detectada:', path);
+        
         let productosAMostrar = PRODUCTOS; // Por defecto, muestra TODOS (para index.html)
 
         if (path.includes('/galletas/')) {
@@ -325,48 +413,4 @@ document.addEventListener('componentesListos', () => {
     buscadorInput?.addEventListener('input', (e) => {
         const termino = e.target.value.toLowerCase().trim();
         let visibles = 0;
-        document.querySelectorAll('.producto-card').forEach(tarjeta => {
-            if (tarjeta.dataset.nombre.includes(termino)) {
-                tarjeta.classList.remove('oculto');
-                visibles++;
-            } else {
-                tarjeta.classList.add('oculto');
-            }
-        });
-        let sinResultados = document.querySelector('.sin-resultados');
-        if (!sinResultados && document.getElementById("productos-grid")) {
-            sinResultados = document.createElement('div');
-            sinResultados.className = 'sin-resultados';
-            sinResultados.textContent = 'No se encontraron productos ';
-            document.getElementById("productos-grid").appendChild(sinResultados);
-        }
-        if (sinResultados) sinResultados.classList.toggle('visible', visibles === 0 && termino !== '');
-    });
-
-    const modalCarrito = document.getElementById('modal-carrito');
-    const btnCerrarCarrito = document.getElementById('btn-cerrar-carrito');
-    document.querySelectorAll('.abrir-modal-carrito').forEach(btn => {
-        btn.addEventListener('click', (e) => { e.preventDefault(); modalCarrito?.classList.add('activo'); });
-    });
-    btnCerrarCarrito?.addEventListener('click', () => modalCarrito?.classList.remove('activo'));
-    modalCarrito?.addEventListener('click', (e) => { if (e.target === modalCarrito) modalCarrito.classList.remove('activo'); });
-
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-agregar-carrito')) alert('✅ Producto agregado al carrito');
-    });
-
-    function crearCopoDeNieve() {
-        const copo = document.createElement('div');
-        copo.className = 'snowflake';
-        copo.innerHTML = '❄';
-        copo.style.left = Math.random() * 100 + 'vw';
-        copo.style.animationDuration = Math.random() * 3 + 2 + 's';
-        copo.style.opacity = Math.random() * 0.7 + 0.3;
-        copo.style.fontSize = Math.random() * 15 + 10 + 'px';
-        document.body.appendChild(copo);
-        setTimeout(() => { copo.remove(); }, 5000);
-    }
-    setInterval(crearCopoDeNieve, 100);
-
-    console.log('🎉 [NERD-DEBUG]: ¡Sistema SLAKIDOM completamente activo, blindado y poético!');
-});
+        document.querySelectorAll('.producto-ca
