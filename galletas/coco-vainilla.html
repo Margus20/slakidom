@@ -6,7 +6,6 @@
     <meta name="description" content="Galletas de Coco y Vainilla SLAKIDOM - Hechas con amor en Caracas">
     <title>Galletas de Coco y Vainilla - SLAKIDOM</title>
     
-    <!-- ✅ RUTA CORREGIDA: ../ en lugar de ../../ -->
     <link rel="icon" type="image/png" href="../img/slaky_cuadrado.jpg">
     
     <!-- CSS MODULAR -->
@@ -18,10 +17,16 @@
     
     <!-- ESTILOS ESPECÍFICOS DEL PRODUCTO -->
     <style>
+        /* ✅ FONDO BLANCO SÓLIDO PARA LA PÁGINA DE PRODUCTO */
+        body {
+            background: #ffffff !important;
+        }
+        
         .producto-detalle {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+            background: #ffffff; /* ✅ BLANCO SÓLIDO */
         }
         
         .producto-grid {
@@ -52,9 +57,9 @@
         /* ✅ PRECIO SIN RECUADRO */
         .producto-precio-detalle {
             margin: 30px 0;
-            padding: 0; /* Sin padding */
-            background: transparent; /* Sin fondo */
-            border: none; /* Sin borde */
+            padding: 0;
+            background: transparent;
+            border: none;
         }
         
         .precio-wrapper {
@@ -143,7 +148,7 @@
             flex: 1;
             height: 45px;
             background: var(--chocolate, #5D4037);
-            color: #FFD700; /* ✅ AMARILLO */
+            color: #FFD700;
             border: none;
             border-radius: 8px;
             font-size: 1.1rem;
@@ -161,33 +166,34 @@
             box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
         }
         
-        /* ✅ DESCRIPCIÓN CON MENOS INTERLINEADO */
+        /* ✅ DESCRIPCIÓN CON FONDO BLANCO */
         .producto-descripcion-full {
             grid-column: 1 / -1;
-            margin-top: 40px; /* Reducido de 60px */
-            padding-top: 30px; /* Reducido de 40px */
+            margin-top: 40px;
+            padding-top: 40px;
             border-top: 2px solid #eee;
             width: 100%;
+            background: #ffffff; /* ✅ BLANCO SÓLIDO */
         }
         
         .producto-descripcion-full h2 {
             color: var(--chocolate, #5D4037);
-            margin-bottom: 15px; /* Reducido de 20px */
+            margin-bottom: 15px;
             font-size: 1.5rem;
         }
         
         .producto-descripcion-full p {
-            line-height: 1.4; /* ✅ REDUCIDO (era 1.6) */
+            line-height: 1.4;
             color: #666;
-            font-size: 0.9rem; /* ✅ REDUCIDO (era 0.95rem) */
-            margin-bottom: 12px; /* Reducido de 15px */
+            font-size: 0.9rem;
+            margin-bottom: 12px;
             max-width: 900px;
         }
         
         .producto-caracteristicas {
-            margin-top: 25px; /* Reducido de 30px */
+            margin-top: 25px;
             padding: 20px;
-            background: #fff8f0;
+            background: #fff8f0; /* ✅ COLOR ORIGINAL (crema claro) */
             border-radius: 10px;
             max-width: 900px;
         }
@@ -210,7 +216,7 @@
             padding: 5px 0;
             padding-left: 30px;
             position: relative;
-            font-size: 0.9rem; /* Reducido de 0.95rem */
+            font-size: 0.9rem;
             color: #555;
         }
         
@@ -265,13 +271,13 @@
 </head>
 <body>
     
-    <!-- ✅ HEADER (se inyecta desde app.js) -->
+    <!-- ✅ HEADER (se inyecta desde app.js - MANTIENE SU FONDO AMARILLO TRANSPARENTE) -->
     <div id="header-container"></div>
     
     <main>
         <section class="producto-detalle">
             <div class="producto-grid">
-                <!-- ✅ IMAGEN DEL PRODUCTO CON RUTA CORREGIDA -->
+                <!-- ✅ IMAGEN DEL PRODUCTO -->
                 <div class="producto-imagen">
                     <img src="../img/galletas/coco_vainilla.jpg" 
                          alt="Galletas de Coco y Vainilla" 
@@ -310,7 +316,7 @@
                     </div>
                 </div>
 
-                <!-- DESCRIPCIÓN ANCHO COMPLETO -->
+                <!-- DESCRIPCIÓN ANCHO COMPLETO CON FONDO BLANCO -->
                 <div class="producto-descripcion-full">
                     <h2>Descripción del Producto</h2>
                     <p>
@@ -344,7 +350,7 @@
     <!-- ✅ FOOTER (se inyecta desde app.js) -->
     <div id="footer-container"></div>
 
-    <!-- ✅ SCRIPT PRINCIPAL CON RUTA CORREGIDA -->
+    <!-- ✅ SCRIPT PRINCIPAL -->
     <script type="module" src="../js/app.js"></script>
     
     <!-- ✅ SCRIPT ESPECÍFICO -->
@@ -388,7 +394,6 @@
                 nombre: "Galletas de Coco y Vainilla",
                 precio: 2.00,
                 cantidad: cantidad,
-                // ✅ RUTA CORREGIDA EN EL OBJETO DEL CARRITO
                 imagen: "../img/galletas/coco_vainilla.jpg"
             };
             
@@ -402,6 +407,10 @@
             
             localStorage.setItem('carrito', JSON.stringify(carrito));
             actualizarContadorCarrito();
+            
+            // ✅ DISPARAR EVENTO PARA ACTUALIZAR EL MODAL DEL CARRITO
+            window.dispatchEvent(new Event('carritoActualizado'));
+            
             alert(`✅ Agregaste ${cantidad} unidad(es) de Galletas de Coco y Vainilla al carrito`);
         }
         
@@ -412,7 +421,11 @@
             const contador = document.getElementById('contador-carrito-flotante');
             if (contador) {
                 contador.textContent = totalItems;
-                contador.style.display = totalItems > 0 ? 'flex' : 'none';
+                if (totalItems > 0) {
+                    contador.style.display = 'flex';
+                } else {
+                    contador.style.display = 'none';
+                }
             }
         }
         
