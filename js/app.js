@@ -41,10 +41,10 @@ async function obtenerTasaBCV() {
         console.error('❌ [DEBUG]: Error al obtener tasa BCV:', error);
         const tasaVieja = localStorage.getItem(TASA_CACHE_KEY);
         if (tasaVieja) {
-            console.log('📦 [DEBUG]: Usando tasa antigua del caché:', tasaVieja);
+            console.log(' [DEBUG]: Usando tasa antigua del caché:', tasaVieja);
             return parseFloat(tasaVieja);
         }
-        console.log('⚠️ [DEBUG]: Usando tasa de respaldo:', TASA_RESPALDO);
+        console.log('️ [DEBUG]: Usando tasa de respaldo:', TASA_RESPALDO);
         return TASA_RESPALDO;
     }
 }
@@ -52,7 +52,6 @@ async function obtenerTasaBCV() {
 // ✅ CORRECCIÓN CLAVE: Rutas relativas dinámicas para GitHub Pages
 async function cargarComponentes() {
     try {
-        // Detectamos si estamos en una subcarpeta para ajustar la ruta (../)
         const path = window.location.pathname;
         const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
         const basePath = isSubfolder ? '../' : '';
@@ -95,12 +94,10 @@ document.addEventListener('componentesListos', () => {
     const monedaActualText = document.querySelector('.moneda-actual');
     const tasaInfo = document.getElementById('tasaBcvInfo');
 
-    // ✅ Formateo de números al estilo venezolano (puntos de mil)
     function formatearConPuntosDeMil(numero) {
         return new Intl.NumberFormat('es-VE').format(numero);
     }
 
-    // ✅ Reconstrucción total del precio
     function actualizarVistaDePrecios(moneda) {
         console.log(`🎭 [DEBUG]: Cambiando vista a moneda: ${moneda}`);
         const precios = document.querySelectorAll('.producto-precio');
@@ -139,7 +136,6 @@ document.addEventListener('componentesListos', () => {
         });
     }
 
-    // ✅ Renderizar productos
     function renderizarProductos(listaProductos) {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
@@ -164,11 +160,13 @@ document.addEventListener('componentesListos', () => {
             const precioEnBolivares = producto.precio * tasaCambio;
             const precioVESRedondeado = redondearBolivares(precioEnBolivares);
             
-            // ✅ Emoji dinámico
-            const emoji = producto.categoria === 'mermeladas' ? '🫙' : '🍪';
+            // ✅ IMAGEN REAL o EMOJI de respaldo
+            const imagenHTML = producto.imagen 
+                ? `<img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;">` 
+                : `<div class="producto-img-placeholder">${producto.categoria === 'mermeladas' ? '' : '🍪'}</div>`;
             
             card.innerHTML = `
-                <div class="producto-img-placeholder">${emoji}</div>
+                ${imagenHTML}
                 <h3 class="producto-nombre">${producto.nombre}</h3>
                 <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
                     <div class="precio-usd activo-grande">
@@ -187,13 +185,11 @@ document.addEventListener('componentesListos', () => {
         });
     }
 
-    // ✅ Flujo principal: Obtener tasa y luego renderizar
     (async () => {
         tasaCambio = await obtenerTasaBCV();
         console.log('💰 [DEBUG]: Tasa establecida en:', tasaCambio);
         if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
         
-        // Detectar la URL y filtrar los productos
         const path = window.location.pathname;
         console.log('📍 [DEBUG]: URL actual:', path);
         
@@ -237,7 +233,7 @@ document.addEventListener('componentesListos', () => {
             const moneda = opcion.dataset.moneda;
             const simbolo = opcion.dataset.simbolo;
             
-            console.log(`🚨 [DEBUG]: Moneda seleccionada: ${moneda}`);
+            console.log(` [DEBUG]: Moneda seleccionada: ${moneda}`);
             
             opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
             opcion.classList.add('seleccionada');
@@ -264,13 +260,14 @@ document.addEventListener('componentesListos', () => {
         return (parteDecimal >= 50) ? parteEntera + 1 : parteEntera;
     }
 
+    // ✅ LISTA DE PRODUCTOS ACTUALIZADA CON RUTAS CORRECTAS A img/mermeladas/
     const PRODUCTOS = [
         { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 3.00, categoria: "galletas" },
         { id: 2, nombre: "Galletas de Limón", precio: 3.00, categoria: "galletas" },
         { id: 3, nombre: "Galletas con Chispas de Chocolate", precio: 3.50, categoria: "galletas" },
-        { id: 4, nombre: "Mermelada de Fresa", precio: 4.00, categoria: "mermeladas" },
-        { id: 5, nombre: "Mermelada de Guayaba", precio: 4.00, categoria: "mermeladas" },
-        { id: 6, nombre: "Mermelada de Durazno", precio: 4.00, categoria: "mermeladas" }
+        { id: 4, nombre: "Mermelada de Fresa", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/fresa.jpg" },
+        { id: 5, nombre: "Mermelada de Guayaba", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/guayaba.jpg" },
+        { id: 6, nombre: "Mermelada de Durazno", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/durazno.jpg" }
     ];
 
     // ==========================================
@@ -304,7 +301,6 @@ document.addEventListener('componentesListos', () => {
     navProductos?.addEventListener('mouseenter', () => navProductos.classList.add('activo'));
     navProductos?.addEventListener('mouseleave', () => navProductos.classList.remove('activo'));
 
-    // ✅ NUEVO: Lógica para el botón "Productos" en el menú horizontal
     const navProductosToggleBtn = document.getElementById('navProductosToggle');
     const navProductosDropdownMenu = document.getElementById('navProductosDropdown');
     
