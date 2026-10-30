@@ -138,7 +138,7 @@ document.addEventListener('componentesListos', () => {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) return;
         
-        console.log('🏗️ [DEBUG]: Renderizando productos...');
+        console.log('️ [DEBUG]: Renderizando productos...');
         gridProductos.innerHTML = "";
 
         if (listaProductos.length === 0) {
@@ -165,7 +165,7 @@ document.addEventListener('componentesListos', () => {
             const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
             
             const imagenHTML = imagenSrc
-                ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
+                ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'></div>'">` 
                 : `<div class="producto-img-placeholder">🫙</div>`;
             
             card.innerHTML = `
@@ -253,10 +253,11 @@ document.addEventListener('componentesListos', () => {
         return (parteDecimal >= 50) ? parteEntera + 1 : parteEntera;
     }
 
+    // ✅ ACTUALIZADO: Imágenes reales de galletas y precios a $2.00
     const PRODUCTOS = [
-        { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 3.00, categoria: "galletas" },
-        { id: 2, nombre: "Galletas de Limón", precio: 3.00, categoria: "galletas" },
-        { id: 3, nombre: "Galletas con Chispas de Chocolate", precio: 3.50, categoria: "galletas" },
+        { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 2.00, categoria: "galletas", imagen: "img/galletas/coco_vainilla.jpg" },
+        { id: 2, nombre: "Galletas de Limón", precio: 2.00, categoria: "galletas", imagen: "img/galletas/limon.jpg" },
+        { id: 3, nombre: "Galletas con Chispas de Chocolate", precio: 2.00, categoria: "galletas", imagen: "img/galletas/chispas_de_chocolate.jpg" },
         { id: 4, nombre: "Mermelada de Fresa", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/fresa.jpg" },
         { id: 5, nombre: "Mermelada de Guayaba", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/guayaba.jpg" },
         { id: 6, nombre: "Mermelada de Durazno", precio: 5.00, categoria: "mermeladas", imagen: "img/mermeladas/durazno.jpg" }
@@ -348,7 +349,6 @@ document.addEventListener('componentesListos', () => {
     const modalCarrito = document.getElementById('modal-carrito');
     const btnCerrarCarrito = document.getElementById('btn-cerrar-carrito');
     
-    // ✅ CORRECCIÓN DEFINITIVA: Forzar ruta absoluta de Excalibur para que funcione en TODAS las páginas
     const btnCarritoFlotante = document.querySelector('.abrir-modal-carrito');
     if (btnCarritoFlotante) {
         let img = btnCarritoFlotante.querySelector('img');
@@ -363,7 +363,6 @@ document.addEventListener('componentesListos', () => {
                 btnCarritoFlotante.appendChild(img);
             }
         }
-        // Esta línea garantiza que la imagen siempre use la ruta correcta de GitHub Pages
         img.src = '/slakidom/img/excalibur_carrito.png';
     }
 
