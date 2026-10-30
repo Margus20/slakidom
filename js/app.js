@@ -1,79 +1,93 @@
 // ==========================================
-// ✅ CONSOLA NERUDA - Panel visual de depuración para tablet
+// ✅ CONSOLA VISUAL PARA TABLET (Estilo Terminal Verde/Negro)
 // ==========================================
 (function() {
-    // Crear el botón flotante
+    // 1. Botón flotante para abrir/cerrar
     const btn = document.createElement('button');
-    btn.innerHTML = '🔍';
-    btn.style.cssText = 'position:fixed;top:10px;right:10px;z-index:99999;background:#333;color:#fff;border:2px solid #fff;border-radius:50%;width:45px;height:45px;font-size:22px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.5);';
-    btn.title = 'Abrir Consola Neruda';
+    btn.innerHTML = '>_';
+    btn.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:100000;background:#000;color:#0f0;border:2px solid #0f0;border-radius:50%;width:55px;height:55px;font-size:26px;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(0,255,0,0.4);font-family:monospace;';
+    btn.title = 'Abrir Consola';
     document.body.appendChild(btn);
 
-    // Crear el panel
+    // 2. Panel de la consola (Parte inferior de la pantalla)
     const panel = document.createElement('div');
-    panel.id = 'consola-neruda';
-    panel.style.cssText = 'display:none;position:fixed;top:0;right:0;width:90%;max-width:500px;height:70vh;background:rgba(0,0,0,0.92);color:#0f0;font-family:monospace;font-size:12px;z-index:99998;border:2px solid #0f0;border-radius:10px 0 0 10px;overflow:hidden;flex-direction:column;';
+    panel.id = 'tablet-console';
+    panel.style.cssText = 'display:none;position:fixed;bottom:0;left:0;width:100%;height:50vh;background:#0a0a0a;color:#0f0;font-family:"Courier New",monospace;font-size:14px;z-index:99999;border-top:3px solid #0f0;flex-direction:column;box-shadow:0 -5px 20px rgba(0,0,0,0.9);';
     
-    // Header del panel
+    // 3. Header del panel
     const header = document.createElement('div');
-    header.style.cssText = 'background:#222;padding:10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #0f0;';
-    header.innerHTML = '<strong style="color:#ff0;">🧠 Consola Neruda</strong><div><button id="neruda-limpiar" style="background:#ff0;color:#000;border:none;padding:5px 10px;border-radius:5px;margin-right:5px;cursor:pointer;font-weight:bold;">Limpiar</button><button id="neruda-cerrar" style="background:#f00;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-weight:bold;">✕</button></div>';
+    header.style.cssText = 'background:#111;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;';
+    header.innerHTML = '<span style="color:#0f0;font-weight:bold;font-size:16px;">📟 CONSOLA DE DEPURACIÓN</span><div><button id="console-clear" style="background:#333;color:#fff;border:1px solid #555;padding:6px 15px;border-radius:4px;margin-right:8px;cursor:pointer;font-family:monospace;font-weight:bold;">Limpiar</button><button id="console-close" style="background:#f00;color:#fff;border:none;padding:6px 15px;border-radius:4px;cursor:pointer;font-weight:bold;">✕ Cerrar</button></div>';
     panel.appendChild(header);
 
-    // Contenedor de mensajes
-    const mensajes = document.createElement('div');
-    mensajes.id = 'neruda-mensajes';
-    mensajes.style.cssText = 'flex:1;overflow-y:auto;padding:10px;';
-    panel.appendChild(mensajes);
-
+    // 4. Contenedor de mensajes
+    const messages = document.createElement('div');
+    messages.id = 'console-messages';
+    messages.style.cssText = 'flex:1;overflow-y:auto;padding:15px;scroll-behavior:smooth;';
+    panel.appendChild(messages);
     document.body.appendChild(panel);
 
-    // Función para agregar mensajes
-    function agregarMensaje(tipo, args) {
-        const linea = document.createElement('div');
-        linea.style.cssText = 'margin:3px 0;padding:4px 8px;border-left:3px solid;word-wrap:break-word;';
+    // 5. Función para agregar mensajes
+    function addMessage(type, args) {
+        const line = document.createElement('div');
+        line.style.cssText = 'margin:5px 0;padding:8px 12px;border-left:4px solid;word-wrap:break-word;font-size:14px;line-height:1.5;border-radius:0 4px 4px 0;';
         
-        let color = '#0f0';
-        let borde = '#0f0';
-        let prefijo = '📝';
+        let color = '#0f0'; // Verde por defecto
+        let border = '#0f0';
+        let prefix = '>';
         
-        if (tipo === 'error') { color = '#f55'; borde = '#f00'; prefijo = '❌'; }
-        else if (tipo === 'warn') { color = '#ff0'; borde = '#fa0'; prefijo = '⚠️'; }
-        else if (tipo === 'info') { color = '#0ff'; borde = '#0ff'; prefijo = 'ℹ️'; }
+        if (type === 'error') { 
+            color = '#ff5555'; border = '#ff0000'; prefix = '❌ ERROR'; 
+            line.style.background = 'rgba(255, 0, 0, 0.15)';
+        } else if (type === 'warn') { 
+            color = '#ffaa00'; border = '#ffaa00'; prefix = '⚠️ WARN'; 
+            line.style.background = 'rgba(255, 170, 0, 0.15)';
+        } else if (type === 'info') { 
+            color = '#00ffff'; border = '#00ffff'; prefix = 'ℹ️ INFO'; 
+            line.style.background = 'rgba(0, 255, 255, 0.1)';
+        }
         
-        linea.style.color = color;
-        linea.style.borderLeftColor = borde;
+        line.style.color = color;
+        line.style.borderLeftColor = border;
         
-        const texto = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
-        linea.textContent = `${prefijo} ${texto}`;
+        const text = args.map(a => {
+            if (typeof a === 'object') {
+                try { return JSON.stringify(a, null, 2); } 
+                catch(e) { return String(a); }
+            }
+            return String(a);
+        }).join(' ');
         
-        mensajes.appendChild(linea);
-        mensajes.scrollTop = mensajes.scrollHeight;
+        line.innerHTML = `<strong>${prefix}</strong> ${text}`;
+        messages.appendChild(line);
+        messages.scrollTop = messages.scrollHeight; // Auto-scroll al fondo
     }
 
-    // Interceptar console.log, error, warn, info
+    // 6. Interceptar consola nativa del navegador
     const origLog = console.log;
     const origError = console.error;
     const origWarn = console.warn;
     const origInfo = console.info;
 
-    console.log = function(...args) { origLog.apply(console, args); agregarMensaje('log', args); };
-    console.error = function(...args) { origError.apply(console, args); agregarMensaje('error', args); };
-    console.warn = function(...args) { origWarn.apply(console, args); agregarMensaje('warn', args); };
-    console.info = function(...args) { origInfo.apply(console, args); agregarMensaje('info', args); };
+    console.log = function(...args) { origLog.apply(console, args); addMessage('log', args); };
+    console.error = function(...args) { origError.apply(console, args); addMessage('error', args); };
+    console.warn = function(...args) { origWarn.apply(console, args); addMessage('warn', args); };
+    console.info = function(...args) { origInfo.apply(console, args); addMessage('info', args); };
 
-    // Eventos de botones
-    btn.addEventListener('click', () => { panel.style.display = 'flex'; });
-    document.getElementById('neruda-cerrar').addEventListener('click', () => { panel.style.display = 'none'; });
-    document.getElementById('neruda-limpiar').addEventListener('click', () => { mensajes.innerHTML = ''; });
+    // 7. Eventos de los botones
+    btn.addEventListener('click', () => { 
+        panel.style.display = (panel.style.display === 'flex') ? 'none' : 'flex'; 
+    });
+    document.getElementById('console-close').addEventListener('click', () => { panel.style.display = 'none'; });
+    document.getElementById('console-clear').addEventListener('click', () => { messages.innerHTML = ''; });
 
-    // Mensaje de bienvenida
+    // Mensaje inicial de bienvenida
     setTimeout(() => {
-        agregarMensaje('info', ['🧠 Consola Neruda activada. Toca el botón 🔍 para ver los mensajes.']);
+        addMessage('info', ['Consola visual activada. Toca el botón ">_" abajo a la derecha para ver los mensajes y errores.']);
     }, 500);
 })();
 // ==========================================
-// FIN CONSOLA NERUDA
+// FIN CONSOLA VISUAL
 // ==========================================
 
 
@@ -136,34 +150,34 @@ async function cargarComponentes() {
         const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
         const basePath = isSubfolder ? '../' : '';
         
-        console.log('📂 [NERUDA]: Buscando header en:', `${basePath}componentes/header.html`);
+        console.log('📂 [RUTA]: Buscando header en:', `${basePath}componentes/header.html`);
         
         const headerRes = await fetch(`${basePath}componentes/header.html`);
         if (headerRes.ok) {
             document.getElementById('header-container').innerHTML = await headerRes.text();
-            console.log('✅ [NERUDA]: Header cargado correctamente');
+            console.log('✅ [ÉXITO]: Header cargado correctamente');
         } else {
-            console.error('❌ [NERUDA]: No se pudo cargar header.html. Status:', headerRes.status, 'Ruta buscada:', `${basePath}componentes/header.html`);
+            console.error('❌ [FALLÓ]: No se pudo cargar header.html. Status:', headerRes.status, 'Ruta buscada:', `${basePath}componentes/header.html`);
         }
         
         const footerRes = await fetch(`${basePath}componentes/footer.html`);
         if (footerRes.ok) {
             document.getElementById('footer-container').innerHTML = await footerRes.text();
-            console.log('✅ [NERUDA]: Footer cargado correctamente');
+            console.log('✅ [ÉXITO]: Footer cargado correctamente');
         } else {
-            console.error('❌ [NERUDA]: No se pudo cargar footer.html. Status:', footerRes.status, 'Ruta buscada:', `${basePath}componentes/footer.html`);
+            console.error('❌ [FALLÓ]: No se pudo cargar footer.html. Status:', footerRes.status, 'Ruta buscada:', `${basePath}componentes/footer.html`);
         }
         
         document.dispatchEvent(new Event('componentesListos'));
     } catch (error) {
-        console.error('❌ [NERD-DEBUG]: Error al cargar los cimientos (componentes):', error);
+        console.error('❌ [FALLÓ]: Error al cargar los cimientos (componentes):', error);
     }
 }
 
 cargarComponentes();
 
 document.addEventListener('componentesListos', () => {
-    console.log('🌟 [NERD-DEBUG]: El escenario está montado. Los componentes han llegado.');
+    console.log('🌟 [ÉXITO]: El escenario está montado. Los componentes han llegado.');
     
     let tasaCambio = TASA_RESPALDO;
     let monedaSeleccionada = 'USD';
@@ -181,9 +195,9 @@ document.addEventListener('componentesListos', () => {
 
     // ✅ FUNCIÓN BRAVA 2: Reconstrucción total del precio (Infalible)
     function actualizarVistaDePrecios(moneda) {
-        console.log(`🎭 [NERD-DEBUG]: Transformando la realidad visual a moneda: ${moneda}`);
+        console.log(`🎭 [PROCESO]: Transformando la realidad visual a moneda: ${moneda}`);
         const precios = document.querySelectorAll('.producto-precio');
-        console.log(`📦 [NERD-DEBUG]: Encontrados ${precios.length} artefactos de precio para transformar.`);
+        console.log(`📦 [PROCESO]: Encontrados ${precios.length} artefactos de precio para transformar.`);
         
         precios.forEach((precioEl, index) => {
             const usd = parseFloat(precioEl.dataset.precioUsd);
@@ -226,11 +240,11 @@ document.addEventListener('componentesListos', () => {
     function renderizarProductos(listaProductos) {
         const gridProductos = document.getElementById("productos-grid");
         if (!gridProductos) {
-            console.warn('⚠️ [NERUDA]: No se encontró el elemento #productos-grid en esta página.');
+            console.warn('⚠️ [ADVERTENCIA]: No se encontró el elemento #productos-grid en esta página.');
             return;
         }
         
-        console.log('🏗️ [NERD-DEBUG]: Construyendo la vitrina de productos...');
+        console.log('🏗️ [PROCESO]: Construyendo la vitrina de productos...');
         gridProductos.innerHTML = "";
 
         if (listaProductos.length === 0) {
@@ -253,7 +267,7 @@ document.addEventListener('componentesListos', () => {
             // ✅ AJUSTE: Emoji dinámico (Frasco 🫙 para mermeladas, Galleta 🍪 para lo demás)
             const emoji = producto.categoria === 'mermeladas' ? '🫙' : '🍪';
             
-            console.log(`${emoji} [NERD-DEBUG]: ${producto.nombre} | $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${formatearConPuntosDeMil(precioVESRedondeado)}`);
+            console.log(`${emoji} [PROCESO]: ${producto.nombre} | $${producto.precio} × ${tasaCambio} = Bs.${precioEnBolivares} → Bs.${formatearConPuntosDeMil(precioVESRedondeado)}`);
             
             card.innerHTML = `
                 <div class="producto-img-placeholder">${emoji}</div>
@@ -278,21 +292,21 @@ document.addEventListener('componentesListos', () => {
     // ✅ Obtenemos la tasa PRIMERO y luego renderizamos
     (async () => {
         tasaCambio = await obtenerTasaBCV();
-        console.log('💰 [NERD-DEBUG]: La tasa sagrada ha sido establecida en:', tasaCambio);
+        console.log('💰 [ÉXITO]: La tasa sagrada ha sido establecida en:', tasaCambio);
         if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
         
         // ✅ Detectar la URL y filtrar los productos
         const path = window.location.pathname; // Ej: "/", "/galletas/", "/mermeladas/"
-        console.log('📍 [NERUDA]: URL actual detectada:', path);
+        console.log('📍 [INFO]: URL actual detectada:', path);
         
         let productosAMostrar = PRODUCTOS; // Por defecto, muestra TODOS (para index.html)
 
         if (path.includes('/galletas/')) {
             productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'galletas');
-            console.log('🍪 [NERD-DEBUG]: Modo Galletas activado. Filtrando productos.');
+            console.log('🍪 [PROCESO]: Modo Galletas activado. Filtrando productos.');
         } else if (path.includes('/mermeladas/')) {
             productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'mermeladas');
-            console.log('🫙 [NERD-DEBUG]: Modo Mermeladas activado. Filtrando productos.');
+            console.log('🫙 [PROCESO]: Modo Mermeladas activado. Filtrando productos.');
         }
 
         // Renderizamos con la lista filtrada (o completa)
@@ -307,7 +321,7 @@ document.addEventListener('componentesListos', () => {
             e.stopPropagation();
             e.preventDefault();
             e.stopImmediatePropagation(); // 🔥 DETIENE CUALQUIER OTRO EVENTO EN SU CAMINO
-            console.log('🛡️ [NERD-DEBUG]: Escudo activado. Clic en selector principal interceptado.');
+            console.log('🛡️ [PROCESO]: Escudo activado. Clic en selector principal interceptado.');
             if (dropdownMonedas) dropdownMonedas.classList.toggle('activo');
             selectorMoneda.classList.toggle('activo');
         });
@@ -327,7 +341,7 @@ document.addEventListener('componentesListos', () => {
             const moneda = opcion.dataset.moneda;
             const simbolo = opcion.dataset.simbolo;
             
-            console.log(`🚨 [NERD-DEBUG]: ¡ACCIÓN CONFIRMADA! El usuario eligió: ${moneda} (${simbolo})`);
+            console.log(`🚨 [ÉXITO]: ¡ACCIÓN CONFIRMADA! El usuario eligió: ${moneda} (${simbolo})`);
             
             opcionesMoneda.forEach(o => o.classList.remove('seleccionada'));
             opcion.classList.add('seleccionada');
@@ -395,22 +409,4 @@ document.addEventListener('componentesListos', () => {
     navProductos?.addEventListener('mouseleave', () => navProductos.classList.remove('activo'));
 
     window.filtrarYCerrar = (categoria) => {
-        document.querySelectorAll('.producto-card').forEach(tarjeta => {
-            tarjeta.classList.toggle('oculto', tarjeta.dataset.categoria !== categoria);
-        });
-        document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
-        cerrarMenu();
-    };
-
-    document.querySelectorAll('[data-categoria]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            filtrarYCerrar(link.dataset.categoria);
-        });
-    });
-
-    const buscadorInput = document.getElementById('buscador-input');
-    buscadorInput?.addEventListener('input', (e) => {
-        const termino = e.target.value.toLowerCase().trim();
-        let visibles = 0;
-        document.querySelectorAll('.producto-ca
+        docume
