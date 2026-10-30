@@ -6,14 +6,15 @@
     <meta name="description" content="Galletas de Coco y Vainilla SLAKIDOM - Hechas con amor en Caracas">
     <title>Galletas de Coco y Vainilla - SLAKIDOM</title>
     
-    <link rel="icon" type="image/png" href="../../img/slaky_cuadrado.jpg">
+    <!-- ✅ RUTA CORREGIDA: ../ en lugar de ../../ -->
+    <link rel="icon" type="image/png" href="../img/slaky_cuadrado.jpg">
     
     <!-- CSS MODULAR -->
-    <link rel="stylesheet" href="../../css/01-variables.css">
-    <link rel="stylesheet" href="../../css/02-base.css">
-    <link rel="stylesheet" href="../../css/03-header-menu.css">
-    <link rel="stylesheet" href="../../css/09-footer.css">
-    <link rel="stylesheet" href="../../css/10-animaciones.css">
+    <link rel="stylesheet" href="../css/01-variables.css">
+    <link rel="stylesheet" href="../css/02-base.css">
+    <link rel="stylesheet" href="../css/03-header-menu.css">
+    <link rel="stylesheet" href="../css/09-footer.css">
+    <link rel="stylesheet" href="../css/10-animaciones.css">
     
     <!-- ESTILOS ESPECÍFICOS DEL PRODUCTO -->
     <style>
@@ -270,11 +271,11 @@
     <main>
         <section class="producto-detalle">
             <div class="producto-grid">
-                <!-- ✅ IMAGEN DEL PRODUCTO -->
+                <!-- ✅ IMAGEN DEL PRODUCTO CON RUTA CORREGIDA -->
                 <div class="producto-imagen">
-                    <img src="../../img/galletas/coco_vainilla.jpg" 
+                    <img src="../img/galletas/coco_vainilla.jpg" 
                          alt="Galletas de Coco y Vainilla" 
-                         onerror="this.src='../../img/slaky_cuadrado.jpg'">
+                         onerror="this.src='../img/slaky_cuadrado.jpg'">
                 </div>
                 
                 <!-- INFORMACIÓN -->
@@ -343,8 +344,8 @@
     <!-- ✅ FOOTER (se inyecta desde app.js) -->
     <div id="footer-container"></div>
 
-    <!-- ✅ SCRIPT PRINCIPAL (carga header, footer y efectos de nieve) -->
-    <script type="module" src="../../js/app.js"></script>
+    <!-- ✅ SCRIPT PRINCIPAL CON RUTA CORREGIDA -->
+    <script type="module" src="../js/app.js"></script>
     
     <!-- ✅ SCRIPT ESPECÍFICO -->
     <script>
@@ -387,7 +388,8 @@
                 nombre: "Galletas de Coco y Vainilla",
                 precio: 2.00,
                 cantidad: cantidad,
-                imagen: "../../img/galletas/coco_vainilla.jpg"
+                // ✅ RUTA CORREGIDA EN EL OBJETO DEL CARRITO
+                imagen: "../img/galletas/coco_vainilla.jpg"
             };
             
             let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
