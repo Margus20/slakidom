@@ -438,7 +438,9 @@
     }
 }
 
-/* RESPONSIVE */
+/* ========================================== */
+/* ✅ RESPONSIVE CORREGIDO (SOLUCIÓN AL AMONTONAMIENTO) */
+/* ========================================== */
 @media (max-width: 768px) {
     .header { height: 200px; }
     .logo { height: 160px; }
@@ -454,9 +456,25 @@
     .buscador-input { font-size: 0.85rem; padding: 6px 12px; }
     .buscador-btn { width: 32px; height: 32px; }
     .buscador-btn svg { width: 16px; height: 16px; }
-    .nav-bar { padding: 0 10px; max-width: calc(100% - 220px); }
-    .nav-list { gap: 4px; }
-    .nav-link { padding: 5px 12px; font-size: 0.8rem; }
+    
+    /* ✅ CORRECCIÓN MENÚ HORIZONTAL EN TABLET/MÓVIL MEDIANO */
+    .nav-bar { 
+        padding: 0 10px; 
+        bottom: 5px; 
+        max-width: 100%; 
+        overflow-x: auto; /* Permite deslizar horizontalmente */
+        -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    }
+    /* Ocultar barra de scroll para que se vea limpio */
+    .nav-bar::-webkit-scrollbar { display: none; }
+    .nav-bar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .nav-list { 
+        gap: 5px; 
+        flex-wrap: nowrap; /* ✅ EVITA que se amontonen verticalmente */
+        width: max-content; /* Asegura que los elementos no se compriman */
+    }
+    .nav-link { padding: 6px 12px; font-size: 0.8rem; white-space: nowrap; }
     .dropdown-link { padding: 10px 15px; font-size: 0.85rem; }
 }
 
@@ -474,9 +492,24 @@
     .buscador-input::placeholder { font-size: 0.7rem; }
     .buscador-btn { width: 28px; height: 28px; }
     .buscador-btn svg { width: 14px; height: 14px; }
-    .nav-bar { padding: 0 5px; bottom: 5px; max-width: 100%; }
-    .nav-list { gap: 3px; flex-wrap: wrap; }
-    .nav-link { padding: 4px 10px; font-size: 0.7rem; }
+    
+    /* ✅ CORRECCIÓN MENÚ HORIZONTAL EN MÓVIL PEQUEÑO */
+    .nav-bar { 
+        padding: 0 5px; 
+        bottom: 5px; 
+        max-width: 100%; 
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch;
+    }
+    .nav-bar::-webkit-scrollbar { display: none; }
+    .nav-bar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .nav-list { 
+        gap: 4px; 
+        flex-wrap: nowrap; /* ✅ CAMBIADO: Era 'wrap', esto causaba el amontonamiento */
+        width: max-content; 
+    }
+    .nav-link { padding: 5px 10px; font-size: 0.75rem; white-space: nowrap; }
     .nav-dropdown { min-width: 140px; }
     .dropdown-link { padding: 10px 12px; font-size: 0.8rem; }
 }
