@@ -3,6 +3,8 @@
 // ==========================================
 
 export function inicializarMenus() {
+    console.log('🍔 [MENÚ]: Inicializando menús...');
+    
     // 1. Menú hamburguesa móvil
     const menuFlotante = document.getElementById('menu-flotante');
     const menuClose = document.getElementById('menuClose');
@@ -37,31 +39,38 @@ export function inicializarMenus() {
     const navProductosToggleBtn = document.getElementById('navProductosToggle');
     const navProductosDropdownMenu = document.getElementById('navProductosDropdown');
     
-    if (navProductosToggleBtn && navProductosDropdownMenu) {
-        // ✅ El botón SOLO despliega/oculta el menú, NO navega a ninguna página
+    // ✅ Buscamos el elemento <li> padre que contiene el dropdown
+    const navItemPadre = document.querySelector('.nav-item:has(#navProductosDropdown)');
+    
+    if (navProductosToggleBtn && navProductosDropdownMenu && navItemPadre) {
+        console.log('🍔 [MENÚ]: Botón Productos encontrado, activando dropdown');
+        
         navProductosToggleBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Blindaje: prevenir cualquier intento de navegación
+            e.preventDefault();
             e.stopPropagation();
             
-            const estaActivo = navProductosDropdownMenu.classList.contains('activo');
+            // ✅ Verificamos si el <li> padre ya tiene la clase 'activo'
+            const estaActivo = navItemPadre.classList.contains('activo');
             
-            // Primero cerramos todo
-            navProductosDropdownMenu.classList.remove('activo');
-            navProductosToggleBtn.classList.remove('activo');
+            // Primero cerramos todo (quitamos la clase del <li> padre)
+            navItemPadre.classList.remove('activo');
             
-            // Si no estaba activo, lo abrimos (efecto toggle)
+            // Si no estaba activo, lo abrimos (el CSS .nav-item.activo .nav-dropdown lo mostrará)
             if (!estaActivo) {
-                navProductosDropdownMenu.classList.add('activo');
-                navProductosToggleBtn.classList.add('activo');
+                navItemPadre.classList.add('activo');
+                console.log('🍔 [MENÚ]: Dropdown abierto');
+            } else {
+                console.log('🍔 [MENÚ]: Dropdown cerrado');
             }
         });
         
         // Cerrar el dropdown si se hace clic fuera del área del menú
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.nav-item')) {
-                navProductosDropdownMenu.classList.remove('activo');
-                navProductosToggleBtn.classList.remove('activo');
+                navItemPadre.classList.remove('activo');
             }
         });
+    } else {
+        console.warn('⚠️ [MENÚ]: No se encontraron los elementos del dropdown de Productos');
     }
 }
