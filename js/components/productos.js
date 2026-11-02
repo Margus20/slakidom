@@ -62,9 +62,10 @@ export function renderizarProductos(listaProductos, tasaCambio) {
             </div>
         `;
 
+        // ✅ AJUSTE REALIZADO: Se eliminó el onclick inline para que carrito.js pueda detectar el clic correctamente
         card.innerHTML = `
             ${esClicable ? `<a href="${productoURL}" style="text-decoration: none; color: inherit; display: block;">${contenidoInfo}</a>` : contenidoInfo}
-            <button class="btn-agregar-carrito" data-id="${producto.id}" ${esClicable ? 'onclick="event.stopPropagation();"' : ''}>Agregar</button>
+            <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
         `;
         gridProductos.appendChild(card);
     });
