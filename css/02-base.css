@@ -1,4 +1,9 @@
 /* ========================================== */
+/* 00. IMPORTAR FUENTE BOWLBY ONE SC */
+/* ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+
+/* ========================================== */
 /* 02. RESET Y ESTILOS BASE */
 /* ========================================== */
 * {
@@ -42,14 +47,34 @@ main, .header, .footer {
     z-index: 1;
 }
 
-/* Títulos de secciones y espaciado general */
+/* ========================================== */
+/* ✅ TÍTULOS CON BOWLBY ONE SC - RESPONSIVE */
+/* ========================================== */
 .section-title {
-    font-family: 'Arial Black', sans-serif;
-    font-size: 2rem;
+    font-family: 'Bowlby One SC', cursive, sans-serif;
+    font-size: 36px;       /* ✅ Tamaño solicitado (400 a 36px) */
+    font-weight: 400;      /* ✅ Peso solicitado */
     text-align: center;
     color: var(--chocolate);
     margin-bottom: 40px;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+/* ✅ RESPONSIVE: Títulos más grandes se reducen en tablet */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+/* ✅ RESPONSIVE: Títulos muy largos se reducen más en móvil */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 22px;
+        letter-spacing: 0.5px;
+    }
 }
 
 section {
