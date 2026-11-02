@@ -12,6 +12,7 @@ import { inicializarMenus } from './features/menu.js';
 import { inicializarSelectorMoneda } from './features/moneda.js';
 import { inicializarBuscador } from './features/buscador.js';
 import { iniciarEfectoNieve } from './features/nieve.js';
+import { inicializarAnimaciones, animarCardsDeProductos } from './features/animaciones.js'; // ✅ NUEVO IMPORT
 
 // Iniciar carga de componentes
 cargarComponentes();
@@ -25,6 +26,7 @@ document.addEventListener('componentesListos', () => {
     inicializarSelectorMoneda();
     inicializarBuscador();
     iniciarEfectoNieve();
+    inicializarAnimaciones(); // ✅ NUEVO: Iniciar animaciones (scroll suave)
     
     // Configurar modal del carrito
     const modalCarrito = document.getElementById('modal-carrito');
@@ -56,7 +58,11 @@ document.addEventListener('componentesListos', () => {
             productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'mermeladas');
         }
 
+        // 1. Dibujar los productos en el HTML
         renderizarProductos(productosAMostrar, tasaCambio);
+        
+        // 2. ✅ NUEVO: Animar las cards JUSTO DESPUÉS de que se dibujen en el DOM
+        animarCardsDeProductos();
     })();
 
     console.log('🎉 [APP]: ¡Sistema SLAKIDOM activo y listo!');
