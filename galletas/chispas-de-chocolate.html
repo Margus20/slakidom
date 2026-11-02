@@ -353,8 +353,11 @@
     <!-- ✅ SCRIPT PRINCIPAL -->
     <script type="module" src="../js/app.js"></script>
     
-    <!-- ✅ SCRIPT ESPECÍFICO -->
-    <script>
+    <!-- ✅ SCRIPT ESPECÍFICO DEL PRODUCTO (Ahora es module para poder importar) -->
+    <script type="module">
+        // ✅ Importamos la función de notificación amigable (sin el alert en inglés)
+        import { mostrarNotificacion } from '../features/carrito.js';
+
         let cantidad = 1;
         let tasaBCV = 0;
         
@@ -411,7 +414,8 @@
             // ✅ DISPARAR EVENTO PARA ACTUALIZAR EL MODAL DEL CARRITO
             window.dispatchEvent(new Event('carritoActualizado'));
             
-            alert(`✅ Agregaste ${cantidad} unidad(es) de Galletas con Chispas de Chocolate al carrito`);
+            // ✅ NOTIFICACIÓN AMIGABLE EN ESPAÑOL (Reemplaza al alert nativo del navegador)
+            mostrarNotificacion(`Agregaste ${cantidad} unidad(es) de Galletas con Chispas de Chocolate al carrito`);
         }
         
         function actualizarContadorCarrito() {
