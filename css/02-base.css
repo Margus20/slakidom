@@ -61,21 +61,21 @@ h1, h2 {
 }
 
 /* ========================================== */
-/* ✅ SUBTÍTULOS CON CAVEAT - MÁS VISIBLES */
+/* ✅ SUBTÍTULOS CON CAVEAT - 36PX Y NEGRITAS */
 /* ========================================== */
 .section-subtitle,
 .section-title + p {
     font-family: 'Caveat', cursive;
-    font-size: 28px;        /* ✅ AUMENTADO: De 26px a 28px */
-    font-weight: 700;       /* ✅ NEGRITAS: Peso máximo para que se vea bien */
+    font-size: 36px;        /* ✅ MISMO TAMAÑO QUE EL TÍTULO */
+    font-weight: 700;       /* ✅ NEGRITAS MÁXIMAS */
     text-align: center;
-    color: var(--chocolate); /* ✅ MISMO COLOR QUE EL TÍTULO para mejor contraste */
+    color: var(--chocolate);
     line-height: 1.3;
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* ✅ Sombra suave para más visibilidad */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 /* ========================================== */
@@ -88,9 +88,9 @@ section p,
 .sobre-nosotros p,
 .producto-descripcion-full p {
     font-family: 'Caveat', cursive;
-    font-size: 24px;        /* ✅ Tamaño legible */
-    font-weight: 600;       /* ✅ Semi-bold para buena lectura */
-    color: #444;            /* ✅ Color más oscuro */
+    font-size: 24px;
+    font-weight: 600;
+    color: #444;
     line-height: 1.5;
     margin-bottom: 15px;
 }
@@ -104,7 +104,7 @@ section p,
     }
     .section-subtitle,
     .section-title + p {
-        font-size: 24px;    /* ✅ En tablet se mantiene visible */
+        font-size: 28px;    /* ✅ Mismo tamaño que el título en tablet */
         font-weight: 700;
     }
     section p,
@@ -124,7 +124,7 @@ section p,
     }
     .section-subtitle,
     .section-title + p {
-        font-size: 20px;    /* ✅ En móvil sigue siendo legible */
+        font-size: 22px;    /* ✅ Mismo tamaño que el título en móvil */
         font-weight: 700;
     }
     section p,
