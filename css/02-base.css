@@ -19,7 +19,6 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     
-    /* ✅ AJUSTE: Fondo con la imagen de textura */
     background-image: url('../img/1_transparencia.jpg');
     background-attachment: fixed;
     background-size: cover;
@@ -28,7 +27,6 @@ body {
     position: relative;
 }
 
-/* ✅ AJUSTE: Capa blanca semitransparente (reducida a 60% para que se vea la textura) */
 body::before {
     content: '';
     position: fixed;
@@ -36,12 +34,11 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.60); /* ✅ Cambiado de 0.85 a 0.60 */
+    background: rgba(255, 255, 255, 0.60);
     z-index: -1;
     pointer-events: none;
 }
 
-/* ✅ AJUSTE: Asegurar que el contenido (menú, footer, etc.) se vea sobre el fondo */
 main, .header, .footer {
     position: relative;
     z-index: 1;
@@ -53,21 +50,37 @@ main, .header, .footer {
 .section-title,
 h1, h2 {
     font-family: 'Bowlby One SC', cursive, sans-serif;
-    font-size: 36px;       /* ✅ Tamaño solicitado */
-    font-weight: 400;      /* ✅ Peso solicitado */
+    font-size: 36px;
+    font-weight: 400;
     text-align: center;
     color: var(--chocolate);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 1.2;
 }
 
 /* ========================================== */
-/* ✅ TODOS LOS TEXTOS SECUNDARIOS CON CAVEAT */
+/* ✅ SUBTÍTULOS CON CAVEAT - MÁS VISIBLES */
 /* ========================================== */
 .section-subtitle,
-.section-title + p,
+.section-title + p {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;        /* ✅ AUMENTADO: De 26px a 28px */
+    font-weight: 700;       /* ✅ NEGRITAS: Peso máximo para que se vea bien */
+    text-align: center;
+    color: var(--chocolate); /* ✅ MISMO COLOR QUE EL TÍTULO para mejor contraste */
+    line-height: 1.3;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* ✅ Sombra suave para más visibilidad */
+}
+
+/* ========================================== */
+/* ✅ TEXTOS SECUNDARIOS EN SECCIONES */
+/* ========================================== */
 section p,
 .descripcion,
 .proceso-descripcion,
@@ -75,33 +88,25 @@ section p,
 .sobre-nosotros p,
 .producto-descripcion-full p {
     font-family: 'Caveat', cursive;
-    font-size: 24px;       /* ✅ Tamaño armónico con el título de 36px */
-    font-weight: 500;      /* ✅ Peso medio para buena legibilidad */
-    color: #555;
-    line-height: 1.4;
+    font-size: 24px;        /* ✅ Tamaño legible */
+    font-weight: 600;       /* ✅ Semi-bold para buena lectura */
+    color: #444;            /* ✅ Color más oscuro */
+    line-height: 1.5;
     margin-bottom: 15px;
 }
 
-/* ✅ Subtítulos centrados que van justo debajo de un título principal */
-.section-subtitle,
-.section-title + p {
-    text-align: center;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    font-size: 26px;       /* Un poco más grande para destacar como subtítulo de sección */
-}
-
 /* ========================================== */
-/* ✅ RESPONSIVE: Ajustes para Tablet y Móvil */
+/* ✅ RESPONSIVE */
 /* ========================================== */
 @media (max-width: 768px) {
     .section-title, h1, h2 {
         font-size: 28px;
     }
     .section-subtitle,
-    .section-title + p,
+    .section-title + p {
+        font-size: 24px;    /* ✅ En tablet se mantiene visible */
+        font-weight: 700;
+    }
     section p,
     .descripcion,
     .proceso-descripcion,
@@ -118,7 +123,10 @@ section p,
         letter-spacing: 0.5px;
     }
     .section-subtitle,
-    .section-title + p,
+    .section-title + p {
+        font-size: 20px;    /* ✅ En móvil sigue siendo legible */
+        font-weight: 700;
+    }
     section p,
     .descripcion,
     .proceso-descripcion,
