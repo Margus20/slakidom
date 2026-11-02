@@ -10,12 +10,15 @@ export function inicializarCarrito() {
     console.log('🛒 [CARRITO]: Inicializando... Productos actuales:', carrito.length);
     actualizarContadorCarrito();
     
+    // ✅ Delegación de eventos: escucha clics en todo el documento para capturar botones dinámicos
     document.addEventListener('click', manejarClickAgregar);
     
+    // Hacer funciones accesibles globalmente para el HTML (modal)
     window.eliminarDelCarrito = eliminarDelCarrito;
     window.cerrarCarritoModal = cerrarCarritoModal;
     window.finalizarPedidoWhatsApp = finalizarPedidoWhatsApp;
     
+    // Escuchar actualizaciones desde otras partes (ej. páginas individuales)
     window.addEventListener('carritoActualizado', () => {
         carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
         actualizarContadorCarrito();
@@ -23,9 +26,10 @@ export function inicializarCarrito() {
 }
 
 function manejarClickAgregar(e) {
+    // ✅ Verificamos si el elemento clickeado es el botón de agregar del índice
     if (e.target.classList.contains('btn-agregar-carrito')) {
         e.preventDefault();
-        e.stopPropagation();
+        e.stopPropagation(); 
         
         const card = e.target.closest('.producto-card');
         if (!card) return;
@@ -85,8 +89,6 @@ export function mostrarCarritoModal() {
     }
 
     carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    console.log('🛒 [CARRITO]: Mostrando modal. Productos:', carrito);
-
     lista.innerHTML = "";
     let total = 0;
 
@@ -127,14 +129,10 @@ export function mostrarCarritoModal() {
 
 function cerrarCarritoModal() {
     const modal = document.getElementById("modal-carrito");
-    if (modal) {
-        modal.classList.remove("activo");
-        console.log('🛒 [CARRITO]: Modal cerrado');
-    }
+    if (modal) modal.classList.remove("activo");
 }
 
 function eliminarDelCarrito(index) {
-    console.log('🛒 [CARRITO]: Eliminando producto en índice:', index);
     carrito.splice(index, 1);
     guardarCarrito();
     actualizarContadorCarrito();
@@ -142,11 +140,10 @@ function eliminarDelCarrito(index) {
 }
 
 function finalizarPedidoWhatsApp() {
-    console.log('🛒 [CARRITO]: Finalizando pedido por WhatsApp');
     carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
     
     if (carrito.length === 0) {
-        alert("Tu carrito está vacío");
+        mostrarNotificacion("Tu carrito está vacío");
         return;
     }
 
@@ -159,27 +156,35 @@ function finalizarPedidoWhatsApp() {
         mensaje += `▪️ ${item.cantidad} x ${item.nombre} - $${subtotal.toFixed(2)}%0A`;
     });
 
-    mensaje += `%0A *Total a pagar: $${total.toFixed(2)}*`;
+    mensaje += `%0A💰 *Total a pagar: $${total.toFixed(2)}*`;
     mensaje += "%0A%0AQuedo atento a los datos de Pago Móvil para realizar la transferencia. ¡Gracias!";
 
-    console.log('🛒 [CARRITO]: Abriendo WhatsApp...');
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`, "_blank");
 }
 
-function mostrarNotificacion(mensaje) {
+// ✅ EXPORTAMOS esta función para que las páginas individuales de productos puedan usarla
+export function mostrarNotificacion(mensaje) {
+    // Evitar múltiples notificaciones apiladas
+    const existente = document.querySelector('.notificacion-slakidom');
+    if (existente) existente.remove();
+
     const notif = document.createElement("div");
-    notif.style.cssText = "position:fixed; bottom:20px; right:20px; background:var(--chocolate, #5D4037); color:white; padding:12px 20px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:9999; opacity:0; transform:translateY(20px); transition:all 0.3s ease; font-weight:bold;";
-    notif.textContent = mensaje;
+    notif.className = "notificacion-slakidom";
+    notif.style.cssText = "position:fixed; bottom:30px; right:30px; background:var(--chocolate, #5D4037); color:white; padding:15px 25px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.3); z-index:10000; opacity:0; transform:translateY(20px); transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-weight:bold; display:flex; align-items:center; gap:10px; font-size:1rem;";
+    notif.innerHTML = `<span style="font-size:1.2rem;">✅</span> ${mensaje}`;
+    
     document.body.appendChild(notif);
     
-    setTimeout(() => {
+    // Animación de entrada
+    requestAnimationFrame(() => {
         notif.style.opacity = "1";
         notif.style.transform = "translateY(0)";
-    }, 10);
+    });
     
+    // Desaparecer automáticamente
     setTimeout(() => {
         notif.style.opacity = "0";
         notif.style.transform = "translateY(20px)";
-        setTimeout(() => notif.remove(), 300);
-    }, 2500);
+        setTimeout(() => notif.remove(), 400);
+    }, 3000);
 }
