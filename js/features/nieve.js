@@ -5,7 +5,7 @@
 export function crearCopoDeNieve() {
     const copo = document.createElement('div');
     copo.className = 'snowflake';
-    copo.innerHTML = '';
+    copo.innerHTML = '❄';  // ✅ CORREGIDO: Antes estaba vacío ''
     copo.style.left = Math.random() * 100 + 'vw';
     copo.style.animationDuration = Math.random() * 3 + 2 + 's';
     copo.style.opacity = Math.random() * 0.7 + 0.3;
@@ -15,5 +15,6 @@ export function crearCopoDeNieve() {
 }
 
 export function iniciarEfectoNieve() {
+    console.log('❄️ [NIEVE]: Iniciando efecto de nieve...');  // ✅ Para verificar en consola
     setInterval(crearCopoDeNieve, 100);
 }
