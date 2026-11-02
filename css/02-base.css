@@ -1,7 +1,7 @@
 /* ========================================== */
-/* 00. IMPORTAR FUENTE BOWLBY ONE SC */
+/* 00. IMPORTAR FUENTES DE GOOGLE */
 /* ========================================== */
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Caveat:wght@400;500;600;700&display=swap');
 
 /* ========================================== */
 /* 02. RESET Y ESTILOS BASE */
@@ -48,32 +48,84 @@ main, .header, .footer {
 }
 
 /* ========================================== */
-/* ✅ TÍTULOS CON BOWLBY ONE SC - RESPONSIVE */
+/* ✅ TÍTULOS PRINCIPALES CON BOWLBY ONE SC */
 /* ========================================== */
-.section-title {
+.section-title,
+h1, h2 {
     font-family: 'Bowlby One SC', cursive, sans-serif;
-    font-size: 36px;       /* ✅ Tamaño solicitado (400 a 36px) */
+    font-size: 36px;       /* ✅ Tamaño solicitado */
     font-weight: 400;      /* ✅ Peso solicitado */
     text-align: center;
     color: var(--chocolate);
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 1.2;
 }
 
-/* ✅ RESPONSIVE: Títulos más grandes se reducen en tablet */
+/* ========================================== */
+/* ✅ TODOS LOS TEXTOS SECUNDARIOS CON CAVEAT */
+/* ========================================== */
+.section-subtitle,
+.section-title + p,
+section p,
+.descripcion,
+.proceso-descripcion,
+.contacto-info p,
+.sobre-nosotros p,
+.producto-descripcion-full p {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;       /* ✅ Tamaño armónico con el título de 36px */
+    font-weight: 500;      /* ✅ Peso medio para buena legibilidad */
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+/* ✅ Subtítulos centrados que van justo debajo de un título principal */
+.section-subtitle,
+.section-title + p {
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    font-size: 26px;       /* Un poco más grande para destacar como subtítulo de sección */
+}
+
+/* ========================================== */
+/* ✅ RESPONSIVE: Ajustes para Tablet y Móvil */
+/* ========================================== */
 @media (max-width: 768px) {
-    .section-title {
+    .section-title, h1, h2 {
         font-size: 28px;
+    }
+    .section-subtitle,
+    .section-title + p,
+    section p,
+    .descripcion,
+    .proceso-descripcion,
+    .contacto-info p,
+    .sobre-nosotros p,
+    .producto-descripcion-full p {
+        font-size: 22px;
     }
 }
 
-/* ✅ RESPONSIVE: Títulos muy largos se reducen más en móvil */
 @media (max-width: 480px) {
-    .section-title {
+    .section-title, h1, h2 {
         font-size: 22px;
         letter-spacing: 0.5px;
+    }
+    .section-subtitle,
+    .section-title + p,
+    section p,
+    .descripcion,
+    .proceso-descripcion,
+    .contacto-info p,
+    .sobre-nosotros p,
+    .producto-descripcion-full p {
+        font-size: 20px;
     }
 }
 
