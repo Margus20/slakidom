@@ -156,6 +156,11 @@ document.addEventListener('componentesListos', () => {
             card.dataset.categoria = producto.categoria;
             card.dataset.nombre = producto.nombre.toLowerCase();
             
+            // ✅ CORRECCIÓN 1: Agregar datasets necesarios para que el carrito funcione
+            card.dataset.id = producto.id;
+            card.dataset.precio = producto.precio;
+            card.dataset.imagen = producto.imagen || '';
+            
             const precioUSD = producto.precio.toFixed(2);
             const [enteroUSD, decimalesUSD] = precioUSD.split('.');
             
@@ -168,7 +173,6 @@ document.addEventListener('componentesListos', () => {
                 ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
                 : `<div class="producto-img-placeholder">🫙</div>`;
             
-            // ✅ AJUSTE: Enlace clicable solo si el producto tiene la propiedad 'url'
             const esClicable = !!producto.url;
             const productoURL = esClicable 
                 ? (isSubfolder ? `../${producto.categoria}/${producto.url}` : `${producto.categoria}/${producto.url}`)
@@ -190,7 +194,6 @@ document.addEventListener('componentesListos', () => {
                 </div>
             `;
 
-            // ✅ Si es clicable, envolvemos la info en un <a>. Si no, la dejamos normal.
             card.innerHTML = `
                 ${esClicable ? `<a href="${productoURL}" style="text-decoration: none; color: inherit; display: block;">${contenidoInfo}</a>` : contenidoInfo}
                 <button class="btn-agregar-carrito" data-id="${producto.id}" ${esClicable ? 'onclick="event.stopPropagation();"' : ''}>Agregar</button>
@@ -264,7 +267,6 @@ document.addEventListener('componentesListos', () => {
         return (parteDecimal >= 50) ? parteEntera + 1 : parteEntera;
     }
 
-    // ✅ ACTUALIZADO: ¡TODOS los productos ahora tienen la propiedad 'url' para ser clicables!
     const PRODUCTOS = [
         { id: 1, nombre: "Galletas de Coco y Vainilla", precio: 2.00, categoria: "galletas", imagen: "img/galletas/coco_vainilla.jpg", url: "coco-vainilla.html" },
         { id: 2, nombre: "Galletas de Limón", precio: 2.00, categoria: "galletas", imagen: "img/galletas/limon.jpg", url: "limon.html" },
@@ -305,11 +307,21 @@ document.addEventListener('componentesListos', () => {
     const navProductosToggleBtn = document.getElementById('navProductosToggle');
     const navProductosDropdownMenu = document.getElementById('navProductosDropdown');
     
+    // ✅ CORRECCIÓN 2: Lógica explícita para que el menú se abra y se cierre al hacer clic
     if (navProductosToggleBtn && navProductosDropdownMenu) {
         navProductosToggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            navProductosDropdownMenu.classList.toggle('activo');
-            navProductosToggleBtn.classList.toggle('activo');
+            const estaActivo = navProductosDropdownMenu.classList.contains('activo');
+            
+            // Cerrar primero
+            navProductosDropdownMenu.classList.remove('activo');
+            navProductosToggleBtn.classList.remove('activo');
+            
+            // Si no estaba activo, lo abrimos
+            if (!estaActivo) {
+                navProductosDropdownMenu.classList.add('activo');
+                navProductosToggleBtn.classList.add('activo');
+            }
         });
         
         document.addEventListener('click', (e) => {
@@ -384,22 +396,47 @@ document.addEventListener('componentesListos', () => {
     btnCerrarCarrito?.addEventListener('click', () => modalCarrito?.classList.remove('activo'));
     modalCarrito?.addEventListener('click', (e) => { if (e.target === modalCarrito) modalCarrito.classList.remove('activo'); });
 
+    // ✅ CORRECCIÓN 3: Funcionalidad real para agregar al carrito desde los índices
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-agregar-carrito')) alert('✅ Producto agregado al carrito');
+        if (e.target.classList.contains('btn-agregar-carrito')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const card = e.target.closest('.producto-card');
+            if (!card) return;
+            
+            const id = parseInt(card.dataset.id);
+            const nombre = card.dataset.nombre;
+            const precio = parseFloat(card.dataset.precio);
+            const imagenRaw = card.dataset.imagen || '';
+            
+            const path = window.location.pathname;
+            const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
+            const imgBasePath = isSubfolder ? '../' : '';
+            const imagen = imagenRaw ? `${imgBasePath}${imagenRaw}` : '';
+            
+            let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+            const existe = carrito.find(item => item.id === id);
+            if (existe) {
+                existe.cantidad += 1;
+            } else {
+                carrito.push({
+                    id: id,
+                    nombre: nombre.charAt(0).toUpperCase() + nombre.slice(1),
+                    precio: precio,
+                    cantidad: 1,
+                    imagen: imagen
+                });
+            }
+            
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            window.dispatchEvent(new Event('carritoActualizado'));
+            alert(`✅ Agregaste 1 unidad de ${nombre.charAt(0).toUpperCase() + nombre.slice(1)} al carrito`);
+        }
     });
 
     function crearCopoDeNieve() {
         const copo = document.createElement('div');
         copo.className = 'snowflake';
         copo.innerHTML = '❄';
-        copo.style.left = Math.random() * 100 + 'vw';
-        copo.style.animationDuration = Math.random() * 3 + 2 + 's';
-        copo.style.opacity = Math.random() * 0.7 + 0.3;
-        copo.style.fontSize = Math.random() * 15 + 10 + 'px';
-        document.body.appendChild(copo);
-        setTimeout(() => { copo.remove(); }, 5000);
-    }
-    setInterval(crearCopoDeNieve, 100);
-
-    console.log('🎉 [DEBUG]: ¡Sistema SLAKIDOM activo y listo!');
-});
+        copo.style.left = 
