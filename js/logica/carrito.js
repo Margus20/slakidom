@@ -1,40 +1,50 @@
 // ==========================================
-// LÓGICA DEL CARRITO DE COMPRAS (carrito.js)
+// LÓGICA DEL CARRITO DE COMPRAS (js/carrito.js)
 // ==========================================
 
 const NUMERO_WHATSAPP = "584122879803";
 
-// ✅ 1. Inicializar el carrito desde localStorage (Fuente de verdad)
-let carrito = JSON.parse(localStorage.getItem('slakidom_carrito') || '[]');
+// ✅ Usamos la clave 'carrito' para mantener consistencia con todo el sistema
+let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
 
 export function inicializarCarrito() {
+    console.log('🛒 [CARRITO]: Inicializando... Productos en carrito:', carrito.length);
     actualizarContadorCarrito();
     
-    // ✅ 2. Escuchar los clics en los botones "Agregar" generados por app.js
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-agregar-carrito')) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const card = e.target.closest('.producto-card');
-            if (!card) return;
-            
-            // Leer datos del HTML
-            const producto = {
-                id: parseInt(card.dataset.id),
-                nombre: card.dataset.nombre.charAt(0).toUpperCase() + card.dataset.nombre.slice(1),
-                precio: parseFloat(card.dataset.precio), // ✅ Precio como número
-                imagen: card.dataset.imagen || ''
-            };
-            
-            agregarAlCarrito(producto);
-        }
-    });
+    // ✅ Escuchar los clics en los botones "Agregar" generados por app.js
+    document.addEventListener('click', manejarClickAgregar);
 
     // Hacer funciones accesibles globalmente para los botones del HTML (modal)
     window.eliminarDelCarrito = eliminarDelCarrito;
     window.cerrarCarritoModal = cerrarCarritoModal;
     window.finalizarPedidoWhatsApp = finalizarPedidoWhatsApp;
+    
+    // ✅ Escuchar actualizaciones desde otras partes
+    window.addEventListener('carritoActualizado', () => {
+        carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+        actualizarContadorCarrito();
+    });
+}
+
+function manejarClickAgregar(e) {
+    if (e.target.classList.contains('btn-agregar-carrito')) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const card = e.target.closest('.producto-card');
+        if (!card) return;
+        
+        const producto = {
+            id: parseInt(card.dataset.id),
+            nombre: card.dataset.nombre.charAt(0).toUpperCase() + card.dataset.nombre.slice(1),
+            precio: parseFloat(card.dataset.precio),
+            imagen: card.dataset.imagen || '',
+            cantidad: 1
+        };
+        
+        console.log('🛒 [CARRITO]: Agregando producto:', producto);
+        agregarAlCarrito(producto);
+    }
 }
 
 export function agregarAlCarrito(producto) {
@@ -43,7 +53,7 @@ export function agregarAlCarrito(producto) {
     if (existe) {
         existe.cantidad += 1;
     } else {
-        carrito.push({ ...producto, cantidad: 1 });
+        carrito.push(producto);
     }
     
     guardarCarrito();
@@ -52,18 +62,18 @@ export function agregarAlCarrito(producto) {
     // ✅ Disparar evento para que el modal (si está abierto) se actualice
     window.dispatchEvent(new Event('carritoActualizado'));
     
-    mostrarNotificacion(`¡${producto.nombre} agregado!`);
+    mostrarNotificacion(`¡${producto.nombre} agregado al carrito!`);
 }
 
 function guardarCarrito() {
-    localStorage.setItem('slakidom_carrito', JSON.stringify(carrito));
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
 export function actualizarContadorCarrito() {
-    // ✅ Busca tanto el contador del header como el flotante de Excalibur
-    const contadores = document.querySelectorAll('#contador-carrito, #contador-carrito-flotante');
     const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
     
+    // ✅ Busca tanto el contador del header como el flotante de Excalibur
+    const contadores = document.querySelectorAll('#contador-carrito, #contador-carrito-flotante');
     contadores.forEach(contador => {
         if (contador) {
             contador.textContent = totalItems;
@@ -77,7 +87,14 @@ export function mostrarCarritoModal() {
     const lista = document.getElementById("lista-carrito");
     const totalElement = document.getElementById("total-carrito");
     
-    if (!modal || !lista) return;
+    if (!modal || !lista) {
+        console.error('❌ [CARRITO]: No se encontró el modal o la lista en el DOM');
+        return;
+    }
+
+    // ✅ Recargar carrito desde localStorage por si acaso
+    carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    console.log('🛒 [CARRITO]: Mostrando modal. Productos actuales:', carrito);
 
     lista.innerHTML = "";
     let total = 0;
@@ -87,7 +104,7 @@ export function mostrarCarritoModal() {
         if (totalElement) totalElement.textContent = "$0.00";
     } else {
         carrito.forEach((item, index) => {
-            const subtotal = item.precio * item.cantidad; // ✅ Precio ya es número
+            const subtotal = item.precio * item.cantidad;
             total += subtotal;
 
             // ✅ Construir ruta de imagen correcta para el modal
@@ -120,10 +137,14 @@ export function mostrarCarritoModal() {
 
 export function cerrarCarritoModal() {
     const modal = document.getElementById("modal-carrito");
-    if (modal) modal.classList.remove("activo");
+    if (modal) {
+        modal.classList.remove("activo");
+        console.log('🛒 [CARRITO]: Modal cerrado');
+    }
 }
 
 export function eliminarDelCarrito(index) {
+    console.log('🛒 [CARRITO]: Eliminando producto en índice:', index);
     carrito.splice(index, 1);
     guardarCarrito();
     actualizarContadorCarrito();
@@ -131,6 +152,10 @@ export function eliminarDelCarrito(index) {
 }
 
 export function finalizarPedidoWhatsApp() {
+    console.log('🛒 [CARRITO]: Finalizando pedido por WhatsApp');
+    // ✅ Recargar carrito desde localStorage
+    carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    
     if (carrito.length === 0) {
         alert("Tu carrito está vacío");
         return;
@@ -148,6 +173,7 @@ export function finalizarPedidoWhatsApp() {
     mensaje += `%0A💰 *Total a pagar: $${total.toFixed(2)}*`;
     mensaje += "%0A%0AQuedo atento a los datos de Pago Móvil para realizar la transferencia. ¡Gracias!";
 
+    console.log('🛒 [CARRITO]: Abriendo WhatsApp...');
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`, "_blank");
 }
 
@@ -157,7 +183,6 @@ function mostrarNotificacion(mensaje) {
     notif.textContent = mensaje;
     document.body.appendChild(notif);
     
-    // Forzar reflow para la animación
     setTimeout(() => {
         notif.style.opacity = "1";
         notif.style.transform = "translateY(0)";
