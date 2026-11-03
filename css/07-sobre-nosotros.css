@@ -40,3 +40,49 @@
     margin-bottom: var(--espacio-entre-elementos);
     color: var(--chocolate);
 }
+
+/* ========================================== */
+/* ✅ RESPONSIVE: SOBRE NOSOTROS */
+/* ========================================== */
+
+/* ✅ TABLET */
+@media (max-width: var(--breakpoint-tablet)) {
+    .chef-content {
+        gap: var(--gap-sobre-nosotros-tablet);
+    }
+    
+    .chef-placeholder {
+        width: var(--tamano-placeholder-chef-tablet);
+        height: var(--tamano-placeholder-chef-tablet);
+        font-size: var(--tamano-placeholder-chef-fuente-tablet);
+    }
+    
+    .chef-texto h3 {
+        font-size: var(--tamano-nombre-chef-tablet);
+    }
+    
+    .chef-historia, .chef-mascota {
+        font-size: var(--tamano-texto-chef-tablet);
+    }
+}
+
+/* ✅ MÓVIL */
+@media (max-width: var(--breakpoint-movil)) {
+    .chef-content {
+        gap: var(--gap-sobre-nosotros-movil);
+    }
+    
+    .chef-placeholder {
+        width: var(--tamano-placeholder-chef-movil);
+        height: var(--tamano-placeholder-chef-movil);
+        font-size: var(--tamano-placeholder-chef-fuente-movil);
+    }
+    
+    .chef-texto h3 {
+        font-size: var(--tamano-nombre-chef-movil);
+    }
+    
+    .chef-historia, .chef-mascota {
+        font-size: var(--tamano-texto-chef-movil);
+    }
+}
