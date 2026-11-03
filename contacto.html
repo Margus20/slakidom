@@ -27,7 +27,7 @@
         /* ✅ CONTENEDOR DE LOS PASOS - FORZADO 3 COLUMNAS EN ESCRITORIO */
         .pasos-pedir {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* ✅ FORZADO: 3 columnas iguales */
+            grid-template-columns: repeat(3, 1fr);
             gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
@@ -64,10 +64,10 @@
             text-transform: uppercase;
         }
         
-        /* ✅ TEXTO CON EL MISMO TAMAÑO QUE LOS SUBTÍTULOS */
+        /* ✅ TEXTO CON TAMAÑO UNIFICADO 26PX */
         .paso-pedir p {
             font-family: 'Caveat', cursive;
-            font-size: 36px;
+            font-size: 26px;           /* ✅ AJUSTADO: De 36px a 26px */
             font-weight: 700;
             color: var(--chocolate);
             line-height: 1.4;
@@ -89,7 +89,7 @@
         
         .contacto-bloque .mensaje-final {
             font-family: 'Caveat', cursive;
-            font-size: 32px;
+            font-size: 26px;           /* ✅ AJUSTADO: De 32px a 26px */
             font-weight: 700;
             color: var(--chocolate);
             margin: 0;
@@ -106,13 +106,13 @@
                 font-size: 26px;
             }
             .paso-pedir p {
-                font-size: 32px;
+                font-size: 26px;       /* ✅ MANTENIDO: 26px */
             }
         }
         
         @media (max-width: 768px) {
             .pasos-pedir {
-                grid-template-columns: 1fr; /* ✅ Una sola columna en móviles */
+                grid-template-columns: 1fr;
                 gap: 50px;
             }
             .paso-imagen {
@@ -123,10 +123,10 @@
                 font-size: 24px;
             }
             .paso-pedir p {
-                font-size: 28px;
+                font-size: 22px;       /* ✅ AJUSTADO: De 28px a 22px */
             }
             .contacto-bloque .mensaje-final {
-                font-size: 28px;
+                font-size: 22px;       /* ✅ AJUSTADO: De 28px a 22px */
             }
         }
         
@@ -145,14 +145,14 @@
                 font-size: 22px;
             }
             .paso-pedir p {
-                font-size: 24px;
+                font-size: 18px;       /* ✅ AJUSTADO: De 24px a 18px */
             }
             .contacto-bloque {
                 padding: 30px 20px;
                 margin-top: 60px;
             }
             .contacto-bloque .mensaje-final {
-                font-size: 24px;
+                font-size: 18px;       /* ✅ AJUSTADO: De 24px a 18px */
             }
         }
     </style>
@@ -191,7 +191,7 @@
                 </div>
             </div>
             
-            <!-- ✅ CUADRO DE CONTACTO: SOLO MENSAJE FINAL (Sin WhatsApp ni Ubicación) -->
+            <!-- ✅ CUADRO DE CONTACTO: SOLO MENSAJE FINAL -->
             <div class="contacto-bloque">
                 <p class="mensaje-final">¡Estamos listos para atenderte!</p>
             </div>
