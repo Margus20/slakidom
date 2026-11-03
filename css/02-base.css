@@ -13,21 +13,25 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* ✅ USANDO VARIABLES DEL ARCHIVO 01 */
+    font-family: var(--fuente-texto);
     background-color: var(--blanco);
     color: var(--chocolate);
     line-height: 1.6;
     min-height: 100vh;
-    
+    position: relative;
+}
+
+/* ✅ TRUCO: Aplicar fondo transparente SOLO si NO es una página de producto */
+body:not(:has(.producto-detalle)) {
     background-image: url('../img/1_transparencia.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    position: relative;
 }
 
-body::before {
+body:not(:has(.producto-detalle))::before {
     content: '';
     position: fixed;
     top: 0;
@@ -39,48 +43,46 @@ body::before {
     pointer-events: none;
 }
 
+/* ✅ USANDO VARIABLES DE Z-INDEX */
 main, .header, .footer {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-base);
 }
 
 /* ========================================== */
-/* ✅ TÍTULOS PRINCIPALES CON BOWLBY ONE SC */
+/* ✅ TÍTULOS PRINCIPALES */
 /* ========================================== */
 .section-title,
 h1, h2 {
-    font-family: 'Bowlby One SC', cursive, sans-serif !important;
-    font-size: 36px !important;
+    font-family: var(--fuente-titulo) !important;
+    font-size: var(--tamano-titulo-grande) !important;
     font-weight: 400 !important;
     text-align: center;
     color: var(--chocolate);
-    margin-bottom: 10px;
+    margin-bottom: var(--espacio-sm);
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 1.2;
 }
 
 /* ========================================== */
-/* ✅ SUBTÍTULOS CON CAVEAT - 26PX */
+/* ✅ SUBTÍTULOS */
 /* ========================================== */
 .section-subtitle {
-    font-family: 'Caveat', cursive !important;
-    font-size: 26px !important;
+    font-family: var(--fuente-subtitulo) !important;
+    font-size: var(--tamano-subtitulo) !important;
     font-weight: 700 !important;
     text-align: center !important;
     color: var(--chocolate) !important;
     line-height: 1.3;
     max-width: 90%;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 40px !important;
+    margin: 0 auto var(--espacio-lg) auto !important;
     display: block;
 }
 
 /* ========================================== */
-/* ✅ TEXTOS SECUNDARIOS EN SECCIONES (CAVEAT 26PX) */
+/* ✅ TEXTOS SECUNDARIOS EN SECCIONES */
 /* ========================================== */
-/* NOTA: Se eliminó .producto-descripcion-full p de esta lista */
 section p,
 .descripcion,
 .proceso-descripcion,
@@ -88,74 +90,61 @@ section p,
 .sobre-nosotros p,
 .paso-pedir p,
 .contacto-bloque p {
-    font-family: 'Caveat', cursive;
-    font-size: 26px;
+    font-family: var(--fuente-subtitulo);
+    font-size: var(--tamano-subtitulo);
     font-weight: 700;
     color: var(--chocolate);
     line-height: 1.4;
-    margin-bottom: 15px;
+    margin-bottom: var(--espacio-sm);
 }
 
 /* ========================================== */
-/* ✅ DESCRIPCIÓN DE PRODUCTOS INDIVIDUALES (LEGIBLE) */
+/* ✅ DESCRIPCIÓN DE PRODUCTOS INDIVIDUALES */
 /* ========================================== */
-/* Esta regla anula la anterior SOLO para los párrafos de descripción de productos */
 .producto-descripcion-full p {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    font-size: 16px !important;              /* ✅ Tamaño legible */
-    font-weight: 400 !important;             /* ✅ Peso normal */
-    color: #555 !important;                  /* ✅ Color gris suave */
-    line-height: 1.7 !important;             /* ✅ Espaciado cómodo para leer */
-    margin-bottom: 15px !important;
-    font-style: normal !important;           /* ✅ Sin cursiva */
+    font-family: var(--fuente-texto) !important;
+    font-size: var(--tamano-texto) !important;
+    font-weight: 400 !important;
+    color: var(--gris-oscuro) !important; /* Usando variable */
+    line-height: 1.7 !important;
+    margin-bottom: var(--espacio-sm) !important;
+    font-style: normal !important;
 }
 
 /* ========================================== */
 /* ✅ RESPONSIVE */
 /* ========================================== */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
     .section-title, h1, h2 {
-        font-size: 28px !important;
+        font-size: var(--tamano-titulo-mediano) !important;
     }
     .section-subtitle {
-        font-size: 22px !important;
+        font-size: 22px !important; /* Valor específico para tablet */
     }
-    section p,
-    .descripcion,
-    .proceso-descripcion,
-    .contacto-info p,
-    .sobre-nosotros p,
-    .paso-pedir p,
-    .contacto-bloque p {
+    section p, .descripcion, .proceso-descripcion, .contacto-info p, .sobre-nosotros p, .paso-pedir p, .contacto-bloque p {
         font-size: 22px;
     }
     .producto-descripcion-full p {
-        font-size: 15px !important;          /* ✅ Legible en tablet */
+        font-size: 15px !important;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: var(--breakpoint-movil)) {
     .section-title, h1, h2 {
-        font-size: 22px !important;
+        font-size: var(--tamano-titulo-pequeno) !important;
         letter-spacing: 0.5px;
     }
     .section-subtitle {
         font-size: 18px !important;
     }
-    section p,
-    .descripcion,
-    .proceso-descripcion,
-    .contacto-info p,
-    .sobre-nosotros p,
-    .paso-pedir p,
-    .contacto-bloque p {
+    section p, .descripcion, .proceso-descripcion, .contacto-info p, .sobre-nosotros p, .paso-pedir p, .contacto-bloque p {
         font-size: 18px;
     }
     .producto-descripcion-full p {
-        font-size: 14px !important;          /* ✅ Legible en móvil */
+        font-size: var(--tamano-texto-pequeno) !important;
     }
 }
 
 section {
-    padding: 60px 20px;
+    padding: var(--espacio-xl) var(--espacio-md);
 }
