@@ -6,29 +6,29 @@
 .footer {
     background: var(--chocolate);
     color: var(--blanco);
-    padding: 40px 20px;
+    padding: var(--padding-footer-desktop);
     text-align: center;
     position: relative;
     z-index: 1;
 }
 
 .footer h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: var(--tamano-titulo-footer-desktop);
+    margin-bottom: var(--espacio-md);
     color: var(--amarillo);
 }
 
 .contacto-info {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: var(--gap-contacto-info-desktop);
+    margin-bottom: var(--espacio-lg);
 }
 
 .contacto-item {
     color: var(--blanco);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: var(--tamano-contacto-item-desktop);
 }
 
 .contacto-item:hover {
@@ -36,11 +36,65 @@
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 20px;
-    font-size: 0.9rem;
+    border-top: var(--borde-footer-bottom);
+    padding-top: var(--padding-top-footer-bottom);
+    font-size: var(--tamano-footer-bottom-desktop);
     opacity: 0.8;
 }
 
 /* ✅ NOTA: El estilo de .whatsapp-flotante ya está en 10-animaciones.css */
 /* con las posiciones correctas (WhatsApp a la izquierda, Excalibur a la derecha) */
+
+/* ========================================== */
+/* ✅ RESPONSIVE: FOOTER */
+/* ========================================== */
+
+/* ✅ TABLET */
+@media (max-width: var(--breakpoint-tablet)) {
+    .footer {
+        padding: var(--padding-footer-tablet);
+    }
+    
+    .footer h3 {
+        font-size: var(--tamano-titulo-footer-tablet);
+    }
+    
+    .contacto-info {
+        gap: var(--gap-contacto-info-tablet);
+        margin-bottom: var(--espacio-md);
+    }
+    
+    .contacto-item {
+        font-size: var(--tamano-contacto-item-tablet);
+    }
+    
+    .footer-bottom {
+        padding-top: var(--padding-top-footer-bottom-tablet);
+        font-size: var(--tamano-footer-bottom-tablet);
+    }
+}
+
+/* ✅ MÓVIL */
+@media (max-width: var(--breakpoint-movil)) {
+    .footer {
+        padding: var(--padding-footer-movil);
+    }
+    
+    .footer h3 {
+        font-size: var(--tamano-titulo-footer-movil);
+    }
+    
+    .contacto-info {
+        gap: var(--gap-contacto-info-movil);
+        margin-bottom: var(--espacio-sm);
+    }
+    
+    .contacto-item {
+        font-size: var(--tamano-contacto-item-movil);
+    }
+    
+    .footer-bottom {
+        padding-top: var(--padding-top-footer-bottom-movil);
+        font-size: var(--tamano-footer-bottom-movil);
+    }
+}
