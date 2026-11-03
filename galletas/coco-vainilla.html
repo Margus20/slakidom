@@ -8,7 +8,7 @@
     
     <link rel="icon" type="image/png" href="../img/slaky_cuadrado.jpg">
     
-    <!-- CSS MODULAR (Actualizado con la nueva estructura) -->
+    <!-- CSS MODULAR -->
     <link rel="stylesheet" href="../css/01-variables.css">
     <link rel="stylesheet" href="../css/02-base.css">
     <link rel="stylesheet" href="../css/03-header.css">
@@ -16,78 +16,102 @@
     <link rel="stylesheet" href="../css/09-footer.css">
     <link rel="stylesheet" href="../css/10-animaciones.css">
     
-    <!-- ESTILOS ESPECÍFICOS DEL PRODUCTO -->
+    <!-- ESTILOS ESPECÍFICOS DEL PRODUCTO (CORREGIDO) -->
     <style>
-        /* ✅ FONDO BLANCO SÓLIDO PARA LA PÁGINA DE PRODUCTO */
+        /* ✅ 1. ELIMINAR FONDO TRANSPARENTE (EFECTO TELÓN) */
         body {
             background: #ffffff !important;
+            background-image: none !important;
+        }
+        body::before {
+            display: none !important;
         }
         
         .producto-detalle {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background: #ffffff; /* ✅ BLANCO SÓLIDO */
+            padding: 60px 20px 40px 20px;
+            background: #ffffff;
+            position: relative;
+            z-index: 10; /* ✅ Evita parpadeos con el header */
         }
         
         .producto-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
             align-items: start;
         }
         
+        /* ✅ 2. IMAGEN FIJA AL HACER SCROLL */
         .producto-imagen {
             position: sticky;
-            top: 100px;
+            top: 120px; /* Se queda fija debajo del header */
+            align-self: start;
         }
         
         .producto-imagen img {
             width: 100%;
+            max-width: 450px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             object-fit: cover;
+            display: block;
         }
         
+        .producto-info {
+            padding-top: 10px;
+        }
+        
+        /* ✅ 3. TÍTULOS ALINEADOS A LA IZQUIERDA */
         .producto-info h1 {
-            font-size: 2rem;
+            font-family: 'Bowlby One SC', cursive, sans-serif;
+            font-size: 2.2rem;
             color: var(--chocolate, #5D4037);
             margin-bottom: 15px;
+            text-align: left;
+            text-transform: uppercase;
         }
         
-        /* ✅ PRECIO SIN RECUADRO */
+        /* ✅ 4. FORMATO DE PRECIOS: UNO ARRIBA DEL OTRO, EL DE ABAJO DILUIDO */
         .producto-precio-detalle {
-            margin: 30px 0;
+            margin: 20px 0 30px 0;
             padding: 0;
             background: transparent;
             border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
         }
         
         .precio-wrapper {
             display: flex;
             align-items: flex-start;
             gap: 2px;
+            line-height: 1;
         }
         
         .precio-principal {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: bold;
             color: var(--chocolate, #5D4037);
         }
         
         .precio-centavos {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: var(--chocolate, #5D4037);
             align-self: flex-start;
-            margin-top: 5px;
+            margin-top: 6px;
         }
         
         .precio-secundario {
-            font-size: 1.2rem;
-            color: #666;
-            font-weight: 600;
-            margin-top: 5px;
+            font-size: 1rem;
+            color: #888; /* ✅ Color diluido/tenue */
+            font-weight: 500;
+            opacity: 0.8;
+            margin-top: 0;
         }
         
         .cantidad-selector {
@@ -144,7 +168,6 @@
             color: var(--chocolate, #5D4037);
         }
         
-        /* ✅ BOTÓN CON TEXTO AMARILLO */
         .btn-agregar-detalle {
             flex: 1;
             height: 45px;
@@ -167,42 +190,49 @@
             box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
         }
         
-        /* ✅ DESCRIPCIÓN CON FONDO BLANCO */
+        /* ✅ 5. DESCRIPCIÓN ALINEADA A LA IZQUIERDA Y FUENTE LEGIBLE */
         .producto-descripcion-full {
             grid-column: 1 / -1;
-            margin-top: 40px;
+            margin-top: 60px;
             padding-top: 40px;
             border-top: 2px solid #eee;
             width: 100%;
-            background: #ffffff; /* ✅ BLANCO SÓLIDO */
+            background: #ffffff;
         }
         
         .producto-descripcion-full h2 {
+            font-family: 'Bowlby One SC', cursive, sans-serif;
             color: var(--chocolate, #5D4037);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 1.5rem;
+            text-align: left; /* ✅ Alineado a la izquierda */
+            text-transform: uppercase;
         }
         
         .producto-descripcion-full p {
-            line-height: 1.4;
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 15px;
             max-width: 900px;
+            text-align: left;
         }
         
         .producto-caracteristicas {
-            margin-top: 25px;
-            padding: 20px;
-            background: #fff8f0; /* ✅ COLOR ORIGINAL (crema claro) */
+            margin-top: 30px;
+            padding: 25px;
+            background: #fff8f0;
             border-radius: 10px;
             max-width: 900px;
+            border-left: 4px solid var(--amarillo, #FFD700);
         }
         
         .producto-caracteristicas h3 {
             color: var(--chocolate, #5D4037);
             margin-bottom: 15px;
             font-size: 1.2rem;
+            font-family: 'Bowlby One SC', cursive, sans-serif;
         }
         
         .producto-caracteristicas ul {
@@ -217,8 +247,9 @@
             padding: 5px 0;
             padding-left: 30px;
             position: relative;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #555;
+            font-family: 'Segoe UI', sans-serif;
         }
         
         .producto-caracteristicas li:before {
@@ -240,12 +271,16 @@
                 top: 0;
             }
             
+            .producto-imagen img {
+                max-width: 100%;
+            }
+            
             .producto-info h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             
             .precio-principal {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .accion-container {
@@ -272,7 +307,7 @@
 </head>
 <body>
     
-    <!-- ✅ HEADER (se inyecta desde app.js - MANTIENE SU FONDO AMARILLO TRANSPARENTE) -->
+    <!-- ✅ HEADER (se inyecta desde app.js) -->
     <div id="header-container"></div>
     
     <main>
@@ -289,7 +324,7 @@
                 <div class="producto-info">
                     <h1>Galletas de Coco y Vainilla</h1>
                     
-                    <!-- ✅ PRECIO SIN RECUADRO -->
+                    <!-- ✅ PRECIO FORMATO CORREGIDO -->
                     <div class="producto-precio-detalle">
                         <div class="precio-wrapper">
                             <span class="precio-principal">$2</span>
@@ -309,7 +344,6 @@
                                 <input type="number" id="cantidad" value="1" min="1" max="50" readonly>
                                 <button type="button" onclick="cambiarCantidad(1)">+</button>
                             </div>
-                            <!-- ✅ BOTÓN CON TEXTO "AGREGAR" EN AMARILLO -->
                             <button class="btn-agregar-detalle" onclick="agregarAlCarrito()">
                                 Agregar
                             </button>
@@ -317,7 +351,7 @@
                     </div>
                 </div>
 
-                <!-- DESCRIPCIÓN ANCHO COMPLETO CON FONDO BLANCO -->
+                <!-- DESCRIPCIÓN ANCHO COMPLETO -->
                 <div class="producto-descripcion-full">
                     <h2>Descripción del Producto</h2>
                     <p>
@@ -408,25 +442,17 @@
             
             localStorage.setItem('carrito', JSON.stringify(carrito));
             actualizarContadorCarrito();
-            
-            // ✅ DISPARAR EVENTO PARA ACTUALIZAR EL MODAL DEL CARRITO
             window.dispatchEvent(new Event('carritoActualizado'));
-            
             alert(`✅ Agregaste ${cantidad} unidad(es) de Galletas de Coco y Vainilla al carrito`);
         }
         
         function actualizarContadorCarrito() {
             const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
             const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            
             const contador = document.getElementById('contador-carrito-flotante');
             if (contador) {
                 contador.textContent = totalItems;
-                if (totalItems > 0) {
-                    contador.style.display = 'flex';
-                } else {
-                    contador.style.display = 'none';
-                }
+                contador.style.display = totalItems > 0 ? 'flex' : 'none';
             }
         }
         
@@ -439,6 +465,5 @@
             actualizarContadorCarrito();
         });
     </script>
-    
 </body>
 </html>
