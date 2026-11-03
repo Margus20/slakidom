@@ -71,6 +71,21 @@
     --tamano-nombre-chef: 1.8rem;
     --tamano-texto-chef: 1.1rem;
     --tamano-placeholder-chef: 6rem;
+
+    /* ✅ TAMAÑOS DE CÓMO PEDIR */
+    --tamano-titulo-paso-desktop: 28px;
+    --tamano-titulo-paso-tablet: 26px;
+    --tamano-titulo-paso-movil: 24px;
+    --tamano-titulo-paso-movil-pequeno: 22px;
+    --tamano-mensaje-final-desktop: 32px;
+    --tamano-mensaje-final-movil: 28px;
+    --tamano-mensaje-final-movil-pequeno: 24px;
+    
+    /* ✅ TAMAÑOS DE IMAGEN DE PASO (Cómo Pedir) */
+    --tamano-imagen-paso-desktop: 200px;
+    --tamano-imagen-paso-tablet: 180px;
+    --tamano-imagen-paso-movil: 150px;
+    --tamano-imagen-paso-movil-pequeno: 120px;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -85,6 +100,7 @@
     /* ✅ GAP DE SECCIONES */
     --gap-proceso: 30px;
     --gap-sobre-nosotros: 30px;
+    --gap-pasos-pedir: 40px;
 
     /* ✅ ESPACIO ENTRE ELEMENTOS */
     --espacio-entre-elementos: 15px;
@@ -96,6 +112,13 @@
     
     /* ✅ PADDINGS DE PASOS (Proceso) */
     --padding-paso: 30px 20px;
+
+    /* ✅ PADDINGS DE CÓMO PEDIR */
+    --padding-como-pedir: 60px 20px;
+    --padding-como-pedir-movil: 40px 15px;
+    --padding-paso-pedir: 20px;
+    --padding-contacto-bloque: 40px 30px;
+    --padding-contacto-bloque-movil: 30px 20px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -111,6 +134,9 @@
     --radio-botón-grande: 50px;
     --radio-boton-agregar: 20px;
     --radio-boton-pedir: 25px;
+
+    /* ✅ BORDES ADICIONALES */
+    --borde-contacto-bloque: 3px solid var(--amarillo);
     
     /* ========================================== */
     /* 🌑 SOMBRAS */
@@ -163,5 +189,9 @@
     /* ========================================== */
     --max-width-proceso: 1000px;
     --max-width-sobre-nosotros: 800px;
+    --max-width-pasos-pedir: 1200px;
+    --max-width-contacto-bloque: 600px;
     --tamano-placeholder-chef-contenedor: 200px;
+    --margin-top-contacto-bloque: 80px;
+    --margin-top-contacto-bloque-movil: 60px;
 }
