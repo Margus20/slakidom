@@ -79,19 +79,21 @@ h1, h2 {
 }
 
 /* ========================================== */
-/* ✅ TEXTOS SECUNDARIOS EN SECCIONES */
+/* ✅ TEXTOS SECUNDARIOS EN SECCIONES (UNIFICADOS AL TAMAÑO DEL SUBTÍTULO) */
 /* ========================================== */
 section p,
 .descripcion,
 .proceso-descripcion,
 .contacto-info p,
 .sobre-nosotros p,
-.producto-descripcion-full p {
+.producto-descripcion-full p,
+.paso-pedir p,
+.contacto-bloque p {
     font-family: 'Caveat', cursive;
-    font-size: 24px;
-    font-weight: 600;
-    color: #444;
-    line-height: 1.5;
+    font-size: 36px;        /* ✅ AJUSTADO: Mismo tamaño que .section-subtitle */
+    font-weight: 700;       /* ✅ AJUSTADO: Negritas máximas */
+    color: var(--chocolate);/* ✅ AJUSTADO: Mismo color para consistencia */
+    line-height: 1.4;
     margin-bottom: 15px;
 }
 
@@ -112,8 +114,11 @@ section p,
     .proceso-descripcion,
     .contacto-info p,
     .sobre-nosotros p,
-    .producto-descripcion-full p {
-        font-size: 22px;
+    .producto-descripcion-full p,
+    .paso-pedir p,
+    .contacto-bloque p {
+        font-size: 28px;    /* ✅ AJUSTADO: Mismo tamaño que subtítulo en tablet */
+        font-weight: 700;
     }
 }
 
@@ -132,8 +137,11 @@ section p,
     .proceso-descripcion,
     .contacto-info p,
     .sobre-nosotros p,
-    .producto-descripcion-full p {
-        font-size: 20px;
+    .producto-descripcion-full p,
+    .paso-pedir p,
+    .contacto-bloque p {
+        font-size: 22px;    /* ✅ AJUSTADO: Mismo tamaño que subtítulo en móvil */
+        font-weight: 700;
     }
 }
 
