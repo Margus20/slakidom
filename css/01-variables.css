@@ -66,6 +66,11 @@
     /* ✅ TAMAÑOS DE PASO (Proceso) */
     --tamano-numero-paso: 50px;
     --tamano-numero-paso-fuente: 1.5rem;
+
+    /* ✅ TAMAÑOS DE CHEF (Sobre Nosotros) */
+    --tamano-nombre-chef: 1.8rem;
+    --tamano-texto-chef: 1.1rem;
+    --tamano-placeholder-chef: 6rem;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -79,6 +84,10 @@
     
     /* ✅ GAP DE SECCIONES */
     --gap-proceso: 30px;
+    --gap-sobre-nosotros: 30px;
+
+    /* ✅ ESPACIO ENTRE ELEMENTOS */
+    --espacio-entre-elementos: 15px;
     
     /* ✅ PADDINGS DE BOTONES */
     --padding-boton-agregar: 6px 14px;
@@ -153,4 +162,6 @@
     /* 🔄 LAYOUT / DIMENSIONES DE SECCIONES */
     /* ========================================== */
     --max-width-proceso: 1000px;
+    --max-width-sobre-nosotros: 800px;
+    --tamano-placeholder-chef-contenedor: 200px;
 }
