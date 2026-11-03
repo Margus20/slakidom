@@ -6,20 +6,20 @@
 }
 
 .chef-content {
-    max-width: 800px;
+    max-width: var(--max-width-sobre-nosotros);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: var(--gap-sobre-nosotros);
 }
 
 .chef-placeholder {
-    font-size: 6rem;
+    font-size: var(--tamano-placeholder-chef);
     background: var(--amarillo);
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    width: var(--tamano-placeholder-chef-contenedor);
+    height: var(--tamano-placeholder-chef-contenedor);
+    border-radius: var(--radio-redondo);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,13 +30,13 @@
 }
 
 .chef-texto h3 {
-    font-size: 1.8rem;
+    font-size: var(--tamano-nombre-chef);
     color: var(--rosa);
-    margin-bottom: 15px;
+    margin-bottom: var(--espacio-entre-elementos);
 }
 
 .chef-historia, .chef-mascota {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    font-size: var(--tamano-texto-chef);
+    margin-bottom: var(--espacio-entre-elementos);
     color: var(--chocolate);
 }
