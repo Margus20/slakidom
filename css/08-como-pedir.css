@@ -3,16 +3,16 @@
 /* ========================================== */
 
 .como-pedir {
-    background: var(--blanco, #FFFFFF);
-    padding: 60px 20px;
+    background: var(--blanco);
+    padding: var(--padding-como-pedir);
 }
 
 /* ✅ FORZADO: 3 columnas en pantallas grandes */
 .pasos-pedir {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* ✅ 3 columnas iguales */
-    gap: 40px;
-    max-width: 1200px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-pasos-pedir);
+    max-width: var(--max-width-pasos-pedir);
     margin: 0 auto;
 }
 
@@ -21,18 +21,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: var(--padding-paso-pedir);
 }
 
 /* ✅ Imágenes de los pasos */
 .paso-imagen {
-    width: 200px;
-    height: 200px;
+    width: var(--tamano-imagen-paso-desktop);
+    height: var(--tamano-imagen-paso-desktop);
     object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    border-radius: var(--radio-mediano);
+    margin-bottom: var(--espacio-md);
+    box-shadow: var(--sombra-media);
+    transition: transform var(--transicion-normal);
 }
 
 .paso-imagen:hover {
@@ -40,29 +40,29 @@
 }
 
 .paso-pedir h3 {
-    font-family: 'Bowlby One SC', cursive, sans-serif;
-    font-size: 28px;
+    font-family: var(--fuente-titulo);
+    font-size: var(--tamano-titulo-paso-desktop);
     color: var(--chocolate);
-    margin-bottom: 15px;
+    margin-bottom: var(--espacio-sm);
     text-transform: uppercase;
 }
 
 /* ✅ CUADRO DE CONTACTO */
 .contacto-bloque {
-    margin-top: 80px;
-    max-width: 600px;
+    margin-top: var(--margin-top-contacto-bloque);
+    max-width: var(--max-width-contacto-bloque);
     margin-left: auto;
     margin-right: auto;
-    padding: 40px 30px;
-    background: var(--blanco, #FFFFFF);
-    border: 3px solid var(--amarillo, #FFD700);
-    border-radius: 20px;
+    padding: var(--padding-contacto-bloque);
+    background: var(--blanco);
+    border: var(--borde-contacto-bloque);
+    border-radius: var(--radio-grande);
     text-align: center;
 }
 
 .contacto-bloque .mensaje-final {
-    font-family: 'Caveat', cursive;
-    font-size: 32px;
+    font-family: var(--fuente-subtitulo);
+    font-size: var(--tamano-mensaje-final-desktop);
     font-weight: 700;
     color: var(--chocolate);
     margin: 0;
@@ -74,59 +74,59 @@
 /* ========================================== */
 
 /* ✅ TABLET: Mantener 3 columnas pero reducir tamaño */
-@media (max-width: 992px) {
+@media (max-width: var(--breakpoint-tablet-grande)) {
     .paso-imagen {
-        width: 180px;
-        height: 180px;
+        width: var(--tamano-imagen-paso-tablet);
+        height: var(--tamano-imagen-paso-tablet);
     }
     
     .paso-pedir h3 {
-        font-size: 26px;
+        font-size: var(--tamano-titulo-paso-tablet);
     }
 }
 
 /* ✅ MÓVIL: 1 columna (una encima de otra) */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
     .pasos-pedir {
-        grid-template-columns: 1fr; /* ✅ Una sola columna */
-        gap: 40px;
+        grid-template-columns: 1fr;
+        gap: var(--gap-pasos-pedir);
     }
     
     .paso-imagen {
-        width: 150px;
-        height: 150px;
+        width: var(--tamano-imagen-paso-movil);
+        height: var(--tamano-imagen-paso-movil);
     }
     
     .paso-pedir h3 {
-        font-size: 24px;
+        font-size: var(--tamano-titulo-paso-movil);
     }
     
     .contacto-bloque .mensaje-final {
-        font-size: 28px;
+        font-size: var(--tamano-mensaje-final-movil);
     }
 }
 
 /* ✅ MÓVIL PEQUEÑO */
-@media (max-width: 480px) {
+@media (max-width: var(--breakpoint-movil)) {
     .como-pedir {
-        padding: 40px 15px;
+        padding: var(--padding-como-pedir-movil);
     }
     
     .paso-imagen {
-        width: 120px;
-        height: 120px;
+        width: var(--tamano-imagen-paso-movil-pequeno);
+        height: var(--tamano-imagen-paso-movil-pequeno);
     }
     
     .paso-pedir h3 {
-        font-size: 22px;
+        font-size: var(--tamano-titulo-paso-movil-pequeno);
     }
     
     .contacto-bloque {
-        padding: 30px 20px;
-        margin-top: 60px;
+        padding: var(--padding-contacto-bloque-movil);
+        margin-top: var(--margin-top-contacto-bloque-movil);
     }
     
     .contacto-bloque .mensaje-final {
-        font-size: 24px;
+        font-size: var(--tamano-mensaje-final-movil-pequeno);
     }
 }
