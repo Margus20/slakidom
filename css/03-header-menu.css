@@ -530,3 +530,107 @@
     .nav-dropdown { min-width: 140px; }
     .dropdown-link { padding: 10px 12px; font-size: 0.8rem; }
 }
+
+/* ========================================== */
+/* ✅ MENÚ DESPLEGABLE DEL BUSCADOR (AUTOCOMPLETADO CON FOTOS) */
+/* ========================================== */
+.buscador-dropdown {
+    position: absolute;
+    top: 100%; /* ✅ Aparece justo debajo del buscador */
+    right: 0;  /* ✅ Alineado a la derecha del buscador */
+    background: var(--blanco, #FFFFFF);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    width: 280px;
+    max-height: 350px;
+    overflow-y: auto;
+    z-index: 10000; /* ✅ Por encima de todo */
+    display: none; /* ✅ Oculto por defecto */
+    margin-top: 8px;
+}
+
+/* ✅ Clase para mostrar el dropdown */
+.buscador-dropdown.activo {
+    display: block;
+}
+
+/* ✅ Cada resultado individual (foto + nombre) */
+.resultado-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.resultado-item:last-child {
+    border-bottom: none;
+}
+
+.resultado-item:hover {
+    background: #f9f9f9;
+}
+
+/* ✅ La foto pequeña del producto */
+.resultado-item img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+/* ✅ El nombre del producto */
+.resultado-item span {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    color: var(--chocolate, #5D4037);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* ✅ Mensaje de no encontrado en el dropdown */
+.resultado-vacio {
+    padding: 15px;
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* ✅ RESPONSIVE para el dropdown del buscador */
+@media (max-width: 768px) {
+    .buscador-dropdown {
+        width: 240px;
+        max-height: 300px;
+    }
+    .resultado-item img {
+        width: 40px;
+        height: 40px;
+    }
+    .resultado-item span {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .buscador-dropdown {
+        width: 200px;
+        max-height: 250px;
+    }
+    .resultado-item {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    .resultado-item img {
+        width: 35px;
+        height: 35px;
+    }
+    .resultado-item span {
+        font-size: 0.85rem;
+    }
+}
