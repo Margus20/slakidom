@@ -63,6 +63,10 @@
     --tamano-imagen-producto-tablet-pequena: 140px;
     --tamano-imagen-producto-movil: 180px;
     
+    /* ✅ TAMAÑOS DE PASO (Proceso) */
+    --tamano-numero-paso: 50px;
+    --tamano-numero-paso-fuente: 1.5rem;
+    
     /* ========================================== */
     /* 📏 ESPACIADO */
     /* ========================================== */
@@ -73,10 +77,16 @@
     --espacio-xl: 60px;
     --espacio-xxl: 80px;
     
+    /* ✅ GAP DE SECCIONES */
+    --gap-proceso: 30px;
+    
     /* ✅ PADDINGS DE BOTONES */
     --padding-boton-agregar: 6px 14px;
     --padding-boton-agregar-tablet: 5px 12px;
     --padding-boton-pedir: 12px 25px;
+    
+    /* ✅ PADDINGS DE PASOS (Proceso) */
+    --padding-paso: 30px 20px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -138,4 +148,9 @@
     --breakpoint-tablet-grande: 992px;
     --breakpoint-tablet-pequena: 600px;
     --breakpoint-movil-pequeno: 400px;
+    
+    /* ========================================== */
+    /* 🔄 LAYOUT / DIMENSIONES DE SECCIONES */
+    /* ========================================== */
+    --max-width-proceso: 1000px;
 }
