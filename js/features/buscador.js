@@ -30,14 +30,16 @@ export function inicializarBuscador() {
         buscadorHeader.appendChild(dropdown);
     }
 
-    // 2. ✅ TRUCO PARA CHROME MÓVIL: Forzar el foco al tocar para abrir el teclado
-    buscadorInput.addEventListener('touchstart', () => {
-        buscadorInput.focus();
-    }, { passive: true });
-
+    // 2. ✅ SOLUCIÓN REAL PARA CHROME/ANDROID: No usar preventDefault en inputs
+    // Usamos 'click' y 'touchend' que son seguros y no bloquean el teclado nativo
     buscadorInput.addEventListener('click', () => {
         buscadorInput.focus();
     });
+
+    buscadorInput.addEventListener('touchend', (e) => {
+        // Forzamos el foco al levantar el dedo, sin prevenir el comportamiento nativo del teclado
+        buscadorInput.focus();
+    }, { passive: true });
 
     // 3. Lógica principal al escribir
     buscadorInput.addEventListener('input', (e) => {
