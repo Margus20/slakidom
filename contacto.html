@@ -15,6 +15,141 @@
     <link rel="stylesheet" href="css/08-como-pedir.css">
     <link rel="stylesheet" href="css/09-footer.css">
     <link rel="stylesheet" href="css/10-animaciones.css">
+    
+    <!-- ✅ ESTILOS ESPECÍFICOS PARA ESTA PÁGINA -->
+    <style>
+        /* ✅ FONDO BLANCO PARA LA SECCIÓN CENTRAL */
+        .como-pedir {
+            background-color: var(--blanco, #FFFFFF) !important;
+            padding: 60px 20px;
+        }
+        
+        /* ✅ CONTENEDOR DE LOS PASOS */
+        .pasos-pedir {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .paso-pedir {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* ✅ IMÁGENES EN LUGAR DE NÚMEROS */
+        .paso-imagen {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .paso-imagen:hover {
+            transform: scale(1.05);
+        }
+        
+        .paso-pedir h3 {
+            font-family: 'Bowlby One SC', cursive, sans-serif;
+            font-size: 28px;
+            color: var(--chocolate);
+            margin-bottom: 15px;
+        }
+        
+        /* ✅ TEXTO CON EL MISMO TAMAÑO QUE LOS SUBTÍTULOS (28px Caveat) */
+        .paso-pedir p {
+            font-family: 'Caveat', cursive;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--chocolate);
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        /* ✅ BLOQUE DE CONTACTO: FONDO BLANCO EN VEZ DE AMARILLO */
+        .contacto-bloque {
+            margin-top: 60px;
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--blanco, #FFFFFF) !important; /* ✅ CAMBIADO DE AMARILLO A BLANCO */
+            border-radius: 15px;
+            border: 2px solid var(--amarillo, #FFD700); /* ✅ Borde amarillo sutil para delimitar */
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contacto-bloque h3 {
+            font-family: 'Bowlby One SC', cursive, sans-serif;
+            color: var(--chocolate);
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        /* ✅ TEXTOS DE CONTACTO CON CAVEAT 28PX Y NEGRITAS */
+        .contacto-bloque p {
+            font-family: 'Caveat', cursive;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--chocolate);
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+        
+        .contacto-bloque p strong {
+            font-weight: 700;
+        }
+        
+        .contacto-bloque .mensaje-final {
+            font-size: 24px;
+            color: #666;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+        
+        /* ✅ RESPONSIVE */
+        @media (max-width: 768px) {
+            .paso-imagen {
+                width: 120px;
+                height: 120px;
+            }
+            .paso-pedir h3 {
+                font-size: 24px;
+            }
+            .paso-pedir p,
+            .contacto-bloque p {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pasos-pedir {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .paso-imagen {
+                width: 100px;
+                height: 100px;
+            }
+            .paso-pedir h3 {
+                font-size: 22px;
+            }
+            .paso-pedir p,
+            .contacto-bloque p {
+                font-size: 22px;
+            }
+            .contacto-bloque .mensaje-final {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     
@@ -23,40 +158,39 @@
     
     <main>
         <!-- SECCIÓN CÓMO PEDIR / CONTACTO -->
-        <section class="como-pedir" style="padding-top: 40px;">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">¿Cómo Pedir?</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 1.1rem;">Es muy fácil, sigue estos 3 pasos</p>
+        <section class="como-pedir">
+            <h2 class="section-title">¿Cómo Pedir?</h2>
+            <p class="section-subtitle">Es muy fácil, sigue estos 3 pasos</p>
             
             <div class="pasos-pedir">
+                <!-- ✅ Paso 1: Imagen ELIGE en lugar del número -->
                 <div class="paso-pedir">
-                    <div class="paso-icono">1️</div>
+                    <img src="img/elige.jpg" alt="Elige tus productos" class="paso-imagen">
                     <h3>Elige</h3>
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
+                
+                <!-- ✅ Paso 2: Imagen ESCRIBE en lugar del número -->
                 <div class="paso-pedir">
-                    <div class="paso-icono">2️⃣</div>
+                    <img src="img/escribe.jpg" alt="Escríbenos por WhatsApp" class="paso-imagen">
                     <h3>Escríbenos</h3>
-                    <p>Al WhatsApp 0412-2879803</p>
+                    <p>Al WhatsApp<br>0412-2879803</p>
                 </div>
+                
+                <!-- ✅ Paso 3: Imagen RECIBE en lugar del número -->
                 <div class="paso-pedir">
-                    <div class="paso-icono">3️⃣</div>
+                    <img src="img/recibe.jpg" alt="Recibe tu pedido" class="paso-imagen">
                     <h3>Recibe</h3>
                     <p>Tu pedido en Caracas</p>
                 </div>
             </div>
             
-            <!-- Información de contacto adicional -->
-            <div style="margin-top: 60px; text-align: center; padding: 40px 20px; background: var(--amarillo); border-radius: 15px;">
-                <h3 style="color: var(--chocolate); margin-bottom: 20px; font-size: 1.8rem;">Contáctanos</h3>
-                <p style="font-size: 1.2rem; margin: 10px 0;">
-                    📱 <strong>WhatsApp:</strong> 0412-2879803
-                </p>
-                <p style="font-size: 1.2rem; margin: 10px 0;">
-                    📍 <strong>Ubicación:</strong> Caracas, Venezuela
-                </p>
-                <p style="font-size: 1rem; color: #666; margin-top: 30px;">
-                    ¡Estamos listos para atenderte! 🍪
-                </p>
+            <!-- ✅ Información de contacto: FONDO BLANCO, SIN EMOJIS, CON CAVEAT 28PX -->
+            <div class="contacto-bloque">
+                <h3>Contáctanos</h3>
+                <p><strong>WhatsApp:</strong> 0412-2879803</p>
+                <p><strong>Ubicación:</strong> Caracas, Venezuela</p>
+                <p class="mensaje-final">¡Estamos listos para atenderte!</p>
             </div>
         </section>
     </main>
