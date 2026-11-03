@@ -15,6 +15,135 @@
     <link rel="stylesheet" href="css/06-proceso.css">
     <link rel="stylesheet" href="css/09-footer.css">
     <link rel="stylesheet" href="css/10-animaciones.css">
+    
+    <!-- ✅ ESTILOS ESPECÍFICOS PARA ESTA PÁGINA -->
+    <style>
+        /* ✅ FONDO BLANCO PARA LA SECCIÓN CENTRAL */
+        .proceso {
+            background-color: var(--blanco, #FFFFFF) !important;
+            padding: 60px 20px;
+        }
+        
+        /* ✅ CUADRÍCULA 2x2: DOS FILAS Y DOS COLUMNAS */
+        .proceso-steps {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* ✅ 2 columnas */
+            grid-template-rows: auto auto;         /* ✅ 2 filas automáticas */
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .paso {
+            background: var(--blanco, #FFFFFF);
+            border: 2px solid var(--amarillo, #FFD700);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .paso:hover {
+            transform: translateY(-5px);
+        }
+        
+        .paso-numero {
+            width: 60px;
+            height: 60px;
+            background: var(--rosa, #D46A6A);
+            color: var(--blanco, #FFFFFF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bowlby One SC', cursive, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .paso h3 {
+            font-family: 'Bowlby One SC', cursive, sans-serif;
+            font-size: 24px;
+            color: var(--chocolate);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        /* ✅ TEXTO CON EL MISMO TAMAÑO UNIFICADO (26px Caveat) */
+        .paso p {
+            font-family: 'Caveat', cursive;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--chocolate);
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        /* ========================================== */
+        /* ✅ RESPONSIVE */
+        /* ========================================== */
+        
+        /* ✅ TABLET: Mantener 2 columnas pero reducir un poco */
+        @media (max-width: 992px) {
+            .proceso-steps {
+                gap: 30px;
+            }
+            .paso h3 {
+                font-size: 22px;
+            }
+            .paso p {
+                font-size: 24px;
+            }
+        }
+        
+        /* ✅ MÓVIL: 1 columna (una encima de otra) */
+        @media (max-width: 768px) {
+            .proceso-steps {
+                grid-template-columns: 1fr; /* ✅ Una sola columna en móviles */
+                gap: 30px;
+            }
+            .paso-numero {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+            .paso h3 {
+                font-size: 22px;
+            }
+            .paso p {
+                font-size: 22px;
+            }
+        }
+        
+        /* ✅ MÓVIL PEQUEÑO */
+        @media (max-width: 480px) {
+            .proceso {
+                padding: 40px 15px;
+            }
+            .proceso-steps {
+                gap: 25px;
+            }
+            .paso {
+                padding: 25px 15px;
+            }
+            .paso-numero {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+            .paso h3 {
+                font-size: 20px;
+            }
+            .paso p {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     
@@ -23,26 +152,33 @@
     
     <main>
         <!-- SECCIÓN PROCESO -->
-        <section id="proceso" class="proceso" style="padding-top: 40px;">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">Así Hacemos Nuestras Galletas</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 1.1rem;">Cada paso lo hacemos con amor y dedicación</p>
+        <section id="proceso" class="proceso">
+            <h2 class="section-title">Así Hacemos Nuestras Galletas</h2>
+            <p class="section-subtitle">Cada paso lo hacemos con amor y dedicación</p>
             
             <div class="proceso-steps">
+                <!-- ✅ Paso 1 -->
                 <div class="paso">
                     <div class="paso-numero">1</div>
                     <h3>Seleccionamos</h3>
                     <p>Los mejores ingredientes frescos</p>
                 </div>
+                
+                <!-- ✅ Paso 2 -->
                 <div class="paso">
                     <div class="paso-numero">2</div>
                     <h3>Preparamos</h3>
                     <p>La masa con amor y dedicación</p>
                 </div>
+                
+                <!-- ✅ Paso 3 -->
                 <div class="paso">
                     <div class="paso-numero">3</div>
                     <h3>Horneamos</h3>
                     <p>Hasta obtener la textura perfecta</p>
                 </div>
+                
+                <!-- ✅ Paso 4 -->
                 <div class="paso">
                     <div class="paso-numero">4</div>
                     <h3>Empacamos</h3>
