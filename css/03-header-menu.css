@@ -33,6 +33,7 @@
     z-index: 0;
 }
 
+/* ✅ CAMBIO CRÍTICO: Eliminado pointer-events: none para que Chrome permita los toques */
 .header-botones {
     position: absolute;
     top: 0;
@@ -44,7 +45,7 @@
     align-items: flex-start;
     padding: 15px 15px;
     z-index: 101;
-    pointer-events: none;
+    /* ✅ ELIMINADO: pointer-events: none; (Esto bloqueaba los toques en Chrome móvil) */
 }
 
 .header-botones button,
@@ -207,6 +208,11 @@
     max-width: 220px;
     width: 100%;
     margin-top: 180px;
+    
+    /* ✅ REFUERZO PARA EL CONTENEDOR DEL BUSCADOR */
+    pointer-events: auto !important;
+    z-index: 110 !important;
+    position: relative;
 }
 
 /* ✅ CORRECCIÓN CLAVE: Forzar que el input sea clicable y abra el teclado en móviles */
@@ -221,13 +227,15 @@
     border-radius: 25px 0 0 25px;
     min-width: 0;
     
-    /* ✅ PROPIEDADES AGREGADAS PARA SOLUCIONAR EL TECLADO EN MÓVIL */
+    /* ✅ PROPIEDADES REFORZADAS PARA SOLUCIONAR EL TECLADO EN MÓVIL */
     pointer-events: auto !important;
-    z-index: 105 !important;
-    position: relative;
+    z-index: 111 !important; /* ✅ AUMENTADO: De 105 a 111 para estar por encima de todo */
+    position: relative !important;
     -webkit-appearance: none; /* Elimina estilos por defecto de iOS que a veces bloquean el foco */
     appearance: none;
     cursor: text;
+    -webkit-user-select: text !important;
+    user-select: text !important;
 }
 
 .buscador-input::placeholder {
