@@ -3,9 +3,9 @@
 /* ========================================== */
 .hero {
     background: linear-gradient(135deg, var(--naranja) 0%, var(--amarillo) 100%);
-    padding: var(--espacio-xxl) var(--espacio-md);
+    padding: var(--padding-hero-desktop);
     text-align: center;
-    min-height: 400px;
+    min-height: var(--min-height-hero-desktop);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,4 +35,46 @@
     border-radius: var(--radio-botón-grande);
     font-size: var(--tamano-botón-texto);
     font-weight: bold;
+}
+
+/* ========================================== */
+/* ✅ RESPONSIVE: HERO */
+/* ========================================== */
+
+/* ✅ TABLET */
+@media (max-width: var(--breakpoint-tablet)) {
+    .hero {
+        padding: var(--padding-hero-tablet);
+        min-height: var(--min-height-hero-tablet);
+    }
+    
+    .hero-title {
+        font-size: var(--tamano-hero-titulo-tablet);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--tamano-hero-subtitulo-tablet);
+    }
+}
+
+/* ✅ MÓVIL */
+@media (max-width: var(--breakpoint-movil)) {
+    .hero {
+        padding: var(--padding-hero-movil);
+        min-height: var(--min-height-hero-movil);
+    }
+    
+    .hero-title {
+        font-size: var(--tamano-hero-titulo-movil);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--tamano-hero-subtitulo-movil);
+        margin-bottom: var(--espacio-md);
+    }
+    
+    .btn-whatsapp {
+        padding: var(--espacio-sm) var(--espacio-md);
+        font-size: var(--tamano-botón-texto-movil);
+    }
 }
