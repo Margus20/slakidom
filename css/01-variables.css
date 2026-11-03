@@ -27,6 +27,9 @@
     
     /* ✅ COLOR DE MARCA EXTERNA (WhatsApp) */
     --color-whatsapp: #25D366;
+    --color-whatsapp-oscuro: #128C7E;
+    --color-excalibur: #F2CB05;
+    --fondo-modal-carrito: rgba(0, 0, 0, 0.6);
     
     /* ========================================== */
     /* 📝 TIPOGRAFÍA */
@@ -114,6 +117,18 @@
     --tamano-footer-bottom-desktop: 0.9rem;
     --tamano-footer-bottom-tablet: 0.85rem;
     --tamano-footer-bottom-movil: 0.8rem;
+
+    /* ✅ TAMAÑOS DE CARRITO Y MODAL */
+    --tamano-carrito-header: 1.2rem;
+    --tamano-contador-carrito: 0.8rem;
+    --tamano-contador-carrito-ancho: 20px;
+    --tamano-btn-cerrar-modal: 2rem;
+    --tamano-info-item-titulo: 0.95rem;
+    --tamano-info-item-precio: 0.85rem;
+    --tamano-btn-eliminar: 1.2rem;
+    --tamano-total-carrito: 1.2rem;
+    --tamano-contador-flotante: 0.75rem;
+    --tamano-contador-flotante-ancho: 22px;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -169,6 +184,15 @@
     --padding-top-footer-bottom: 20px;
     --padding-top-footer-bottom-tablet: 15px;
     --padding-top-footer-bottom-movil: 10px;
+
+    /* ✅ PADDINGS DE CARRITO Y MODAL */
+    --padding-carrito-header: 8px 15px;
+    --padding-modal-header: 15px 20px;
+    --padding-modal-header-movil: 12px 15px;
+    --padding-btn-whatsapp-modal: 15px;
+    --padding-btn-whatsapp-modal-movil: 12px;
+    --padding-notificacion: 12px 25px;
+    --padding-notificacion-movil: 10px 20px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -184,10 +208,12 @@
     --radio-botón-grande: 50px;
     --radio-boton-agregar: 20px;
     --radio-boton-pedir: 25px;
+    --radio-modal-carrito: 15px;
 
     /* ✅ BORDES ADICIONALES */
     --borde-contacto-bloque: 3px solid var(--amarillo);
     --borde-footer-bottom: 1px solid rgba(255,255,255,0.2);
+    --borde-item-carrito: 1px solid var(--color-borde-claro);
     
     /* ========================================== */
     /* 🌑 SOMBRAS */
@@ -201,6 +227,19 @@
     --sombra-dropdown: 0 8px 20px rgba(0,0,0,0.15);
     --sombra-hover-producto: 0 8px 25px rgba(140, 47, 13, 0.15);
     --sombra-hover-boton: 0 4px 12px rgba(140, 47, 13, 0.3);
+    --sombra-modal-carrito: 0 10px 30px rgba(0,0,0,0.3);
+    --sombra-menu-flotante: 0 4px 15px rgba(140, 47, 13, 0.4);
+    --sombra-menu-flotante-hover: 0 6px 20px rgba(140, 47, 13, 0.5);
+    --sombra-excalibur: 0 4px 15px rgba(0,0,0,0.3);
+    --sombra-whatsapp: 0 4px 15px rgba(37, 211, 102, 0.4);
+    
+    /* ✅ FILTROS DE EXCALIBUR */
+    --filtro-excalibur: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    --filtro-excalibur-hover: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+    --filtro-excalibur-tablet: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+    --filtro-excalibur-hover-tablet: drop-shadow(0 5px 8px rgba(0,0,0,0.6));
+    --filtro-excalibur-movil: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+    --filtro-excalibur-hover-movil: drop-shadow(0 5px 8px rgba(0,0,0,0.6));
     
     /* ========================================== */
     /* ⚡ TRANSICIONES */
@@ -222,6 +261,11 @@
     --z-dropdown-monedas: 9999;
     --z-dropdown-buscador: 10000;
     --z-maximo: 9999;
+    --z-modal-carrito: 2000;
+    --z-notificacion: 3000;
+    --z-menu-flotante: 998;
+    --z-excalibur: 1500;
+    --z-whatsapp: 1500;
     
     /* ========================================== */
     /* 📱 BREAKPOINTS (Para media queries) */
@@ -252,4 +296,56 @@
     --min-height-hero-desktop: 400px;
     --min-height-hero-tablet: 350px;
     --min-height-hero-movil: 300px;
+
+    /* ✅ LAYOUT DE MODAL */
+    --max-width-modal-carrito: 400px;
+    --max-width-modal-carrito-tablet: 380px;
+    --max-width-modal-carrito-movil: 95%;
+    --max-height-lista-carrito: 300px;
+
+    /* ✅ POSICIONES DE BOTONES FLOTANTES - DESKTOP */
+    --top-menu-flotante-desktop: 20px;
+    --right-menu-flotante-desktop: 20px;
+    --tamano-menu-flotante-desktop: 60px;
+    --bottom-excalibur-desktop: 30px;
+    --right-excalibur-desktop: 20px;
+    --tamano-excalibur-desktop: 70px;
+    --tamano-imagen-excalibur-desktop: 68px;
+    --bottom-whatsapp-desktop: 30px;
+    --left-whatsapp-desktop: 30px;
+    --tamano-whatsapp-desktop: 70px;
+    --tamano-icono-whatsapp-desktop: 40px;
+    --bottom-notificacion: 100px;
+
+    /* ✅ POSICIONES DE BOTONES FLOTANTES - TABLET */
+    --top-menu-flotante-tablet: 18px;
+    --right-menu-flotante-tablet: 18px;
+    --tamano-menu-flotante-tablet: 58px;
+    --bottom-excalibur-tablet: 25px;
+    --right-excalibur-tablet: 18px;
+    --tamano-excalibur-tablet: 65px;
+    --tamano-imagen-excalibur-tablet: 63px;
+    --bottom-whatsapp-tablet: 25px;
+    --left-whatsapp-tablet: 20px;
+    --tamano-whatsapp-tablet: 65px;
+    --tamano-icono-whatsapp-tablet: 38px;
+
+    /* ✅ POSICIONES DE BOTONES FLOTANTES - MÓVIL */
+    --top-menu-flotante-movil: 15px;
+    --right-menu-flotante-movil: 15px;
+    --tamano-menu-flotante-movil: 55px;
+    --tamano-icono-menu-movil: 26px;
+    --bottom-excalibur-movil: 20px;
+    --right-excalibur-movil: 15px;
+    --tamano-excalibur-movil: 60px;
+    --tamano-imagen-excalibur-movil: 58px;
+    --bottom-whatsapp-movil: 20px;
+    --left-whatsapp-movil: 15px;
+    --tamano-whatsapp-movil: 60px;
+    --tamano-icono-whatsapp-movil: 35px;
+    --bottom-notificacion-movil: 90px;
+
+    /* ✅ POSICIONES DEL CONTADOR FLOTANTE */
+    --top-contador-flotante: -5px;
+    --right-contador-flotante: -5px;
 }
