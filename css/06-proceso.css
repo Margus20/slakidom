@@ -39,3 +39,42 @@
     color: var(--chocolate);
     margin-bottom: var(--espacio-sm);
 }
+
+/* ========================================== */
+/* ✅ RESPONSIVE: PROCESO */
+/* ========================================== */
+
+/* ✅ TABLET */
+@media (max-width: var(--breakpoint-tablet)) {
+    .proceso-steps {
+        gap: var(--gap-proceso-tablet);
+    }
+    
+    .paso {
+        padding: var(--padding-paso-tablet);
+    }
+    
+    .paso-numero {
+        width: var(--tamano-numero-paso-tablet);
+        height: var(--tamano-numero-paso-tablet);
+        font-size: var(--tamano-numero-paso-fuente-tablet);
+    }
+}
+
+/* ✅ MÓVIL */
+@media (max-width: var(--breakpoint-movil)) {
+    .proceso-steps {
+        grid-template-columns: 1fr;
+        gap: var(--gap-proceso-movil);
+    }
+    
+    .paso {
+        padding: var(--padding-paso-movil);
+    }
+    
+    .paso-numero {
+        width: var(--tamano-numero-paso-movil);
+        height: var(--tamano-numero-paso-movil);
+        font-size: var(--tamano-numero-paso-fuente-movil);
+    }
+}
