@@ -209,6 +209,7 @@
     margin-top: 180px;
 }
 
+/* ✅ CORRECCIÓN CLAVE: Forzar que el input sea clicable y abra el teclado en móviles */
 .buscador-input {
     flex: 1;
     border: none;
@@ -219,6 +220,14 @@
     color: var(--chocolate);
     border-radius: 25px 0 0 25px;
     min-width: 0;
+    
+    /* ✅ PROPIEDADES AGREGADAS PARA SOLUCIONAR EL TECLADO EN MÓVIL */
+    pointer-events: auto !important;
+    z-index: 105 !important;
+    position: relative;
+    -webkit-appearance: none; /* Elimina estilos por defecto de iOS que a veces bloquean el foco */
+    appearance: none;
+    cursor: text;
 }
 
 .buscador-input::placeholder {
