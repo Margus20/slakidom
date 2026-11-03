@@ -10,10 +10,9 @@
     50% { transform: scale(1.05); }
 }
 
-/* ✅ NUEVA ANIMACIÓN: Latido suave pero evidente para botones flotantes */
 @keyframes latido-suave {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); } /* Crece un 8% sutilmente */
+    50% { transform: scale(1.08); }
 }
 
 @keyframes slideUp {
@@ -24,39 +23,17 @@
 /* ========================================== */
 /* CARRITO DE COMPRAS - HEADER */
 /* ========================================== */
-
-/* ✅ AJUSTE: header-botones ahora ocupa todo el ancho y distribuye los botones a los lados */
-.header-botones {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0 15px;
-    z-index: 101;
-    pointer-events: none;
-}
-
-/* ✅ Reactivar clics en los botones hijos */
-.header-botones button {
-    pointer-events: auto;
-}
-
 .btn-carrito-header {
     background: var(--blanco);
     border: 2px solid var(--chocolate);
-    border-radius: 50px;
-    padding: 8px 15px;
-    font-size: 1.2rem;
+    border-radius: var(--radio-botón-grande);
+    padding: var(--padding-carrito-header);
+    font-size: var(--tamano-carrito-header);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
-    transition: transform 0.2s;
+    gap: var(--espacio-xs);
+    transition: transform var(--transicion-rapida);
 }
 
 .btn-carrito-header:hover {
@@ -66,30 +43,14 @@
 .contador-carrito {
     background: var(--rosa);
     color: var(--blanco);
-    font-size: 0.8rem;
+    font-size: var(--tamano-contador-carrito);
     font-weight: bold;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: var(--tamano-contador-carrito-ancho);
+    height: var(--tamano-contador-carrito-ancho);
+    border-radius: var(--radio-redondo);
     display: none;
     align-items: center;
     justify-content: center;
-}
-
-.btn-agregar-carrito {
-    background: var(--chocolate);
-    color: var(--blanco);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    transition: background 0.3s;
-}
-
-.btn-agregar-carrito:hover {
-    background: var(--rosa);
 }
 
 /* ========================================== */
@@ -101,12 +62,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
+    background: var(--fondo-modal-carrito);
+    z-index: var(--z-modal-carrito);
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: var(--espacio-md);
 }
 
 .modal-carrito.activo {
@@ -116,16 +77,16 @@
 .modal-contenido {
     background: var(--blanco);
     width: 100%;
-    max-width: 400px;
-    border-radius: 15px;
+    max-width: var(--max-width-modal-carrito);
+    border-radius: var(--radio-modal-carrito);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    animation: slideUp 0.3s ease;
+    box-shadow: var(--sombra-modal-carrito);
+    animation: slideUp var(--transicion-normal);
 }
 
 .modal-header {
     background: var(--amarillo);
-    padding: 15px 20px;
+    padding: var(--padding-modal-header);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -139,23 +100,23 @@
 .btn-cerrar-modal {
     background: none;
     border: none;
-    font-size: 2rem;
+    font-size: var(--tamano-btn-cerrar-modal);
     color: var(--chocolate);
     cursor: pointer;
 }
 
 .lista-carrito {
-    max-height: 300px;
+    max-height: var(--max-height-lista-carrito);
     overflow-y: auto;
-    padding: 20px;
+    padding: var(--espacio-md);
 }
 
 .item-carrito {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    padding: var(--espacio-sm) 0;
+    border-bottom: var(--borde-item-carrito);
 }
 
 .info-item {
@@ -165,51 +126,51 @@
 
 .info-item strong {
     color: var(--chocolate);
-    font-size: 0.95rem;
+    font-size: var(--tamano-info-item-titulo);
 }
 
 .info-item span {
-    color: #666;
-    font-size: 0.85rem;
+    color: var(--color-texto-secundario);
+    font-size: var(--tamano-info-item-precio);
 }
 
 .btn-eliminar {
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: var(--tamano-btn-eliminar);
     cursor: pointer;
 }
 
 .modal-footer {
-    padding: 20px;
-    background: #f9f9f9;
-    border-top: 1px solid #eee;
+    padding: var(--espacio-md);
+    background: var(--color-fondo-hover);
+    border-top: var(--borde-item-carrito);
 }
 
 .total-carrito {
     display: flex;
     justify-content: space-between;
-    font-size: 1.2rem;
+    font-size: var(--tamano-total-carrito);
     font-weight: bold;
     color: var(--chocolate);
-    margin-bottom: 15px;
+    margin-bottom: var(--espacio-md);
 }
 
 .btn-whatsapp-modal {
     width: 100%;
-    background: #25D366;
-    color: white;
+    background: var(--color-whatsapp);
+    color: var(--blanco);
     border: none;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 1rem;
+    padding: var(--padding-btn-whatsapp-modal);
+    border-radius: var(--radio-pequeno);
+    font-size: var(--tamano-texto);
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background var(--transicion-normal);
 }
 
 .btn-whatsapp-modal:hover {
-    background: #128C7E;
+    background: var(--color-whatsapp-oscuro);
 }
 
 /* ========================================== */
@@ -217,17 +178,17 @@
 /* ========================================== */
 .notificacion-flotante {
     position: fixed;
-    bottom: 100px;
+    bottom: var(--bottom-notificacion);
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background: var(--chocolate);
     color: var(--blanco);
-    padding: 12px 25px;
-    border-radius: 50px;
+    padding: var(--padding-notificacion);
+    border-radius: var(--radio-botón-grande);
     font-weight: bold;
     opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 3000;
+    transition: all var(--transicion-normal);
+    z-index: var(--z-notificacion);
     pointer-events: none;
 }
 
@@ -243,31 +204,31 @@
 /* ✅ 1. BOTÓN FLOTANTE DEL MENÚ (esquina superior DERECHA) */
 .btn-menu-flotante {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
+    top: var(--top-menu-flotante-desktop);
+    right: var(--right-menu-flotante-desktop);
+    width: var(--tamano-menu-flotante-desktop);
+    height: var(--tamano-menu-flotante-desktop);
     background: var(--chocolate);
     border: none;
-    border-radius: 50%;
+    border-radius: var(--radio-redondo);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(140, 47, 13, 0.4);
-    z-index: 998;
+    box-shadow: var(--sombra-menu-flotante);
+    z-index: var(--z-menu-flotante);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: latido-suave 2.5s ease-in-out infinite; /* ✅ Animación de latido */
+    transition: transform var(--transicion-normal), box-shadow var(--transicion-normal);
+    animation: latido-suave 2.5s ease-in-out infinite;
 }
 
 .btn-menu-flotante:hover {
-    animation: none; /* ✅ Pausa el latido al hacer hover para que el efecto de escala funcione perfecto */
+    animation: none;
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(140, 47, 13, 0.5);
+    box-shadow: var(--sombra-menu-flotante-hover);
 }
 
 .btn-menu-flotante svg {
-    transition: transform 0.3s ease;
+    transition: transform var(--transicion-normal);
 }
 
 .btn-menu-flotante:hover svg {
@@ -277,55 +238,54 @@
 /* ✅ 2. BOTÓN FLOTANTE DE EXCALIBUR (esquina inferior DERECHA) */
 .btn-flotante-excalibur {
     position: fixed;
-    bottom: 30px;
-    right: 20px;
-    width: 70px;
-    height: 70px;
-    background: #F2CB05;
+    bottom: var(--bottom-excalibur-desktop);
+    right: var(--right-excalibur-desktop);
+    width: var(--tamano-excalibur-desktop);
+    height: var(--tamano-excalibur-desktop);
+    background: var(--color-excalibur);
     border: 2px solid var(--chocolate);
-    border-radius: 50%;
+    border-radius: var(--radio-redondo);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 1500;
-    transition: transform 0.3s ease;
+    box-shadow: var(--sombra-excalibur);
+    z-index: var(--z-excalibur);
+    transition: transform var(--transicion-normal);
     cursor: pointer;
     text-decoration: none;
     overflow: visible;
-    animation: latido-suave 2.5s ease-in-out infinite; /* ✅ Animación de latido */
+    animation: latido-suave 2.5s ease-in-out infinite;
 }
 
-/* ✅ AJUSTE: Perrito más grande y con efecto 3D de sobresalir */
 .btn-flotante-excalibur img {
-    width: 68px;
-    height: 68px;
+    width: var(--tamano-imagen-excalibur-desktop);
+    height: var(--tamano-imagen-excalibur-desktop);
     object-fit: contain;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
-    transition: filter 0.3s ease, transform 0.3s ease;
+    filter: var(--filtro-excalibur);
+    transition: filter var(--transicion-normal), transform var(--transicion-normal);
 }
 
 .btn-flotante-excalibur:hover {
-    animation: none; /* ✅ Pausa el latido al hacer hover */
+    animation: none;
     transform: scale(1.1);
 }
 
 .btn-flotante-excalibur:hover img {
-    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+    filter: var(--filtro-excalibur-hover);
     transform: translateY(-2px);
 }
 
 .contador-flotante {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: var(--top-contador-flotante);
+    right: var(--right-contador-flotante);
     background: var(--rosa);
     color: var(--blanco);
-    font-size: 0.75rem;
+    font-size: var(--tamano-contador-flotante);
     font-weight: bold;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
+    width: var(--tamano-contador-flotante-ancho);
+    height: var(--tamano-contador-flotante-ancho);
+    border-radius: var(--radio-redondo);
     display: none;
     align-items: center;
     justify-content: center;
@@ -335,110 +295,141 @@
 /* ✅ 3. BOTÓN FLOTANTE DE WHATSAPP (esquina inferior IZQUIERDA) */
 .whatsapp-flotante {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
-    background: #25D366;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+    bottom: var(--bottom-whatsapp-desktop);
+    left: var(--left-whatsapp-desktop);
+    background: var(--color-whatsapp);
+    width: var(--tamano-whatsapp-desktop);
+    height: var(--tamano-whatsapp-desktop);
+    border-radius: var(--radio-redondo);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    z-index: 1500;
-    transition: transform 0.3s ease;
+    box-shadow: var(--sombra-whatsapp);
+    z-index: var(--z-whatsapp);
+    transition: transform var(--transicion-normal);
     text-decoration: none;
-    animation: latido-suave 2.5s ease-in-out infinite; /* ✅ Animación de latido */
+    animation: latido-suave 2.5s ease-in-out infinite;
 }
 
 .whatsapp-flotante svg {
-    width: 40px;
-    height: 40px;
-    fill: #FFFFFF;
+    width: var(--tamano-icono-whatsapp-desktop);
+    height: var(--tamano-icono-whatsapp-desktop);
+    fill: var(--blanco);
 }
 
 .whatsapp-flotante:hover {
-    animation: none; /* ✅ Pausa el latido al hacer hover */
+    animation: none;
     transform: scale(1.1);
 }
 
 /* ========================================== */
-/* RESPONSIVE UNIFICADO */
+/* ✅ RESPONSIVE: TABLET (768px) */
 /* ========================================== */
-
-/* Tablets y celulares grandes */
-@media (max-width: 768px) {
-    .hero-title { font-size: 2rem; }
-    .section-title { font-size: 1.6rem; }
-    .menu-item { font-size: 1.5rem; }
-    
-    .productos-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-    }
-}
-
-/* Celulares pequeños */
-@media (max-width: 480px) {
-    .header { padding: 10px 15px; }
-    
-    .hero { padding: 60px 15px; min-height: 350px; }
-    .hero-title { font-size: 1.6rem; }
-    .hero-subtitle { font-size: 1rem; }
-    .section-title { font-size: 1.5rem; }
-    
+@media (max-width: var(--breakpoint-tablet)) {
     .modal-contenido {
-        max-width: 95%;
-        margin: 10px;
+        max-width: var(--max-width-modal-carrito-tablet);
     }
     
-    .btn-agregar-carrito {
-        font-size: 0.9rem;
-        padding: 12px;
-    }
-
-    /* ✅ Menú flotante en móvil */
     .btn-menu-flotante {
-        top: 15px;
-        right: 15px;
-        width: 55px;
-        height: 55px;
+        top: var(--top-menu-flotante-tablet);
+        right: var(--right-menu-flotante-tablet);
+        width: var(--tamano-menu-flotante-tablet);
+        height: var(--tamano-menu-flotante-tablet);
     }
     
-    .btn-menu-flotante svg {
-        width: 26px;
-        height: 26px;
-    }
-
-    /* ✅ Excalibur en móvil: misma altura que WhatsApp */
     .btn-flotante-excalibur {
-        bottom: 20px;
-        right: 15px;
-        width: 60px;
-        height: 60px;
+        bottom: var(--bottom-excalibur-tablet);
+        right: var(--right-excalibur-tablet);
+        width: var(--tamano-excalibur-tablet);
+        height: var(--tamano-excalibur-tablet);
     }
     
     .btn-flotante-excalibur img {
-        width: 58px;
-        height: 58px;
-        filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+        width: var(--tamano-imagen-excalibur-tablet);
+        height: var(--tamano-imagen-excalibur-tablet);
+        filter: var(--filtro-excalibur-tablet);
     }
     
     .btn-flotante-excalibur:hover img {
-        filter: drop-shadow(0 5px 8px rgba(0,0,0,0.6));
-        transform: translateY(-2px);
+        filter: var(--filtro-excalibur-hover-tablet);
     }
     
-    /* ✅ WhatsApp en móvil: misma altura que Excalibur */
     .whatsapp-flotante {
-        bottom: 20px;
-        left: 15px;
-        width: 60px;
-        height: 60px;
+        bottom: var(--bottom-whatsapp-tablet);
+        left: var(--left-whatsapp-tablet);
+        width: var(--tamano-whatsapp-tablet);
+        height: var(--tamano-whatsapp-tablet);
     }
     
     .whatsapp-flotante svg {
-        width: 35px;
-        height: 35px;
+        width: var(--tamano-icono-whatsapp-tablet);
+        height: var(--tamano-icono-whatsapp-tablet);
+    }
+}
+
+/* ========================================== */
+/* ✅ RESPONSIVE: MÓVIL (480px) */
+/* ========================================== */
+@media (max-width: var(--breakpoint-movil)) {
+    .modal-contenido {
+        max-width: var(--max-width-modal-carrito-movil);
+        margin: var(--espacio-sm);
+    }
+    
+    .modal-header {
+        padding: var(--padding-modal-header-movil);
+    }
+    
+    .btn-whatsapp-modal {
+        padding: var(--padding-btn-whatsapp-modal-movil);
+        font-size: var(--tamano-texto-pequeno);
+    }
+    
+    .btn-menu-flotante {
+        top: var(--top-menu-flotante-movil);
+        right: var(--right-menu-flotante-movil);
+        width: var(--tamano-menu-flotante-movil);
+        height: var(--tamano-menu-flotante-movil);
+    }
+    
+    .btn-menu-flotante svg {
+        width: var(--tamano-icono-menu-movil);
+        height: var(--tamano-icono-menu-movil);
+    }
+    
+    .btn-flotante-excalibur {
+        bottom: var(--bottom-excalibur-movil);
+        right: var(--right-excalibur-movil);
+        width: var(--tamano-excalibur-movil);
+        height: var(--tamano-excalibur-movil);
+    }
+    
+    .btn-flotante-excalibur img {
+        width: var(--tamano-imagen-excalibur-movil);
+        height: var(--tamano-imagen-excalibur-movil);
+        filter: var(--filtro-excalibur-movil);
+    }
+    
+    .btn-flotante-excalibur:hover img {
+        filter: var(--filtro-excalibur-hover-movil);
+        transform: translateY(-2px);
+    }
+    
+    .whatsapp-flotante {
+        bottom: var(--bottom-whatsapp-movil);
+        left: var(--left-whatsapp-movil);
+        width: var(--tamano-whatsapp-movil);
+        height: var(--tamano-whatsapp-movil);
+    }
+    
+    .whatsapp-flotante svg {
+        width: var(--tamano-icono-whatsapp-movil);
+        height: var(--tamano-icono-whatsapp-movil);
+    }
+    
+    .notificacion-flotante {
+        bottom: var(--bottom-notificacion-movil);
+        padding: var(--padding-notificacion-movil);
+        font-size: var(--tamano-texto-pequeno);
     }
 }
