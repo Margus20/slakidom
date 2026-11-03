@@ -25,6 +25,9 @@
     --color-texto-secundario: #888;
     --color-chocolate-oscuro: #5D4037;
     
+    /* ✅ COLOR DE MARCA EXTERNA (WhatsApp) */
+    --color-whatsapp: #25D366;
+    
     /* ========================================== */
     /* 📝 TIPOGRAFÍA */
     /* ========================================== */
@@ -39,6 +42,11 @@
     --tamano-subtitulo: 26px;
     --tamano-texto: 16px;
     --tamano-texto-pequeno: 14px;
+    
+    /* ✅ TAMAÑOS ADICIONALES (para Hero y botones) */
+    --tamano-hero-titulo: 2.5rem;
+    --tamano-hero-subtitulo: 1.2rem;
+    --tamano-botón-texto: 1.1rem;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -58,9 +66,10 @@
     --radio-grande: 20px;
     --radio-redondo: 50%;
     
-    /* ✅ RADIOS ADICIONALES (para buscador y dropdowns) */
+    /* ✅ RADIOS ADICIONALES (para buscador, dropdowns y botones) */
     --radio-buscador: 25px;
     --radio-dropdown: 12px;
+    --radio-botón-grande: 50px;
     
     /* ========================================== */
     /* 🌑 SOMBRAS */
