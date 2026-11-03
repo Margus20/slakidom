@@ -3,7 +3,7 @@
 /* ========================================== */
 .hero {
     background: linear-gradient(135deg, var(--naranja) 0%, var(--amarillo) 100%);
-    padding: 80px 20px;
+    padding: var(--espacio-xxl) var(--espacio-md);
     text-align: center;
     min-height: 400px;
     display: flex;
@@ -12,28 +12,27 @@
 }
 
 .hero-title {
-    font-family: 'Arial Black', sans-serif;
-    font-size: 2.5rem;
+    font-family: var(--fuente-titulo);
+    font-size: var(--tamano-hero-titulo);
     color: var(--chocolate);
-    margin-bottom: 15px;
+    margin-bottom: var(--espacio-sm);
     line-height: 1.2;
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: var(--tamano-hero-subtitulo);
     color: var(--chocolate);
-    margin-bottom: 30px;
+    margin-bottom: var(--espacio-lg);
     opacity: 0.9;
 }
 
 .btn-whatsapp {
     display: inline-block;
-    background: #25D366;
+    background: var(--color-whatsapp);
     color: var(--blanco);
     text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 1.1rem;
+    padding: var(--espacio-md) var(--espacio-lg);
+    border-radius: var(--radio-botón-grande);
+    font-size: var(--tamano-botón-texto);
     font-weight: bold;
-    animation: latido 2s infinite;
 }
