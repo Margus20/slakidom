@@ -48,6 +48,21 @@
     --tamano-hero-subtitulo: 1.2rem;
     --tamano-botón-texto: 1.1rem;
     
+    /* ✅ TAMAÑOS DE PRODUCTOS */
+    --tamano-nombre-producto: 0.95rem;
+    --tamano-nombre-producto-tablet: 0.9rem;
+    --tamano-precio-grande: 1.8rem;
+    --tamano-precio-tablet: 1.6rem;
+    --tamano-precio-decimales: 0.9rem;
+    --tamano-boton-agregar: 0.85rem;
+    --tamano-boton-agregar-tablet: 0.8rem;
+    
+    /* ✅ TAMAÑOS DE IMAGEN DE PRODUCTO */
+    --tamano-imagen-producto-desktop: 150px;
+    --tamano-imagen-producto-tablet-grande: 130px;
+    --tamano-imagen-producto-tablet-pequena: 140px;
+    --tamano-imagen-producto-movil: 180px;
+    
     /* ========================================== */
     /* 📏 ESPACIADO */
     /* ========================================== */
@@ -57,6 +72,11 @@
     --espacio-lg: 40px;
     --espacio-xl: 60px;
     --espacio-xxl: 80px;
+    
+    /* ✅ PADDINGS DE BOTONES */
+    --padding-boton-agregar: 6px 14px;
+    --padding-boton-agregar-tablet: 5px 12px;
+    --padding-boton-pedir: 12px 25px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -70,6 +90,8 @@
     --radio-buscador: 25px;
     --radio-dropdown: 12px;
     --radio-botón-grande: 50px;
+    --radio-boton-agregar: 20px;
+    --radio-boton-pedir: 25px;
     
     /* ========================================== */
     /* 🌑 SOMBRAS */
@@ -79,8 +101,10 @@
     --sombra-fuerte: 0 8px 20px rgba(0,0,0,0.2);
     --sombra-logo: 0 8px 16px rgba(0,0,0,0.25);
     
-    /* ✅ SOMBRAS ADICIONALES (para dropdown del buscador) */
+    /* ✅ SOMBRAS ADICIONALES */
     --sombra-dropdown: 0 8px 20px rgba(0,0,0,0.15);
+    --sombra-hover-producto: 0 8px 25px rgba(140, 47, 13, 0.15);
+    --sombra-hover-boton: 0 4px 12px rgba(140, 47, 13, 0.3);
     
     /* ========================================== */
     /* ⚡ TRANSICIONES */
@@ -109,4 +133,9 @@
     --breakpoint-movil: 480px;
     --breakpoint-tablet: 768px;
     --breakpoint-desktop: 1024px;
+    
+    /* ✅ BREAKPOINTS ADICIONALES */
+    --breakpoint-tablet-grande: 992px;
+    --breakpoint-tablet-pequena: 600px;
+    --breakpoint-movil-pequeno: 400px;
 }
