@@ -80,8 +80,14 @@
 
     /* ✅ TAMAÑOS DE CHEF (Sobre Nosotros) */
     --tamano-nombre-chef: 1.8rem;
+    --tamano-nombre-chef-tablet: 1.6rem;
+    --tamano-nombre-chef-movil: 1.4rem;
     --tamano-texto-chef: 1.1rem;
+    --tamano-texto-chef-tablet: 1rem;
+    --tamano-texto-chef-movil: 0.95rem;
     --tamano-placeholder-chef: 6rem;
+    --tamano-placeholder-chef-fuente-tablet: 5rem;
+    --tamano-placeholder-chef-fuente-movil: 4rem;
 
     /* ✅ TAMAÑOS DE CÓMO PEDIR */
     --tamano-titulo-paso-desktop: 28px;
@@ -113,6 +119,8 @@
     --gap-proceso-tablet: 20px;
     --gap-proceso-movil: 15px;
     --gap-sobre-nosotros: 30px;
+    --gap-sobre-nosotros-tablet: 25px;
+    --gap-sobre-nosotros-movil: 20px;
     --gap-pasos-pedir: 40px;
 
     /* ✅ ESPACIO ENTRE ELEMENTOS */
@@ -212,6 +220,8 @@
     --max-width-pasos-pedir: 1200px;
     --max-width-contacto-bloque: 600px;
     --tamano-placeholder-chef-contenedor: 200px;
+    --tamano-placeholder-chef-tablet: 180px;
+    --tamano-placeholder-chef-movil: 150px;
     --margin-top-contacto-bloque: 80px;
     --margin-top-contacto-bloque-movil: 60px;
 
