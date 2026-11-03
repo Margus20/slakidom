@@ -73,6 +73,10 @@
     /* ✅ TAMAÑOS DE PASO (Proceso) */
     --tamano-numero-paso: 50px;
     --tamano-numero-paso-fuente: 1.5rem;
+    --tamano-numero-paso-tablet: 45px;
+    --tamano-numero-paso-movil: 40px;
+    --tamano-numero-paso-fuente-tablet: 1.3rem;
+    --tamano-numero-paso-fuente-movil: 1.1rem;
 
     /* ✅ TAMAÑOS DE CHEF (Sobre Nosotros) */
     --tamano-nombre-chef: 1.8rem;
@@ -106,6 +110,8 @@
     
     /* ✅ GAP DE SECCIONES */
     --gap-proceso: 30px;
+    --gap-proceso-tablet: 20px;
+    --gap-proceso-movil: 15px;
     --gap-sobre-nosotros: 30px;
     --gap-pasos-pedir: 40px;
 
@@ -119,6 +125,8 @@
     
     /* ✅ PADDINGS DE PASOS (Proceso) */
     --padding-paso: 30px 20px;
+    --padding-paso-tablet: 25px 15px;
+    --padding-paso-movil: 20px 10px;
 
     /* ✅ PADDINGS DE CÓMO PEDIR */
     --padding-como-pedir: 60px 20px;
