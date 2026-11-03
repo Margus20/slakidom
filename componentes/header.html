@@ -29,7 +29,7 @@
                 <span class="icono-ubicacion">📍</span>
                 <span>Caracas</span>
             </div>
-            <!-- ✅ TASA BCV: Color negro y en negritas -->
+            <!-- ✅ TASA BCV -->
             <div class="tasa-bcv-info" id="tasaBcvInfo" style="font-size: 0.8rem; color: #000000; font-weight: 700; padding: 2px 12px 8px 12px;"></div>
         </div>
         
@@ -45,18 +45,18 @@
         </div>
     </div>
 
-    <!-- ✅ MENÚ HORIZONTAL: Productos como dropdown selector -->
+    <!-- ✅ MENÚ HORIZONTAL: Productos como dropdown -->
     <nav class="nav-bar">
         <ul class="nav-list">
             <li class="nav-item">
-                <!-- ✅ CAMBIO 1: Se eliminó el span de la flecha para evitar la duplicidad (el CSS ya la agrega) -->
-                <button class="nav-link nav-dropdown-toggle" id="navProductosToggle">
+                <!-- ✅ El CSS agrega la flecha automáticamente, no hace falta ponerla aquí -->
+                <button class="nav-link" id="navProductosToggle">
                     Productos
                 </button>
                 <ul class="nav-dropdown" id="navProductosDropdown">
-                    <!-- ✅ CAMBIO 2: Se agregó onclick para cerrar el menú inmediatamente al seleccionar -->
-                    <li><a href="/slakidom/galletas/" class="dropdown-link" onclick="document.getElementById('navProductosDropdown').classList.remove('activo'); document.getElementById('navProductosToggle').classList.remove('activo');">Galletas</a></li>
-                    <li><a href="/slakidom/mermeladas/" class="dropdown-link" onclick="document.getElementById('navProductosDropdown').classList.remove('activo'); document.getElementById('navProductosToggle').classList.remove('activo');">Mermeladas</a></li>
+                    <!-- ✅ HTML limpio: sin onclick inline, la navegación cierra el menú naturalmente -->
+                    <li><a href="/slakidom/galletas/" class="dropdown-link">Galletas</a></li>
+                    <li><a href="/slakidom/mermeladas/" class="dropdown-link">Mermeladas</a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="/slakidom/proceso.html" class="nav-link">Nuestro Proceso</a></li>
