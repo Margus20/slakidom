@@ -17,6 +17,14 @@
     --gris-medio: #888888;
     --gris-oscuro: #555555;
     
+    /* ✅ COLORES ADICIONALES (para header, buscador y dropdowns) */
+    --color-borde-claro: #eee;
+    --color-borde-medio: #ddd;
+    --color-fondo-hover: #f9f9f9;
+    --color-texto-placeholder: #B0B0B0;
+    --color-texto-secundario: #888;
+    --color-chocolate-oscuro: #5D4037;
+    
     /* ========================================== */
     /* 📝 TIPOGRAFÍA */
     /* ========================================== */
@@ -50,6 +58,10 @@
     --radio-grande: 20px;
     --radio-redondo: 50%;
     
+    /* ✅ RADIOS ADICIONALES (para buscador y dropdowns) */
+    --radio-buscador: 25px;
+    --radio-dropdown: 12px;
+    
     /* ========================================== */
     /* 🌑 SOMBRAS */
     /* ========================================== */
@@ -57,6 +69,9 @@
     --sombra-media: 0 4px 15px rgba(0,0,0,0.15);
     --sombra-fuerte: 0 8px 20px rgba(0,0,0,0.2);
     --sombra-logo: 0 8px 16px rgba(0,0,0,0.25);
+    
+    /* ✅ SOMBRAS ADICIONALES (para dropdown del buscador) */
+    --sombra-dropdown: 0 8px 20px rgba(0,0,0,0.15);
     
     /* ========================================== */
     /* ⚡ TRANSICIONES */
@@ -70,9 +85,13 @@
     /* ========================================== */
     --z-base: 1;
     --z-header: 100;
+    --z-header-botones: 101;
+    --z-logo: 102;
     --z-dropdown: 103;
     --z-buscador: 110;
     --z-modal: 999;
+    --z-dropdown-monedas: 9999;
+    --z-dropdown-buscador: 10000;
     --z-maximo: 9999;
     
     /* ========================================== */
