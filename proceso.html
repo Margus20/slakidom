@@ -8,10 +8,11 @@
     
     <link rel="icon" type="image/png" href="img/slaky_cuadrado.jpg">
     
-    <!-- CSS MODULAR -->
+    <!-- CSS MODULAR (Actualizado con la nueva estructura) -->
     <link rel="stylesheet" href="css/01-variables.css">
     <link rel="stylesheet" href="css/02-base.css">
-    <link rel="stylesheet" href="css/03-header-menu.css">
+    <link rel="stylesheet" href="css/03-header.css">
+    <link rel="stylesheet" href="css/11-menu.css">
     <link rel="stylesheet" href="css/06-proceso.css">
     <link rel="stylesheet" href="css/09-footer.css">
     <link rel="stylesheet" href="css/10-animaciones.css">
@@ -27,8 +28,8 @@
         /* ✅ CUADRÍCULA 2x2: DOS FILAS Y DOS COLUMNAS */
         .proceso-steps {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* ✅ 2 columnas */
-            grid-template-rows: auto auto;         /* ✅ 2 filas automáticas */
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto;
             gap: 40px;
             max-width: 900px;
             margin: 0 auto;
@@ -104,7 +105,7 @@
         /* ✅ MÓVIL: 1 columna (una encima de otra) */
         @media (max-width: 768px) {
             .proceso-steps {
-                grid-template-columns: 1fr; /* ✅ Una sola columna en móviles */
+                grid-template-columns: 1fr;
                 gap: 30px;
             }
             .paso-numero {
