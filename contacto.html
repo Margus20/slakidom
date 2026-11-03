@@ -24,10 +24,10 @@
             padding: 60px 20px;
         }
         
-        /* ✅ CONTENEDOR DE LOS PASOS */
+        /* ✅ CONTENEDOR DE LOS PASOS - FORZADO 3 COLUMNAS EN ESCRITORIO */
         .pasos-pedir {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* ✅ FORZADO: 3 columnas iguales */
             gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
@@ -43,8 +43,8 @@
         
         /* ✅ IMÁGENES EN LUGAR DE NÚMEROS */
         .paso-imagen {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -61,92 +61,98 @@
             font-size: 28px;
             color: var(--chocolate);
             margin-bottom: 15px;
+            text-transform: uppercase;
         }
         
-        /* ✅ TEXTO CON EL MISMO TAMAÑO QUE LOS SUBTÍTULOS (28px Caveat) */
+        /* ✅ TEXTO CON EL MISMO TAMAÑO QUE LOS SUBTÍTULOS */
         .paso-pedir p {
             font-family: 'Caveat', cursive;
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--chocolate);
             line-height: 1.4;
             margin: 0;
         }
         
-        /* ✅ BLOQUE DE CONTACTO: FONDO BLANCO EN VEZ DE AMARILLO */
+        /* ✅ BLOQUE DE CONTACTO: SOLO MENSAJE FINAL */
         .contacto-bloque {
-            margin-top: 60px;
+            margin-top: 80px;
             text-align: center;
-            padding: 40px 20px;
-            background: var(--blanco, #FFFFFF) !important; /* ✅ CAMBIADO DE AMARILLO A BLANCO */
-            border-radius: 15px;
-            border: 2px solid var(--amarillo, #FFD700); /* ✅ Borde amarillo sutil para delimitar */
-            max-width: 700px;
+            padding: 40px 30px;
+            background: var(--blanco, #FFFFFF) !important;
+            border-radius: 20px;
+            border: 3px solid var(--amarillo, #FFD700);
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         
-        .contacto-bloque h3 {
-            font-family: 'Bowlby One SC', cursive, sans-serif;
-            color: var(--chocolate);
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-        
-        /* ✅ TEXTOS DE CONTACTO CON CAVEAT 28PX Y NEGRITAS */
-        .contacto-bloque p {
+        .contacto-bloque .mensaje-final {
             font-family: 'Caveat', cursive;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--chocolate);
-            margin: 10px 0;
+            margin: 0;
             line-height: 1.4;
         }
         
-        .contacto-bloque p strong {
-            font-weight: 700;
-        }
-        
-        .contacto-bloque .mensaje-final {
-            font-size: 24px;
-            color: #666;
-            margin-top: 30px;
-            font-weight: 600;
-        }
-        
         /* ✅ RESPONSIVE */
+        @media (max-width: 992px) {
+            .paso-imagen {
+                width: 180px;
+                height: 180px;
+            }
+            .paso-pedir h3 {
+                font-size: 26px;
+            }
+            .paso-pedir p {
+                font-size: 32px;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .pasos-pedir {
+                grid-template-columns: 1fr; /* ✅ Una sola columna en móviles */
+                gap: 50px;
+            }
+            .paso-imagen {
+                width: 150px;
+                height: 150px;
+            }
+            .paso-pedir h3 {
+                font-size: 24px;
+            }
+            .paso-pedir p {
+                font-size: 28px;
+            }
+            .contacto-bloque .mensaje-final {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .como-pedir {
+                padding: 40px 15px;
+            }
+            .pasos-pedir {
+                gap: 40px;
+            }
             .paso-imagen {
                 width: 120px;
                 height: 120px;
             }
             .paso-pedir h3 {
-                font-size: 24px;
-            }
-            .paso-pedir p,
-            .contacto-bloque p {
-                font-size: 24px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .pasos-pedir {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .paso-imagen {
-                width: 100px;
-                height: 100px;
-            }
-            .paso-pedir h3 {
                 font-size: 22px;
             }
-            .paso-pedir p,
-            .contacto-bloque p {
-                font-size: 22px;
+            .paso-pedir p {
+                font-size: 24px;
+            }
+            .contacto-bloque {
+                padding: 30px 20px;
+                margin-top: 60px;
             }
             .contacto-bloque .mensaje-final {
-                font-size: 20px;
+                font-size: 24px;
             }
         }
     </style>
@@ -163,21 +169,21 @@
             <p class="section-subtitle">Es muy fácil, sigue estos 3 pasos</p>
             
             <div class="pasos-pedir">
-                <!-- ✅ Paso 1: Imagen ELIGE en lugar del número -->
+                <!-- ✅ Paso 1: Imagen ELIGE -->
                 <div class="paso-pedir">
                     <img src="img/elige.jpg" alt="Elige tus productos" class="paso-imagen">
                     <h3>Elige</h3>
                     <p>Tus galletas o mermeladas favoritas</p>
                 </div>
                 
-                <!-- ✅ Paso 2: Imagen ESCRIBE en lugar del número -->
+                <!-- ✅ Paso 2: Imagen ESCRIBE -->
                 <div class="paso-pedir">
                     <img src="img/escribe.jpg" alt="Escríbenos por WhatsApp" class="paso-imagen">
                     <h3>Escríbenos</h3>
                     <p>Al WhatsApp<br>0412-2879803</p>
                 </div>
                 
-                <!-- ✅ Paso 3: Imagen RECIBE en lugar del número -->
+                <!-- ✅ Paso 3: Imagen RECIBE -->
                 <div class="paso-pedir">
                     <img src="img/recibe.jpg" alt="Recibe tu pedido" class="paso-imagen">
                     <h3>Recibe</h3>
@@ -185,11 +191,8 @@
                 </div>
             </div>
             
-            <!-- ✅ Información de contacto: FONDO BLANCO, SIN EMOJIS, CON CAVEAT 28PX -->
+            <!-- ✅ CUADRO DE CONTACTO: SOLO MENSAJE FINAL (Sin WhatsApp ni Ubicación) -->
             <div class="contacto-bloque">
-                <h3>Contáctanos</h3>
-                <p><strong>WhatsApp:</strong> 0412-2879803</p>
-                <p><strong>Ubicación:</strong> Caracas, Venezuela</p>
                 <p class="mensaje-final">¡Estamos listos para atenderte!</p>
             </div>
         </section>
