@@ -103,6 +103,17 @@
     --tamano-imagen-paso-tablet: 180px;
     --tamano-imagen-paso-movil: 150px;
     --tamano-imagen-paso-movil-pequeno: 120px;
+
+    /* ✅ TAMAÑOS DE FOOTER */
+    --tamano-titulo-footer-desktop: 1.5rem;
+    --tamano-titulo-footer-tablet: 1.3rem;
+    --tamano-titulo-footer-movil: 1.1rem;
+    --tamano-contacto-item-desktop: 1.1rem;
+    --tamano-contacto-item-tablet: 1rem;
+    --tamano-contacto-item-movil: 0.95rem;
+    --tamano-footer-bottom-desktop: 0.9rem;
+    --tamano-footer-bottom-tablet: 0.85rem;
+    --tamano-footer-bottom-movil: 0.8rem;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -122,6 +133,9 @@
     --gap-sobre-nosotros-tablet: 25px;
     --gap-sobre-nosotros-movil: 20px;
     --gap-pasos-pedir: 40px;
+    --gap-contacto-info-desktop: 15px;
+    --gap-contacto-info-tablet: 12px;
+    --gap-contacto-info-movil: 10px;
 
     /* ✅ ESPACIO ENTRE ELEMENTOS */
     --espacio-entre-elementos: 15px;
@@ -147,6 +161,14 @@
     --padding-hero-desktop: 80px 20px;
     --padding-hero-tablet: 60px 20px;
     --padding-hero-movil: 40px 15px;
+
+    /* ✅ PADDINGS DE FOOTER */
+    --padding-footer-desktop: 40px 20px;
+    --padding-footer-tablet: 30px 20px;
+    --padding-footer-movil: 20px 15px;
+    --padding-top-footer-bottom: 20px;
+    --padding-top-footer-bottom-tablet: 15px;
+    --padding-top-footer-bottom-movil: 10px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -165,6 +187,7 @@
 
     /* ✅ BORDES ADICIONALES */
     --borde-contacto-bloque: 3px solid var(--amarillo);
+    --borde-footer-bottom: 1px solid rgba(255,255,255,0.2);
     
     /* ========================================== */
     /* 🌑 SOMBRAS */
