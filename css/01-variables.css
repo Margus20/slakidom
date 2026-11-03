@@ -48,6 +48,13 @@
     --tamano-hero-subtitulo: 1.2rem;
     --tamano-botón-texto: 1.1rem;
     
+    /* ✅ TAMAÑOS HERO RESPONSIVE */
+    --tamano-hero-titulo-tablet: 2rem;
+    --tamano-hero-titulo-movil: 1.5rem;
+    --tamano-hero-subtitulo-tablet: 1.1rem;
+    --tamano-hero-subtitulo-movil: 1rem;
+    --tamano-botón-texto-movil: 1rem;
+    
     /* ✅ TAMAÑOS DE PRODUCTOS */
     --tamano-nombre-producto: 0.95rem;
     --tamano-nombre-producto-tablet: 0.9rem;
@@ -119,6 +126,11 @@
     --padding-paso-pedir: 20px;
     --padding-contacto-bloque: 40px 30px;
     --padding-contacto-bloque-movil: 30px 20px;
+
+    /* ✅ PADDINGS DE HERO */
+    --padding-hero-desktop: 80px 20px;
+    --padding-hero-tablet: 60px 20px;
+    --padding-hero-movil: 40px 15px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -194,4 +206,9 @@
     --tamano-placeholder-chef-contenedor: 200px;
     --margin-top-contacto-bloque: 80px;
     --margin-top-contacto-bloque-movil: 60px;
+
+    /* ✅ MIN-HEIGHT DE HERO */
+    --min-height-hero-desktop: 400px;
+    --min-height-hero-tablet: 350px;
+    --min-height-hero-movil: 300px;
 }
