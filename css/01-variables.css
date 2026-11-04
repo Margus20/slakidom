@@ -31,6 +31,12 @@
     --color-excalibur: #F2CB05;
     --fondo-modal-carrito: rgba(0, 0, 0, 0.6);
     
+    /* ✅ COLORES DE MENÚ */
+    --color-fondo-nav-link: rgba(255, 192, 203, 0.3);
+    --color-fondo-menu-subnav: rgba(0,0,0,0.2);
+    --color-fondo-menu-subitem-hover: rgba(255,255,255,0.1);
+    --color-borde-menu-subitem: 1px solid rgba(255,255,255,0.05);
+    
     /* ========================================== */
     /* 📝 TIPOGRAFÍA */
     /* ========================================== */
@@ -129,6 +135,20 @@
     --tamano-total-carrito: 1.2rem;
     --tamano-contador-flotante: 0.75rem;
     --tamano-contador-flotante-ancho: 22px;
+
+    /* ✅ TAMAÑOS DE MENÚ */
+    --tamano-nav-link-desktop: 0.85rem;
+    --tamano-nav-link-tablet: 0.8rem;
+    --tamano-nav-link-movil: 0.75rem;
+    --tamano-dropdown-link-desktop: 0.95rem;
+    --tamano-dropdown-link-tablet: 0.85rem;
+    --tamano-dropdown-link-movil: 0.8rem;
+    --tamano-menu-close: 40px;
+    --tamano-menu-item-desktop: 2rem;
+    --tamano-menu-item-tablet: 1.5rem;
+    --tamano-menu-subitem-desktop: 1.2rem;
+    --tamano-menu-subitem-tablet: 1.1rem;
+    --tamano-dropdown-arrow: 1.2rem;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -151,6 +171,11 @@
     --gap-contacto-info-desktop: 15px;
     --gap-contacto-info-tablet: 12px;
     --gap-contacto-info-movil: 10px;
+
+    /* ✅ GAP DE NAVEGACIÓN */
+    --gap-nav-list-desktop: 6px;
+    --gap-nav-list-tablet: 5px;
+    --gap-nav-list-movil: 4px;
 
     /* ✅ ESPACIO ENTRE ELEMENTOS */
     --espacio-entre-elementos: 15px;
@@ -193,6 +218,21 @@
     --padding-btn-whatsapp-modal-movil: 12px;
     --padding-notificacion: 12px 25px;
     --padding-notificacion-movil: 10px 20px;
+
+    /* ✅ PADDINGS DE MENÚ */
+    --padding-nav-bar-desktop: 0 15px;
+    --padding-nav-bar-tablet: 0 10px;
+    --padding-nav-bar-movil: 0 5px;
+    --padding-nav-link-desktop: 6px 14px;
+    --padding-nav-link-tablet: 6px 12px;
+    --padding-nav-link-movil: 5px 10px;
+    --padding-dropdown-link-desktop: 12px 20px;
+    --padding-dropdown-link-tablet: 10px 15px;
+    --padding-dropdown-link-movil: 10px 12px;
+    --padding-menu-overlay: 40px;
+    --padding-menu-item: 20px 0;
+    --padding-menu-subitem-desktop: 15px 20px;
+    --padding-menu-subitem-tablet: 12px 20px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -214,6 +254,7 @@
     --borde-contacto-bloque: 3px solid var(--amarillo);
     --borde-footer-bottom: 1px solid rgba(255,255,255,0.2);
     --borde-item-carrito: 1px solid var(--color-borde-claro);
+    --borde-menu-item: 2px solid rgba(255,255,255,0.1);
     
     /* ========================================== */
     /* 🌑 SOMBRAS */
@@ -303,6 +344,12 @@
     --max-width-modal-carrito-movil: 95%;
     --max-height-lista-carrito: 300px;
 
+    /* ✅ LAYOUT DE MENÚ */
+    --max-width-nav-bar: calc(100% - 260px);
+    --min-width-nav-dropdown: 180px;
+    --min-width-nav-dropdown-movil: 140px;
+    --max-height-menu-subnav: 200px;
+
     /* ✅ POSICIONES DE BOTONES FLOTANTES - DESKTOP */
     --top-menu-flotante-desktop: 20px;
     --right-menu-flotante-desktop: 20px;
@@ -348,4 +395,9 @@
     /* ✅ POSICIONES DEL CONTADOR FLOTANTE */
     --top-contador-flotante: -5px;
     --right-contador-flotante: -5px;
+
+    /* ✅ POSICIONES DE NAVEGACIÓN */
+    --bottom-nav-bar-desktop: 10px;
+    --bottom-nav-bar-tablet: 5px;
+    --bottom-nav-bar-movil: 5px;
 }
