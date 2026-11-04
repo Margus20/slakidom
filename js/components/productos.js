@@ -8,17 +8,21 @@ export function renderizarProductos(listaProductos, tasaCambio) {
     const gridProductos = document.getElementById("productos-grid");
     if (!gridProductos) return;
     
-    console.log('🏗️ [PRODUCTOS]: Renderizando productos...');
+    console.log('🏗️ [PRODUCTOS]: Iniciando renderizado...');
     gridProductos.innerHTML = "";
 
     if (listaProductos.length === 0) {
-        gridProductos.innerHTML = "<p style='text-align:center; color: var(--chocolate); padding: 40px;'>No hay productos en esta categoría por ahora.</p>";
+        // Usamos la variable CSS --chocolate para mantener la consistencia visual
+        gridProductos.innerHTML = `<p style="text-align: center; color: var(--chocolate); padding: var(--espacio-lg);">No hay productos en esta categoría por ahora.</p>";
         return;
     }
     
     const path = window.location.pathname;
     const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
     const imgBasePath = isSubfolder ? '../' : '';
+    
+    // ✅ OPTIMIZACIÓN: Usar DocumentFragment para insertar todo el HTML de una sola vez
+    const fragment = document.createDocumentFragment();
     
     listaProductos.forEach(producto => {
         const card = document.createElement("div");
@@ -37,8 +41,9 @@ export function renderizarProductos(listaProductos, tasaCambio) {
         
         const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
         
+        // ✅ CORRECCIÓN: Se eliminaron los estilos inline. La clase .producto-img en 05-productos.css ya maneja todo.
         const imagenHTML = imagenSrc
-            ? `<img src="${imagenSrc}" alt="${producto.nombre}" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0; background:#fff;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
+            ? `<img src="${imagenSrc}" alt="${producto.nombre}" class="producto-img" onerror="this.outerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
             : `<div class="producto-img-placeholder">🫙</div>`;
         
         const esClicable = !!producto.url;
@@ -62,11 +67,16 @@ export function renderizarProductos(listaProductos, tasaCambio) {
             </div>
         `;
 
-        // ✅ AJUSTE REALIZADO: Se eliminó el onclick inline para que carrito.js pueda detectar el clic correctamente
+        // ✅ Se usa una clase 'card-link' en lugar de estilos inline para el enlace
         card.innerHTML = `
-            ${esClicable ? `<a href="${productoURL}" style="text-decoration: none; color: inherit; display: block;">${contenidoInfo}</a>` : contenidoInfo}
+            ${esClicable ? `<a href="${productoURL}" class="card-link">${contenidoInfo}</a>` : contenidoInfo}
             <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
         `;
-        gridProductos.appendChild(card);
+        
+        fragment.appendChild(card);
     });
-}
+
+    // Inserción única en el DOM (mucho más rápido que hacerlo en cada iteración)
+    gridProductos.appendChild(fragment);
+    console.log(`✅ [PRODUCTOS]: ${listaProductos.length} productos renderizados correctamente.`);
+            }
