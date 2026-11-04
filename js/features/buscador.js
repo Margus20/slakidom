@@ -2,7 +2,7 @@
 // BUSCADOR DE PRODUCTOS CON VISTA PREVIA
 // ==========================================
 
-import { PRODUCTOS } from '../config.js'; // ✅ Importamos la lista de productos para el dropdown
+import { PRODUCTOS } from '../config.js';
 
 // Función auxiliar para eliminar tildes y hacer la búsqueda más flexible
 function normalizarTexto(texto) {
@@ -18,7 +18,7 @@ export function inicializarBuscador() {
         return;
     }
 
-    console.log('🔍 [BUSCADOR]: Inicializado con vista previa de imágenes y soporte móvil.');
+    console.log('🔍 [BUSCADOR]: Inicializado con vista previa y soporte móvil.');
 
     // 1. Crear el contenedor del menú desplegable dinámicamente
     const dropdown = document.createElement('div');
@@ -26,18 +26,17 @@ export function inicializarBuscador() {
     
     const buscadorHeader = document.querySelector('.buscador-header');
     if (buscadorHeader) {
-        buscadorHeader.style.position = 'relative'; // Asegura que el dropdown se posicione relativo a esto
+        // ✅ CORRECCIÓN: Eliminamos la manipulación de estilos inline.
+        // La regla 'position: relative' ya debe estar definida en 03-header.css
         buscadorHeader.appendChild(dropdown);
     }
 
-    // 2. ✅ SOLUCIÓN REAL PARA CHROME/ANDROID: No usar preventDefault en inputs
-    // Usamos 'click' y 'touchend' que son seguros y no bloquean el teclado nativo
+    // 2. Solución para Chrome/Android: Forzar foco sin bloquear el teclado nativo
     buscadorInput.addEventListener('click', () => {
         buscadorInput.focus();
     });
 
-    buscadorInput.addEventListener('touchend', (e) => {
-        // Forzamos el foco al levantar el dedo, sin prevenir el comportamiento nativo del teclado
+    buscadorInput.addEventListener('touchend', () => {
         buscadorInput.focus();
     }, { passive: true });
 
@@ -60,6 +59,7 @@ export function inicializarBuscador() {
                 }
             });
 
+            // Manejo del mensaje "Sin resultados" en la grilla
             let sinResultados = productosGrid.querySelector('.sin-resultados');
             if (!sinResultados) {
                 sinResultados = document.createElement('div');
@@ -71,7 +71,7 @@ export function inicializarBuscador() {
         }
 
         // ==========================================
-        // B. Mostrar el menú desplegable con fotos (NUEVO)
+        // B. Mostrar el menú desplegable con fotos
         // ==========================================
         dropdown.innerHTML = ''; // Limpiar resultados anteriores
         
@@ -88,13 +88,15 @@ export function inicializarBuscador() {
                 const item = document.createElement('div');
                 item.className = 'resultado-item';
                 
-                // Determinar la ruta correcta de la imagen según la carpeta donde estemos
+                // Determinar la ruta correcta de la imagen
                 const path = window.location.pathname;
                 const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
                 const imgSrc = producto.imagen ? (isSubfolder ? `../${producto.imagen}` : producto.imagen) : '';
 
+                // ✅ MEJORA: Fallback de imagen más seguro (usa un emoji o icono genérico si falla)
                 item.innerHTML = `
-                    <img src="${imgSrc}" alt="${producto.nombre}" onerror="this.src='../img/slaky_cuadrado.jpg'">
+                    <img src="${imgSrc}" alt="${producto.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="resultado-item-placeholder" style="display:none; width:40px; height:40px; background:var(--gris-claro); border-radius:50%; align-items:center; justify-content:center; margin-right:10px;">🍪</div>
                     <span>${producto.nombre}</span>
                 `;
 
