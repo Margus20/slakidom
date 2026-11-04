@@ -21,6 +21,19 @@
     <link rel="stylesheet" href="css/10-animaciones.css">
     <link rel="stylesheet" href="css/11-menu.css">
     <link rel="stylesheet" href="css/12-slider.css">
+
+    <!-- ✅ DETECTOR DE ERRORES GLOBAL (Para identificar exactamente qué archivo falla) -->
+    <script>
+        window.onerror = function(message, source, lineno, colno, error) {
+            document.body.innerHTML = '<div style="background:#d32f2f; color:white; padding:30px; font-family:monospace; font-size:16px; line-height:1.5;">' +
+                '<h2>⚠️ ERROR DETECTADO EN EL SISTEMA</h2>' +
+                '<p><strong>Mensaje:</strong> ' + message + '</p>' +
+                '<p><strong>Archivo:</strong> ' + source + '</p>' +
+                '<p><strong>Línea:</strong> ' + lineno + '</p>' +
+                '<hr><p style="font-size:14px;">Por favor, toma una captura de esta pantalla y envíala para corregir ese archivo específico.</p></div>';
+            return true; 
+        };
+    </script>
 </head>
 <body>
     
