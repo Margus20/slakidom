@@ -171,23 +171,36 @@
 /* ========================================== */
 /* ✅ UTILIDADES PARA EL BUSCADOR (Filtrado) */
 /* ========================================== */
-/* Esta clase la agrega el JS para ocultar tarjetas que no coinciden */
 .producto-card.oculto {
     display: none !important;
 }
 
-/* Mensaje cuando no hay resultados en la búsqueda */
 .sin-resultados {
-    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+    grid-column: 1 / -1;
     text-align: center;
     padding: var(--espacio-lg);
     color: var(--chocolate);
     font-size: var(--tamano-texto);
-    display: none; /* Oculto por defecto */
+    display: none;
 }
 
 .sin-resultados.visible {
-    display: block; /* Se muestra cuando el JS le agrega la clase 'visible' */
+    display: block;
+}
+
+/* ========================================== */
+/* ✅ CAMBIO DE MONEDA (Activo Grande / Pequeño) */
+/* ========================================== */
+/* Cuando un precio es el principal, se muestra con el estilo EPA */
+.precio-usd.activo-grande,
+.precio-ves.activo-grande {
+    display: inline-flex;
+}
+
+/* Cuando un precio es secundario, se oculta para no saturar la tarjeta */
+.precio-usd.activo-pequeno,
+.precio-ves.activo-pequeno {
+    display: none;
 }
 
 /* ========================================== */
