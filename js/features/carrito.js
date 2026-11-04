@@ -3,20 +3,17 @@
 // ==========================================
 
 const NUMERO_WHATSAPP = "584122879803";
-
 let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
 
 export function inicializarCarrito() {
     console.log('🛒 [CARRITO]: Inicializando... Productos actuales:', carrito.length);
     actualizarContadorCarrito();
     
-    // ✅ Delegación de eventos: escucha clics en todo el documento para capturar botones dinámicos
+    // ✅ Delegación de eventos para botones "Agregar" dinámicos
     document.addEventListener('click', manejarClickAgregar);
     
-    // Hacer funciones accesibles globalmente para el HTML (modal)
-    window.eliminarDelCarrito = eliminarDelCarrito;
-    window.cerrarCarritoModal = cerrarCarritoModal;
-    window.finalizarPedidoWhatsApp = finalizarPedidoWhatsApp;
+    // ✅ Delegación de eventos para botones "Eliminar" dentro del modal
+    document.addEventListener('click', manejarClickEliminar);
     
     // Escuchar actualizaciones desde otras partes (ej. páginas individuales)
     window.addEventListener('carritoActualizado', () => {
@@ -26,7 +23,6 @@ export function inicializarCarrito() {
 }
 
 function manejarClickAgregar(e) {
-    // ✅ Verificamos si el elemento clickeado es el botón de agregar del índice
     if (e.target.classList.contains('btn-agregar-carrito')) {
         e.preventDefault();
         e.stopPropagation(); 
@@ -44,6 +40,17 @@ function manejarClickAgregar(e) {
         
         console.log('🛒 [CARRITO]: Agregando producto:', producto);
         agregarAlCarrito(producto);
+    }
+}
+
+function manejarClickEliminar(e) {
+    // Detectar si se hizo clic en el botón de eliminar del modal
+    if (e.target.classList.contains('btn-eliminar')) {
+        e.preventDefault();
+        const index = parseInt(e.target.dataset.index);
+        if (!isNaN(index)) {
+            eliminarDelCarrito(index);
+        }
     }
 }
 
@@ -73,7 +80,14 @@ function actualizarContadorCarrito() {
     contadores.forEach(contador => {
         if (contador) {
             contador.textContent = totalItems;
-            contador.style.display = totalItems > 0 ? 'flex' : 'none';
+            // Usamos clases en lugar de style.display
+            if (totalItems > 0) {
+                contador.classList.add('activo');
+                contador.style.display = 'flex'; // Mantenemos flex solo si la clase no lo garantiza
+            } else {
+                contador.classList.remove('activo');
+                contador.style.display = 'none';
+            }
         }
     });
 }
@@ -93,7 +107,7 @@ export function mostrarCarritoModal() {
     let total = 0;
 
     if (carrito.length === 0) {
-        lista.innerHTML = "<p style='text-align:center; padding: 20px; color: #666;'>Tu carrito está vacío 🍪</p>";
+        lista.innerHTML = "<p class='carrito-vacio'>Tu carrito está vacío 🍪</p>";
         if (totalElement) totalElement.textContent = "$0.00";
     } else {
         carrito.forEach((item, index) => {
@@ -105,29 +119,57 @@ export function mostrarCarritoModal() {
             const imgBasePath = isSubfolder ? '../' : '';
             const imgSrc = item.imagen ? `${imgBasePath}${item.imagen}` : `${imgBasePath}img/slaky_cuadrado.jpg`;
 
+            // ✅ CONSTRUCCIÓN LIMPIA DEL DOM SIN ESTILOS INLINE
             const div = document.createElement("div");
-            div.className = "item-carrito";
-            div.style.cssText = "display:flex; align-items:center; gap:15px; padding:15px 0; border-bottom:1px solid #eee;";
-            div.innerHTML = `
-                <img src="${imgSrc}" alt="${item.nombre}" style="width:60px; height:60px; object-fit:cover; border-radius:8px; background:#fff;">
-                <div style="flex:1;">
-                    <strong style="display:block; font-size:0.95rem; color:#333;">${item.nombre}</strong>
-                    <span style="font-size:0.85rem; color:#666;">${item.cantidad} x $${item.precio.toFixed(2)}</span>
-                </div>
-                <div style="text-align:right;">
-                    <p style="margin:0; font-weight:bold; color:var(--chocolate, #5D4037);">$${subtotal.toFixed(2)}</p>
-                    <button onclick="window.eliminarDelCarrito(${index})" style="background:none; border:none; color:#ff4444; cursor:pointer; font-size:0.8rem; margin-top:5px; text-decoration:underline;">Eliminar</button>
-                </div>
-            `;
-            lista.appendChild(div);
+            div.className = "item-carrito"; // Clase ya definida en 10-animaciones.css
+
+            const img = document.createElement("img");
+            img.src = imgSrc;
+            img.alt = item.nombre;
+            // La clase .resultado-item img o estilos generales de img en el modal pueden aplicarse aquí
+            
+            const infoDiv = document.createElement("div");
+            infoDiv.className = "info-item"; // Clase ya definida en 10-animaciones.css
+
+            const strong = document.createElement("strong");
+            strong.textContent = item.nombre;
+
+            const span = document.createElement("span");
+            span.textContent = `${item.cantidad} x $${item.precio.toFixed(2)}`;
+
+            infoDiv.appendChild(strong);
+            infoDiv.appendChild(span);
+
+            const accionesDiv = document.createElement("div");
+            accionesDiv.className = "acciones-carrito";
+            accionesDiv.style.textAlign = "right"; // Único estilo inline aceptable para layout específico
+
+            const precioP = document.createElement("p");
+            precioP.className = "precio-subtotal";
+            precioP.textContent = `$${subtotal.toFixed(2)}`;
+
+            const btnEliminar = document.createElement("button");
+            btnEliminar.className = "btn-eliminar"; // Clase ya definida en 10-animaciones.css
+            btnEliminar.textContent = "Eliminar";
+            btnEliminar.dataset.index = index; // Guardamos el índice para la delegación
+
+            accionesDiv.appendChild(precioP);
+            accionesDiv.appendChild(btnEliminar);
+
+            div.appendChild(img);
+            div.appendChild(infoDiv);
+            div.appendChild(accionesDiv);
+            
+            lista.appendChild(divPY);
         });
+        
         if (totalElement) totalElement.textContent = `$${total.toFixed(2)}`;
     }
     
     modal.classList.add("activo");
 }
 
-function cerrarCarritoModal() {
+export function cerrarCarritoModal() {
     const modal = document.getElementById("modal-carrito");
     if (modal) modal.classList.remove("activo");
 }
@@ -136,10 +178,10 @@ function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
     guardarCarrito();
     actualizarContadorCarrito();
-    mostrarCarritoModal();
+    mostrarCarritoModal(); // Re-renderizar el modal
 }
 
-function finalizarPedidoWhatsApp() {
+export function finalizarPedidoWhatsApp() {
     carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
     
     if (carrito.length === 0) {
@@ -162,29 +204,28 @@ function finalizarPedidoWhatsApp() {
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`, "_blank");
 }
 
-// ✅ EXPORTAMOS esta función para que las páginas individuales de productos puedan usarla
 export function mostrarNotificacion(mensaje) {
     // Evitar múltiples notificaciones apiladas
-    const existente = document.querySelector('.notificacion-slakidom');
+    const existente = document.querySelector('.notificacion-flotante.mostrar');
     if (existente) existente.remove();
 
     const notif = document.createElement("div");
-    notif.className = "notificacion-slakidom";
-    notif.style.cssText = "position:fixed; bottom:30px; right:30px; background:var(--chocolate, #5D4037); color:white; padding:15px 25px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.3); z-index:10000; opacity:0; transform:translateY(20px); transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-weight:bold; display:flex; align-items:center; gap:10px; font-size:1rem;";
-    notif.innerHTML = `<span style="font-size:1.2rem;">✅</span> ${mensaje}`;
+    // ✅ REUTILIZAMOS LA CLASE QUE YA EXISTE EN 10-animaciones.css
+    notif.className = "notificacion-flotante";
+    notif.innerHTML = `<span>✅</span> ${mensaje}`;
     
     document.body.appendChild(notif);
     
-    // Animación de entrada
+    // Forzar reflow para que la transición CSS funcione
     requestAnimationFrame(() => {
-        notif.style.opacity = "1";
-        notif.style.transform = "translateY(0)";
+        notif.classList.add('mostrar');
     });
     
-    // Desaparecer automáticamente
+    // Desaparecer automáticamente (3s + 0.3s de transición de salida)
     setTimeout(() => {
-        notif.style.opacity = "0";
-        notif.style.transform = "translateY(20px)";
-        setTimeout(() => notif.remove(), 400);
+        notif.classList.remove('mostrar');
+        setTimeout(() => {
+            if (notif.parentNode) notif.remove();
+        }, 300);
     }, 3000);
 }
