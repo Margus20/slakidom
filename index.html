@@ -54,22 +54,12 @@
     <!-- Aquí se inyectará el Footer automáticamente -->
     <div id="footer-container"></div>
 
-    <!-- ✅ CONSOLA DE DESARROLLADOR PARA TABLET (Eruda) - Versión mejorada -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <!-- ✅ CONSOLA vConsole (Más específica para errores de JavaScript) -->
+    <script src="https://cdn.jsdelivr.net/npm/vconsole@latest/dist/vconsole.min.js"></script>
     <script>
-        // Inicializar Eruda con herramientas extendidas para ver errores específicos
-        eruda.init({
-            defaults: {
-                display: {
-                    console: true,
-                    elements: true,
-                    network: true,
-                    resources: true,
-                    sources: true
-                }
-            }
-        });
-        console.log('[INFO] Consola Eruda cargada. Revisa las pestañas "Network" y "Sources" para ver detalles del error.');
+        // Inicializar vConsole ANTES de cargar app.js
+        var vConsole = new window.VConsole();
+        console.log('[INFO] vConsole cargada. Revisa los errores en la consola verde.');
     </script>
 
     <!-- Único script: El cerebro de la aplicación -->
