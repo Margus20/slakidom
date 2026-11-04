@@ -7,12 +7,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: sticky;
+    position: sticky; /* ✅ Se mantiene para que el header se quede fijo al hacer scroll */
     top: 0;
     z-index: var(--z-header);
     box-shadow: var(--sombra-media);
     height: 260px;
-    position: relative;
     overflow: visible;
     background-image: url('../img/navidad.jpg');
     background-size: cover;
