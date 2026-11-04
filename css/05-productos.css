@@ -35,6 +35,15 @@
     box-shadow: var(--sombra-hover-producto);
 }
 
+/* ✅ NUEVO: Enlace que envuelve la tarjeta (para productos clicables) */
+/* Esto evita el subrayado azul por defecto y mantiene la herencia de color */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
 /* Imagen del producto */
 .producto-img {
     width: 100%;
@@ -154,7 +163,7 @@
 @media (max-width: var(--breakpoint-tablet-grande)) {
     .productos-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
+        gap: 15px; /* Mantenemos 15px fijo para ajuste fino del grid */
     }
     
     .producto-img,
