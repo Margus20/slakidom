@@ -1,5 +1,5 @@
 // ==========================================
-// SLAKIDOM - ORQUESTADOR PRINCIPAL
+// SLAKIDOM - ORQUESTADOR PRINCIPAL (app.js)
 // ==========================================
 
 import { cargarComponentes } from './components/header.js';
@@ -7,31 +7,37 @@ import { renderizarProductos } from './components/productos.js';
 import { obtenerTasaBCV } from './utils/tasa.js';
 import { formatearConPuntosDeMil } from './utils/helpers.js';
 import { PRODUCTOS } from './config.js';
-import { inicializarCarrito, mostrarCarritoModal } from './features/carrito.js';
+
+// ✅ CORRECCIÓN: Importar finalizarPedidoWhatsApp directamente para evitar usar 'window.'
+import { inicializarCarrito, mostrarCarritoModal, finalizarPedidoWhatsApp } from './features/carrito.js';
+
 import { inicializarMenus } from './features/menu.js';
 import { inicializarSelectorMoneda } from './features/moneda.js';
 import { inicializarBuscador } from './features/buscador.js';
 import { iniciarEfectoNieve } from './features/nieve.js';
-import { inicializarAnimaciones, animarCardsDeProductos } from './features/animaciones.js'; // ✅ NUEVO IMPORT
+import { inicializarAnimaciones, animarCardsDeProductos } from './features/animaciones.js';
 
-// Iniciar carga de componentes
+// 1. Iniciar carga de componentes (Header y Footer)
 cargarComponentes();
 
+// 2. Esperar a que el HTML dinámico esté listo en el DOM
 document.addEventListener('componentesListos', () => {
     console.log('🌟 [APP]: Componentes cargados. Iniciando aplicación...');
     
-    // ✅ Inicializar todas las características
+    // ✅ Inicializar todas las características independientes
     inicializarCarrito();
     inicializarMenus();
     inicializarSelectorMoneda();
     inicializarBuscador();
     iniciarEfectoNieve();
-    inicializarAnimaciones(); // ✅ NUEVO: Iniciar animaciones (scroll suave)
+    inicializarAnimaciones(); // Scroll suave y observador de animaciones
     
-    // Configurar modal del carrito
+    // 3. Configurar eventos del Modal del Carrito
     const modalCarrito = document.getElementById('modal-carrito');
     const btnCerrarCarrito = document.getElementById('btn-cerrar-carrito');
+    const btnFinalizarPedido = document.getElementById('btn-finalizar-pedido');
     
+    // Abrir modal (soporta múltiples botones si los hubiera en el futuro)
     document.querySelectorAll('.abrir-modal-carrito').forEach(btn => {
         btn.addEventListener('click', (e) => { 
             e.preventDefault(); 
@@ -39,30 +45,54 @@ document.addEventListener('componentesListos', () => {
         });
     });
     
-    btnCerrarCarrito?.addEventListener('click', () => modalCarrito?.classList.remove('activo'));
-    modalCarrito?.addEventListener('click', (e) => { if (e.target === modalCarrito) modalCarrito.classList.remove('activo'); });
-    document.getElementById('btn-finalizar-pedido')?.addEventListener('click', window.finalizarPedidoWhatsApp);
-
-    // Cargar tasa y renderizar productos
-    (async () => {
-        const tasaCambio = await obtenerTasaBCV();
-        const tasaInfo = document.getElementById('tasaBcvInfo');
-        if (tasaInfo) tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
-        
-        const path = window.location.pathname;
-        let productosAMostrar = PRODUCTOS;
-
-        if (path.includes('/galletas/')) {
-            productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'galletas');
-        } else if (path.includes('/mermeladas/')) {
-            productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'mermeladas');
+    // Cerrar modal con el botón 'X'
+    btnCerrarCarrito?.addEventListener('click', () => {
+        modalCarrito?.classList.remove('activo');
+    });
+    
+    // Cerrar modal al hacer clic fuera del contenido (en el fondo oscuro)
+    modalCarrito?.addEventListener('click', (e) => { 
+        if (e.target === modalCarrito) {
+            modalCarrito.classList.remove('activo');
         }
+    });
 
-        // 1. Dibujar los productos en el HTML
-        renderizarProductos(productosAMostrar, tasaCambio);
-        
-        // 2. ✅ NUEVO: Animar las cards JUSTO DESPUÉS de que se dibujen en el DOM
-        animarCardsDeProductos();
+    // ✅ CORRECCIÓN: Usar la función importada, no window.finalizarPedidoWhatsApp
+    btnFinalizarPedido?.addEventListener('click', (e) => {
+        e.preventDefault();
+        finalizarPedidoWhatsApp();
+    });
+
+    // 4. Cargar datos y renderizar el catálogo
+    (async () => {
+        try {
+            const tasaCambio = await obtenerTasaBCV();
+            
+            // Actualizar indicador de tasa en el header (si existe el elemento)
+            const tasaInfo = document.getElementById('tasaBcvInfo');
+            if (tasaInfo) {
+                tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
+            }
+            
+            // Filtrar productos según la carpeta/URL actual
+            const path = window.location.pathname;
+            let productosAMostrar = PRODUCTOS;
+
+            if (path.includes('/galletas/')) {
+                productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'galletas');
+            } else if (path.includes('/mermeladas/')) {
+                productosAMostrar = PRODUCTOS.filter(p => p.categoria === 'mermeladas');
+            }
+
+            // A. Dibujar los productos en el HTML
+            renderizarProductos(productosAMostrar, tasaCambio);
+            
+            // B. Activar animaciones de entrada JUSTO después de insertarlos en el DOM
+            animarCardsDeProductos();
+            
+        } catch (error) {
+            console.error('❌ [APP]: Error crítico al iniciar el catálogo:', error);
+        }
     })();
 
     console.log('🎉 [APP]: ¡Sistema SLAKIDOM activo y listo!');
