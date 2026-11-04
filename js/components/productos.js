@@ -13,7 +13,7 @@ export function renderizarProductos(listaProductos, tasaCambio) {
 
     if (listaProductos.length === 0) {
         // Usamos la variable CSS --chocolate para mantener la consistencia visual
-        gridProductos.innerHTML = `<p style="text-align: center; color: var(--chocolate); padding: var(--espacio-lg);">No hay productos en esta categoría por ahora.</p>";
+        gridProductos.innerHTML = `<p style="text-align: center; color: var(--chocolate); padding: var(--espacio-lg);">No hay productos en esta categoría por ahora.</p>;
         return;
     }
     
