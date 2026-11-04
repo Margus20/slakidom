@@ -1,43 +1,53 @@
 // ==========================================
-// ANIMACIONES Y SCROLL (js/features/animaciones.js)
+// ANIMACIONES Y SCROLL
 // ==========================================
 
 export function inicializarAnimaciones() {
-    // 1. Scroll suave para los enlaces del menú (ej: ir a #contacto)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return; // Ignorar enlaces vacíos
-            
+    // ✅ OPTIMIZACIÓN 1: Delegación de eventos.
+    // En lugar de buscar los enlaces al inicio (cuando el header quizás aún no cargó),
+    // escuchamos los clics en todo el documento. Así funciona siempre, incluso con carga dinámica.
+    document.addEventListener('click', function(e) {
+        const anchor = e.target.closest('a[href^="#"]');
+        if (!anchor) return; // Si no es un enlace con #, ignorar
+
+        const targetId = anchor.getAttribute('href');
+        if (targetId === '#') return; // Ignorar enlaces vacíos
+        
+        const target = document.querySelector(targetId);
+        if (target) {
             e.preventDefault();
-            const target = document.querySelector(targetId);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+            
+            // ✅ OPTIMIZACIÓN 2: Compensar la altura del header sticky
+            const header = document.querySelector('.header');
+            const headerOffset = header ? header.offsetHeight : 0;
+            
+            // Calculamos la posición exacta restando la altura del header y un pequeño margen (20px)
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
 }
 
-// 2. Función separada para animar las cards (se llama DESPUÉS de renderizar productos)
+// ✅ OPTIMIZACIÓN 3: Usar clases CSS en lugar de estilos inline para la animación
 export function animarCardsDeProductos() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target); // Dejar de observar una vez animado (mejor rendimiento)
+                // En lugar de modificar estilos inline, agregamos una clase
+                entry.target.classList.add('card-visible');
+                observer.unobserve(entry.target); // Dejar de observar para ahorrar rendimiento
             }
         });
     }, { threshold: 0.1 });
 
-    // Aplicar a las cards de productos que ya existen en el DOM
+    // Aplicar la clase inicial a las cards que ya existen en el DOM
     document.querySelectorAll('.producto-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        card.classList.add('card-hidden');
         observer.observe(card);
     });
 }
