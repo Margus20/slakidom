@@ -1,13 +1,22 @@
 // ==========================================
-// CARGA DE HEADER Y FOOTER (Optimizado)
+// CARGA DE HEADER Y FOOTER (Optimizado y a prueba de GitHub Pages)
 // ==========================================
 
 export async function cargarComponentes() {
     try {
-        // 1. Detectar si estamos en una subcarpeta para ajustar la ruta
+        // 1. Detectar el entorno para ajustar la ruta base correctamente
         const path = window.location.pathname;
+        const isGitHubPages = path.includes('/slakidom/');
         const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
-        const basePath = isSubfolder ? '../' : '';
+        
+        let basePath = '';
+        if (isGitHubPages) {
+            // En GitHub Pages, la ruta absoluta desde la raíz del repositorio es lo más seguro
+            basePath = '/slakidom/';
+        } else {
+            // En entorno local, usamos rutas relativas
+            basePath = isSubfolder ? '../' : './';
+        }
         
         // 2. Función auxiliar para evitar repetir código (Principio DRY)
         const cargarHTML = async (idContenedor, nombreArchivo) => {
@@ -29,8 +38,8 @@ export async function cargarComponentes() {
                 console.log(`✅ [CARGA]: ${nombreArchivo} cargado correctamente.`);
             } else {
                 console.error(`❌ [CARGA]: Error ${response.status} al cargar ${nombreArchivo}.`);
-                // Plan B: Mostrar un mensaje visual si falla la carga
-                contenedor.innerHTML = `<p style="color: red; text-align: center; padding: 20px;">Error al cargar el ${nombreArchivo}. Recarga la página.</p>`;
+                // Plan B: Mostrar un mensaje visual si falla la carga (Sin estilos inline)
+                contenedor.innerHTML = `<p class="error-carga-componente">Error al cargar el ${nombreArchivo}. Por favor, recarga la página.</p>`;
             }
         };
 
