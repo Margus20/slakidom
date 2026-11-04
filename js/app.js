@@ -8,7 +8,7 @@ import { obtenerTasaBCV } from './utils/tasa.js';
 import { formatearConPuntosDeMil } from './utils/helpers.js';
 import { PRODUCTOS } from './config.js';
 
-// ✅ CORRECCIÓN: Importar funciones del carrito directamente para evitar usar 'window.'
+// CORRECCIÓN: Importar funciones del carrito directamente para evitar usar 'window.'
 import { inicializarCarrito, mostrarCarritoModal, finalizarPedidoWhatsApp } from './features/carrito.js';
 
 import { inicializarMenus } from './features/menu.js';
@@ -17,7 +17,7 @@ import { inicializarBuscador } from './features/buscador.js';
 import { iniciarEfectoNieve } from './features/nieve.js';
 import { inicializarAnimaciones, animarCardsDeProductos } from './features/animaciones.js';
 
-// ✅ NUEVO: Importar la función del slider
+// NUEVO: Importar la función del slider
 import { inicializarSlider } from './features/slider.js';
 
 // 1. Iniciar carga de componentes (Header y Footer)
@@ -25,23 +25,23 @@ cargarComponentes();
 
 // 2. Esperar a que el HTML dinámico esté listo en el DOM
 document.addEventListener('componentesListos', () => {
-    console.log('🌟 [APP]: Componentes cargados. Iniciando aplicación...');
+    console.log('[APP]: Componentes cargados. Iniciando aplicacion...');
     
-    // ✅ Inicializar todas las características independientes
+    // Inicializar todas las características independientes
     inicializarCarrito();
     inicializarMenus();
     inicializarSelectorMoneda();
     inicializarBuscador();
     iniciarEfectoNieve();
     inicializarAnimaciones(); // Scroll suave y observador de animaciones
-    inicializarSlider();      // ✅ NUEVO: Inicializar el slider de imágenes del hero
+    inicializarSlider();      // NUEVO: Inicializar el slider de imagenes del hero
     
     // 3. Configurar eventos del Modal del Carrito
     const modalCarrito = document.getElementById('modal-carrito');
     const btnCerrarCarrito = document.getElementById('btn-cerrar-carrito');
     const btnFinalizarPedido = document.getElementById('btn-finalizar-pedido');
     
-    // Abrir modal (soporta múltiples botones si los hubiera en el futuro)
+    // Abrir modal (soporta multiples botones si los hubiera en el futuro)
     document.querySelectorAll('.abrir-modal-carrito').forEach(btn => {
         btn.addEventListener('click', (e) => { 
             e.preventDefault(); 
@@ -49,7 +49,7 @@ document.addEventListener('componentesListos', () => {
         });
     });
     
-    // Cerrar modal con el botón 'X'
+    // Cerrar modal con el boton 'X'
     btnCerrarCarrito?.addEventListener('click', () => {
         modalCarrito?.classList.remove('activo');
     });
@@ -61,13 +61,13 @@ document.addEventListener('componentesListos', () => {
         }
     });
 
-    // ✅ CORRECCIÓN: Usar la función importada, no window.finalizarPedidoWhatsApp
+    // CORRECCIÓN: Usar la funcion importada, no window.finalizarPedidoWhatsApp
     btnFinalizarPedido?.addEventListener('click', (e) => {
         e.preventDefault();
         finalizarPedidoWhatsApp();
     });
 
-    // 4. Cargar datos y renderizar el catálogo
+    // 4. Cargar datos y renderizar el catalogo
     (async () => {
         try {
             const tasaCambio = await obtenerTasaBCV();
@@ -78,7 +78,7 @@ document.addEventListener('componentesListos', () => {
                 tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
             }
             
-            // Filtrar productos según la carpeta/URL actual
+            // Filtrar productos segun la carpeta/URL actual
             const path = window.location.pathname;
             let productosAMostrar = PRODUCTOS;
 
@@ -91,13 +91,13 @@ document.addEventListener('componentesListos', () => {
             // A. Dibujar los productos en el HTML
             renderizarProductos(productosAMostrar, tasaCambio);
             
-            // B. Activar animaciones de entrada JUSTO después de insertarlos en el DOM
+            // B. Activar animaciones de entrada JUSTO despues de insertarlos en el DOM
             animarCardsDeProductos();
             
         } catch (error) {
-            console.error('❌ [APP]: Error crítico al iniciar el catálogo:', error);
+            console.error('[APP]: Error critico al iniciar el catalogo:', error);
         }
     })();
 
-    console.log('🎉 [APP]: ¡Sistema SLAKIDOM activo y listo!');
+    console.log('[APP]: Sistema SLAKIDOM activo y listo!');
 });
