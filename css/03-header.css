@@ -260,6 +260,18 @@
 }
 
 /* ========================================== */
+/* ✅ TASA BCV (Sin estilos inline) */
+/* ========================================== */
+.tasa-bcv-info {
+    font-size: 0.8rem;
+    color: var(--chocolate);
+    font-weight: 700;
+    padding: 2px 12px 8px 12px;
+    text-align: center;
+    display: block;
+}
+
+/* ========================================== */
 /* ✅ RESPONSIVE: HEADER Y BUSCADOR */
 /* ========================================== */
 @media (max-width: var(--breakpoint-tablet)) {
@@ -278,6 +290,7 @@
     .buscador-dropdown { width: var(--ancho-dropdown-buscador-tablet); max-height: var(--alto-max-dropdown-buscador-tablet); }
     .resultado-item img { width: var(--tamano-imagen-resultado-tablet); height: var(--tamano-imagen-resultado-tablet); }
     .resultado-item span { font-size: var(--tamano-texto-selector-hover); }
+    .tasa-bcv-info { font-size: 0.75rem; padding: 2px 8px 6px 8px; }
 }
 
 @media (max-width: var(--breakpoint-movil)) {
@@ -299,4 +312,5 @@
     .resultado-item { padding: var(--padding-resultado-item-movil); gap: var(--gap-resultado-item-movil); }
     .resultado-item img { width: var(--tamano-imagen-resultado-movil); height: var(--tamano-imagen-resultado-movil); }
     .resultado-item span { font-size: 0.85rem; }
+    .tasa-bcv-info { font-size: 0.7rem; padding: 2px 6px 4px 6px; }
 }
