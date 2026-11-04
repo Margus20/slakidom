@@ -149,6 +149,16 @@
     --tamano-menu-subitem-desktop: 1.2rem;
     --tamano-menu-subitem-tablet: 1.1rem;
     --tamano-dropdown-arrow: 1.2rem;
+
+    /* ✅ TAMAÑOS DE HEADER (Selector, Ubicación, Logo) */
+    --tamano-texto-selector: 0.95rem;
+    --tamano-texto-selector-hover: 0.9rem;
+    --tamano-texto-ubicacion: 0.95rem;
+    --tamano-texto-ubicacion-tablet: 0.85rem;
+    --tamano-texto-ubicacion-movil: 0.8rem;
+    --tamano-texto-resultado: 0.95rem;
+    --tamano-texto-vacio: 0.9rem;
+    --tamano-placeholder-movil: 0.85rem;
     
     /* ========================================== */
     /* 📏 ESPACIADO */
@@ -176,6 +186,12 @@
     --gap-nav-list-desktop: 6px;
     --gap-nav-list-tablet: 5px;
     --gap-nav-list-movil: 4px;
+
+    /* ✅ GAP DE HEADER */
+    --gap-ubicacion-desktop: 5px;
+    --gap-ubicacion-movil: 3px;
+    --gap-resultado-item-desktop: 10px;
+    --gap-resultado-item-movil: 8px;
 
     /* ✅ ESPACIO ENTRE ELEMENTOS */
     --espacio-entre-elementos: 15px;
@@ -233,6 +249,20 @@
     --padding-menu-item: 20px 0;
     --padding-menu-subitem-desktop: 15px 20px;
     --padding-menu-subitem-tablet: 12px 20px;
+
+    /* ✅ PADDINGS DE HEADER (Selector, Ubicación, Buscador) */
+    --padding-selector-desktop: 8px 12px;
+    --padding-selector-tablet: 6px 10px;
+    --padding-selector-movil: 5px 8px;
+    --padding-ubicacion-desktop: 8px 12px;
+    --padding-ubicacion-tablet: 6px 10px;
+    --padding-ubicacion-movil: 5px 8px;
+    --padding-buscador-input-desktop: 8px 15px;
+    --padding-buscador-input-tablet: 7px 12px;
+    --padding-buscador-input-movil: 6px 10px;
+    --padding-resultado-item-desktop: 10px 15px;
+    --padding-resultado-item-movil: 8px 12px;
+    --padding-resultado-vacio: 15px;
     
     /* ========================================== */
     /* 🎨 BORDES Y RADIOS */
@@ -349,6 +379,53 @@
     --min-width-nav-dropdown: 180px;
     --min-width-nav-dropdown-movil: 140px;
     --max-height-menu-subnav: 200px;
+
+    /* ✅ LAYOUT DE HEADER (Alturas, Logos y Posiciones) */
+    --altura-header-tablet: 220px;
+    --altura-header-movil: 180px;
+    --altura-logo-desktop: 200px;
+    --altura-logo-tablet: 170px;
+    --altura-logo-movil: 140px;
+    --top-logo-desktop: 55%;
+    --top-logo-tablet: 55%;
+    --top-logo-movil: 55%;
+
+    /* ✅ MARGENES SUPERIORES DE HEADER */
+    --margin-top-selector-desktop: 15px;
+    --margin-top-selector-tablet: 12px;
+    --margin-top-selector-movil: 10px;
+    --margin-top-dropdown-monedas: 5px;
+    --margin-top-ubicacion-desktop: 10px;
+    --margin-top-ubicacion-tablet: 8px;
+    --margin-top-ubicacion-movil: 8px;
+    --margin-top-buscador-desktop: 15px;
+    --margin-top-buscador-tablet: 12px;
+    --margin-top-buscador-movil: 10px;
+    --margin-top-dropdown-buscador: 5px;
+
+    /* ✅ TAMAÑOS DE BUSCADOR */
+    --tamano-buscador-desktop: 350px;
+    --tamano-buscador-tablet: 280px;
+    --tamano-buscador-movil: 220px;
+    --tamano-buscador-input-desktop: 0.95rem;
+    --tamano-buscador-input-tablet: 0.9rem;
+    --tamano-buscador-input-movil: 0.85rem;
+    --tamano-boton-buscador-desktop: 36px;
+    --tamano-boton-buscador-tablet: 32px;
+    --tamano-boton-buscador-movil: 30px;
+
+    /* ✅ LAYOUT DE DROPDOWN BUSCADOR */
+    --ancho-dropdown-buscador-desktop: 100%;
+    --ancho-dropdown-buscador-tablet: 100%;
+    --ancho-dropdown-buscador-movil: 100%;
+    --alto-max-dropdown-buscador-desktop: 400px;
+    --alto-max-dropdown-buscador-tablet: 350px;
+    --alto-max-dropdown-buscador-movil: 300px;
+
+    /* ✅ TAMAÑOS DE RESULTADOS DE BÚSQUEDA */
+    --tamano-imagen-resultado-desktop: 50px;
+    --tamano-imagen-resultado-tablet: 45px;
+    --tamano-imagen-resultado-movil: 40px;
 
     /* ✅ POSICIONES DE BOTONES FLOTANTES - DESKTOP */
     --top-menu-flotante-desktop: 20px;
