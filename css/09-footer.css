@@ -2,7 +2,6 @@
 /* 09. FOOTER Y CONTACTO */
 /* ========================================== */
 
-/* ✅ AJUSTE: Footer con posición relativa para estar sobre la textura */
 .footer {
     background: var(--chocolate);
     color: var(--blanco);
@@ -10,6 +9,12 @@
     text-align: center;
     position: relative;
     z-index: 1;
+}
+
+/* ✅ MEJORA: Centrar y limitar el ancho del contenido en pantallas grandes */
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .footer h3 {
@@ -29,6 +34,7 @@
     color: var(--blanco);
     text-decoration: none;
     font-size: var(--tamano-contacto-item-desktop);
+    transition: color var(--transicion-rapida);
 }
 
 .contacto-item:hover {
@@ -42,8 +48,8 @@
     opacity: 0.8;
 }
 
-/* ✅ NOTA: El estilo de .whatsapp-flotante ya está en 10-animaciones.css */
-/* con las posiciones correctas (WhatsApp a la izquierda, Excalibur a la derecha) */
+/* ✅ NOTA: Los estilos de .whatsapp-flotante, .btn-flotante-excalibur y .btn-menu-flotante 
+   ya están perfectamente definidos en 10-animaciones.css con sus posiciones correctas. */
 
 /* ========================================== */
 /* ✅ RESPONSIVE: FOOTER */
