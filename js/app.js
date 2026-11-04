@@ -8,7 +8,7 @@ import { obtenerTasaBCV } from './utils/tasa.js';
 import { formatearConPuntosDeMil } from './utils/helpers.js';
 import { PRODUCTOS } from './config.js';
 
-// ✅ CORRECCIÓN: Importar finalizarPedidoWhatsApp directamente para evitar usar 'window.'
+// ✅ CORRECCIÓN: Importar funciones del carrito directamente para evitar usar 'window.'
 import { inicializarCarrito, mostrarCarritoModal, finalizarPedidoWhatsApp } from './features/carrito.js';
 
 import { inicializarMenus } from './features/menu.js';
@@ -16,6 +16,9 @@ import { inicializarSelectorMoneda } from './features/moneda.js';
 import { inicializarBuscador } from './features/buscador.js';
 import { iniciarEfectoNieve } from './features/nieve.js';
 import { inicializarAnimaciones, animarCardsDeProductos } from './features/animaciones.js';
+
+// ✅ NUEVO: Importar la función del slider
+import { inicializarSlider } from './features/slider.js';
 
 // 1. Iniciar carga de componentes (Header y Footer)
 cargarComponentes();
@@ -31,6 +34,7 @@ document.addEventListener('componentesListos', () => {
     inicializarBuscador();
     iniciarEfectoNieve();
     inicializarAnimaciones(); // Scroll suave y observador de animaciones
+    inicializarSlider();      // ✅ NUEVO: Inicializar el slider de imágenes del hero
     
     // 3. Configurar eventos del Modal del Carrito
     const modalCarrito = document.getElementById('modal-carrito');
