@@ -156,6 +156,20 @@
 }
 
 /* ========================================== */
+/* ✅ ANIMACIÓN DE ENTRADA DE CARDS (Scroll) */
+/* ========================================== */
+.producto-card.card-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.producto-card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ========================================== */
 /* RESPONSIVE: Ajustes para diferentes tamaños */
 /* ========================================== */
 
@@ -163,7 +177,7 @@
 @media (max-width: var(--breakpoint-tablet-grande)) {
     .productos-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 15px; /* Mantenemos 15px fijo para ajuste fino del grid */
+        gap: 15px;
     }
     
     .producto-img,
