@@ -1,7 +1,6 @@
 <!-- HEADER / NAVEGACIÓN -->
 <header class="header">
     <div class="logo-container">
-        <!-- ✅ Ruta absoluta incluyendo el nombre del repositorio -->
         <a href="/slakidom/index.html" class="logo-link" title="Volver al inicio">
             <img src="/slakidom/img/slaky_logo.png" alt="SLAKIDOM Logo" class="logo">
         </a>
@@ -29,13 +28,12 @@
                 <span class="icono-ubicacion">📍</span>
                 <span>Caracas</span>
             </div>
-            <!-- ✅ TASA BCV -->
-            <div class="tasa-bcv-info" id="tasaBcvInfo" style="font-size: 0.8rem; color: #000000; font-weight: 700; padding: 2px 12px 8px 12px;"></div>
+            <!-- ✅ TASA BCV (Sin estilos inline, controlado por CSS) -->
+            <div class="tasa-bcv-info" id="tasaBcvInfo"></div>
         </div>
         
         <!-- Buscador (derecha) -->
         <div class="buscador-header">
-            <!-- ✅ CRÍTICO: autocomplete="off" evita que Chrome robe el foco con sugerencias -->
             <input type="text" id="buscador-input" class="buscador-input" placeholder="Buscar..." autocomplete="off" aria-label="Buscar productos">
             <button class="buscador-btn" id="buscador-btn" aria-label="Buscar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -46,16 +44,12 @@
         </div>
     </div>
 
-    <!-- ✅ MENÚ HORIZONTAL: Productos como dropdown -->
+    <!-- MENÚ HORIZONTAL: Productos como dropdown -->
     <nav class="nav-bar">
         <ul class="nav-list">
             <li class="nav-item">
-                <!-- ✅ El CSS agrega la flecha automáticamente, no hace falta ponerla aquí -->
-                <button class="nav-link" id="navProductosToggle">
-                    Productos
-                </button>
+                <button class="nav-link" id="navProductosToggle">Productos</button>
                 <ul class="nav-dropdown" id="navProductosDropdown">
-                    <!-- ✅ HTML limpio: sin onclick inline, la navegación cierra el menú naturalmente -->
                     <li><a href="/slakidom/galletas/" class="dropdown-link">Galletas</a></li>
                     <li><a href="/slakidom/mermeladas/" class="dropdown-link">Mermeladas</a></li>
                 </ul>
