@@ -111,17 +111,37 @@
     padding: var(--espacio-md);
 }
 
+/* ✅ NUEVO: Estado vacío del carrito */
+.carrito-vacio {
+    text-align: center;
+    padding: var(--espacio-lg);
+    color: var(--color-texto-secundario);
+    font-size: var(--tamano-texto);
+}
+
 .item-carrito {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--espacio-sm) 0;
     border-bottom: var(--borde-item-carrito);
+    gap: var(--espacio-md);
+}
+
+/* ✅ NUEVO: Imagen del item en el carrito */
+.item-carrito img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radio-pequeno);
+    background: var(--blanco);
+    flex-shrink: 0;
 }
 
 .info-item {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .info-item strong {
@@ -134,11 +154,34 @@
     font-size: var(--tamano-info-item-precio);
 }
 
+/* ✅ NUEVO: Contenedor de acciones (precio y botón eliminar) */
+.acciones-carrito {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.precio-subtotal {
+    margin: 0;
+    font-weight: bold;
+    color: var(--chocolate);
+    font-size: var(--tamano-info-item-titulo);
+}
+
 .btn-eliminar {
     background: none;
     border: none;
-    font-size: var(--tamano-btn-eliminar);
+    font-size: var(--tamano-texto-pequeno);
     cursor: pointer;
+    color: #ff4444;
+    text-decoration: underline;
+    transition: color var(--transicion-rapida);
+}
+
+.btn-eliminar:hover {
+    color: var(--rosa);
 }
 
 .modal-footer {
