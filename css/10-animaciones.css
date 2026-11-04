@@ -111,7 +111,7 @@
     padding: var(--espacio-md);
 }
 
-/* ✅ NUEVO: Estado vacío del carrito */
+/* ✅ Estado vacío del carrito */
 .carrito-vacio {
     text-align: center;
     padding: var(--espacio-lg);
@@ -128,7 +128,7 @@
     gap: var(--espacio-md);
 }
 
-/* ✅ NUEVO: Imagen del item en el carrito */
+/* ✅ Imagen del item en el carrito */
 .item-carrito img {
     width: 60px;
     height: 60px;
@@ -154,7 +154,7 @@
     font-size: var(--tamano-info-item-precio);
 }
 
-/* ✅ NUEVO: Contenedor de acciones (precio y botón eliminar) */
+/* ✅ Contenedor de acciones (precio y botón eliminar) */
 .acciones-carrito {
     text-align: right;
     display: flex;
@@ -474,5 +474,29 @@
         bottom: var(--bottom-notificacion-movil);
         padding: var(--padding-notificacion-movil);
         font-size: var(--tamano-texto-pequeno);
+    }
+}
+
+/* ========================================== */
+/* ✅ EFECTO DE NIEVE (Navidad) */
+/* ========================================== */
+.snowflake {
+    position: fixed;
+    top: -50px;
+    left: var(--snow-left, 50vw);
+    font-size: var(--snow-size, 15px);
+    opacity: var(--snow-opacity, 0.8);
+    color: var(--blanco);
+    pointer-events: none; /* ✅ CRUCIAL: Permite hacer clic a través de la nieve */
+    z-index: 5000;
+    animation: caerNieve var(--snow-duration, 3s) linear forwards;
+}
+
+@keyframes caerNieve {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
     }
 }
