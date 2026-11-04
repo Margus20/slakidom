@@ -9,40 +9,52 @@ export async function obtenerTasaBCV() {
         const tasaGuardada = localStorage.getItem(CONFIG.TASA_CACHE_KEY);
         const timestamp = localStorage.getItem(CONFIG.TASA_TIMESTAMP_KEY);
         
-        if (tasaGuardada && timestamp) {
-            const horasTranscurridas = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60);
+        // ✅ MEJORA: Validar que ambos existan y sean números válidos antes de calcular
+        if (tasaGuardada && timestamp && !isNaN(parseFloat(tasaGuardada)) && !isNaN(parseInt(timestamp, 10))) {
+            const horasTranscurridas = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60 * 60);
+            
             if (horasTranscurridas < CONFIG.HORAS_ACTUALIZACION) {
-                console.log('✅ [TASA]: Usando tasa en caché:', tasaGuardada);
+                console.log('✅ [TASA]: Usando tasa en caché válida:', tasaGuardada);
                 return parseFloat(tasaGuardada);
             }
+            console.log('⏳ [TASA]: Caché expirado. Actualizando...');
         }
         
         console.log('🔄 [TASA]: Consultando API del BCV...');
         const respuesta = await fetch(CONFIG.API_URL);
-        if (!respuesta.ok) throw new Error('Error en la respuesta');
+        if (!respuesta.ok) throw new Error(`HTTP Error: ${respuesta.status}`);
         
         const datos = await respuesta.json();
-        console.log('📊 [TASA]: Datos recibidos:', datos);
+        console.log('📊 [TASA]: Datos recibidos de la API:', datos);
         
-        const tasaBCV = datos.precio || datos.promedio;
+        // ✅ MEJORA: Búsqueda más flexible de la tasa en la respuesta JSON 
+        // (dependiendo de cómo la devuelva tu API específica)
+        const tasaBCV = datos.precio || datos.promedio || datos.tasa || datos.USD; 
         
-        if (!tasaBCV || tasaBCV <= 0) {
-            throw new Error('Tasa inválida recibida: ' + tasaBCV);
+        if (!tasaBCV || isNaN(parseFloat(tasaBCV)) || parseFloat(tasaBCV) <= 0) {
+            throw new Error('Tasa inválida o no encontrada en la respuesta de la API');
         }
         
-        localStorage.setItem(CONFIG.TASA_CACHE_KEY, tasaBCV);
+        const tasaNumerica = parseFloat(tasaBCV);
+        
+        localStorage.setItem(CONFIG.TASA_CACHE_KEY, tasaNumerica.toString());
         localStorage.setItem(CONFIG.TASA_TIMESTAMP_KEY, Date.now().toString());
         
-        console.log('✅ [TASA]: Tasa BCV actualizada:', tasaBCV);
-        return tasaBCV;
+        console.log('✅ [TASA]: Tasa BCV actualizada y guardada en caché:', tasaNumerica);
+        return tasaNumerica;
+        
     } catch (error) {
-        console.error('❌ [TASA]: Error al obtener tasa BCV:', error);
+        console.error('❌ [TASA]: Error al obtener tasa BCV:', error.message);
+        
+        // 1. Intentar usar la tasa antigua del caché (aunque esté expirada, es mejor que nada)
         const tasaVieja = localStorage.getItem(CONFIG.TASA_CACHE_KEY);
-        if (tasaVieja) {
-            console.log('📦 [TASA]: Usando tasa antigua del caché:', tasaVieja);
+        if (tasaVieja && !isNaN(parseFloat(tasaVieja))) {
+            console.log('📦 [TASA]: Usando tasa antigua del caché como respaldo:', tasaVieja);
             return parseFloat(tasaVieja);
         }
-        console.log('⚠️ [TASA]: Usando tasa de respaldo:', CONFIG.TASA_RESPALDO);
-        return CONFIG.TASA_RESPALDO;
+        
+        // 2. Último recurso: usar la tasa de respaldo configurada en CONFIG
+        console.log('⚠️ [TASA]: Usando tasa de respaldo de CONFIG:', CONFIG.TASA_RESPALDO);
+        return parseFloat(CONFIG.TASA_RESPALDO);
     }
 }
