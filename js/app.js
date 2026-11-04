@@ -8,7 +8,7 @@ import { obtenerTasaBCV } from './utils/tasa.js';
 import { formatearConPuntosDeMil } from './utils/helpers.js';
 import { PRODUCTOS } from './config.js';
 
-// CORRECCIÓN: Importar funciones del carrito directamente para evitar usar 'window.'
+// CORRECCION: Importar funciones del carrito directamente para evitar usar 'window.'
 import { inicializarCarrito, mostrarCarritoModal, finalizarPedidoWhatsApp } from './features/carrito.js';
 
 import { inicializarMenus } from './features/menu.js';
@@ -17,17 +17,17 @@ import { inicializarBuscador } from './features/buscador.js';
 import { iniciarEfectoNieve } from './features/nieve.js';
 import { inicializarAnimaciones, animarCardsDeProductos } from './features/animaciones.js';
 
-// NUEVO: Importar la función del slider
+// NUEVO: Importar la funcion del slider
 import { inicializarSlider } from './features/slider.js';
 
 // 1. Iniciar carga de componentes (Header y Footer)
 cargarComponentes();
 
-// 2. Esperar a que el HTML dinámico esté listo en el DOM
+// 2. Esperar a que el HTML dinamico este listo en el DOM
 document.addEventListener('componentesListos', () => {
     console.log('[APP]: Componentes cargados. Iniciando aplicacion...');
     
-    // Inicializar todas las características independientes
+    // Inicializar todas las caracteristicas independientes
     inicializarCarrito();
     inicializarMenus();
     inicializarSelectorMoneda();
@@ -61,7 +61,7 @@ document.addEventListener('componentesListos', () => {
         }
     });
 
-    // CORRECCIÓN: Usar la funcion importada, no window.finalizarPedidoWhatsApp
+    // CORRECCION: Usar la funcion importada, no window.finalizarPedidoWhatsApp
     btnFinalizarPedido?.addEventListener('click', (e) => {
         e.preventDefault();
         finalizarPedidoWhatsApp();
@@ -75,7 +75,7 @@ document.addEventListener('componentesListos', () => {
             // Actualizar indicador de tasa en el header (si existe el elemento)
             const tasaInfo = document.getElementById('tasaBcvInfo');
             if (tasaInfo) {
-                tasaInfo.textContent = `Tasa BCV: Bs. ${formatearConPuntosDeMil(tasaCambio)} por $`;
+                tasaInfo.textContent = 'Tasa BCV: Bs. ' + formatearConPuntosDeMil(tasaCambio) + ' por $';
             }
             
             // Filtrar productos segun la carpeta/URL actual
