@@ -36,7 +36,6 @@
 }
 
 /* ✅ NUEVO: Enlace que envuelve la tarjeta (para productos clicables) */
-/* Esto evita el subrayado azul por defecto y mantiene la herencia de color */
 .card-link {
     text-decoration: none;
     color: inherit;
@@ -167,6 +166,28 @@
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ========================================== */
+/* ✅ UTILIDADES PARA EL BUSCADOR (Filtrado) */
+/* ========================================== */
+/* Esta clase la agrega el JS para ocultar tarjetas que no coinciden */
+.producto-card.oculto {
+    display: none !important;
+}
+
+/* Mensaje cuando no hay resultados en la búsqueda */
+.sin-resultados {
+    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+    text-align: center;
+    padding: var(--espacio-lg);
+    color: var(--chocolate);
+    font-size: var(--tamano-texto);
+    display: none; /* Oculto por defecto */
+}
+
+.sin-resultados.visible {
+    display: block; /* Se muestra cuando el JS le agrega la clase 'visible' */
 }
 
 /* ========================================== */
