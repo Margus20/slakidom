@@ -55,14 +55,14 @@
     /* ✅ TAMAÑOS ADICIONALES (para Hero y botones) */
     --tamano-hero-titulo: 2.5rem;
     --tamano-hero-subtitulo: 1.2rem;
-    --tamano-botón-texto: 1.1rem;
+    --tamano-boton-texto: 1.1rem;
     
     /* ✅ TAMAÑOS HERO RESPONSIVE */
     --tamano-hero-titulo-tablet: 2rem;
     --tamano-hero-titulo-movil: 1.5rem;
     --tamano-hero-subtitulo-tablet: 1.1rem;
     --tamano-hero-subtitulo-movil: 1rem;
-    --tamano-botón-texto-movil: 1rem;
+    --tamano-boton-texto-movil: 1rem;
     
     /* ✅ TAMAÑOS DE PRODUCTOS */
     --tamano-nombre-producto: 0.95rem;
@@ -140,6 +140,7 @@
     --tamano-nav-link-desktop: 0.85rem;
     --tamano-nav-link-tablet: 0.8rem;
     --tamano-nav-link-movil: 0.75rem;
+    --tamano-nav-link-fluid: clamp(0.7rem, 1.2vw, 0.95rem); /* NUEVO: Texto líquido para botones del menú */
     --tamano-dropdown-link-desktop: 0.95rem;
     --tamano-dropdown-link-tablet: 0.85rem;
     --tamano-dropdown-link-movil: 0.8rem;
@@ -186,6 +187,7 @@
     --gap-nav-list-desktop: 6px;
     --gap-nav-list-tablet: 5px;
     --gap-nav-list-movil: 4px;
+    --gap-nav-list-fluid: clamp(4px, 1vw, 10px); /* NUEVO: Espacio líquido entre botones del menú */
 
     /* ✅ GAP DE HEADER */
     --gap-ubicacion-desktop: 5px;
@@ -242,6 +244,7 @@
     --padding-nav-link-desktop: 6px 14px;
     --padding-nav-link-tablet: 6px 12px;
     --padding-nav-link-movil: 5px 10px;
+    --padding-nav-link-fluid: clamp(4px, 0.8vw, 8px) clamp(8px, 1.5vw, 14px); /* NUEVO: Padding líquido para botones del menú */
     --padding-dropdown-link-desktop: 12px 20px;
     --padding-dropdown-link-tablet: 10px 15px;
     --padding-dropdown-link-movil: 10px 12px;
@@ -275,7 +278,7 @@
     /* ✅ RADIOS ADICIONALES (para buscador, dropdowns y botones) */
     --radio-buscador: 25px;
     --radio-dropdown: 12px;
-    --radio-botón-grande: 50px;
+    --radio-boton-grande: 50px;
     --radio-boton-agregar: 20px;
     --radio-boton-pedir: 25px;
     --radio-modal-carrito: 15px;
