@@ -271,6 +271,45 @@
 }
 
 /* ========================================== */
+/* ✅ NUEVO: LAYOUT MENÚ + BUSCADOR (Fila inferior) */
+/* ========================================== */
+.nav-buscador-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espacio-md, 1rem);
+    gap: var(--espacio-md, 1rem);
+    position: relative;
+    z-index: var(--z-header);
+}
+
+.nav-bar {
+    flex: 1; /* El menú ocupa el espacio disponible a la izquierda */
+}
+
+/* Ajuste del buscador para que no aplaste al menú en desktop */
+.nav-buscador-wrapper .buscador-header {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 320px; /* Tamaño controlado para desktop */
+    margin-top: 0; /* Reset del margin para alineación perfecta en flex */
+}
+
+/* Borde restaurado para el botón de Productos */
+.btn-productos {
+    border: 2px solid var(--rosa, #ff6b81);
+    border-radius: var(--radio-mediano, 8px);
+    transition: var(--transicion-rapida, 0.3s ease);
+}
+
+.btn-productos:hover {
+    background-color: var(--color-fondo-hover, rgba(255, 107, 129, 0.1));
+}
+
+/* ========================================== */
 /* ✅ RESPONSIVE: HEADER Y BUSCADOR */
 /* ========================================== */
 @media (max-width: var(--breakpoint-tablet)) {
@@ -281,7 +320,20 @@
     .selector-moneda .bandera { font-size: 1.1rem; }
     .selector-moneda .moneda-actual { font-size: var(--tamano-texto-selector-hover); }
     .ubicacion { font-size: var(--tamano-texto-ubicacion-tablet); padding: var(--padding-ubicacion-tablet); margin-top: var(--margin-top-ubicacion-tablet); }
-    .buscador-header { max-width: var(--tamano-buscador-tablet); margin-top: var(--margin-top-buscador-tablet); }
+    
+    /* Ajuste responsive del nuevo layout */
+    .nav-buscador-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--espacio-sm, 0.5rem);
+        padding-bottom: var(--espacio-sm, 0.5rem);
+    }
+    .nav-buscador-wrapper .buscador-header {
+        max-width: 100%;
+        width: 90%;
+        margin-top: var(--espacio-xs, 0.5rem);
+    }
+
     .buscador-input { font-size: var(--tamano-buscador-input-tablet); padding: var(--padding-buscador-input-tablet); }
     .buscador-btn { width: var(--tamano-boton-buscador-tablet); height: var(--tamano-boton-buscador-tablet); }
     .buscador-btn svg { width: 16px; height: 16px; }
@@ -301,6 +353,7 @@
     .selector-moneda .moneda-actual { font-size: var(--tamano-texto-pequeno); }
     .ubicacion { font-size: var(--tamano-texto-ubicacion-movil); padding: var(--padding-ubicacion-movil); gap: var(--gap-ubicacion-movil); margin-top: var(--margin-top-ubicacion-movil); }
     .ubicacion .icono-ubicacion { font-size: 0.9rem; }
+    
     .buscador-header { max-width: var(--tamano-buscador-movil); margin-top: var(--margin-top-buscador-movil); }
     .buscador-input { font-size: var(--tamano-buscador-input-movil); padding: var(--padding-buscador-input-movil); }
     .buscador-input::placeholder { font-size: var(--tamano-placeholder-movil); }
