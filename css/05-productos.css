@@ -290,7 +290,7 @@
 
 /* ✅ CORRECCIÓN: Imagen en posición normal (ya no sticky, no te sigue al hacer scroll) */
 .producto-imagen {
-    position: relative;
+    position: relative !important; /* CAMBIO: agregado !important para ganar la batalla contra el <style> del HTML */
     align-self: start;
 }
 
@@ -505,7 +505,7 @@
     }
     
     .producto-imagen {
-        position: relative;
+        position: relative !important; /* CAMBIO: agregado !important también aquí */
         top: 0;
     }
     
