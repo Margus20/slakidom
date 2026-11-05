@@ -281,8 +281,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--espacio-md);
-    z-index: 105; /* CAMBIO QUIRÚRGICO: De 10 a 105 para estar por encima de --z-header-botones (101) */
+    z-index: 105;
     box-sizing: border-box;
+    gap: 10px; /* CAMBIO 1: separa menú y buscador */
 }
 
 /* El menú ocupa todo el espacio disponible a la IZQUIERDA */
@@ -290,7 +291,8 @@
     flex: 1;
     display: flex;
     justify-content: flex-start;
-    margin-right: 15px;
+    margin-right: 10px; /* CAMBIO 2: reducido de 15px a 10px */
+    min-width: 0; /* CAMBIO 2: permite que se encoja si es necesario */
 }
 
 /* El buscador se va a la DERECHA con tamaño controlado */
@@ -309,9 +311,9 @@
     min-width: 100px;
 }
 
-/* Borde restaurado para el botón de Productos - CAMBIO QUIRÚRGICO */
+/* Borde restaurado para el botón de Productos */
 .btn-productos {
-    border: 2px solid var(--rosa, #ff6b81) !important; /* CAMBIO QUIRÚRGICO: agregado !important */
+    border: 2px solid var(--rosa, #ff6b81) !important;
     border-radius: var(--radio-mediano, 8px);
     transition: var(--transicion-rapida, 0.3s ease);
 }
@@ -340,9 +342,9 @@
         padding-bottom: var(--espacio-sm, 0.5rem);
     }
     .nav-buscador-wrapper .buscador-header {
-        max-width: 100% !important;
-        width: 90%;
-        margin-left: 0;
+        max-width: 260px !important; /* CAMBIO 3: de 100% a 260px para no crecer tanto */
+        width: auto; /* CAMBIO 3: de 90% a auto */
+        margin-left: auto; /* CAMBIO 3: empuja el buscador a la derecha */
     }
 
     .buscador-input { font-size: var(--tamano-buscador-input-tablet); padding: var(--padding-buscador-input-tablet); }
