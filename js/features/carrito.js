@@ -1,21 +1,21 @@
 // ==========================================
-// LÓGICA DEL CARRITO DE COMPRAS
+// LOGICA DEL CARRITO DE COMPRAS
 // ==========================================
 
 const NUMERO_WHATSAPP = "584122879803";
 let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
 
 export function inicializarCarrito() {
-    console.log('🛒 [CARRITO]: Inicializando... Productos actuales:', carrito.length);
+    console.log('[CARRITO]: Inicializando... Productos actuales:', carrito.length);
     actualizarContadorCarrito();
     
-    // ✅ Delegación de eventos para botones "Agregar" dinámicos
+    // Delegacion de eventos para botones "Agregar" dinamicos
     document.addEventListener('click', manejarClickAgregar);
     
-    // ✅ Delegación de eventos para botones "Eliminar" dentro del modal
+    // Delegacion de eventos para botones "Eliminar" dentro del modal
     document.addEventListener('click', manejarClickEliminar);
     
-    // Escuchar actualizaciones desde otras partes (ej. páginas individuales)
+    // Escuchar actualizaciones desde otras partes
     window.addEventListener('carritoActualizado', () => {
         carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
         actualizarContadorCarrito();
@@ -38,13 +38,12 @@ function manejarClickAgregar(e) {
             cantidad: 1
         };
         
-        console.log('🛒 [CARRITO]: Agregando producto:', producto);
+        console.log('[CARRITO]: Agregando producto:', producto);
         agregarAlCarrito(producto);
     }
 }
 
 function manejarClickEliminar(e) {
-    // Detectar si se hizo clic en el botón de eliminar del modal
     if (e.target.classList.contains('btn-eliminar')) {
         e.preventDefault();
         const index = parseInt(e.target.dataset.index);
@@ -66,7 +65,7 @@ function agregarAlCarrito(producto) {
     guardarCarrito();
     actualizarContadorCarrito();
     window.dispatchEvent(new Event('carritoActualizado'));
-    mostrarNotificacion(`¡${producto.nombre} agregado al carrito!`);
+    mostrarNotificacion('Producto agregado al carrito!');
 }
 
 function guardarCarrito() {
@@ -80,10 +79,9 @@ function actualizarContadorCarrito() {
     contadores.forEach(contador => {
         if (contador) {
             contador.textContent = totalItems;
-            // Usamos clases en lugar de style.display
             if (totalItems > 0) {
                 contador.classList.add('activo');
-                contador.style.display = 'flex'; // Mantenemos flex solo si la clase no lo garantiza
+                contador.style.display = 'flex';
             } else {
                 contador.classList.remove('activo');
                 contador.style.display = 'none';
@@ -98,7 +96,7 @@ export function mostrarCarritoModal() {
     const totalElement = document.getElementById("total-carrito");
     
     if (!modal || !lista) {
-        console.error('❌ [CARRITO]: No se encontró el modal o la lista');
+        console.error('[CARRITO]: No se encontro el modal o la lista');
         return;
     }
 
@@ -107,7 +105,7 @@ export function mostrarCarritoModal() {
     let total = 0;
 
     if (carrito.length === 0) {
-        lista.innerHTML = "<p class='carrito-vacio'>Tu carrito está vacío 🍪</p>";
+        lista.innerHTML = "<p class='carrito-vacio'>Tu carrito esta vacio.</p>";
         if (totalElement) totalElement.textContent = "$0.00";
     } else {
         carrito.forEach((item, index) => {
@@ -119,17 +117,15 @@ export function mostrarCarritoModal() {
             const imgBasePath = isSubfolder ? '../' : '';
             const imgSrc = item.imagen ? `${imgBasePath}${item.imagen}` : `${imgBasePath}img/slaky_cuadrado.jpg`;
 
-            // ✅ CONSTRUCCIÓN LIMPIA DEL DOM SIN ESTILOS INLINE
             const div = document.createElement("div");
-            div.className = "item-carrito"; // Clase ya definida en 10-animaciones.css
+            div.className = "item-carrito";
 
             const img = document.createElement("img");
             img.src = imgSrc;
             img.alt = item.nombre;
-            // La clase .resultado-item img o estilos generales de img en el modal pueden aplicarse aquí
             
             const infoDiv = document.createElement("div");
-            infoDiv.className = "info-item"; // Clase ya definida en 10-animaciones.css
+            infoDiv.className = "info-item";
 
             const strong = document.createElement("strong");
             strong.textContent = item.nombre;
@@ -142,16 +138,16 @@ export function mostrarCarritoModal() {
 
             const accionesDiv = document.createElement("div");
             accionesDiv.className = "acciones-carrito";
-            accionesDiv.style.textAlign = "right"; // Único estilo inline aceptable para layout específico
+            accionesDiv.style.textAlign = "right";
 
             const precioP = document.createElement("p");
             precioP.className = "precio-subtotal";
             precioP.textContent = `$${subtotal.toFixed(2)}`;
 
             const btnEliminar = document.createElement("button");
-            btnEliminar.className = "btn-eliminar"; // Clase ya definida en 10-animaciones.css
+            btnEliminar.className = "btn-eliminar";
             btnEliminar.textContent = "Eliminar";
-            btnEliminar.dataset.index = index; // Guardamos el índice para la delegación
+            btnEliminar.dataset.index = index;
 
             accionesDiv.appendChild(precioP);
             accionesDiv.appendChild(btnEliminar);
@@ -160,7 +156,8 @@ export function mostrarCarritoModal() {
             div.appendChild(infoDiv);
             div.appendChild(accionesDiv);
             
-            lista.appendChild(divPY);
+            // AQUI ESTABA EL ERROR: Se cambio divPY por div
+            lista.appendChild(div); 
         });
         
         if (totalElement) totalElement.textContent = `$${total.toFixed(2)}`;
@@ -178,50 +175,46 @@ function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
     guardarCarrito();
     actualizarContadorCarrito();
-    mostrarCarritoModal(); // Re-renderizar el modal
+    mostrarCarritoModal();
 }
 
 export function finalizarPedidoWhatsApp() {
     carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
     
     if (carrito.length === 0) {
-        mostrarNotificacion("Tu carrito está vacío");
+        mostrarNotificacion("Tu carrito esta vacio");
         return;
     }
 
-    let mensaje = "¡Hola SLAKIDOM! 🍪 Quiero hacer el siguiente pedido:%0A%0A";
+    let mensaje = "Hola SLAKIDOM! Quiero hacer el siguiente pedido:%0A%0A";
     let total = 0;
 
     carrito.forEach(item => {
         const subtotal = item.precio * item.cantidad;
         total += subtotal;
-        mensaje += `▪️ ${item.cantidad} x ${item.nombre} - $${subtotal.toFixed(2)}%0A`;
+        mensaje += `- ${item.cantidad} x ${item.nombre} - $${subtotal.toFixed(2)}%0A`;
     });
 
-    mensaje += `%0A💰 *Total a pagar: $${total.toFixed(2)}*`;
-    mensaje += "%0A%0AQuedo atento a los datos de Pago Móvil para realizar la transferencia. ¡Gracias!";
+    mensaje += `%0A*Total a pagar: $${total.toFixed(2)}*`;
+    mensaje += "%0A%0AQuedo atento a los datos de Pago Movil para realizar la transferencia. Gracias!";
 
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`, "_blank");
 }
 
 export function mostrarNotificacion(mensaje) {
-    // Evitar múltiples notificaciones apiladas
     const existente = document.querySelector('.notificacion-flotante.mostrar');
     if (existente) existente.remove();
 
     const notif = document.createElement("div");
-    // ✅ REUTILIZAMOS LA CLASE QUE YA EXISTE EN 10-animaciones.css
     notif.className = "notificacion-flotante";
-    notif.innerHTML = `<span>✅</span> ${mensaje}`;
+    notif.textContent = mensaje;
     
     document.body.appendChild(notif);
     
-    // Forzar reflow para que la transición CSS funcione
     requestAnimationFrame(() => {
         notif.classList.add('mostrar');
     });
     
-    // Desaparecer automáticamente (3s + 0.3s de transición de salida)
     setTimeout(() => {
         notif.classList.remove('mostrar');
         setTimeout(() => {
