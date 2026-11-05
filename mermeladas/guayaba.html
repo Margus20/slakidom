@@ -3,280 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mermelada de Guayaba SLAKIDOM - Hecha con amor en Caracas">
+    <meta name="description" content="Mermelada de Guayaba SLAKIDOM - Fruta fresca cocida a fuego lento con amor">
     <title>Mermelada de Guayaba - SLAKIDOM</title>
     
     <link rel="icon" type="image/png" href="../img/slaky_cuadrado.jpg">
     
-    <!-- CSS MODULAR (Actualizado con la nueva estructura) -->
+    <!-- CSS MODULAR -->
     <link rel="stylesheet" href="../css/01-variables.css">
     <link rel="stylesheet" href="../css/02-base.css">
     <link rel="stylesheet" href="../css/03-header.css">
+    <link rel="stylesheet" href="../css/05-productos.css">
     <link rel="stylesheet" href="../css/11-menu.css">
     <link rel="stylesheet" href="../css/09-footer.css">
     <link rel="stylesheet" href="../css/10-animaciones.css">
-    
-    <!-- ESTILOS ESPECÍFICOS DEL PRODUCTO -->
-    <style>
-        /* ✅ FONDO BLANCO SÓLIDO PARA LA PÁGINA DE PRODUCTO */
-        body {
-            background: #ffffff !important;
-        }
-        
-        .producto-detalle {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background: #ffffff; /* ✅ BLANCO SÓLIDO */
-        }
-        
-        .producto-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-        
-        .producto-imagen {
-            position: sticky;
-            top: 100px;
-        }
-        
-        .producto-imagen img {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
-        
-        .producto-info h1 {
-            font-size: 2rem;
-            color: var(--chocolate, #5D4037);
-            margin-bottom: 15px;
-        }
-        
-        /* ✅ PRECIO SIN RECUADRO */
-        .producto-precio-detalle {
-            margin: 30px 0;
-            padding: 0;
-            background: transparent;
-            border: none;
-        }
-        
-        .precio-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 2px;
-        }
-        
-        .precio-principal {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--chocolate, #5D4037);
-        }
-        
-        .precio-centavos {
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--chocolate, #5D4037);
-            align-self: flex-start;
-            margin-top: 5px;
-        }
-        
-        .precio-secundario {
-            font-size: 1.2rem;
-            color: #666;
-            font-weight: 600;
-            margin-top: 5px;
-        }
-        
-        .cantidad-selector {
-            margin: 25px 0;
-        }
-        
-        .cantidad-selector label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--chocolate, #5D4037);
-        }
-        
-        .accion-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .cantidad-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .cantidad-input button {
-            width: 45px;
-            height: 45px;
-            border: 2px solid var(--rosado, #D46A6A);
-            background: var(--rosado, #D46A6A);
-            color: white;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .cantidad-input button:hover {
-            background: var(--chocolate, #5D4037);
-            border-color: var(--chocolate, #5D4037);
-        }
-        
-        .cantidad-input input {
-            width: 70px;
-            height: 45px;
-            text-align: center;
-            border: 2px solid var(--chocolate, #5D4037);
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--chocolate, #5D4037);
-        }
-        
-        /* ✅ BOTÓN CON TEXTO AMARILLO */
-        .btn-agregar-detalle {
-            flex: 1;
-            height: 45px;
-            background: var(--chocolate, #5D4037);
-            color: #FFD700;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn-agregar-detalle:hover {
-            background: var(--marron-oscuro, #3E2723);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
-        }
-        
-        /* ✅ DESCRIPCIÓN CON FONDO BLANCO */
-        .producto-descripcion-full {
-            grid-column: 1 / -1;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 2px solid #eee;
-            width: 100%;
-            background: #ffffff; /* ✅ BLANCO SÓLIDO */
-        }
-        
-        .producto-descripcion-full h2 {
-            color: var(--chocolate, #5D4037);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .producto-descripcion-full p {
-            line-height: 1.4;
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            max-width: 900px;
-        }
-        
-        .producto-caracteristicas {
-            margin-top: 25px;
-            padding: 20px;
-            background: #fff8f0; /* ✅ COLOR ORIGINAL (crema claro) */
-            border-radius: 10px;
-            max-width: 900px;
-        }
-        
-        .producto-caracteristicas h3 {
-            color: var(--chocolate, #5D4037);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .producto-caracteristicas ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 10px 30px;
-        }
-        
-        .producto-caracteristicas li {
-            padding: 5px 0;
-            padding-left: 30px;
-            position: relative;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        
-        .producto-caracteristicas li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--verde, #28a745);
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .producto-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .producto-imagen {
-                position: relative;
-                top: 0;
-            }
-            
-            .producto-info h1 {
-                font-size: 1.5rem;
-            }
-            
-            .precio-principal {
-                font-size: 2rem;
-            }
-            
-            .accion-container {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 15px;
-            }
-            
-            .cantidad-input {
-                justify-content: center;
-            }
-            
-            .btn-agregar-detalle {
-                width: 100%;
-                height: 50px;
-            }
-
-            .producto-descripcion-full p,
-            .producto-caracteristicas {
-                max-width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     
-    <!-- ✅ HEADER (se inyecta desde app.js - MANTIENE SU FONDO AMARILLO TRANSPARENTE) -->
+    <!-- ✅ HEADER (se inyecta desde app.js) -->
     <div id="header-container"></div>
     
     <main>
-        <section class="producto-detalle">
+        <!-- ✅ SECCIÓN DE DETALLE CON DATOS DINÁMICOS (data-*) -->
+        <section class="producto-detalle" 
+                 data-id="5" 
+                 data-nombre="Mermelada de Guayaba" 
+                 data-precio="5.00" 
+                 data-imagen="../img/mermeladas/guayaba.jpg">
+            
             <div class="producto-grid">
                 <!-- ✅ IMAGEN DEL PRODUCTO -->
                 <div class="producto-imagen">
@@ -289,7 +42,7 @@
                 <div class="producto-info">
                     <h1>Mermelada de Guayaba</h1>
                     
-                    <!-- ✅ PRECIO SIN RECUADRO -->
+                    <!-- ✅ PRECIO FORMATO CORREGIDO -->
                     <div class="producto-precio-detalle">
                         <div class="precio-wrapper">
                             <span class="precio-principal">$5</span>
@@ -305,26 +58,25 @@
                         <label>Cantidad:</label>
                         <div class="accion-container">
                             <div class="cantidad-input">
-                                <button type="button" onclick="cambiarCantidad(-1)">−</button>
-                                <input type="number" id="cantidad" value="1" min="1" max="50" readonly>
-                                <button type="button" onclick="cambiarCantidad(1)">+</button>
+                                <button type="button" class="btn-cantidad" data-accion="restar">−</button>
+                                <input type="number" class="input-cantidad" value="1" min="1" max="50" readonly>
+                                <button type="button" class="btn-cantidad" data-accion="sumar">+</button>
                             </div>
-                            <!-- ✅ BOTÓN CON TEXTO "AGREGAR" EN AMARILLO -->
-                            <button class="btn-agregar-detalle" onclick="agregarAlCarrito()">
+                            <button class="btn-agregar-detalle btn-agregar-carrito">
                                 Agregar
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- DESCRIPCIÓN ANCHO COMPLETO CON FONDO BLANCO -->
+                <!-- DESCRIPCIÓN ANCHO COMPLETO -->
                 <div class="producto-descripcion-full">
                     <h2>Descripción del Producto</h2>
                     <p>
                         Deliciosa mermelada artesanal de guayaba, elaborada con fruta fresca cocida 
-                        a fuego lento con amor. Su sabor dulce y tropical, combinado con la 
-                        textura perfecta, la convierten en el acompañante ideal para tus 
-                        galletas, panquecas o tostadas.
+                        a fuego lento con amor. Su sabor dulce y tropical, combinado con la textura 
+                        perfecta, la convierten en el acompañante ideal para tus galletas, panquecas 
+                        o tostadas.
                     </p>
                     <p>
                         Cada frasco es preparado a mano con la receta familiar de Slaki Dom, 
@@ -336,10 +88,10 @@
                         <h3>Características:</h3>
                         <ul>
                             <li>Fruta fresca 100% natural</li>
-                            <li>Sin conservantes artificiales</li>
                             <li>Elaborada artesanalmente</li>
-                            <li>Presentación: Frasco de vidrio 445g</li>
                             <li>Conservación: Refrigerar después de abrir</li>
+                            <li>Sin conservantes artificiales</li>
+                            <li>Presentación: Frasco de vidrio 445g</li>
                             <li>Duración: 21 días refrigerado aproximadamente</li>
                         </ul>
                     </div>
@@ -351,94 +103,9 @@
     <!-- ✅ FOOTER (se inyecta desde app.js) -->
     <div id="footer-container"></div>
 
-    <!-- ✅ SCRIPT PRINCIPAL -->
+    <!-- ✅ SCRIPTS MODULARES (Única lógica que queda en el HTML) -->
     <script type="module" src="../js/app.js"></script>
-    
-    <!-- ✅ SCRIPT ESPECÍFICO -->
-    <script>
-        let cantidad = 1;
-        let tasaBCV = 0;
-        
-        function formatearNumero(numero) {
-            return new Intl.NumberFormat('es-VE', { maximumFractionDigits: 0 }).format(numero);
-        }
-
-        async function obtenerTasa() {
-            try {
-                const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
-                const datos = await respuesta.json();
-                tasaBCV = datos.precio || datos.promedio;
-                actualizarPrecio();
-            } catch (error) {
-                console.error('Error al obtener tasa:', error);
-                tasaBCV = 36.50;
-                actualizarPrecio();
-            }
-        }
-        
-        function actualizarPrecio() {
-            const precioUSD = 5.00;
-            const precioVES = Math.round(precioUSD * tasaBCV);
-            document.getElementById('precio-bolivares').textContent = `Bs. ${formatearNumero(precioVES)}`;
-        }
-        
-        function cambiarCantidad(cambio) {
-            cantidad += cambio;
-            if (cantidad < 1) cantidad = 1;
-            if (cantidad > 50) cantidad = 50;
-            document.getElementById('cantidad').value = cantidad;
-        }
-        
-        function agregarAlCarrito() {
-            const producto = {
-                id: 5,
-                nombre: "Mermelada de Guayaba",
-                precio: 5.00,
-                cantidad: cantidad,
-                imagen: "../img/mermeladas/guayaba.jpg"
-            };
-            
-            let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-            const existe = carrito.find(item => item.id === producto.id);
-            if (existe) {
-                existe.cantidad += cantidad;
-            } else {
-                carrito.push(producto);
-            }
-            
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            actualizarContadorCarrito();
-            
-            // ✅ DISPARAR EVENTO PARA ACTUALIZAR EL MODAL DEL CARRITO
-            window.dispatchEvent(new Event('carritoActualizado'));
-            
-            alert(`✅ Agregaste ${cantidad} unidad(es) de Mermelada de Guayaba al carrito`);
-        }
-        
-        function actualizarContadorCarrito() {
-            const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            
-            const contador = document.getElementById('contador-carrito-flotante');
-            if (contador) {
-                contador.textContent = totalItems;
-                if (totalItems > 0) {
-                    contador.style.display = 'flex';
-                } else {
-                    contador.style.display = 'none';
-                }
-            }
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            obtenerTasa();
-            actualizarContadorCarrito();
-        });
-        
-        document.addEventListener('componentesListos', () => {
-            actualizarContadorCarrito();
-        });
-    </script>
+    <script type="module" src="../js/features/detalle-producto.js"></script>
     
 </body>
 </html>
