@@ -1,28 +1,34 @@
 // ==========================================
-// LÓGICA DE DETALLE DE PRODUCTO (DEFINITIVO)
+// LÓGICA DE DETALLE DE PRODUCTO (DINÁMICA Y UNIVERSAL)
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Verificar si estamos en una página de detalle de producto
+    // 1. Verificar si estamos en una página de detalle de producto
     const detalleSection = document.querySelector('.producto-detalle');
     if (!detalleSection) return; // Si no existe, salir sin hacer nada
 
-    // Selectores ajustados al HTML limpio
+    // 2. LEER LOS DATOS DIRECTAMENTE DEL HTML (¡Esto lo hace universal!)
+    const productoId = parseInt(detalleSection.dataset.id);
+    const productoNombre = detalleSection.dataset.nombre;
+    const productoPrecio = parseFloat(detalleSection.dataset.precio);
+    const productoImagen = detalleSection.dataset.imagen;
+
+    // Selectores de elementos
     const btnRestar = detalleSection.querySelector('[data-accion="restar"]');
     const btnSumar = detalleSection.querySelector('[data-accion="sumar"]');
-    const inputCantidad = detalleSection.querySelector('.input-cantidad'); // ✅ CORREGIDO: ahora busca por clase
-    const btnAgregar = detalleSection.querySelector('.btn-agregar-carrito'); // ✅ CORREGIDO: coincide con el HTML limpio
+    const inputCantidad = detalleSection.querySelector('.input-cantidad');
+    const btnAgregar = detalleSection.querySelector('.btn-agregar-carrito');
     const precioBsElement = document.getElementById('precio-bolivares');
 
     let cantidad = 1;
     let tasaBCV = 36.50; // Valor por defecto
 
-    // 1. Función para formatear números
+    // 3. Función para formatear números
     function formatearNumero(numero) {
         return new Intl.NumberFormat('es-VE', { maximumFractionDigits: 0 }).format(numero);
     }
 
-    // 2. Obtener tasa BCV
+    // 4. Obtener tasa BCV
     async function obtenerTasa() {
         try {
             const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
@@ -31,25 +37,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             actualizarPrecio();
         } catch (error) {
             console.error('Error al obtener tasa:', error);
-            actualizarPrecio(); // Usa el valor por defecto
+            actualizarPrecio();
         }
     }
 
-    // 3. Actualizar el precio en pantalla
+    // 5. Actualizar el precio en pantalla usando el precio leído del HTML
     function actualizarPrecio() {
-        const precioUSD = 2.00; 
-        const precioVES = Math.round(precioUSD * tasaBCV);
+        const precioVES = Math.round(productoPrecio * tasaBCV);
         if (precioBsElement) {
             precioBsElement.textContent = `Bs. ${formatearNumero(precioVES)}`;
         }
     }
 
-    // 4. Manejo de cantidad
+    // 6. Manejo de cantidad
     if (btnRestar) {
         btnRestar.addEventListener('click', () => {
             if (cantidad > 1) {
                 cantidad--;
-                if (inputCantidad) inputCantidad.value = cantidad; // ✅ Ahora sí actualizará el input visualmente
+                if (inputCantidad) inputCantidad.value = cantidad;
             }
         });
     }
@@ -58,20 +63,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         btnSumar.addEventListener('click', () => {
             if (cantidad < 50) {
                 cantidad++;
-                if (inputCantidad) inputCantidad.value = cantidad; // ✅ Ahora sí actualizará el input visualmente
+                if (inputCantidad) inputCantidad.value = cantidad;
             }
         });
     }
 
-    // 5. Agregar al carrito
+    // 7. Agregar al carrito (¡Usando los datos dinámicos!)
     if (btnAgregar) {
         btnAgregar.addEventListener('click', () => {
             const producto = {
-                id: 1,
-                nombre: "Galletas de Coco y Vainilla",
-                precio: 2.00,
+                id: productoId,
+                nombre: productoNombre,
+                precio: productoPrecio,
                 cantidad: cantidad,
-                imagen: "../img/galletas/coco_vainilla.jpg"
+                imagen: productoImagen
             };
             
             let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
@@ -84,11 +89,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             localStorage.setItem('carrito', JSON.stringify(carrito));
-            
-            // Actualizar contador global
             window.dispatchEvent(new Event('carritoActualizado'));
             
-            alert(`✅ Agregaste ${cantidad} unidad(es) de Galletas de Coco y Vainilla al carrito`);
+            alert(`✅ Agregaste ${cantidad} unidad(es) de ${productoNombre} al carrito`);
             
             // Resetear cantidad
             cantidad = 1;
