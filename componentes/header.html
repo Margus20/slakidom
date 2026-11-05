@@ -28,11 +28,30 @@
                 <span class="icono-ubicacion">📍</span>
                 <span>Caracas</span>
             </div>
-            <!-- ✅ TASA BCV (Sin estilos inline, controlado por CSS) -->
+            <!-- ✅ TASA BCV -->
             <div class="tasa-bcv-info" id="tasaBcvInfo"></div>
         </div>
-        
-        <!-- Buscador (derecha) -->
+    </div>
+
+    <!-- NUEVO CONTENEDOR: Agrupa el Menú y el Buscador en la misma línea inferior -->
+    <div class="nav-buscador-wrapper">
+        <!-- MENÚ HORIZONTAL -->
+        <nav class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button class="nav-link btn-productos" id="navProductosToggle">Productos</button>
+                    <ul class="nav-dropdown" id="navProductosDropdown">
+                        <li><a href="/slakidom/galletas/" class="dropdown-link">Galletas</a></li>
+                        <li><a href="/slakidom/mermeladas/" class="dropdown-link">Mermeladas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="/slakidom/proceso.html" class="nav-link">Nuestro Proceso</a></li>
+                <li class="nav-item"><a href="/slakidom/nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li class="nav-item"><a href="/slakidom/contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Buscador (ahora al lado derecho del menú) -->
         <div class="buscador-header">
             <input type="text" id="buscador-input" class="buscador-input" placeholder="Buscar..." autocomplete="off" aria-label="Buscar productos">
             <button class="buscador-btn" id="buscador-btn" aria-label="Buscar">
@@ -43,25 +62,9 @@
             </button>
         </div>
     </div>
-
-    <!-- MENÚ HORIZONTAL: Productos como dropdown -->
-    <nav class="nav-bar">
-        <ul class="nav-list">
-            <li class="nav-item">
-                <button class="nav-link" id="navProductosToggle">Productos</button>
-                <ul class="nav-dropdown" id="navProductosDropdown">
-                    <li><a href="/slakidom/galletas/" class="dropdown-link">Galletas</a></li>
-                    <li><a href="/slakidom/mermeladas/" class="dropdown-link">Mermeladas</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a href="/slakidom/proceso.html" class="nav-link">Nuestro Proceso</a></li>
-            <li class="nav-item"><a href="/slakidom/nosotros.html" class="nav-link">Sobre Nosotros</a></li>
-            <li class="nav-item"><a href="/slakidom/contacto.html" class="nav-link">Contacto</a></li>
-        </ul>
-    </nav>
 </header>
 
-<!-- MENÚ FULL-SCREEN (Móvil) -->
+<!-- MENÚ FULL-SCREEN (Móvil) - Se mantiene igual -->
 <div class="menu-overlay" id="menuOverlay">
     <button class="menu-close" id="menuClose" aria-label="Cerrar menú">×</button>
     <nav class="menu-nav">
