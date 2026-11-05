@@ -20,7 +20,7 @@ export const PRODUCTOS = [
         precio: 2.00, 
         categoria: "galletas", 
         imagen: "img/galletas/coco_vainilla.jpg", 
-        url: "coco-vainilla.html" 
+        url: "galletas/coco-vainilla.html" 
     },
     { 
         id: 2, 
@@ -28,7 +28,7 @@ export const PRODUCTOS = [
         precio: 2.00, 
         categoria: "galletas", 
         imagen: "img/galletas/limon.jpg", 
-        url: "limon.html" 
+        url: "galletas/limon.html" 
     },
     { 
         id: 3, 
@@ -36,7 +36,7 @@ export const PRODUCTOS = [
         precio: 2.00, 
         categoria: "galletas", 
         imagen: "img/galletas/chispas_de_chocolate.jpg", 
-        url: "chispas-de-chocolate.html" 
+        url: "galletas/chispas-de-chocolate.html" 
     },
     { 
         id: 4, 
@@ -44,7 +44,7 @@ export const PRODUCTOS = [
         precio: 5.00, 
         categoria: "mermeladas", 
         imagen: "img/mermeladas/fresa.jpg", 
-        url: "fresa.html" 
+        url: "mermeladas/fresa.html" 
     },
     { 
         id: 5, 
@@ -52,7 +52,7 @@ export const PRODUCTOS = [
         precio: 5.00, 
         categoria: "mermeladas", 
         imagen: "img/mermeladas/guayaba.jpg", 
-        url: "guayaba.html" 
+        url: "mermeladas/guayaba.html" 
     },
     { 
         id: 6, 
@@ -60,6 +60,14 @@ export const PRODUCTOS = [
         precio: 5.00, 
         categoria: "mermeladas", 
         imagen: "img/mermeladas/durazno.jpg", 
-        url: "durazno.html" 
+        url: "mermeladas/durazno.html" 
+    },
+    { 
+        id: 7, 
+        nombre: "Galletas de Mermelada", 
+        precio: 2.00, 
+        categoria: "galletas", 
+        imagen: "img/galletas/mermelada.jpg", 
+        url: "galletas/mermelada.html" 
     }
 ];
