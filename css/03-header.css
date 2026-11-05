@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: sticky; /* ✅ Se mantiene para que el header se quede fijo al hacer scroll */
+    position: sticky;
     top: 0;
     z-index: var(--z-header);
     box-shadow: var(--sombra-media);
@@ -171,8 +171,6 @@
     color: var(--chocolate);
     border-radius: var(--radio-buscador) 0 0 var(--radio-buscador);
     min-width: 0;
-    
-    /* ✅ CORRECCIÓN NUCLEAR PARA CHROME/ANDROID */
     touch-action: manipulation !important;
     -webkit-tap-highlight-color: transparent;
     pointer-events: auto !important;
@@ -271,31 +269,30 @@
 }
 
 /* ========================================== */
-/* ✅ NUEVO: LAYOUT MENÚ + BUSCADOR (Fila inferior) */
+/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) */
 /* ========================================== */
 .nav-buscador-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--espacio-md, 1rem);
-    gap: var(--espacio-md, 1rem);
-    position: relative;
+    padding: var(--espacio-sm) var(--espacio-md);
     z-index: var(--z-header);
 }
 
 .nav-bar {
-    flex: 1; /* El menú ocupa el espacio disponible a la izquierda */
+    flex: 1;
 }
 
-/* Ajuste del buscador para que no aplaste al menú en desktop */
+/* Buscador más pequeño para dejar espacio al menú */
 .nav-buscador-wrapper .buscador-header {
     flex-shrink: 0;
     width: 100%;
-    max-width: 320px; /* Tamaño controlado para desktop */
-    margin-top: 0; /* Reset del margin para alineación perfecta en flex */
+    max-width: 280px;
+    margin-top: 0;
 }
 
 /* Borde restaurado para el botón de Productos */
@@ -321,7 +318,7 @@
     .selector-moneda .moneda-actual { font-size: var(--tamano-texto-selector-hover); }
     .ubicacion { font-size: var(--tamano-texto-ubicacion-tablet); padding: var(--padding-ubicacion-tablet); margin-top: var(--margin-top-ubicacion-tablet); }
     
-    /* Ajuste responsive del nuevo layout */
+    /* En tablet: menú y buscador en columnas para no amontonarse */
     .nav-buscador-wrapper {
         flex-direction: column;
         align-items: center;
@@ -331,7 +328,6 @@
     .nav-buscador-wrapper .buscador-header {
         max-width: 100%;
         width: 90%;
-        margin-top: var(--espacio-xs, 0.5rem);
     }
 
     .buscador-input { font-size: var(--tamano-buscador-input-tablet); padding: var(--padding-buscador-input-tablet); }
