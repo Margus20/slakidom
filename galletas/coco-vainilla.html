@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/01-variables.css">
     <link rel="stylesheet" href="../css/02-base.css">
     <link rel="stylesheet" href="../css/03-header.css">
-    <link rel="stylesheet" href="../css/05-productos.css"> <!-- ✅ NUEVO: Estilos del detalle de producto -->
+    <link rel="stylesheet" href="../css/05-productos.css"> <!-- ✅ Estilos del detalle de producto -->
     <link rel="stylesheet" href="../css/11-menu.css">
     <link rel="stylesheet" href="../css/09-footer.css">
     <link rel="stylesheet" href="../css/10-animaciones.css">
@@ -100,7 +100,10 @@
     <!-- ✅ SCRIPT PRINCIPAL -->
     <script type="module" src="../js/app.js"></script>
     
-    <!-- ✅ SCRIPT ESPECÍFICO (Lo limpiaremos en el Paso 3) -->
+    <!-- ✅ NUEVO SCRIPT MODULAR DE DETALLE DE PRODUCTO (Paso 3) -->
+    <script type="module" src="../js/features/detalle-producto.js"></script>
+    
+    <!-- ✅ SCRIPT ESPECÍFICO VIEJO (Se eliminará en el Paso 4) -->
     <script>
         let cantidad = 1;
         let tasaBCV = 0;
