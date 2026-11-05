@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/01-variables.css">
     <link rel="stylesheet" href="../css/02-base.css">
     <link rel="stylesheet" href="../css/03-header.css">
-    <link rel="stylesheet" href="../css/05-productos.css"> <!-- ✅ Estilos del detalle de producto -->
+    <link rel="stylesheet" href="../css/05-productos.css">
     <link rel="stylesheet" href="../css/11-menu.css">
     <link rel="stylesheet" href="../css/09-footer.css">
     <link rel="stylesheet" href="../css/10-animaciones.css">
@@ -52,11 +52,11 @@
                         <label>Cantidad:</label>
                         <div class="accion-container">
                             <div class="cantidad-input">
-                                <button type="button" onclick="cambiarCantidad(-1)">−</button>
-                                <input type="number" id="cantidad" value="1" min="1" max="50" readonly>
-                                <button type="button" onclick="cambiarCantidad(1)">+</button>
+                                <button type="button" class="btn-cantidad" data-accion="restar">−</button>
+                                <input type="number" class="input-cantidad" value="1" min="1" max="50" readonly>
+                                <button type="button" class="btn-cantidad" data-accion="sumar">+</button>
                             </div>
-                            <button class="btn-agregar-detalle" onclick="agregarAlCarrito()">
+                            <button class="btn-agregar-detalle btn-agregar-carrito">
                                 Agregar
                             </button>
                         </div>
@@ -97,88 +97,9 @@
     <!-- ✅ FOOTER (se inyecta desde app.js) -->
     <div id="footer-container"></div>
 
-    <!-- ✅ SCRIPT PRINCIPAL -->
+    <!-- ✅ SCRIPTS MODULARES (Única lógica que queda en el HTML) -->
     <script type="module" src="../js/app.js"></script>
-    
-    <!-- ✅ NUEVO SCRIPT MODULAR DE DETALLE DE PRODUCTO (Paso 3) -->
     <script type="module" src="../js/features/detalle-producto.js"></script>
     
-    <!-- ✅ SCRIPT ESPECÍFICO VIEJO (Se eliminará en el Paso 4) -->
-    <script>
-        let cantidad = 1;
-        let tasaBCV = 0;
-        
-        function formatearNumero(numero) {
-            return new Intl.NumberFormat('es-VE', { maximumFractionDigits: 0 }).format(numero);
-        }
-
-        async function obtenerTasa() {
-            try {
-                const respuesta = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
-                const datos = await respuesta.json();
-                tasaBCV = datos.precio || datos.promedio;
-                actualizarPrecio();
-            } catch (error) {
-                console.error('Error al obtener tasa:', error);
-                tasaBCV = 36.50;
-                actualizarPrecio();
-            }
-        }
-        
-        function actualizarPrecio() {
-            const precioUSD = 2.00;
-            const precioVES = Math.round(precioUSD * tasaBCV);
-            document.getElementById('precio-bolivares').textContent = `Bs. ${formatearNumero(precioVES)}`;
-        }
-        
-        function cambiarCantidad(cambio) {
-            cantidad += cambio;
-            if (cantidad < 1) cantidad = 1;
-            if (cantidad > 50) cantidad = 50;
-            document.getElementById('cantidad').value = cantidad;
-        }
-        
-        function agregarAlCarrito() {
-            const producto = {
-                id: 1,
-                nombre: "Galletas de Coco y Vainilla",
-                precio: 2.00,
-                cantidad: cantidad,
-                imagen: "../img/galletas/coco_vainilla.jpg"
-            };
-            
-            let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-            const existe = carrito.find(item => item.id === producto.id);
-            if (existe) {
-                existe.cantidad += cantidad;
-            } else {
-                carrito.push(producto);
-            }
-            
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            actualizarContadorCarrito();
-            window.dispatchEvent(new Event('carritoActualizado'));
-            alert(`✅ Agregaste ${cantidad} unidad(es) de Galletas de Coco y Vainilla al carrito`);
-        }
-        
-        function actualizarContadorCarrito() {
-            const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            const contador = document.getElementById('contador-carrito-flotante');
-            if (contador) {
-                contador.textContent = totalItems;
-                contador.style.display = totalItems > 0 ? 'flex' : 'none';
-            }
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            obtenerTasa();
-            actualizarContadorCarrito();
-        });
-        
-        document.addEventListener('componentesListos', () => {
-            actualizarContadorCarrito();
-        });
-    </script>
 </body>
 </html>
