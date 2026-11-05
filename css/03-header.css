@@ -117,10 +117,22 @@
     transition: background var(--transicion-rapida);
     margin-top: var(--margin-top-ubicacion-desktop);
     margin-left: 0;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    /* CAMBIO 1: Eliminado el text-shadow blanco que rodeaba "Caracas" */
 }
 .ubicacion:hover { background: rgba(255, 255, 255, 0.4); }
-.ubicacion .icono-ubicacion { font-size: 1rem; }
+
+/* CAMBIO 2: Preparado para el SVG de ubicación en lugar del emoji */
+.ubicacion .icono-ubicacion {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+.ubicacion .icono-ubicacion svg {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
 
 .logo-container {
     display: flex;
@@ -269,7 +281,7 @@
 }
 
 /* ========================================== */
-/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - MENÚ LÍQUIDO */
+/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - MENÚ LÍQUIDO CON VARIABLES */
 /* ========================================== */
 .nav-buscador-wrapper {
     position: absolute;
@@ -293,18 +305,18 @@
     justify-content: flex-start;
     margin-right: 10px;
     min-width: 0;
-    max-width: calc(100% - 250px); /* NUEVO: Reserva 250px mínimo para el buscador + gap */
+    max-width: calc(100% - 250px); /* Reserva espacio sagrado para el buscador */
 }
 
-/* NUEVO: Diseño líquido para la lista de navegación */
+/* CAMBIO 3: Menú líquido usando la variable declarada en 01-variables.css */
 .nav-buscador-wrapper .nav-list {
-    gap: clamp(4px, 1vw, 10px); /* Espacio entre botones que se adapta al ancho */
+    gap: var(--gap-nav-list-fluid);
 }
 
-/* NUEVO: Diseño líquido para los botones del menú */
+/* CAMBIO 3: Botones líquidos usando las variables declaradas en 01-variables.css */
 .nav-buscador-wrapper .nav-link {
-    font-size: clamp(0.7rem, 1.2vw, 0.95rem); /* Texto que se encoge/estira suavemente */
-    padding: clamp(4px, 0.8vw, 8px) clamp(8px, 1.5vw, 14px); /* Padding que se adapta */
+    font-size: var(--tamano-nav-link-fluid);
+    padding: var(--padding-nav-link-fluid);
     white-space: nowrap; /* Evita que el texto se parta en dos líneas */
 }
 
@@ -378,7 +390,12 @@
     .selector-moneda .bandera { font-size: 1rem; }
     .selector-moneda .moneda-actual { font-size: var(--tamano-texto-pequeno); }
     .ubicacion { font-size: var(--tamano-texto-ubicacion-movil); padding: var(--padding-ubicacion-movil); gap: var(--gap-ubicacion-movil); margin-top: var(--margin-top-ubicacion-movil); }
-    .ubicacion .icono-ubicacion { font-size: 0.9rem; }
+    
+    /* CAMBIO 2: Ajuste del SVG para móvil */
+    .ubicacion .icono-ubicacion svg {
+        width: 16px;
+        height: 16px;
+    }
     
     .buscador-header { max-width: var(--tamano-buscador-movil); margin-top: var(--margin-top-buscador-movil); }
     .buscador-input { font-size: var(--tamano-buscador-input-movil); padding: var(--padding-buscador-input-movil); }
