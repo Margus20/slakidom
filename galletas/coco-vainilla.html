@@ -43,10 +43,9 @@
             align-items: start;
         }
         
-        /* ✅ 2. IMAGEN FIJA AL HACER SCROLL */
+        /* ✅ 2. IMAGEN EN POSICIÓN NORMAL (SCROLL NORMAL) */
         .producto-imagen {
-            position: sticky;
-            top: 120px; /* Se queda fija debajo del header */
+            position: relative; /* CAMBIO: de sticky a relative para que no te siga al hacer scroll */
             align-self: start;
         }
         
