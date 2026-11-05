@@ -269,7 +269,7 @@
 }
 
 /* ========================================== */
-/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - CAMBIO QUIRÚRGICO */
+/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - MENÚ LÍQUIDO */
 /* ========================================== */
 .nav-buscador-wrapper {
     position: absolute;
@@ -283,16 +283,29 @@
     padding: 0 var(--espacio-md);
     z-index: 105;
     box-sizing: border-box;
-    gap: 10px; /* CAMBIO 1: separa menú y buscador */
+    gap: 10px;
 }
 
-/* El menú ocupa todo el espacio disponible a la IZQUIERDA */
+/* El menú ocupa el espacio disponible, pero con límites líquidos */
 .nav-buscador-wrapper .nav-bar {
     flex: 1;
     display: flex;
     justify-content: flex-start;
-    margin-right: 10px; /* CAMBIO 2: reducido de 15px a 10px */
-    min-width: 0; /* CAMBIO 2: permite que se encoja si es necesario */
+    margin-right: 10px;
+    min-width: 0;
+    max-width: calc(100% - 250px); /* NUEVO: Reserva 250px mínimo para el buscador + gap */
+}
+
+/* NUEVO: Diseño líquido para la lista de navegación */
+.nav-buscador-wrapper .nav-list {
+    gap: clamp(4px, 1vw, 10px); /* Espacio entre botones que se adapta al ancho */
+}
+
+/* NUEVO: Diseño líquido para los botones del menú */
+.nav-buscador-wrapper .nav-link {
+    font-size: clamp(0.7rem, 1.2vw, 0.95rem); /* Texto que se encoge/estira suavemente */
+    padding: clamp(4px, 0.8vw, 8px) clamp(8px, 1.5vw, 14px); /* Padding que se adapta */
+    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
 }
 
 /* El buscador se va a la DERECHA con tamaño controlado */
@@ -342,9 +355,9 @@
         padding-bottom: var(--espacio-sm, 0.5rem);
     }
     .nav-buscador-wrapper .buscador-header {
-        max-width: 260px !important; /* CAMBIO 3: de 100% a 260px para no crecer tanto */
-        width: auto; /* CAMBIO 3: de 90% a auto */
-        margin-left: auto; /* CAMBIO 3: empuja el buscador a la derecha */
+        max-width: 260px !important;
+        width: auto;
+        margin-left: auto;
     }
 
     .buscador-input { font-size: var(--tamano-buscador-input-tablet); padding: var(--padding-buscador-input-tablet); }
