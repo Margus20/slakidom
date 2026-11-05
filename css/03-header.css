@@ -269,7 +269,7 @@
 }
 
 /* ========================================== */
-/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - VERSIÓN INTEGRADA */
+/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - CAMBIO QUIRÚRGICO */
 /* ========================================== */
 .nav-buscador-wrapper {
     position: absolute;
@@ -281,7 +281,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--espacio-md);
-    z-index: 10;
+    z-index: 105; /* CAMBIO QUIRÚRGICO: De 10 a 105 para estar por encima de --z-header-botones (101) */
     box-sizing: border-box;
 }
 
@@ -294,7 +294,6 @@
 }
 
 /* El buscador se va a la DERECHA con tamaño controlado */
-/* Selector más específico para ganar la batalla contra .buscador-header original */
 .nav-buscador-wrapper .buscador-header {
     flex-shrink: 0;
     width: auto;
@@ -310,9 +309,9 @@
     min-width: 100px;
 }
 
-/* Borde restaurado para el botón de Productos */
+/* Borde restaurado para el botón de Productos - CAMBIO QUIRÚRGICO */
 .btn-productos {
-    border: 2px solid var(--rosa, #ff6b81);
+    border: 2px solid var(--rosa, #ff6b81) !important; /* CAMBIO QUIRÚRGICO: agregado !important */
     border-radius: var(--radio-mediano, 8px);
     transition: var(--transicion-rapida, 0.3s ease);
 }
