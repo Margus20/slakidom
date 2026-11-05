@@ -1,5 +1,5 @@
 // ==========================================
-// LÓGICA DE DETALLE DE PRODUCTO (MODULAR)
+// LÓGICA DE DETALLE DE PRODUCTO (DEFINITIVO)
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -7,10 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const detalleSection = document.querySelector('.producto-detalle');
     if (!detalleSection) return; // Si no existe, salir sin hacer nada
 
-    const btnRestar = detalleSection.querySelector('.cantidad-input button:first-child');
-    const btnSumar = detalleSection.querySelector('.cantidad-input button:last-child');
-    const inputCantidad = detalleSection.querySelector('#cantidad');
-    const btnAgregar = detalleSection.querySelector('.btn-agregar-detalle');
+    // Selectores ajustados al HTML limpio
+    const btnRestar = detalleSection.querySelector('[data-accion="restar"]');
+    const btnSumar = detalleSection.querySelector('[data-accion="sumar"]');
+    const inputCantidad = detalleSection.querySelector('.input-cantidad'); // ✅ CORREGIDO: ahora busca por clase
+    const btnAgregar = detalleSection.querySelector('.btn-agregar-carrito'); // ✅ CORREGIDO: coincide con el HTML limpio
     const precioBsElement = document.getElementById('precio-bolivares');
 
     let cantidad = 1;
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 3. Actualizar el precio en pantalla
     function actualizarPrecio() {
-        const precioUSD = 2.00; // Este valor se puede hacer dinámico con data-precio en el futuro
+        const precioUSD = 2.00; 
         const precioVES = Math.round(precioUSD * tasaBCV);
         if (precioBsElement) {
             precioBsElement.textContent = `Bs. ${formatearNumero(precioVES)}`;
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         btnRestar.addEventListener('click', () => {
             if (cantidad > 1) {
                 cantidad--;
-                if (inputCantidad) inputCantidad.value = cantidad;
+                if (inputCantidad) inputCantidad.value = cantidad; // ✅ Ahora sí actualizará el input visualmente
             }
         });
     }
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         btnSumar.addEventListener('click', () => {
             if (cantidad < 50) {
                 cantidad++;
-                if (inputCantidad) inputCantidad.value = cantidad;
+                if (inputCantidad) inputCantidad.value = cantidad; // ✅ Ahora sí actualizará el input visualmente
             }
         });
     }
