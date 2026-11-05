@@ -269,30 +269,45 @@
 }
 
 /* ========================================== */
-/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) */
+/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - VERSIÓN INTEGRADA */
 /* ========================================== */
 .nav-buscador-wrapper {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
+    right: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--espacio-sm) var(--espacio-md);
-    z-index: var(--z-header);
+    padding: 0 var(--espacio-md);
+    z-index: 10;
+    box-sizing: border-box;
 }
 
-.nav-bar {
+/* El menú ocupa todo el espacio disponible a la IZQUIERDA */
+.nav-buscador-wrapper .nav-bar {
     flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 15px;
 }
 
-/* Buscador más pequeño para dejar espacio al menú */
+/* El buscador se va a la DERECHA con tamaño controlado */
+/* Selector más específico para ganar la batalla contra .buscador-header original */
 .nav-buscador-wrapper .buscador-header {
     flex-shrink: 0;
-    width: 100%;
-    max-width: 280px;
-    margin-top: 0;
+    width: auto;
+    max-width: 240px !important;
+    min-width: 180px;
+    margin-top: 0 !important;
+    margin-left: auto;
+}
+
+/* El input del buscador también necesita límite dentro del wrapper */
+.nav-buscador-wrapper .buscador-input {
+    max-width: 160px;
+    min-width: 100px;
 }
 
 /* Borde restaurado para el botón de Productos */
@@ -326,8 +341,9 @@
         padding-bottom: var(--espacio-sm, 0.5rem);
     }
     .nav-buscador-wrapper .buscador-header {
-        max-width: 100%;
+        max-width: 100% !important;
         width: 90%;
+        margin-left: 0;
     }
 
     .buscador-input { font-size: var(--tamano-buscador-input-tablet); padding: var(--padding-buscador-input-tablet); }
