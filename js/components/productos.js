@@ -8,12 +8,12 @@ export function renderizarProductos(listaProductos, tasaCambio) {
     const gridProductos = document.getElementById("productos-grid");
     if (!gridProductos) return;
     
-    console.log('🏗️ [PRODUCTOS]: Iniciando renderizado...');
+    console.log('[PRODUCTOS]: Iniciando renderizado...');
     gridProductos.innerHTML = "";
 
     if (listaProductos.length === 0) {
-        // Usamos la variable CSS --chocolate para mantener la consistencia visual
-        gridProductos.innerHTML = `<p style="text-align: center; color: var(--chocolate); padding: var(--espacio-lg);">No hay productos en esta categoría por ahora.</p>;
+        // CORRECCION: Se agrego el backtick de cierre que faltaba
+        gridProductos.innerHTML = `<p style="text-align: center; color: var(--chocolate); padding: var(--espacio-lg);">No hay productos en esta categoria por ahora.</p>`;
         return;
     }
     
@@ -21,7 +21,7 @@ export function renderizarProductos(listaProductos, tasaCambio) {
     const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
     const imgBasePath = isSubfolder ? '../' : '';
     
-    // ✅ OPTIMIZACIÓN: Usar DocumentFragment para insertar todo el HTML de una sola vez
+    // OPTIMIZACION: Usar DocumentFragment para insertar todo el HTML de una sola vez
     const fragment = document.createDocumentFragment();
     
     listaProductos.forEach(producto => {
@@ -41,10 +41,10 @@ export function renderizarProductos(listaProductos, tasaCambio) {
         
         const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
         
-        // ✅ CORRECCIÓN: Se eliminaron los estilos inline. La clase .producto-img en 05-productos.css ya maneja todo.
+        // CORRECCION: Se eliminaron los estilos inline. La clase .producto-img en 05-productos.css ya maneja todo.
         const imagenHTML = imagenSrc
-            ? `<img src="${imagenSrc}" alt="${producto.nombre}" class="producto-img" onerror="this.outerHTML='<div class=\\'producto-img-placeholder\\'>🫙</div>'">` 
-            : `<div class="producto-img-placeholder">🫙</div>`;
+            ? `<img src="${imagenSrc}" alt="${producto.nombre}" class="producto-img" onerror="this.outerHTML='<div class=\\'producto-img-placeholder\\'></div>'">` 
+            : `<div class="producto-img-placeholder"></div>`;
         
         const esClicable = !!producto.url;
         const productoURL = esClicable 
@@ -67,7 +67,7 @@ export function renderizarProductos(listaProductos, tasaCambio) {
             </div>
         `;
 
-        // ✅ Se usa una clase 'card-link' en lugar de estilos inline para el enlace
+        // Se usa una clase 'card-link' en lugar de estilos inline para el enlace
         card.innerHTML = `
             ${esClicable ? `<a href="${productoURL}" class="card-link">${contenidoInfo}</a>` : contenidoInfo}
             <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
@@ -76,7 +76,7 @@ export function renderizarProductos(listaProductos, tasaCambio) {
         fragment.appendChild(card);
     });
 
-    // Inserción única en el DOM (mucho más rápido que hacerlo en cada iteración)
+    // Insercion unica en el DOM (mucho mas rapido que hacerlo en cada iteracion)
     gridProductos.appendChild(fragment);
-    console.log(`✅ [PRODUCTOS]: ${listaProductos.length} productos renderizados correctamente.`);
-            }
+    console.log(`[PRODUCTOS]: ${listaProductos.length} productos renderizados correctamente.`);
+}
