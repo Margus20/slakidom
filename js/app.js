@@ -20,6 +20,9 @@ import { inicializarAnimaciones, animarCardsDeProductos } from './features/anima
 // NUEVO: Importar la funcion del slider
 import { inicializarSlider } from './features/slider.js';
 
+// ✅ NUEVO: Importar la funcion del lightbox de proceso
+import { inicializarLightboxProceso } from './features/lightbox-proceso.js';
+
 // 1. Iniciar carga de componentes (Header y Footer)
 cargarComponentes();
 
@@ -35,6 +38,7 @@ document.addEventListener('componentesListos', () => {
     iniciarEfectoNieve();
     inicializarAnimaciones(); 
     inicializarSlider();      
+    inicializarLightboxProceso(); // ✅ NUEVO: Inicializar el lightbox de la galería de proceso
     
     // 3. Configurar eventos del Modal del Carrito
     const modalCarrito = document.getElementById('modal-carrito');
