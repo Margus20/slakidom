@@ -1,81 +1,118 @@
 /* ========================================== */
-/* 07. SOBRE NOSOTROS (Chef y Mascota) */
+/* 07. SOBRE NOSOTROS (Artículo Familia) */
 /* ========================================== */
 
 .sobre-nosotros {
     background: var(--blanco);
-    padding: 60px 20px; /* Agregado para igualar el diseño solicitado */
+    padding: 60px 20px;
 }
 
-.chef-content {
-    max-width: var(--max-width-sobre-nosotros, 800px);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap-sobre-nosotros, 30px);
+.section-title {
     text-align: center;
+    margin-bottom: 10px;
 }
 
-.chef-imagen {
-    margin-bottom: 30px;
-}
-
-.chef-placeholder {
-    font-size: 120px; /* Tamaño específico solicitado */
-    line-height: 1;
-    background: var(--amarillo);
-    width: var(--tamano-placeholder-chef-contenedor, 150px);
-    height: var(--tamano-placeholder-chef-contenedor, 150px);
-    border-radius: var(--radio-redondo);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chef-texto {
+.section-subtitle {
     text-align: center;
-}
-
-.chef-texto h3 {
-    font-family: 'Bowlby One SC', cursive, sans-serif;
-    font-size: 32px; /* Tamaño específico solicitado */
-    color: var(--chocolate); /* Corregido a chocolate según tu diseño */
-    margin-bottom: 20px;
-    text-transform: uppercase;
-}
-
-.chef-historia, 
-.chef-mascota {
-    font-family: 'Caveat', cursive; /* Fuente específica solicitada */
-    font-size: 26px; /* Tamaño específico solicitado */
-    font-weight: 700;
-    color: var(--chocolate);
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.chef-mascota strong {
-    font-weight: 700;
-    color: var(--chocolate);
+    margin-bottom: 40px;
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: SOBRE NOSOTROS */
+/* ✅ ARTÍCULO ESTILO REVISTA */
+/* ========================================== */
+
+.articulo-familia {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.articulo-familia h3 {
+    font-family: 'Bowlby One SC', cursive, sans-serif;
+    font-size: 32px;
+    color: var(--chocolate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Imagen flotante a la izquierda (familia) */
+.img-float-left {
+    float: left;
+    width: 280px;
+    height: auto;
+    margin: 0 25px 15px 0;
+    border-radius: var(--radio-grande);
+    box-shadow: var(--sombra-media);
+    transition: transform var(--transicion-normal);
+}
+
+.img-float-left:hover {
+    transform: scale(1.03);
+}
+
+/* Logo flotante a la derecha (SLAKIDOM) */
+.logo-float {
+    float: right;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 0 0 15px 25px;
+    border-radius: var(--radio-mediano);
+    background: var(--blanco);
+    padding: 10px;
+    box-shadow: var(--sombra-suave);
+}
+
+/* ✅ PÁRRAFOS: TEXTO NEGRO PURO, LEGIBLE */
+.articulo-familia p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #000;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Firma final de la familia */
+.firma-familia {
+    font-family: 'Caveat', cursive !important;
+    font-size: 28px !important;
+    font-weight: 700;
+    color: var(--rosa) !important;
+    text-align: right;
+    margin-top: 30px;
+    clear: both;
+}
+
+/* Limpiar floats al final del artículo */
+.articulo-familia::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ========================================== */
+/* ✅ RESPONSIVE */
 /* ========================================== */
 
 /* ✅ TABLET (768px) */
 @media (max-width: 768px) {
-    .chef-placeholder {
-        font-size: 100px;
+    .sobre-nosotros {
+        padding: 40px 15px;
     }
-    .chef-texto h3 {
-        font-size: 28px;
+    
+    .img-float-left {
+        width: 200px;
+        margin: 0 15px 10px 0;
     }
-    .chef-historia, 
-    .chef-mascota {
-        font-size: 22px;
+    .logo-float {
+        width: 90px;
+        height: 90px;
     }
+    
+    .articulo-familia h3 { font-size: 28px; }
+    .articulo-familia p { font-size: 16px; }
+    .firma-familia { font-size: 24px !important; }
 }
 
 /* ✅ MÓVIL (480px) */
@@ -83,14 +120,24 @@
     .sobre-nosotros {
         padding: 40px 15px;
     }
-    .chef-placeholder {
-        font-size: 80px;
+    
+    .img-float-left,
+    .logo-float {
+        float: none;
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto 20px auto;
     }
-    .chef-texto h3 {
-        font-size: 24px;
+    
+    .articulo-familia {
+        text-align: left;
     }
-    .chef-historia, 
-    .chef-mascota {
-        font-size: 20px;
+    
+    .articulo-familia h3 { font-size: 24px; }
+    .articulo-familia p { font-size: 16px; }
+    .firma-familia { 
+        font-size: 22px !important; 
+        text-align: center; 
     }
 }
