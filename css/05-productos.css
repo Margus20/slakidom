@@ -169,8 +169,16 @@
 }
 
 /* ========================================== */
-/* ✅ UTILIDADES PARA EL BUSCADOR (Filtrado) */
+/* ✅ UTILIDADES GENERALES Y PARA EL BUSCADOR */
 /* ========================================== */
+/* ✅ NUEVO: Clase para mensajes de carga sin estilos inline en el HTML */
+.mensaje-carga {
+    text-align: center;
+    color: var(--chocolate);
+    padding: var(--espacio-lg);
+    font-size: var(--tamano-texto);
+}
+
 .producto-card.oculto {
     display: none !important;
 }
@@ -270,7 +278,7 @@
 }
 
 /* ========================================== */
-/* ✅ ESTILOS DE PÁGINA DE DETALLE DE PRODUCTO (NUEVO) */
+/* ✅ ESTILOS DE PÁGINA DE DETALLE DE PRODUCTO */
 /* ========================================== */
 .producto-detalle {
     max-width: 1200px;
