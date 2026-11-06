@@ -1,24 +1,32 @@
 /* ========================================== */
 /* 07. SOBRE NOSOTROS (Chef y Mascota) */
 /* ========================================== */
+
 .sobre-nosotros {
     background: var(--blanco);
+    padding: 60px 20px; /* Agregado para igualar el diseño solicitado */
 }
 
 .chef-content {
-    max-width: var(--max-width-sobre-nosotros);
+    max-width: var(--max-width-sobre-nosotros, 800px);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-sobre-nosotros);
+    gap: var(--gap-sobre-nosotros, 30px);
+    text-align: center;
+}
+
+.chef-imagen {
+    margin-bottom: 30px;
 }
 
 .chef-placeholder {
-    font-size: var(--tamano-placeholder-chef);
+    font-size: 120px; /* Tamaño específico solicitado */
+    line-height: 1;
     background: var(--amarillo);
-    width: var(--tamano-placeholder-chef-contenedor);
-    height: var(--tamano-placeholder-chef-contenedor);
+    width: var(--tamano-placeholder-chef-contenedor, 150px);
+    height: var(--tamano-placeholder-chef-contenedor, 150px);
     border-radius: var(--radio-redondo);
     display: flex;
     align-items: center;
@@ -30,14 +38,25 @@
 }
 
 .chef-texto h3 {
-    font-size: var(--tamano-nombre-chef);
-    color: var(--rosa);
-    margin-bottom: var(--espacio-entre-elementos);
+    font-family: 'Bowlby One SC', cursive, sans-serif;
+    font-size: 32px; /* Tamaño específico solicitado */
+    color: var(--chocolate); /* Corregido a chocolate según tu diseño */
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
-.chef-historia, .chef-mascota {
-    font-size: var(--tamano-texto-chef);
-    margin-bottom: var(--espacio-entre-elementos);
+.chef-historia, 
+.chef-mascota {
+    font-family: 'Caveat', cursive; /* Fuente específica solicitada */
+    font-size: 26px; /* Tamaño específico solicitado */
+    font-weight: 700;
+    color: var(--chocolate);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.chef-mascota strong {
+    font-weight: 700;
     color: var(--chocolate);
 }
 
@@ -45,44 +64,33 @@
 /* ✅ RESPONSIVE: SOBRE NOSOTROS */
 /* ========================================== */
 
-/* ✅ TABLET */
-@media (max-width: var(--breakpoint-tablet)) {
-    .chef-content {
-        gap: var(--gap-sobre-nosotros-tablet);
-    }
-    
+/* ✅ TABLET (768px) */
+@media (max-width: 768px) {
     .chef-placeholder {
-        width: var(--tamano-placeholder-chef-tablet);
-        height: var(--tamano-placeholder-chef-tablet);
-        font-size: var(--tamano-placeholder-chef-fuente-tablet);
+        font-size: 100px;
     }
-    
     .chef-texto h3 {
-        font-size: var(--tamano-nombre-chef-tablet);
+        font-size: 28px;
     }
-    
-    .chef-historia, .chef-mascota {
-        font-size: var(--tamano-texto-chef-tablet);
+    .chef-historia, 
+    .chef-mascota {
+        font-size: 22px;
     }
 }
 
-/* ✅ MÓVIL */
-@media (max-width: var(--breakpoint-movil)) {
-    .chef-content {
-        gap: var(--gap-sobre-nosotros-movil);
+/* ✅ MÓVIL (480px) */
+@media (max-width: 480px) {
+    .sobre-nosotros {
+        padding: 40px 15px;
     }
-    
     .chef-placeholder {
-        width: var(--tamano-placeholder-chef-movil);
-        height: var(--tamano-placeholder-chef-movil);
-        font-size: var(--tamano-placeholder-chef-fuente-movil);
+        font-size: 80px;
     }
-    
     .chef-texto h3 {
-        font-size: var(--tamano-nombre-chef-movil);
+        font-size: 24px;
     }
-    
-    .chef-historia, .chef-mascota {
-        font-size: var(--tamano-texto-chef-movil);
+    .chef-historia, 
+    .chef-mascota {
+        font-size: 20px;
     }
 }
