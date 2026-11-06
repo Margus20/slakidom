@@ -33,7 +33,7 @@ export const PRODUCTOS = [
     { 
         id: 3, 
         nombre: "Galletas con Chispas de Chocolate", 
-        precio: 2.00, 
+        precio: 2.50, 
         categoria: "galletas", 
         imagen: "img/galletas/chispas_de_chocolate.jpg", 
         url: "galletas/chispas-de-chocolate.html" 
@@ -65,9 +65,17 @@ export const PRODUCTOS = [
     { 
         id: 7, 
         nombre: "Galletas de Mermelada", 
-        precio: 2.00, 
+        precio: 2.50, 
         categoria: "galletas", 
         imagen: "img/galletas/mermelada.jpg", 
         url: "galletas/mermelada.html" 
+    },
+    { 
+        id: 8, 
+        nombre: "Galletas de Chocolate", 
+        precio: 2.00, 
+        categoria: "galletas", 
+        imagen: "img/galletas/chocolate.jpg", 
+        url: "galletas/chocolate.html" 
     }
 ];
