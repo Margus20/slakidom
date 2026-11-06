@@ -47,8 +47,11 @@ export function renderizarProductos(listaProductos, tasaCambio) {
             : `<div class="producto-img-placeholder"></div>`;
         
         const esClicable = !!producto.url;
+        
+        // ✅ CORRECCION CRITICA: producto.url YA incluye la carpeta (ej: "galletas/coco-vainilla.html").
+        // Solo necesitamos agregar "../" si estamos dentro de una subcarpeta para subir un nivel.
         const productoURL = esClicable 
-            ? (isSubfolder ? `../${producto.categoria}/${producto.url}` : `${producto.categoria}/${producto.url}`)
+            ? (isSubfolder ? `../${producto.url}` : producto.url)
             : '#';
         
         const contenidoInfo = `
