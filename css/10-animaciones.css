@@ -366,7 +366,7 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: TABLET (768px) */
+/* ✅ RESPONSIVE: TABLET (768px) - SIN CAMBIOS */
 /* ========================================== */
 @media (max-width: var(--breakpoint-tablet)) {
     .modal-contenido {
@@ -411,7 +411,7 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (480px) */
+/* ✅ RESPONSIVE: MÓVIL (480px) - BOTONES REDUCIDOS */
 /* ========================================== */
 @media (max-width: var(--breakpoint-movil)) {
     .modal-contenido {
@@ -428,28 +428,30 @@
         font-size: var(--tamano-texto-pequeno);
     }
     
+    /* ✅ BOTÓN MENÚ FLOTANTE - Tamaño reducido */
     .btn-menu-flotante {
-        top: var(--top-menu-flotante-movil);
-        right: var(--right-menu-flotante-movil);
-        width: var(--tamano-menu-flotante-movil);
-        height: var(--tamano-menu-flotante-movil);
+        top: 10px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
     }
     
     .btn-menu-flotante svg {
-        width: var(--tamano-icono-menu-movil);
-        height: var(--tamano-icono-menu-movil);
+        width: 22px;
+        height: 22px;
     }
     
+    /* ✅ BOTÓN EXCALIBUR - Tamaño reducido */
     .btn-flotante-excalibur {
-        bottom: var(--bottom-excalibur-movil);
-        right: var(--right-excalibur-movil);
-        width: var(--tamano-excalibur-movil);
-        height: var(--tamano-excalibur-movil);
+        bottom: 15px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
     }
     
     .btn-flotante-excalibur img {
-        width: var(--tamano-imagen-excalibur-movil);
-        height: var(--tamano-imagen-excalibur-movil);
+        width: 32px;
+        height: 32px;
         filter: var(--filtro-excalibur-movil);
     }
     
@@ -458,22 +460,33 @@
         transform: translateY(-2px);
     }
     
+    /* ✅ CONTADOR FLOTANTE - Tamaño reducido */
+    .contador-flotante {
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+        top: -5px;
+        right: -5px;
+    }
+    
+    /* ✅ BOTÓN WHATSAPP - Tamaño reducido */
     .whatsapp-flotante {
-        bottom: var(--bottom-whatsapp-movil);
-        left: var(--left-whatsapp-movil);
-        width: var(--tamano-whatsapp-movil);
-        height: var(--tamano-whatsapp-movil);
+        bottom: 15px;
+        left: 15px;
+        width: 50px;
+        height: 50px;
     }
     
     .whatsapp-flotante svg {
-        width: var(--tamano-icono-whatsapp-movil);
-        height: var(--tamano-icono-whatsapp-movil);
+        width: 28px;
+        height: 28px;
     }
     
+    /* ✅ NOTIFICACIÓN FLOTANTE - Ajustada */
     .notificacion-flotante {
-        bottom: var(--bottom-notificacion-movil);
-        padding: var(--padding-notificacion-movil);
-        font-size: var(--tamano-texto-pequeno);
+        bottom: 80px;
+        padding: 10px 16px;
+        font-size: 0.85rem;
     }
 }
 
@@ -487,7 +500,7 @@
     font-size: var(--snow-size, 15px);
     opacity: var(--snow-opacity, 0.8);
     color: var(--blanco);
-    pointer-events: none; /* ✅ CRUCIAL: Permite hacer clic a través de la nieve */
+    pointer-events: none;
     z-index: 5000;
     animation: caerNieve var(--snow-duration, 3s) linear forwards;
 }
