@@ -12,7 +12,7 @@ export const CONFIG = {
 };
 
 // ✅ PRODUCTOS: Catálogo maestro. 
-// Nota: Los precios deben ser números (ej: 2.00, no "2.00") para que los cálculos matemáticos funcionen.
+// Nota: Los precios deben ser números (ej: 7.00, no "7.00") para que los cálculos matemáticos funcionen.
 export const PRODUCTOS = [
     { 
         id: 1, 
@@ -41,7 +41,7 @@ export const PRODUCTOS = [
     { 
         id: 4, 
         nombre: "Mermelada de Fresa", 
-        precio: 5.00, 
+        precio: 7.00, 
         categoria: "mermeladas", 
         imagen: "img/mermeladas/fresa.jpg", 
         url: "mermeladas/fresa.html" 
@@ -49,7 +49,7 @@ export const PRODUCTOS = [
     { 
         id: 5, 
         nombre: "Mermelada de Guayaba", 
-        precio: 5.00, 
+        precio: 7.00, 
         categoria: "mermeladas", 
         imagen: "img/mermeladas/guayaba.jpg", 
         url: "mermeladas/guayaba.html" 
@@ -57,7 +57,7 @@ export const PRODUCTOS = [
     { 
         id: 6, 
         nombre: "Mermelada de Durazno", 
-        precio: 5.00, 
+        precio: 7.00, 
         categoria: "mermeladas", 
         imagen: "img/mermeladas/durazno.jpg", 
         url: "mermeladas/durazno.html" 
