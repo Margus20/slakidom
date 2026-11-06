@@ -29,30 +29,54 @@
             <p class="section-subtitle">Cada paso lo hacemos con amor y dedicación</p>
             
             <div class="proceso-steps">
-                <!-- ✅ Paso 1 -->
+                <!-- ✅ Paso 1: SELECCIONAMOS (2 fotos) -->
                 <div class="paso">
-                    <div class="paso-numero">1</div>
+                    <div class="mini-galeria" data-etapa="seleccionamos">
+                        <img src="img/procesos/seleccionamos/foto1.jpg" alt="Seleccionamos ingredientes" class="miniatura" onerror="this.src='img/slaky_cuadrado.jpg'">
+                        <div class="overlay-galeria">
+                            <span class="icono-ver">🔍</span>
+                            <span class="texto-ver">Ver fotos</span>
+                        </div>
+                    </div>
                     <h3>Seleccionamos</h3>
                     <p>Los mejores ingredientes frescos</p>
                 </div>
                 
-                <!-- ✅ Paso 2 -->
+                <!-- ✅ Paso 2: PREPARAMOS (3 fotos) -->
                 <div class="paso">
-                    <div class="paso-numero">2</div>
+                    <div class="mini-galeria" data-etapa="preparamos">
+                        <img src="img/procesos/preparamos/foto1.jpg" alt="Preparamos la masa" class="miniatura" onerror="this.src='img/slaky_cuadrado.jpg'">
+                        <div class="overlay-galeria">
+                            <span class="icono-ver">🔍</span>
+                            <span class="texto-ver">Ver fotos</span>
+                        </div>
+                    </div>
                     <h3>Preparamos</h3>
                     <p>La masa con amor y dedicación</p>
                 </div>
                 
-                <!-- ✅ Paso 3 -->
+                <!-- ✅ Paso 3: HORNEAMOS (1 foto) -->
                 <div class="paso">
-                    <div class="paso-numero">3</div>
+                    <div class="mini-galeria" data-etapa="horneamos">
+                        <img src="img/procesos/horneamos/foto1.jpg" alt="Horneamos" class="miniatura" onerror="this.src='img/slaky_cuadrado.jpg'">
+                        <div class="overlay-galeria">
+                            <span class="icono-ver">🔍</span>
+                            <span class="texto-ver">Ver fotos</span>
+                        </div>
+                    </div>
                     <h3>Horneamos</h3>
                     <p>Hasta obtener la textura perfecta</p>
                 </div>
                 
-                <!-- ✅ Paso 4 -->
+                <!-- ✅ Paso 4: EMPACAMOS (2 fotos) -->
                 <div class="paso">
-                    <div class="paso-numero">4</div>
+                    <div class="mini-galeria" data-etapa="empacamos">
+                        <img src="img/procesos/empacamos/foto1.jpg" alt="Empacamos" class="miniatura" onerror="this.src='img/slaky_cuadrado.jpg'">
+                        <div class="overlay-galeria">
+                            <span class="icono-ver">🔍</span>
+                            <span class="texto-ver">Ver fotos</span>
+                        </div>
+                    </div>
                     <h3>Empacamos</h3>
                     <p>Con cuidado para que lleguen perfectas</p>
                 </div>
@@ -60,11 +84,24 @@
         </section>
     </main>
     
+    <!-- ✅ MODAL LIGHTBOX PARA GALERÍAS -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <div class="lightbox-contenido">
+            <button class="lightbox-cerrar" aria-label="Cerrar galería">&times;</button>
+            <button class="lightbox-anterior" aria-label="Foto anterior">&#10094;</button>
+            <button class="lightbox-siguiente" aria-label="Foto siguiente">&#10095;</button>
+            <img src="" alt="Foto ampliada" class="lightbox-imagen">
+            <div class="lightbox-contador"></div>
+        </div>
+    </div>
+    
     <!-- ✅ AQUÍ SE INYECTARÁ EL FOOTER -->
     <div id="footer-container"></div>
 
     <!-- ✅ SCRIPT PRINCIPAL -->
     <script type="module" src="js/app.js"></script>
+    <!-- ✅ SCRIPT DEL LIGHTBOX -->
+    <script type="module" src="js/features/lightbox-proceso.js"></script>
     
 </body>
 </html>
