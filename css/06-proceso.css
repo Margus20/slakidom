@@ -1,80 +1,142 @@
 /* ========================================== */
 /* 06. PROCESO DE ELABORACIÓN */
 /* ========================================== */
+
+/* ✅ FONDO BLANCO PARA LA SECCIÓN CENTRAL */
 .proceso {
-    background: var(--durazno);
+    background: var(--blanco);
+    padding: 60px 20px;
 }
 
+/* ✅ CUADRÍCULA 2x2: DOS FILAS Y DOS COLUMNAS */
 .proceso-steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--gap-proceso);
-    max-width: var(--max-width-proceso);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 40px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
+/* ✅ TARJETA DE PASO CON BORDE AMARILLO */
 .paso {
     text-align: center;
     background: var(--blanco);
-    padding: var(--padding-paso);
-    border-radius: var(--radio-mediano);
-    box-shadow: var(--sombra-media);
+    border: 2px solid var(--amarillo);
+    border-radius: 20px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
 }
 
+.paso:hover {
+    transform: translateY(-5px);
+}
+
+/* ✅ NÚMERO DEL PASO (Círculo grande) */
 .paso-numero {
-    width: var(--tamano-numero-paso);
-    height: var(--tamano-numero-paso);
+    width: 60px;
+    height: 60px;
     background: var(--rosa);
     color: var(--blanco);
     border-radius: var(--radio-redondo);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--tamano-numero-paso-fuente);
-    font-weight: bold;
-    margin: 0 auto var(--espacio-sm);
+    font-family: 'Bowlby One SC', cursive, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
+/* ✅ TÍTULO DEL PASO (Bowlby One SC, uppercase) */
 .paso h3 {
+    font-family: 'Bowlby One SC', cursive, sans-serif;
+    font-size: 24px;
     color: var(--chocolate);
-    margin-bottom: var(--espacio-sm);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* ✅ TEXTO DEL PASO (Caveat 26px unificado) */
+.paso p {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--chocolate);
+    line-height: 1.4;
+    margin: 0;
 }
 
 /* ========================================== */
 /* ✅ RESPONSIVE: PROCESO */
 /* ========================================== */
 
-/* ✅ TABLET */
-@media (max-width: var(--breakpoint-tablet)) {
+/* ✅ TABLET GRANDE (992px): Mantener 2 columnas, reducir tamaños */
+@media (max-width: 992px) {
     .proceso-steps {
-        gap: var(--gap-proceso-tablet);
+        gap: 30px;
     }
     
-    .paso {
-        padding: var(--padding-paso-tablet);
+    .paso h3 {
+        font-size: 22px;
     }
     
-    .paso-numero {
-        width: var(--tamano-numero-paso-tablet);
-        height: var(--tamano-numero-paso-tablet);
-        font-size: var(--tamano-numero-paso-fuente-tablet);
+    .paso p {
+        font-size: 24px;
     }
 }
 
-/* ✅ MÓVIL */
-@media (max-width: var(--breakpoint-movil)) {
+/* ✅ TABLET (768px): Cambiar a 1 columna */
+@media (max-width: 768px) {
     .proceso-steps {
         grid-template-columns: 1fr;
-        gap: var(--gap-proceso-movil);
-    }
-    
-    .paso {
-        padding: var(--padding-paso-movil);
+        gap: 30px;
     }
     
     .paso-numero {
-        width: var(--tamano-numero-paso-movil);
-        height: var(--tamano-numero-paso-movil);
-        font-size: var(--tamano-numero-paso-fuente-movil);
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    
+    .paso h3 {
+        font-size: 22px;
+    }
+    
+    .paso p {
+        font-size: 22px;
+    }
+}
+
+/* ✅ MÓVIL PEQUEÑO (480px): Ajustes finos */
+@media (max-width: 480px) {
+    .proceso {
+        padding: 40px 15px;
+    }
+    
+    .proceso-steps {
+        gap: 25px;
+    }
+    
+    .paso {
+        padding: 25px 15px;
+    }
+    
+    .paso-numero {
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+    }
+    
+    .paso h3 {
+        font-size: 20px;
+    }
+    
+    .paso p {
+        font-size: 20px;
     }
 }
