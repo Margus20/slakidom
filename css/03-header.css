@@ -117,11 +117,9 @@
     transition: background var(--transicion-rapida);
     margin-top: var(--margin-top-ubicacion-desktop);
     margin-left: 0;
-    /* CAMBIO 1: Eliminado el text-shadow blanco que rodeaba "Caracas" */
 }
 .ubicacion:hover { background: rgba(255, 255, 255, 0.4); }
 
-/* CAMBIO 2: Preparado para el SVG de ubicación en lugar del emoji */
 .ubicacion .icono-ubicacion {
     display: inline-flex;
     align-items: center;
@@ -281,7 +279,7 @@
 }
 
 /* ========================================== */
-/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) - MENÚ LÍQUIDO CON VARIABLES */
+/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) */
 /* ========================================== */
 .nav-buscador-wrapper {
     position: absolute;
@@ -298,29 +296,25 @@
     gap: 10px;
 }
 
-/* El menú ocupa el espacio disponible, pero con límites líquidos */
 .nav-buscador-wrapper .nav-bar {
     flex: 1;
     display: flex;
     justify-content: flex-start;
     margin-right: 10px;
     min-width: 0;
-    max-width: calc(100% - 250px); /* Reserva espacio sagrado para el buscador */
+    max-width: calc(100% - 250px);
 }
 
-/* CAMBIO 3: Menú líquido usando la variable declarada en 01-variables.css */
 .nav-buscador-wrapper .nav-list {
     gap: var(--gap-nav-list-fluid);
 }
 
-/* CAMBIO 3: Botones líquidos usando las variables declaradas en 01-variables.css */
 .nav-buscador-wrapper .nav-link {
     font-size: var(--tamano-nav-link-fluid);
     padding: var(--padding-nav-link-fluid);
-    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+    white-space: nowrap;
 }
 
-/* El buscador se va a la DERECHA con tamaño controlado */
 .nav-buscador-wrapper .buscador-header {
     flex-shrink: 0;
     width: auto;
@@ -330,13 +324,11 @@
     margin-left: auto;
 }
 
-/* El input del buscador también necesita límite dentro del wrapper */
 .nav-buscador-wrapper .buscador-input {
     max-width: 160px;
     min-width: 100px;
 }
 
-/* Borde restaurado para el botón de Productos */
 .btn-productos {
     border: 2px solid var(--rosa, #ff6b81) !important;
     border-radius: var(--radio-mediano, 8px);
@@ -350,6 +342,8 @@
 /* ========================================== */
 /* ✅ RESPONSIVE: HEADER Y BUSCADOR */
 /* ========================================== */
+
+/* ✅ TABLET (768px) - Se mantiene el menú horizontal */
 @media (max-width: var(--breakpoint-tablet)) {
     .header { height: var(--altura-header-tablet); }
     .logo { height: var(--altura-logo-tablet); }
@@ -359,7 +353,6 @@
     .selector-moneda .moneda-actual { font-size: var(--tamano-texto-selector-hover); }
     .ubicacion { font-size: var(--tamano-texto-ubicacion-tablet); padding: var(--padding-ubicacion-tablet); margin-top: var(--margin-top-ubicacion-tablet); }
     
-    /* En tablet: menú y buscador en columnas para no amontonarse */
     .nav-buscador-wrapper {
         flex-direction: column;
         align-items: center;
@@ -382,30 +375,122 @@
     .tasa-bcv-info { font-size: 0.75rem; padding: 2px 8px 6px 8px; }
 }
 
+/* ✅ MÓVIL (480px) - SOLO MENÚ HAMBURGUESA FLOTANTE */
 @media (max-width: var(--breakpoint-movil)) {
-    .header { height: var(--altura-header-movil); padding: 0 var(--espacio-sm); }
-    .logo { height: var(--altura-logo-movil); }
-    .logo-container { top: var(--top-logo-movil); }
-    .selector-moneda { font-size: var(--tamano-texto-pequeno); padding: var(--padding-selector-movil); margin-top: var(--margin-top-selector-movil); }
-    .selector-moneda .bandera { font-size: 1rem; }
-    .selector-moneda .moneda-actual { font-size: var(--tamano-texto-pequeno); }
-    .ubicacion { font-size: var(--tamano-texto-ubicacion-movil); padding: var(--padding-ubicacion-movil); gap: var(--gap-ubicacion-movil); margin-top: var(--margin-top-ubicacion-movil); }
-    
-    /* CAMBIO 2: Ajuste del SVG para móvil */
-    .ubicacion .icono-ubicacion svg {
-        width: 16px;
-        height: 16px;
+    /* Header más compacto */
+    .header { 
+        height: auto;
+        min-height: 140px;
+        padding: 6px;
     }
     
-    .buscador-header { max-width: var(--tamano-buscador-movil); margin-top: var(--margin-top-buscador-movil); }
-    .buscador-input { font-size: var(--tamano-buscador-input-movil); padding: var(--padding-buscador-input-movil); }
-    .buscador-input::placeholder { font-size: var(--tamano-placeholder-movil); }
-    .buscador-btn { width: var(--tamano-boton-buscador-movil); height: var(--tamano-boton-buscador-movil); }
-    .buscador-btn svg { width: 14px; height: 14px; }
+    /* ❌ OCULTAR menú horizontal + buscador grande */
+    .nav-buscador-wrapper {
+        display: none !important;
+    }
     
-    .buscador-dropdown { width: var(--ancho-dropdown-buscador-movil); max-height: var(--alto-max-dropdown-buscador-movil); }
-    .resultado-item { padding: var(--padding-resultado-item-movil); gap: var(--gap-resultado-item-movil); }
-    .resultado-item img { width: var(--tamano-imagen-resultado-movil); height: var(--tamano-imagen-resultado-movil); }
-    .resultado-item span { font-size: 0.85rem; }
-    .tasa-bcv-info { font-size: 0.7rem; padding: 2px 6px 4px 6px; }
+    /* Reorganizar header-botones */
+    .header-botones {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px;
+        gap: 3px;
+    }
+    
+    /* Selector moneda arriba izquierda (compacto) */
+    .selector-moneda {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        margin-top: 0;
+        font-size: 0.7rem;
+        padding: 2px 5px;
+    }
+    
+    .selector-moneda .bandera { font-size: 0.8rem; }
+    .selector-moneda .moneda-actual { font-size: 0.7rem; }
+    
+    /* Logo centrado y pequeño */
+    .logo-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 8px 0 4px 0;
+    }
+    
+    .logo {
+        height: 40px;
+    }
+    
+    /* Ubicación centrada y compacta */
+    .ubicacion {
+        margin-top: 0;
+        font-size: 0.75rem;
+        padding: 2px 5px;
+        gap: 3px;
+    }
+    
+    .ubicacion .icono-ubicacion svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Tasa BCV compacta */
+    .tasa-bcv-info {
+        font-size: 0.65rem;
+        padding: 1px 4px 3px 4px;
+    }
+    
+    /* Buscador pequeño centrado */
+    .buscador-header {
+        max-width: 85%;
+        width: 240px;
+        margin-top: 4px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .buscador-input {
+        font-size: 0.75rem;
+        padding: 5px 7px;
+    }
+    
+    .buscador-input::placeholder {
+        font-size: 0.65rem;
+    }
+    
+    .buscador-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .buscador-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Dropdown del buscador ajustado */
+    .buscador-dropdown {
+        width: 85%;
+        max-width: 240px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+    }
+    
+    .resultado-item {
+        padding: 5px 7px;
+        gap: 5px;
+    }
+    
+    .resultado-item img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .resultado-item span {
+        font-size: 0.7rem;
+    }
 }
