@@ -503,3 +503,12 @@
         font-size: 0.7rem;
     }
 }
+
+/* ========================================== */
+/* 🚨 PRUEBA DE DIAGNÓSTICO (BORRAR DESPUÉS DE LA PRUEBA) */
+/* ========================================== */
+@media (max-width: 9999px) {
+    .nav-buscador-wrapper {
+        display: none !important;
+    }
+}
