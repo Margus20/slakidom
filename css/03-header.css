@@ -52,6 +52,9 @@
     pointer-events: auto;
 }
 
+/* ========================================== */
+/* SELECTOR DE MONEDA */
+/* ========================================== */
 .selector-moneda {
     display: flex;
     align-items: center;
@@ -104,6 +107,9 @@
 .opcion-moneda:hover { background: var(--durazno); }
 .opcion-moneda.seleccionada { background: var(--amarillo); font-weight: bold; }
 
+/* ========================================== */
+/* UBICACIÓN */
+/* ========================================== */
 .ubicacion {
     display: flex;
     align-items: center;
@@ -132,6 +138,9 @@
     flex-shrink: 0;
 }
 
+/* ========================================== */
+/* LOGO */
+/* ========================================== */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -153,7 +162,7 @@
 }
 
 /* ========================================== */
-/* ✅ BUSCADOR CON CORRECCIÓN NUCLEAR PARA CHROME */
+/* BUSCADOR */
 /* ========================================== */
 .buscador-header {
     display: flex;
@@ -212,7 +221,7 @@
 .buscador-btn svg { width: 18px; height: 18px; }
 
 /* ========================================== */
-/* ✅ MENÚ DESPLEGABLE DEL BUSCADOR (AUTOCOMPLETADO) */
+/* DROPDOWN DEL BUSCADOR */
 /* ========================================== */
 .buscador-dropdown {
     position: absolute;
@@ -267,7 +276,7 @@
 }
 
 /* ========================================== */
-/* ✅ TASA BCV (Sin estilos inline) */
+/* TASA BCV */
 /* ========================================== */
 .tasa-bcv-info {
     font-size: 0.8rem;
@@ -279,7 +288,7 @@
 }
 
 /* ========================================== */
-/* ✅ LAYOUT MENÚ + BUSCADOR (Fila inferior del header) */
+/* MENÚ + BUSCADOR (Fila inferior) */
 /* ========================================== */
 .nav-buscador-wrapper {
     position: absolute;
@@ -340,10 +349,8 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: HEADER Y BUSCADOR */
+/* ✅ RESPONSIVE: TABLET (768px) */
 /* ========================================== */
-
-/* ✅ TABLET (768px) - Se mantiene el menú horizontal */
 @media (max-width: var(--breakpoint-tablet)) {
     .header { height: var(--altura-header-tablet); }
     .logo { height: var(--altura-logo-tablet); }
@@ -375,30 +382,27 @@
     .tasa-bcv-info { font-size: 0.75rem; padding: 2px 8px 6px 8px; }
 }
 
-/* ✅ MÓVIL (480px) - SOLO MENÚ HAMBURGUESA FLOTANTE */
+/* ========================================== */
+/* ✅ RESPONSIVE: MÓVIL (480px) - LAYOUT LIMPIO */
+/* ========================================== */
 @media (max-width: var(--breakpoint-movil)) {
-    /* Header más compacto */
+    /* Header: altura automática y flexible */
     .header { 
         height: auto;
-        min-height: 140px;
+        min-height: 150px;
         padding: 6px;
     }
     
-    /* ❌ OCULTAR menú horizontal + buscador grande */
-    .nav-buscador-wrapper {
-        display: none !important;
-    }
-    
-    /* Reorganizar header-botones */
+    /* header-botones: de absolute a relative, en columna */
     .header-botones {
         position: relative;
         flex-direction: column;
         align-items: center;
         padding: 6px;
-        gap: 3px;
+        gap: 4px;
     }
     
-    /* Selector moneda arriba izquierda (compacto) */
+    /* Selector moneda: arriba a la izquierda */
     .selector-moneda {
         position: absolute;
         top: 4px;
@@ -411,20 +415,20 @@
     .selector-moneda .bandera { font-size: 0.8rem; }
     .selector-moneda .moneda-actual { font-size: 0.7rem; }
     
-    /* Logo centrado y pequeño */
+    /* Logo: centrado, sin absolute */
     .logo-container {
         position: relative;
         top: auto;
         left: auto;
         transform: none;
-        margin: 8px 0 4px 0;
+        margin: 10px 0 4px 0;
     }
     
     .logo {
-        height: 40px;
+        height: 45px;
     }
     
-    /* Ubicación centrada y compacta */
+    /* Ubicación: centrada y compacta */
     .ubicacion {
         margin-top: 0;
         font-size: 0.75rem;
@@ -437,13 +441,18 @@
         height: 12px;
     }
     
-    /* Tasa BCV compacta */
+    /* Tasa BCV: compacta */
     .tasa-bcv-info {
         font-size: 0.65rem;
         padding: 1px 4px 3px 4px;
     }
     
-    /* Buscador pequeño centrado */
+    /* OCULTAR menú horizontal + buscador grande */
+    .nav-buscador-wrapper {
+        display: none !important;
+    }
+    
+    /* Buscador pequeño centrado (el que está dentro de header-botones) */
     .buscador-header {
         max-width: 85%;
         width: 240px;
@@ -471,7 +480,7 @@
         height: 12px;
     }
     
-    /* Dropdown del buscador ajustado */
+    /* Dropdown del buscador centrado */
     .buscador-dropdown {
         width: 85%;
         max-width: 240px;
