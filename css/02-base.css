@@ -154,3 +154,13 @@ section p,
 section {
     padding: var(--espacio-xl) var(--espacio-md);
 }
+
+/* ========================================== */
+/* 🧪 PRUEBA DE VARIABLES - BORRAR DESPUÉS */
+/* ========================================== */
+/* Si las variables funcionan, en pantallas menores a 767px aparecerá un borde rojo alrededor de toda la página */
+@media (max-width: var(--breakpoint-movil)) {
+    body {
+        outline: 5px solid red !important;
+    }
+}
