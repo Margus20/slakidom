@@ -383,7 +383,7 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (767px) - POSICIONAMIENTO PRECISO */
+/* ✅ RESPONSIVE: MÓVIL (767px) - LOGO Y LUPA AJUSTADOS */
 /* ========================================== */
 @media (max-width: 767px) {
     /* Header: altura fija para mantener proporciones */
@@ -436,7 +436,7 @@
         font-weight: bold;
     }
     
-    /* ✅ Logo: CENTRO MEDIA SUPERIOR */
+    /* ✅ Logo: más grande y centrado */
     .logo-container {
         position: absolute;
         top: 45%;
@@ -447,7 +447,7 @@
     }
     
     .logo {
-        height: 55px;
+        height: 70px; /* ✅ AUMENTADO de 55px a 70px */
     }
     
     /* Ocultar ubicación completa */
@@ -478,16 +478,16 @@
         display: none !important;
     }
     
-    /* Buscador centrado abajo */
+    /* ✅ Buscador más ancho para que la lupa llegue al borde derecho */
     .nav-buscador-wrapper .buscador-header {
-        max-width: 85% !important;
-        width: 260px !important;
+        max-width: 92% !important; /* ✅ AUMENTADO de 85% a 92% */
+        width: 92% !important;     /* ✅ Cambiado de 260px fijo a 92% */
         margin: 0 auto !important;
     }
     
     .buscador-input {
         font-size: 0.75rem;
-        padding: 6px 8px;
+        padding: 6px 10px; /* ✅ Más padding para mejor lectura */
     }
     
     .buscador-input::placeholder {
@@ -495,19 +495,20 @@
     }
     
     .buscador-btn {
-        width: 30px;
-        height: 30px;
+        width: 32px;  /* ✅ Ligeramente más grande */
+        height: 32px;
+        flex-shrink: 0; /* ✅ Evita que se encoja */
     }
     
     .buscador-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 15px;
+        height: 15px;
     }
     
     /* Dropdown del buscador centrado */
     .buscador-dropdown {
-        width: 85%;
-        max-width: 260px;
+        width: 92%;
+        max-width: 92%;
         left: 50%;
         transform: translateX(-50%);
         right: auto;
