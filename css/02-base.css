@@ -14,9 +14,11 @@ html, body {
 }
 
 body {
+    /* 🚨 PRUEBA DRÁSTICA: Si ves la pantalla VERDE, el archivo SÍ se está cargando. */
+    background-color: #00FF00 !important; 
+    
     /* ✅ USANDO VARIABLES DEL ARCHIVO 01 */
     font-family: var(--fuente-texto);
-    background-color: var(--blanco);
     color: var(--chocolate);
     line-height: 1.6;
     min-height: 100vh;
@@ -106,7 +108,7 @@ section p,
     font-family: var(--fuente-texto) !important;
     font-size: var(--tamano-texto) !important;
     font-weight: 400 !important;
-    color: var(--gris-oscuro) !important; /* Usando variable */
+    color: var(--gris-oscuro) !important;
     line-height: 1.7 !important;
     margin-bottom: var(--espacio-sm) !important;
     font-style: normal !important;
@@ -120,7 +122,7 @@ section p,
         font-size: var(--tamano-titulo-mediano) !important;
     }
     .section-subtitle {
-        font-size: 22px !important; /* Valor específico para tablet */
+        font-size: 22px !important;
     }
     section p, .descripcion, .proceso-descripcion, .contacto-info p, .sobre-nosotros p, .paso-pedir p, .contacto-bloque p {
         font-size: 22px;
@@ -148,14 +150,4 @@ section p,
 
 section {
     padding: var(--espacio-xl) var(--espacio-md);
-}
-
-/* ========================================== */
-/* 🧪 PRUEBA EXTREMA (9999px) - BORRAR DESPUÉS */
-/* ========================================== */
-/* Si este borde rojo aparece en tu tablet o teléfono, significa que el archivo CSS SÍ se está cargando correctamente. */
-@media (max-width: 9999px) {
-    body {
-        outline: 5px solid red !important;
-    }
 }
