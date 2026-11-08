@@ -1,4 +1,4 @@
-/* ========================================== */
+5/* ========================================== */
 /* 09. FOOTER Y CONTACTO */
 /* ========================================== */
 
@@ -102,5 +102,31 @@
     .footer-bottom {
         padding-top: var(--padding-top-footer-bottom-movil);
         font-size: var(--tamano-footer-bottom-movil);
+    }
+}
+
+/* ✅ MÓVIL MUY PEQUEÑO (400px) - Agregado para pantallas diminutas */
+@media (max-width: var(--breakpoint-movil-pequeno)) {
+    .footer {
+        padding: 15px 10px;
+    }
+    
+    .footer h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .contacto-info {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .contacto-item {
+        font-size: 0.85rem;
+    }
+    
+    .footer-bottom {
+        padding-top: 8px;
+        font-size: 0.7rem;
     }
 }
