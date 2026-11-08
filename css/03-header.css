@@ -383,7 +383,7 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (767px) - LOGO Y LUPA AJUSTADOS */
+/* ✅ RESPONSIVE: MÓVIL (767px) - LUPA A LA DERECHA */
 /* ========================================== */
 @media (max-width: 767px) {
     /* Header: altura fija para mantener proporciones */
@@ -447,7 +447,7 @@
     }
     
     .logo {
-        height: 70px; /* ✅ AUMENTADO de 55px a 70px */
+        height: 70px;
     }
     
     /* Ocultar ubicación completa */
@@ -478,26 +478,37 @@
         display: none !important;
     }
     
-    /* ✅ Buscador más ancho para que la lupa llegue al borde derecho */
+    /* ✅ Buscador con lupa pegada a la derecha (MISMO TAMAÑO) */
     .nav-buscador-wrapper .buscador-header {
-        max-width: 92% !important; /* ✅ AUMENTADO de 85% a 92% */
-        width: 92% !important;     /* ✅ Cambiado de 260px fijo a 92% */
+        max-width: 92% !important;
+        width: 92% !important;
         margin: 0 auto !important;
+        padding: 4px !important;
+        overflow: hidden !important;
+        display: flex !important;
+        align-items: center !important;
     }
     
+    /* ✅ Input ocupa todo el espacio disponible */
+    .nav-buscador-wrapper .buscador-input,
     .buscador-input {
+        flex: 1 !important;
+        min-width: 0 !important;
         font-size: 0.75rem;
-        padding: 6px 10px; /* ✅ Más padding para mejor lectura */
+        padding: 6px 10px !important;
     }
     
     .buscador-input::placeholder {
         font-size: 0.7rem;
     }
     
+    /* ✅ Botón de lupa pegado a la derecha (MISMO TAMAÑO: 32px) */
+    .nav-buscador-wrapper .buscador-btn,
     .buscador-btn {
-        width: 32px;  /* ✅ Ligeramente más grande */
-        height: 32px;
-        flex-shrink: 0; /* ✅ Evita que se encoja */
+        width: 32px !important;
+        height: 32px !important;
+        flex-shrink: 0 !important;
+        margin-left: auto !important;
     }
     
     .buscador-btn svg {
