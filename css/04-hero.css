@@ -32,8 +32,8 @@
     color: var(--blanco);
     text-decoration: none;
     padding: var(--espacio-md) var(--espacio-lg);
-    border-radius: var(--radio-botón-grande);
-    font-size: var(--tamano-botón-texto);
+    border-radius: var(--radio-boton-grande);
+    font-size: var(--tamano-boton-texto);
     font-weight: bold;
 }
 
@@ -75,6 +75,6 @@
     
     .btn-whatsapp {
         padding: var(--espacio-sm) var(--espacio-md);
-        font-size: var(--tamano-botón-texto-movil);
+        font-size: var(--tamano-boton-texto-movil);
     }
 }
