@@ -25,11 +25,13 @@ export async function obtenerTasaBCV() {
         if (!respuesta.ok) throw new Error(`HTTP Error: ${respuesta.status}`);
         
         const datos = await respuesta.json();
-        console.log('📊 [TASA]: Datos recibidos de la API:', datos);
         
-        // ✅ MEJORA: Búsqueda más flexible de la tasa en la respuesta JSON 
-        // (dependiendo de cómo la devuelva tu API específica)
-        const tasaBCV = datos.precio || datos.promedio || datos.tasa || datos.USD; 
+        // 🕵️‍♂️ DIAGNÓSTICO: Esto nos dirá exactamente qué nombres de variables envía la API hoy
+        console.log('📊 [TASA]: Claves disponibles en la respuesta:', Object.keys(datos));
+        console.log('📊 [TASA]: Datos completos recibidos:', datos);
+        
+        // ✅ MEJORA: Búsqueda aún más flexible de la tasa (se agregaron DolarBCV, dolar, value)
+        const tasaBCV = datos.precio || datos.promedio || datos.tasa || datos.USD || datos.DolarBCV || datos.dolar || datos.value; 
         
         if (!tasaBCV || isNaN(parseFloat(tasaBCV)) || parseFloat(tasaBCV) <= 0) {
             throw new Error('Tasa inválida o no encontrada en la respuesta de la API');
