@@ -383,9 +383,9 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (480px) - LAYOUT LIMPIO */
+/* ✅ RESPONSIVE: MÓVIL (767px) - LAYOUT LIMPIO */
 /* ========================================== */
-@media (max-width: var(--breakpoint-movil)) {
+@media (max-width: 767px) {
     /* Header: altura automática y flexible */
     .header { 
         height: auto;
