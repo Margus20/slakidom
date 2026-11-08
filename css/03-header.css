@@ -503,8 +503,3 @@
         font-size: 0.7rem;
     }
 }
-
-/* 🚨 PRUEBA DEFINITIVA: Ocultar menú en TODOS los dispositivos */
-.nav-buscador-wrapper {
-    display: none !important;
-}
