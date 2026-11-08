@@ -383,7 +383,7 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (767px) - LAYOUT LIMPIO */
+/* ✅ RESPONSIVE: MÓVIL (767px) - HEADER LIMPIO */
 /* ========================================== */
 @media (max-width: 767px) {
     /* Header: altura automática y flexible */
@@ -402,18 +402,31 @@
         gap: 4px;
     }
     
-    /* Selector moneda: arriba a la izquierda */
+    /* Selector moneda: arriba a la izquierda, compacto */
     .selector-moneda {
         position: absolute;
         top: 4px;
         left: 4px;
         margin-top: 0;
         font-size: 0.7rem;
-        padding: 2px 5px;
+        padding: 4px 6px;
     }
     
-    .selector-moneda .bandera { font-size: 0.8rem; }
-    .selector-moneda .moneda-actual { font-size: 0.7rem; }
+    /* ✅ Ocultar bandera (emoji 🇻🇪) en móvil */
+    .selector-moneda .bandera {
+        display: none !important;
+    }
+    
+    /* ✅ Ocultar texto "Venezuela ($)" en móvil */
+    .selector-moneda .moneda-actual {
+        display: none !important;
+    }
+    
+    /* Mantener la flecha visible para indicar que es un dropdown */
+    .selector-moneda .flecha {
+        font-size: 1rem;
+        display: block;
+    }
     
     /* Logo: centrado, sin absolute */
     .logo-container {
@@ -428,37 +441,32 @@
         height: 45px;
     }
     
-    /* Ubicación: centrada y compacta */
+    /* ✅ Ocultar ubicación completa (texto "Caracas" + ícono SVG) */
     .ubicacion {
-        margin-top: 0;
-        font-size: 0.75rem;
-        padding: 2px 5px;
-        gap: 3px;
-    }
-    
-    .ubicacion .icono-ubicacion svg {
-        width: 12px;
-        height: 12px;
-    }
-    
-    /* Tasa BCV: compacta */
-    .tasa-bcv-info {
-        font-size: 0.65rem;
-        padding: 1px 4px 3px 4px;
-    }
-    
-    /* OCULTAR menú horizontal + buscador grande */
-    .nav-buscador-wrapper {
         display: none !important;
     }
     
-    /* Buscador pequeño centrado (el que está dentro de header-botones) */
-    .buscador-header {
-        max-width: 85%;
-        width: 240px;
-        margin-top: 4px;
-        margin-left: auto;
-        margin-right: auto;
+    /* ✅ Ocultar tasa BCV en móvil */
+    .tasa-bcv-info {
+        display: none !important;
+    }
+    
+    /* ✅ Ocultar SOLO el menú horizontal, mantener el buscador */
+    .nav-buscador-wrapper .nav-bar {
+        display: none !important;
+    }
+    
+    /* Ajustar contenedor para centrar el buscador */
+    .nav-buscador-wrapper {
+        justify-content: center !important;
+        padding: 0 !important;
+    }
+    
+    /* Buscador pequeño centrado */
+    .nav-buscador-wrapper .buscador-header {
+        max-width: 90% !important;
+        width: 280px !important;
+        margin: 4px auto 0 auto !important;
     }
     
     .buscador-input {
@@ -482,8 +490,8 @@
     
     /* Dropdown del buscador centrado */
     .buscador-dropdown {
-        width: 85%;
-        max-width: 240px;
+        width: 90%;
+        max-width: 280px;
         left: 50%;
         transform: translateX(-50%);
         right: auto;
