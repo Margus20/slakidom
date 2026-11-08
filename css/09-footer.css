@@ -1,20 +1,24 @@
-5/* ========================================== */
+/* ========================================== */
 /* 09. FOOTER Y CONTACTO */
 /* ========================================== */
 
 .footer {
-    background: var(--chocolate);
+    background: var(--chocolate) !important;
+    background-color: var(--chocolate) !important;
     color: var(--blanco);
     padding: var(--padding-footer-desktop);
     text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 10;
+    width: 100%;
 }
 
 /* ✅ MEJORA: Centrar y limitar el ancho del contenido en pantallas grandes */
 .footer-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .footer h3 {
