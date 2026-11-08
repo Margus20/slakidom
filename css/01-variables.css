@@ -344,7 +344,7 @@
     /* ========================================== */
     /* 📱 BREAKPOINTS (Para media queries) */
     /* ========================================== */
-    --breakpoint-movil: 999px;
+    --breakpoint-movil: 767px;
     --breakpoint-tablet: 768px;
     --breakpoint-desktop: 1024px;
     
