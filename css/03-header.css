@@ -389,8 +389,8 @@
     /* Header: altura automática y flexible */
     .header { 
         height: auto;
-        min-height: 150px;
-        padding: 6px;
+        min-height: 160px;
+        padding: 8px 6px;
     }
     
     /* header-botones: de absolute a relative, en columna */
@@ -398,60 +398,62 @@
         position: relative;
         flex-direction: column;
         align-items: center;
-        padding: 6px;
-        gap: 4px;
+        padding: 8px 6px;
+        gap: 6px;
     }
     
-    /* Selector moneda: arriba a la izquierda, compacto */
+    /* ✅ Selector moneda: reposicionado con mejor espacio y fondo sutil */
     .selector-moneda {
         position: absolute;
-        top: 4px;
-        left: 4px;
+        top: 8px;
+        left: 8px;
         margin-top: 0;
-        font-size: 0.7rem;
-        padding: 4px 6px;
+        padding: 6px 8px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
     }
     
-    /* ✅ Ocultar bandera (emoji 🇻🇪) en móvil */
+    /* Ocultar bandera (emoji 🇻🇪) en móvil */
     .selector-moneda .bandera {
         display: none !important;
     }
     
-    /* ✅ Ocultar texto "Venezuela ($)" en móvil */
+    /* Ocultar texto "Venezuela ($)" en móvil */
     .selector-moneda .moneda-actual {
         display: none !important;
     }
     
-    /* Mantener la flecha visible para indicar que es un dropdown */
+    /* Mantener la flecha visible y más grande para mejor toque */
     .selector-moneda .flecha {
-        font-size: 1rem;
+        font-size: 1.2rem;
         display: block;
+        color: var(--chocolate);
     }
     
-    /* Logo: centrado, sin absolute */
+    /* ✅ Logo: más grande y mejor centrado */
     .logo-container {
         position: relative;
         top: auto;
         left: auto;
         transform: none;
-        margin: 10px 0 4px 0;
+        margin: 16px 0 8px 0;
     }
     
     .logo {
-        height: 45px;
+        height: 60px;
     }
     
-    /* ✅ Ocultar ubicación completa (texto "Caracas" + ícono SVG) */
+    /* Ocultar ubicación completa (texto "Caracas" + ícono SVG) */
     .ubicacion {
         display: none !important;
     }
     
-    /* ✅ Ocultar tasa BCV en móvil */
+    /* Ocultar tasa BCV en móvil */
     .tasa-bcv-info {
         display: none !important;
     }
     
-    /* ✅ Ocultar SOLO el menú horizontal, mantener el buscador */
+    /* Ocultar SOLO el menú horizontal, mantener el buscador */
     .nav-buscador-wrapper .nav-bar {
         display: none !important;
     }
@@ -460,13 +462,15 @@
     .nav-buscador-wrapper {
         justify-content: center !important;
         padding: 0 !important;
+        position: relative;
+        bottom: auto;
     }
     
     /* Buscador pequeño centrado */
     .nav-buscador-wrapper .buscador-header {
         max-width: 90% !important;
         width: 280px !important;
-        margin: 4px auto 0 auto !important;
+        margin: 6px auto 0 auto !important;
     }
     
     .buscador-input {
