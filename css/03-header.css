@@ -70,6 +70,8 @@
     transition: background var(--transicion-rapida);
     position: relative;
     margin-top: var(--margin-top-selector-desktop);
+    z-index: 20;
+    pointer-events: auto !important;
 }
 
 .selector-moneda:hover { background: rgba(255, 255, 255, 0.4); }
@@ -91,6 +93,7 @@
     z-index: var(--z-dropdown-monedas);
     margin-top: var(--margin-top-dropdown-monedas);
     overflow: visible;
+    pointer-events: auto !important;
 }
 .dropdown-monedas.activo { display: block; }
 
@@ -237,6 +240,7 @@
     z-index: var(--z-dropdown-buscador);
     display: none;
     margin-top: var(--margin-top-dropdown-buscador);
+    pointer-events: auto !important;
 }
 .buscador-dropdown.activo { display: block; }
 
@@ -383,17 +387,17 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (767px) - LUPA A LA DERECHA */
+/* ✅ RESPONSIVE: MÓVIL (SIN HARDCODE - usa variable) */
 /* ========================================== */
-@media (max-width: 767px) {
+@media (max-width: var(--breakpoint-movil)) {
     /* Header: altura fija para mantener proporciones */
     .header { 
-        height: 200px;
-        min-height: 200px;
+        height: 220px;
+        min-height: 220px;
         padding: 0;
     }
     
-    /* header-botones: MANTENER absolute para posicionar elementos libremente */
+    /* ✅ FIX CRÍTICO: header-botones NO bloquea clics en elementos de abajo */
     .header-botones {
         position: absolute;
         top: 0;
@@ -404,18 +408,28 @@
         align-items: flex-start;
         padding: 8px;
         gap: 0;
+        pointer-events: none !important;
+        z-index: 5 !important;
     }
     
-    /* ✅ Selector moneda: IZQUIERDA SUPERIOR */
+    /* ✅ Reactivar pointer-events solo en los elementos clicables dentro de header-botones */
+    .header-botones .selector-moneda,
+    .header-botones .menu-flotante,
+    .header-botones button {
+        pointer-events: auto !important;
+    }
+    
+    /* ✅ Selector moneda: IZQUIERDA SUPERIOR con área de clic más grande */
     .selector-moneda {
         position: absolute;
         top: 8px;
         left: 8px;
         margin-top: 0;
-        padding: 6px 10px;
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 8px;
-        z-index: 10;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        z-index: 20;
+        pointer-events: auto !important;
     }
     
     /* Ocultar bandera (emoji 🇻🇪) en móvil */
@@ -430,16 +444,16 @@
     
     /* Mantener la flecha visible y más grande */
     .selector-moneda .flecha {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         display: block;
         color: var(--chocolate);
         font-weight: bold;
     }
     
-    /* ✅ Logo: más grande y centrado */
+    /* ✅ Logo: MÁS GRANDE (90px) y centrado */
     .logo-container {
         position: absolute;
-        top: 45%;
+        top: 42%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: 0;
@@ -447,7 +461,7 @@
     }
     
     .logo {
-        height: 70px;
+        height: 90px;
     }
     
     /* Ocultar ubicación completa */
@@ -460,7 +474,7 @@
         display: none !important;
     }
     
-    /* ✅ Nav-buscador-wrapper: ABAJO CENTRADO */
+    /* ✅ Nav-buscador-wrapper: ABAJO CENTRADO con z-index ALTO */
     .nav-buscador-wrapper {
         position: absolute;
         bottom: 8px;
@@ -470,7 +484,8 @@
         justify-content: center !important;
         align-items: center;
         padding: 0 8px !important;
-        z-index: 10;
+        z-index: 120 !important;
+        pointer-events: auto !important;
     }
     
     /* Ocultar SOLO el menú horizontal */
@@ -478,7 +493,7 @@
         display: none !important;
     }
     
-    /* ✅ Buscador con lupa pegada a la derecha (MISMO TAMAÑO) */
+    /* ✅ Buscador funcional con lupa pegada a la derecha */
     .nav-buscador-wrapper .buscador-header {
         max-width: 92% !important;
         width: 92% !important;
@@ -487,6 +502,7 @@
         overflow: hidden !important;
         display: flex !important;
         align-items: center !important;
+        pointer-events: auto !important;
     }
     
     /* ✅ Input ocupa todo el espacio disponible */
@@ -494,35 +510,39 @@
     .buscador-input {
         flex: 1 !important;
         min-width: 0 !important;
-        font-size: 0.75rem;
-        padding: 6px 10px !important;
+        font-size: 0.8rem;
+        padding: 8px 12px !important;
+        pointer-events: auto !important;
     }
     
     .buscador-input::placeholder {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
     
-    /* ✅ Botón de lupa pegado a la derecha (MISMO TAMAÑO: 32px) */
+    /* ✅ Botón de lupa pegado a la derecha */
     .nav-buscador-wrapper .buscador-btn,
     .buscador-btn {
-        width: 32px !important;
-        height: 32px !important;
+        width: 34px !important;
+        height: 34px !important;
         flex-shrink: 0 !important;
         margin-left: auto !important;
+        pointer-events: auto !important;
     }
     
     .buscador-btn svg {
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
     }
     
-    /* Dropdown del buscador centrado */
+    /* ✅ Dropdown del buscador con z-index muy alto */
     .buscador-dropdown {
         width: 92%;
         max-width: 92%;
         left: 50%;
         transform: translateX(-50%);
         right: auto;
+        z-index: 10000 !important;
+        pointer-events: auto !important;
     }
     
     .resultado-item {
@@ -537,5 +557,11 @@
     
     .resultado-item span {
         font-size: 0.7rem;
+    }
+    
+    /* ✅ Dropdown de monedas con z-index muy alto */
+    .dropdown-monedas {
+        z-index: 10000 !important;
+        pointer-events: auto !important;
     }
 }
