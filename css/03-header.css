@@ -387,9 +387,9 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (SIN HARDCODE - usa variable) */
+/* ✅ RESPONSIVE: MÓVIL (767px) - FUNCIONAL */
 /* ========================================== */
-@media (max-width: var(--breakpoint-movil)) {
+@media (max-width: 767px) {
     /* Header: altura fija para mantener proporciones */
     .header { 
         height: 220px;
