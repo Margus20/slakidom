@@ -70,7 +70,7 @@
     transition: background var(--transicion-rapida);
     position: relative;
     margin-top: var(--margin-top-selector-desktop);
-    z-index: 20;
+    z-index: 200;
     pointer-events: auto !important;
 }
 
@@ -90,7 +90,7 @@
     box-shadow: var(--sombra-media);
     min-width: 160px;
     display: none;
-    z-index: var(--z-dropdown-monedas);
+    z-index: 10001;
     margin-top: var(--margin-top-dropdown-monedas);
     overflow: visible;
     pointer-events: auto !important;
@@ -193,7 +193,7 @@
     color: var(--chocolate);
     border-radius: var(--radio-buscador) 0 0 var(--radio-buscador);
     min-width: 0;
-    touch-action: manipulation !important;
+    touch-action: auto !important;
     -webkit-tap-highlight-color: transparent;
     pointer-events: auto !important;
     z-index: 111 !important;
@@ -237,7 +237,7 @@
     width: var(--ancho-dropdown-buscador-desktop);
     max-height: var(--alto-max-dropdown-buscador-desktop);
     overflow-y: auto;
-    z-index: var(--z-dropdown-buscador);
+    z-index: 10000;
     display: none;
     margin-top: var(--margin-top-dropdown-buscador);
     pointer-events: auto !important;
@@ -387,13 +387,13 @@
 }
 
 /* ========================================== */
-/* ✅ RESPONSIVE: MÓVIL (767px) - FUNCIONAL */
+/* ✅ RESPONSIVE: MÓVIL (767px) - LOGO GRANDE + FUNCIONAL */
 /* ========================================== */
 @media (max-width: 767px) {
-    /* Header: altura fija para mantener proporciones */
+    /* Header: altura aumentada para acomodar logo grande */
     .header { 
-        height: 220px;
-        min-height: 220px;
+        height: 280px;
+        min-height: 280px;
         padding: 0;
     }
     
@@ -419,16 +419,16 @@
         pointer-events: auto !important;
     }
     
-    /* ✅ Selector moneda: IZQUIERDA SUPERIOR con área de clic más grande */
+    /* ✅ Selector moneda: IZQUIERDA SUPERIOR con área de clic más grande y z-index alto */
     .selector-moneda {
         position: absolute;
         top: 8px;
         left: 8px;
         margin-top: 0;
-        padding: 10px 14px;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        z-index: 20;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        z-index: 200;
         pointer-events: auto !important;
     }
     
@@ -444,24 +444,24 @@
     
     /* Mantener la flecha visible y más grande */
     .selector-moneda .flecha {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         display: block;
         color: var(--chocolate);
         font-weight: bold;
     }
     
-    /* ✅ Logo: MÁS GRANDE (90px) y centrado */
+    /* ✅ Logo: MUCHO MÁS GRANDE (160px) y centrado */
     .logo-container {
         position: absolute;
-        top: 42%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: 0;
-        z-index: 5;
+        z-index: 10;
     }
     
     .logo {
-        height: 90px;
+        height: 160px;
     }
     
     /* Ocultar ubicación completa */
@@ -477,13 +477,13 @@
     /* ✅ Nav-buscador-wrapper: ABAJO CENTRADO con z-index ALTO */
     .nav-buscador-wrapper {
         position: absolute;
-        bottom: 8px;
+        bottom: 12px;
         left: 0;
         right: 0;
         width: 100%;
         justify-content: center !important;
         align-items: center;
-        padding: 0 8px !important;
+        padding: 0 10px !important;
         z-index: 120 !important;
         pointer-events: auto !important;
     }
@@ -505,14 +505,19 @@
         pointer-events: auto !important;
     }
     
-    /* ✅ Input ocupa todo el espacio disponible */
+    /* ✅ Input ocupa todo el espacio disponible - FUNCIONAL PARA ESCRIBIR */
     .nav-buscador-wrapper .buscador-input,
     .buscador-input {
         flex: 1 !important;
         min-width: 0 !important;
-        font-size: 0.8rem;
-        padding: 8px 12px !important;
+        font-size: 0.85rem;
+        padding: 10px 14px !important;
         pointer-events: auto !important;
+        touch-action: auto !important;
+        -webkit-user-select: text !important;
+        user-select: text !important;
+        -webkit-appearance: none;
+        appearance: none;
     }
     
     .buscador-input::placeholder {
@@ -522,8 +527,8 @@
     /* ✅ Botón de lupa pegado a la derecha */
     .nav-buscador-wrapper .buscador-btn,
     .buscador-btn {
-        width: 34px !important;
-        height: 34px !important;
+        width: 36px !important;
+        height: 36px !important;
         flex-shrink: 0 !important;
         margin-left: auto !important;
         pointer-events: auto !important;
@@ -559,9 +564,9 @@
         font-size: 0.7rem;
     }
     
-    /* ✅ Dropdown de monedas con z-index muy alto */
+    /* ✅ Dropdown de monedas con z-index más alto que el del buscador */
     .dropdown-monedas {
-        z-index: 10000 !important;
+        z-index: 10001 !important;
         pointer-events: auto !important;
     }
 }
