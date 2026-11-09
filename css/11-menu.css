@@ -267,3 +267,31 @@
         font-size: var(--tamano-dropdown-link-movil); 
     }
 }
+
+/* ========================================== */
+/* ✅ BOTONES FLOTANTES POR ENCIMA DEL HEADER */
+/* ========================================== */
+/* El header tiene z-index: 1000, así que estos botones deben tener z-index mayor */
+
+.btn-menu-flotante,
+.btn-flotante-menu {
+    z-index: 1100 !important;
+    position: fixed !important;
+}
+
+.btn-flotante-excalibur,
+.excalibur-flotante {
+    z-index: 1100 !important;
+    position: fixed !important;
+}
+
+.whatsapp-flotante,
+.btn-flotante-whatsapp {
+    z-index: 1100 !important;
+    position: fixed !important;
+}
+
+/* ✅ El menú overlay (pantalla completa) debe estar por encima de todo */
+.menu-overlay {
+    z-index: 1200 !important;
+}
