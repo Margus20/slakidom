@@ -26,8 +26,6 @@ export function inicializarBuscador() {
     
     const buscadorHeader = document.querySelector('.buscador-header');
     if (buscadorHeader) {
-        // ✅ CORRECCIÓN: Eliminamos la manipulación de estilos inline.
-        // La regla 'position: relative' ya debe estar definida en 03-header.css
         buscadorHeader.appendChild(dropdown);
     }
 
@@ -93,17 +91,28 @@ export function inicializarBuscador() {
                 const isSubfolder = path.includes('/galletas/') || path.includes('/mermeladas/');
                 const imgSrc = producto.imagen ? (isSubfolder ? `../${producto.imagen}` : producto.imagen) : '';
 
-                // ✅ MEJORA: Fallback de imagen más seguro (usa un emoji o icono genérico si falla)
                 item.innerHTML = `
                     <img src="${imgSrc}" alt="${producto.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="resultado-item-placeholder" style="display:none; width:40px; height:40px; background:var(--gris-claro); border-radius:50%; align-items:center; justify-content:center; margin-right:10px;">🍪</div>
                     <span>${producto.nombre}</span>
                 `;
 
-                // Al hacer clic en el resultado, ir directamente a la página del producto
+                // ✅ CORRECCIÓN DE RUTAS 404: Lógica inteligente para construir la URL
                 item.addEventListener('click', () => {
                     if (producto.url) {
-                        const urlDestino = isSubfolder ? `../${producto.categoria}/${producto.url}` : `${producto.categoria}/${producto.url}`;
+                        let urlDestino = producto.url;
+                        
+                        // Si la URL en config.js ya incluye la carpeta (ej: "galletas/limon.html" o "/galletas/limon.html")
+                        if (urlDestino.includes('/')) {
+                            // Si estamos en una subcarpeta, necesitamos subir un nivel (../)
+                            urlDestino = isSubfolder ? `../${urlDestino}` : urlDestino;
+                        } else {
+                            // Si la URL es solo el archivo (ej: "limon.html"), le agregamos la categoría
+                            urlDestino = isSubfolder 
+                                ? `../${producto.categoria}/${urlDestino}` 
+                                : `${producto.categoria}/${urlDestino}`;
+                        }
+                        
                         window.location.href = urlDestino;
                     }
                 });
