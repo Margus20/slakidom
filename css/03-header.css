@@ -9,10 +9,10 @@
     justify-content: center;
     position: sticky;
     top: 0;
-    z-index: var(--z-header);
+    z-index: 1000;
     box-shadow: var(--sombra-media);
     height: 260px;
-    overflow: hidden;
+    overflow: visible !important;
     background-image: url('../img/navidad.jpg');
     background-size: cover;
     background-position: center;
@@ -499,7 +499,7 @@
         width: 92% !important;
         margin: 0 auto !important;
         padding: 4px !important;
-        overflow: hidden !important;
+        overflow: visible !important;
         display: flex !important;
         align-items: center !important;
         pointer-events: auto !important;
