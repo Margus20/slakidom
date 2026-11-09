@@ -1,4 +1,4 @@
-5/* ========================================== */
+/* ========================================== */
 /* 02. RESET Y ESTILOS BASE */
 /* ========================================== */
 * {
@@ -14,11 +14,9 @@ html, body {
 }
 
 body {
-    /* 🚨 PRUEBA DRÁSTICA: Si ves la pantalla VERDE, el archivo SÍ se está cargando. */
-    background-color: #00FF00 !important; 
-    
     /* ✅ USANDO VARIABLES DEL ARCHIVO 01 */
     font-family: var(--fuente-texto);
+    background-color: var(--blanco);
     color: var(--chocolate);
     line-height: 1.6;
     min-height: 100vh;
