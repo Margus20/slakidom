@@ -77,5 +77,13 @@ export const PRODUCTOS = [
         categoria: "galletas", 
         imagen: "img/galletas/chocolate.jpg", 
         url: "galletas/chocolate.html" 
+    },
+    { 
+        id: 9, 
+        nombre: "Galletas de Canela", 
+        precio: 2.00, 
+        categoria: "galletas", 
+        imagen: "img/galletas/canela.jpg", 
+        url: "galletas/canela.html" 
     }
 ];
