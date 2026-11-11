@@ -12,8 +12,8 @@ export function renderizarProductos(listaProductos, tasaCambio) {
     gridProductos.innerHTML = "";
 
     if (listaProductos.length === 0) {
-        // CORRECCION: Se agrego el backtick de cierre que faltaba
-        gridProductos.innerHTML = `<p style="text-align: center; color: var(--chocolate); padding: var(--espacio-lg);">No hay productos en esta categoria por ahora.</p>`;
+        // ✅ CORRECCIÓN: Uso de clase CSS en lugar de estilo inline
+        gridProductos.innerHTML = `<p class="mensaje-sin-productos">No hay productos en esta categoria por ahora.</p>`;
         return;
     }
     
@@ -33,12 +33,6 @@ export function renderizarProductos(listaProductos, tasaCambio) {
         card.dataset.precio = producto.precio;
         card.dataset.imagen = producto.imagen || '';
         
-        const precioUSD = producto.precio.toFixed(2);
-        const [enteroUSD, decimalesUSD] = precioUSD.split('.');
-        
-        const precioEnBolivares = producto.precio * tasaCambio;
-        const precioVESRedondeado = redondearBolivares(precioEnBolivares);
-        
         const imagenSrc = producto.imagen ? `${imgBasePath}${producto.imagen}` : null;
         
         // CORRECCION: Se eliminaron los estilos inline. La clase .producto-img en 05-productos.css ya maneja todo.
@@ -48,32 +42,54 @@ export function renderizarProductos(listaProductos, tasaCambio) {
         
         const esClicable = !!producto.url;
         
-        // ✅ CORRECCION CRITICA: producto.url YA incluye la carpeta (ej: "galletas/coco-vainilla.html").
-        // Solo necesitamos agregar "../" si estamos dentro de una subcarpeta para subir un nivel.
+        // ✅ CORRECCION CRITICA: producto.url YA incluye la carpeta.
         const productoURL = esClicable 
             ? (isSubfolder ? `../${producto.url}` : producto.url)
             : '#';
         
+        let precioHTML = '';
+        let botonHTML = '';
+
+        // ✅ LÓGICA PARA PRODUCTOS PERSONALIZADOS
+        if (producto.esPersonalizado) {
+            // 1. No mostramos el precio
+            precioHTML = '';
+            // 2. El botón es un enlace directo a WhatsApp
+            const waLink = producto.whatsappLink || `https://wa.me/584122879803?text=Hola,%20quiero%20cotizar%20${encodeURIComponent(producto.nombre)}`;
+            botonHTML = `<a href="${waLink}" target="_blank" class="btn-cotizar-whatsapp" rel="noopener noreferrer">💬 Cotizar</a>`;
+        } else {
+            // 3. Productos normales: mostramos precio y botón de agregar
+            const precioUSD = producto.precio.toFixed(2);
+            const [enteroUSD, decimalesUSD] = precioUSD.split('.');
+            const precioEnBolivares = producto.precio * tasaCambio;
+            const precioVESRedondeado = redondearBolivares(precioEnBolivares);
+            
+            precioHTML = `
+                <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
+                    <div class="precio-usd activo-grande">
+                        <span class="simbolo">$</span>
+                        <span class="entero">${enteroUSD}</span>
+                        <span class="decimales">.${decimalesUSD}</span>
+                    </div>
+                    <div class="precio-ves activo-pequeno">
+                        <span class="simbolo">Bs.</span>
+                        <span class="entero">${formatearConPuntosDeMil(precioVESRedondeado)}</span>
+                    </div>
+                </div>
+            `;
+            botonHTML = `<button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>`;
+        }
+
         const contenidoInfo = `
             ${imagenHTML}
             <h3 class="producto-nombre">${producto.nombre}</h3>
-            <div class="producto-precio" data-precio-usd="${producto.precio}" data-precio-ves="${precioVESRedondeado}">
-                <div class="precio-usd activo-grande">
-                    <span class="simbolo">$</span>
-                    <span class="entero">${enteroUSD}</span>
-                    <span class="decimales">.${decimalesUSD}</span>
-                </div>
-                <div class="precio-ves activo-pequeno">
-                    <span class="simbolo">Bs.</span>
-                    <span class="entero">${formatearConPuntosDeMil(precioVESRedondeado)}</span>
-                </div>
-            </div>
+            ${precioHTML}
         `;
 
-        // Se usa una clase 'card-link' en lugar de estilos inline para el enlace
+        // ✅ La imagen y el nombre siguen siendo un enlace a la página descriptiva
         card.innerHTML = `
             ${esClicable ? `<a href="${productoURL}" class="card-link">${contenidoInfo}</a>` : contenidoInfo}
-            <button class="btn-agregar-carrito" data-id="${producto.id}">Agregar</button>
+            ${botonHTML}
         `;
         
         fragment.appendChild(card);
