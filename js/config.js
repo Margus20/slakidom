@@ -20,7 +20,9 @@ export const PRODUCTOS = [
         precio: 2.50, 
         categoria: "galletas", 
         imagen: "img/galletas/personalizada.jpg", 
-        url: "galletas/personalizada.html" 
+        url: "galletas/personalizada.html",
+        esPersonalizado: true,  // ← NUEVO: Indica que es un producto personalizado
+        whatsappLink: "https://wa.me/584122879803?text=Hola%20SLAKIDOM,%20quiero%20cotizar%20galletas%20personalizadas%20con%20la%20siguiente%20idea:"  // ← NUEVO: Link directo a WhatsApp
     },
     { 
         id: 1, 
