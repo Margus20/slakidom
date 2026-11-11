@@ -15,6 +15,14 @@ export const CONFIG = {
 // Nota: Los precios deben ser números (ej: 7.00, no "7.00") para que los cálculos matemáticos funcionen.
 export const PRODUCTOS = [
     { 
+        id: 10, 
+        nombre: "Galletas Personalizadas", 
+        precio: 2.50, 
+        categoria: "galletas", 
+        imagen: "img/galletas/personalizada.jpg", 
+        url: "galletas/personalizada.html" 
+    },
+    { 
         id: 1, 
         nombre: "Galletas de Coco y Vainilla", 
         precio: 2.00, 
@@ -39,30 +47,6 @@ export const PRODUCTOS = [
         url: "galletas/chispas-de-chocolate.html" 
     },
     { 
-        id: 4, 
-        nombre: "Mermelada de Fresa", 
-        precio: 7.00, 
-        categoria: "mermeladas", 
-        imagen: "img/mermeladas/fresa.jpg", 
-        url: "mermeladas/fresa.html" 
-    },
-    { 
-        id: 5, 
-        nombre: "Mermelada de Guayaba", 
-        precio: 7.00, 
-        categoria: "mermeladas", 
-        imagen: "img/mermeladas/guayaba.jpg", 
-        url: "mermeladas/guayaba.html" 
-    },
-    { 
-        id: 6, 
-        nombre: "Mermelada de Durazno", 
-        precio: 7.00, 
-        categoria: "mermeladas", 
-        imagen: "img/mermeladas/durazno.jpg", 
-        url: "mermeladas/durazno.html" 
-    },
-    { 
         id: 7, 
         nombre: "Galletas de Mermelada", 
         precio: 2.50, 
@@ -85,5 +69,29 @@ export const PRODUCTOS = [
         categoria: "galletas", 
         imagen: "img/galletas/canela.jpg", 
         url: "galletas/canela.html" 
+    },
+    { 
+        id: 4, 
+        nombre: "Mermelada de Fresa", 
+        precio: 7.00, 
+        categoria: "mermeladas", 
+        imagen: "img/mermeladas/fresa.jpg", 
+        url: "mermeladas/fresa.html" 
+    },
+    { 
+        id: 5, 
+        nombre: "Mermelada de Guayaba", 
+        precio: 7.00, 
+        categoria: "mermeladas", 
+        imagen: "img/mermeladas/guayaba.jpg", 
+        url: "mermeladas/guayaba.html" 
+    },
+    { 
+        id: 6, 
+        nombre: "Mermelada de Durazno", 
+        precio: 7.00, 
+        categoria: "mermeladas", 
+        imagen: "img/mermeladas/durazno.jpg", 
+        url: "mermeladas/durazno.html" 
     }
 ];
