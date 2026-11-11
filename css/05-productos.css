@@ -137,32 +137,32 @@
     box-shadow: var(--sombra-hover-boton);
 }
 
-/* ✅ NUEVO: Botón "Cotizar" (MISMO ESTILO que "Agregar", solo cambia que es un enlace <a>) */
-.btn-cotizar {
-    background: var(--chocolate);
-    color: var(--blanco);
-    border: none;
-    padding: var(--padding-boton-agregar);
-    border-radius: var(--radio-boton-agregar);
-    font-weight: 600;
-    font-size: var(--tamano-boton-agregar);
-    cursor: pointer;
+/* ✅ CORRECCIÓN DEFINITIVA: Botón "Cotizar" forzado a verse idéntico al de "Agregar" */
+a.btn-cotizar {
+    background: var(--chocolate) !important;
+    color: var(--blanco) !important;
+    border: none !important;
+    padding: var(--padding-boton-agregar) !important;
+    border-radius: var(--radio-boton-agregar) !important;
+    font-weight: 600 !important;
+    font-size: var(--tamano-boton-agregar) !important;
+    cursor: pointer !important;
     width: auto !important;
     min-width: 0 !important;
-    align-self: center;
-    transition: all var(--transicion-normal);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none; /* Elimina el subrayado del enlace */
-    gap: 5px;
+    align-self: center !important;
+    transition: all var(--transicion-normal) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important; /* Elimina el subrayado del enlace */
+    gap: 5px !important;
 }
 
-.btn-cotizar:hover {
-    background: var(--amarillo);
-    color: var(--chocolate);
-    transform: translateY(-2px);
-    box-shadow: var(--sombra-hover-boton);
+a.btn-cotizar:hover {
+    background: var(--amarillo) !important;
+    color: var(--chocolate) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--sombra-hover-boton) !important;
 }
 
 /* Botón "Pedir" (por si se usa en otro lado) */
@@ -270,9 +270,9 @@
     }
     
     .btn-agregar-carrito,
-    .btn-cotizar {
-        font-size: var(--tamano-boton-agregar-tablet);
-        padding: var(--padding-boton-agregar-tablet);
+    a.btn-cotizar {
+        font-size: var(--tamano-boton-agregar-tablet) !important;
+        padding: var(--padding-boton-agregar-tablet) !important;
     }
 }
 
