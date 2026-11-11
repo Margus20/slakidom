@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galletas Personalizadas SLAKIDOM - Diseños únicos a tu medida para cualquier ocasión especial">
+    <title>Galletas Personalizadas - SLAKIDOM</title>
+    
+    <!-- ✅ ETIQUETAS OPEN GRAPH PARA REDES SOCIALES -->
+    <meta property="og:title" content="Galletas Personalizadas - SLAKIDOM">
+    <meta property="og:description" content="Diseños únicos a tu medida. ¡Cotiza tu idea con nosotros y sorprende a todos!">
+    <meta property="og:image" content="https://margus20.github.io/slakidom/img/galletas/personalizada.jpg">
+    <meta property="og:type" content="product">
+    <meta property="og:locale" content="es_VE">
+    
+    <link rel="icon" type="image/png" href="../img/slaky_cuadrado.jpg">
+    
+    <!-- ✅ FUENTES DE GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ✅ ESTILOS ESPECÍFICOS PARA ESTE PRODUCTO (Sin estilos inline) -->
+    <style>
+        .custom-product-note {
+            font-size: 1rem;
+            color: var(--chocolate);
+            margin-top: 10px;
+            font-family: var(--fuente-texto);
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .btn-whatsapp-custom {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            font-family: var(--fuente-texto);
+            margin-top: 20px;
+        }
+        
+        .btn-whatsapp-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--sombra-hover-boton);
+            background: #128C7E;
+        }
+
+        .pedido-info-box, .ideas-info-box {
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            font-family: var(--fuente-texto);
+        }
+        
+        .pedido-info-box {
+            background: var(--rosa);
+            text-align: center;
+        }
+        
+        .ideas-info-box {
+            background: var(--gris-claro);
+            border-left: 5px solid var(--amarillo);
+        }
+        
+        .pedido-info-box h3, .ideas-info-box h3 {
+            color: var(--chocolate);
+            margin-bottom: 15px;
+            font-family: var(--fuente-subtitulo);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .pedido-info-box ol, .ideas-info-box ul {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #000;
+        }
+        
+        .ideas-info-box ul {
+            padding-left: 20px;
+        }
+    </style>
+    
+    <!-- CSS MODULAR -->
+    <link rel="stylesheet" href="../css/01-variables.css">
+    <link rel="stylesheet" href="../css/02-base.css">
+    <link rel="stylesheet" href="../css/03-header.css">
+    <link rel="stylesheet" href="../css/05-productos.css">
+    <link rel="stylesheet" href="../css/11-menu.css">
+    <link rel="stylesheet" href="../css/09-footer.css">
+    <link rel="stylesheet" href="../css/10-animaciones.css">
+</head>
+<body>
+    
+    <!-- ✅ HEADER (se inyecta desde app.js) -->
+    <div id="header-container"></div>
+    
+    <main>
+        <!-- ✅ SECCIÓN DE DETALLE CON DATOS DINÁMICOS (data-*) -->
+        <section class="producto-detalle" 
+                 data-id="10" 
+                 data-nombre="Galletas Personalizadas" 
+                 data-precio="2.50" 
+                 data-imagen="../img/galletas/personalizada.jpg">
+            
+            <div class="producto-grid">
+                <!-- ✅ IMAGEN DEL PRODUCTO -->
+                <div class="producto-imagen">
+                    <img src="../img/galletas/personalizada.jpg" 
+                         alt="Galletas Personalizadas - SLAKIDOM" 
+                         onerror="this.src='../img/slaky_cuadrado.jpg'">
+                </div>
+                
+                <!-- INFORMACIÓN -->
+                <div class="producto-info">
+                    <h1>Galletas Personalizadas</h1>
+                    
+                    <!-- ✅ PRECIO FORMATO CORREGIDO -->
+                    <div class="producto-precio-detalle">
+                        <div class="precio-wrapper">
+                            <span class="precio-principal">$2</span>
+                            <span class="precio-centavos">50</span>
+                        </div>
+                        <div class="precio-secundario" id="precio-bolivares">
+                            Bs. 0
+                        </div>
+                        <p class="custom-product-note">
+                            Precio base referencial - Cotizar según diseño y cantidad
+                        </p>
+                    </div>
+                    
+                    <!-- ✅ BOTÓN DE WHATSAPP DIRECTO -->
+                    <a href="https://wa.me/584122879803?text=Hola%20SLAKIDOM,%20quiero%20cotizar%20galletas%20personalizadas%20con%20la%20siguiente%20idea:" 
+                       target="_blank" 
+                       class="btn-whatsapp-custom">
+                       💬 Consultar y Cotizar por WhatsApp
+                    </a>
+                </div>
+
+                <!-- DESCRIPCIÓN ANCHO COMPLETO -->
+                <div class="producto-descripcion-full">
+                    <h2>Diseño Totalmente a tu Medida</h2>
+                    <p>
+                        ¿Tienes una idea especial en mente? Creamos galletas únicas elaboradas 
+                        especialmente para ti, decoradas con glaseado real o fondant, con los 
+                        colores, formas y diseños que tú elijas.
+                    </p>
+                    <p>
+                        Solicita temáticas específicas (logos, nombres, personajes, flores, geométricos) 
+                        o basadas en una imagen de referencia que tengas. ¡Tú decides cómo lucirán!
+                    </p>
+                    
+                    <div class="producto-caracteristicas">
+                        <h3>¿Qué incluye tu pedido personalizado?</h3>
+                        <ul>
+                            <li>✅ <strong>Diseño único:</strong> Creado especialmente para tu evento o regalo</li>
+                            <li>✅ <strong>Colores a elección:</strong> Tú eliges la paleta de colores del decorado</li>
+                            <li>✅ <strong>Temática personalizada:</strong> Para cualquier ocasión especial</li>
+                            <li>✅ <strong>Ingredientes premium:</strong> Mantequilla real, esencias naturales y glaseado de alta calidad</li>
+                            <li>✅ <strong>Empaque especial:</strong> Presentación individual o en cajas de regalo (consultar)</li>
+                            <li>✅ <strong>100% hecho a mano:</strong> Cada galleta decorada con amor y dedicación</li>
+                            <li>✅ <strong>Tiempo de elaboración:</strong> 3-5 días hábiles (dependiendo de la complejidad y cantidad)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- ✅ CAJA: CÓMO HACER TU PEDIDO -->
+                    <div class="pedido-info-box">
+                        <h3>¿Cómo hacer tu pedido?</h3>
+                        <ol>
+                            <li><strong>Paso 1:</strong> Haz clic en el botón "Consultar y Cotizar por WhatsApp"</li>
+                            <li><strong>Paso 2:</strong> Cuéntanos tu idea (temática, colores, cantidad aproximada y fecha del evento)</li>
+                            <li><strong>Paso 3:</strong> Te enviamos una propuesta de diseño y el presupuesto final</li>
+                            <li><strong>Paso 4:</strong> Aprobamos el diseño juntos y realizas el pago (50% anticipo)</li>
+                            <li><strong>Paso 5:</strong> Horneamos, decoramos y coordinamos la entrega o envío</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- ✅ CAJA: IDEAS PARA TU PEDIDO (ACTUALIZADA CON MÁS OCASIONES) -->
+                    <div class="ideas-info-box">
+                        <h3>Ideas para tus galletas personalizadas:</h3>
+                        <ul>
+                            <li>🎄 <strong>Navidad:</strong> Diseños festivos para compartir en temporada decembrina</li>
+                            <li>🎂 <strong>Cumpleaños infantiles:</strong> Con el nombre, edad o personaje favorito</li>
+                            <li>⛪ <strong>Bautizos y Primera Comunión:</strong> Diseños delicados y religiosos</li>
+                            <li>💍 <strong>Matrimonios y Bodas:</strong> Diseños elegantes, minimalistas o temáticos</li>
+                            <li>🎓 <strong>Graduaciones:</strong> Para celebrar logros académicos</li>
+                            <li>👶 <strong>Baby Shower:</strong> Temáticas de bebés, gender reveal</li>
+                            <li> <strong>Corporativas:</strong> Con el logo de tu empresa para eventos o regalos</li>
+                            <li>🌸 <strong>Temática floral:</strong> Girasoles, rosas, lavanda, etc.</li>
+                            <li>🎨 <strong>Arte y Geometría:</strong> Mandalas, acuarelas o patrones modernos</li>
+                            <li>🎁 <strong>Cajas de regalo:</strong> Surtidos personalizados para sorprender</li>
+                            <li>✨ <strong>Cualquier ocasión especial:</strong> ¡Tú nos cuentas y lo hacemos realidad!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- ✅ FOOTER (se inyecta desde app.js) -->
+    <div id="footer-container"></div>
+
+    <!-- ✅ SCRIPTS MODULARES -->
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/features/detalle-producto.js"></script>
+    
+</body>
+</html>
