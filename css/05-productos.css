@@ -111,7 +111,7 @@
     margin-top: 4px;
 }
 
-/* ✅ Botón "Agregar" compacto (FORZADO a ser del tamaño del texto) */
+/* ✅ Botón "Agregar" compacto */
 .btn-agregar-carrito {
     background: var(--chocolate);
     color: var(--blanco);
@@ -131,6 +131,34 @@
 }
 
 .btn-agregar-carrito:hover {
+    background: var(--amarillo);
+    color: var(--chocolate);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover-boton);
+}
+
+/* ✅ NUEVO: Botón "Cotizar" (MISMO ESTILO que "Agregar", solo cambia que es un enlace <a>) */
+.btn-cotizar {
+    background: var(--chocolate);
+    color: var(--blanco);
+    border: none;
+    padding: var(--padding-boton-agregar);
+    border-radius: var(--radio-boton-agregar);
+    font-weight: 600;
+    font-size: var(--tamano-boton-agregar);
+    cursor: pointer;
+    width: auto !important;
+    min-width: 0 !important;
+    align-self: center;
+    transition: all var(--transicion-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    gap: 5px;
+}
+
+.btn-cotizar:hover {
     background: var(--amarillo);
     color: var(--chocolate);
     transform: translateY(-2px);
@@ -171,8 +199,15 @@
 /* ========================================== */
 /* ✅ UTILIDADES GENERALES Y PARA EL BUSCADOR */
 /* ========================================== */
-/* ✅ NUEVO: Clase para mensajes de carga sin estilos inline en el HTML */
 .mensaje-carga {
+    text-align: center;
+    color: var(--chocolate);
+    padding: var(--espacio-lg);
+    font-size: var(--tamano-texto);
+}
+
+/* ✅ NUEVO: Clase para mensaje sin productos (sin estilos inline) */
+.mensaje-sin-productos {
     text-align: center;
     color: var(--chocolate);
     padding: var(--espacio-lg);
@@ -199,13 +234,11 @@
 /* ========================================== */
 /* ✅ CAMBIO DE MONEDA (Activo Grande / Pequeño) */
 /* ========================================== */
-/* Cuando un precio es el principal, se muestra con el estilo EPA */
 .precio-usd.activo-grande,
 .precio-ves.activo-grande {
     display: inline-flex;
 }
 
-/* Cuando un precio es secundario, se oculta para no saturar la tarjeta */
 .precio-usd.activo-pequeno,
 .precio-ves.activo-pequeno {
     display: none;
@@ -236,7 +269,8 @@
         font-size: var(--tamano-precio-tablet);
     }
     
-    .btn-agregar-carrito {
+    .btn-agregar-carrito,
+    .btn-cotizar {
         font-size: var(--tamano-boton-agregar-tablet);
         padding: var(--padding-boton-agregar-tablet);
     }
@@ -259,7 +293,7 @@
     }
 }
 
-/* ✅ Celulares: 1 columna (CAMBIO: de breakpoint-movil-pequeno a breakpoint-movil) */
+/* ✅ Celulares: 1 columna */
 @media (max-width: var(--breakpoint-movil)) {
     .productos-grid {
         grid-template-columns: 1fr;
@@ -296,7 +330,6 @@
     align-items: start;
 }
 
-/* ✅ CORRECCIÓN: Imagen en posición normal (ya no sticky, no te sigue al hacer scroll) */
 .producto-imagen {
     position: relative !important;
     align-self: start;
@@ -313,7 +346,6 @@
 
 .producto-info { padding-top: 10px; }
 
-/* ✅ TÍTULO DEL PRODUCTO: Fuente Bowlby, tamaño controlado, centrado */
 .producto-info h1 {
     font-family: var(--fuente-titulo) !important;
     font-size: 1.8rem !important;
@@ -324,7 +356,6 @@
     line-height: 1.2;
 }
 
-/* ✅ PRECIO CENTRADO */
 .producto-precio-detalle {
     margin: 20px 0 30px 0;
     padding: 0;
@@ -527,7 +558,6 @@
         max-width: 100%;
     }
     
-    /* ✅ TÍTULO más pequeño en móvil para que quepa en una línea */
     .producto-info h1 {
         font-size: 1.4rem !important;
     }
