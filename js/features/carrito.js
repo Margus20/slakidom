@@ -3,7 +3,33 @@
 // ==========================================
 
 const NUMERO_WHATSAPP = "584122879803";
-let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+const CART_KEY = 'slakidom_carrito';          // ✅ Clave única para no cruzarse con otros proyectos
+const CART_TIME_KEY = 'slakidom_carrito_time'; // ✅ Clave para guardar la hora de la última actualización
+const EXPIRATION_HOURS = 12;                   // ✅ El carrito se borra automáticamente después de 12 horas
+
+// ✅ Función para obtener el carrito verificando si ya expiró
+function obtenerCarrito() {
+    const savedCart = localStorage.getItem(CART_KEY);
+    const savedTime = localStorage.getItem(CART_TIME_KEY);
+
+    if (savedCart && savedTime) {
+        const now = Date.now();
+        const expirationTime = parseInt(savedTime, 10) + (EXPIRATION_HOURS * 60 * 60 * 1000);
+
+        if (now > expirationTime) {
+            // El tiempo expiró, limpiamos el carrito
+            localStorage.removeItem(CART_KEY);
+            localStorage.removeItem(CART_TIME_KEY);
+            console.log('[CARRITO]: Carrito expirado (más de 12 horas) y limpiado automáticamente.');
+            return [];
+        }
+        return JSON.parse(savedCart);
+    }
+    return [];
+}
+
+// Inicializamos el carrito con la función segura
+let carrito = obtenerCarrito();
 
 export function inicializarCarrito() {
     console.log('[CARRITO]: Inicializando... Productos actuales:', carrito.length);
@@ -17,7 +43,7 @@ export function inicializarCarrito() {
     
     // Escuchar actualizaciones desde otras partes
     window.addEventListener('carritoActualizado', () => {
-        carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+        carrito = obtenerCarrito();
         actualizarContadorCarrito();
     });
 }
@@ -65,11 +91,13 @@ function agregarAlCarrito(producto) {
     guardarCarrito();
     actualizarContadorCarrito();
     window.dispatchEvent(new Event('carritoActualizado'));
-    mostrarNotificacion('Producto agregado al carrito!');
+    mostrarNotificacion('¡Producto agregado al carrito!');
 }
 
 function guardarCarrito() {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+    // ✅ Guardamos el carrito Y la hora actual para controlar la expiración
+    localStorage.setItem(CART_KEY, JSON.stringify(carrito));
+    localStorage.setItem(CART_TIME_KEY, Date.now().toString());
 }
 
 function actualizarContadorCarrito() {
@@ -100,7 +128,8 @@ export function mostrarCarritoModal() {
         return;
     }
 
-    carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    // ✅ Usamos la función segura para leer el carrito
+    carrito = obtenerCarrito();
     lista.innerHTML = "";
     let total = 0;
 
@@ -156,7 +185,6 @@ export function mostrarCarritoModal() {
             div.appendChild(infoDiv);
             div.appendChild(accionesDiv);
             
-            // AQUI ESTABA EL ERROR: Se cambio divPY por div
             lista.appendChild(div); 
         });
         
@@ -179,7 +207,7 @@ function eliminarDelCarrito(index) {
 }
 
 export function finalizarPedidoWhatsApp() {
-    carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    carrito = obtenerCarrito();
     
     if (carrito.length === 0) {
         mostrarNotificacion("Tu carrito esta vacio");
