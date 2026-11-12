@@ -54,9 +54,9 @@ export function renderizarProductos(listaProductos, tasaCambio) {
         if (producto.esPersonalizado) {
             // 1. No mostramos el precio
             precioHTML = '';
-            // 2. El botón es un enlace directo a WhatsApp
+            // 2. El botón es un enlace directo a WhatsApp con la clase CORRECTA para que se vea como los demás
             const waLink = producto.whatsappLink || `https://wa.me/584122879803?text=Hola,%20quiero%20cotizar%20${encodeURIComponent(producto.nombre)}`;
-            botonHTML = `<a href="${waLink}" target="_blank" class="btn-cotizar-whatsapp" rel="noopener noreferrer">💬 Cotizar</a>`;
+            botonHTML = `<a href="${waLink}" target="_blank" class="btn-cotizar" rel="noopener noreferrer">Cotizar</a>`;
         } else {
             // 3. Productos normales: mostramos precio y botón de agregar
             const precioUSD = producto.precio.toFixed(2);
